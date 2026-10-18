@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:horizont/horizont.dart';
 
 /// One screen built only from Horizont: header with Kennung, a strip of key
-/// figures, sections, rows with status, controls and the navigation, which
-/// switches from tab bar to rail at 600.
+/// figures, sections, rows with status, controls, the one primary action as
+/// FAB (symbol only under 600, with its word from 600) and the navigation,
+/// which switches from tab bar to rail at 600.
 class Showcase extends StatefulWidget {
   const Showcase({super.key});
 
@@ -54,10 +55,20 @@ class _ShowcaseState extends State<Showcase> {
             Expanded(child: content),
           ],
         ),
+        floatingActionButton: FloatingActionButton.extended(
+          onPressed: () {},
+          icon: const Icon(HorizontSymbols.add),
+          label: const Text('Meldung erfassen'),
+        ),
       );
     }
     return Scaffold(
       body: content,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        tooltip: 'Meldung erfassen',
+        child: const Icon(HorizontSymbols.add),
+      ),
       bottomNavigationBar: HorizontTabBar(
         destinations: _destinations,
         selectedIndex: _tab,
@@ -106,13 +117,18 @@ class _ShowcaseState extends State<Showcase> {
                   spacing: HzSpace.s8,
                   runSpacing: HzSpace.s8,
                   children: [
-                    FilledButton(onPressed: () {}, child: const Text('Meldung erfassen')),
+                    FilledButton(onPressed: () {}, child: const Text('Speichern')),
                     OutlinedButton(onPressed: () {}, child: const Text('Abbrechen')),
                     TextButton(onPressed: () {}, child: const Text('Alle anzeigen')),
                   ],
                 ),
                 const SizedBox(height: HzSpace.s16),
-                const TextField(decoration: InputDecoration(labelText: 'Name', helperText: 'So heißt sie im Revier.')),
+                // The label above the field, not inside the outline.
+                const HorizontField(
+                  label: 'Name',
+                  help: 'So heißt sie im Revier.',
+                  child: TextField(decoration: InputDecoration(hintText: 'Kanzel am Bruch')),
+                ),
                 const SizedBox(height: HzSpace.s16),
                 SegmentedButton<String>(
                   segments: const [
@@ -141,6 +157,29 @@ class _ShowcaseState extends State<Showcase> {
                     HorizontBadge(HorizontStatus.critical, label: 'Defekt'),
                     HorizontBadge(HorizontStatus.info, label: 'Hinweis'),
                     HorizontBadge(HorizontStatus.neutral, label: 'Unbekannt'),
+                  ],
+                ),
+                const SizedBox(height: HzSpace.s16),
+                const HorizontStatusLine(HorizontStatus.positive, 'Abgeglichen um 06:42'),
+                const SizedBox(height: HzSpace.s16),
+                const HorizontMetricRow(
+                  children: [
+                    HorizontMetric(label: 'Ansitze', value: '27'),
+                    HorizontMetric(label: 'Überfällig', value: '2', status: HorizontStatus.warning),
+                  ],
+                ),
+                const SizedBox(height: HzSpace.s16),
+                Row(
+                  children: [
+                    const HorizontLetterBadge('K', semanticLabel: 'Kanzel'),
+                    const SizedBox(width: HzSpace.s4),
+                    const HorizontLetterBadge('L', semanticLabel: 'Leiter', status: HorizontStatus.info),
+                    const SizedBox(width: HzSpace.s16),
+                    Icon(HorizontSymbols.starFill, size: HzIconSize.bar, color: c.accentText),
+                    Icon(HorizontSymbols.pushPinFill, size: HzIconSize.bar, color: c.accentText),
+                    const SizedBox(width: HzSpace.s16),
+                    for (final step in c.dataRamp)
+                      Container(width: HzSpace.s16, height: HzSpace.s16, color: step),
                   ],
                 ),
                 const SizedBox(height: HzSpace.s24),
