@@ -24,9 +24,11 @@ class HorizontDestination {
 }
 
 /// The bottom navigation of Horizont on touch devices: labels always
-/// visible, the selected destination on a light accent tint (radius 6, no
-/// pill) with its icon larger and in the accent. On Android it replaces `NavigationBar`, on iOS
-/// it stands for the tab bar.
+/// visible, the selected destination on `accentTint` (radius 6, no pill, no
+/// line) that hugs icon and word; the icon is 24 in `accentText`, the word
+/// semibold in `text`. On Android it replaces `NavigationBar`, on iOS it
+/// stands for the tab bar. The tint instead of the selection line is a
+/// decided exception (KNX Monitor): the line looked like a fault on device.
 class HorizontTabBar extends StatelessWidget {
   /// Creates a tab bar.
   const HorizontTabBar({
@@ -108,7 +110,8 @@ class _Tab extends StatelessWidget {
               vertical: HzSpace.s4,
             ),
             // The selection is a light tint behind icon and word, radius 6
-            // (no pill); the icon is larger and in the accent.
+            // (no pill); the icon is larger and in accent-text, the colour
+            // of the accent for foregrounds (4.5:1 on accent-tint).
             child: Center(
               // The tint hugs icon and word instead of filling the slot; it
               // never takes more height than its content.
@@ -128,7 +131,7 @@ class _Tab extends StatelessWidget {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Icon(destination.icon, size: 24, color: fg),
+                      Icon(destination.icon, size: HzIconSize.tab, color: fg),
                       const SizedBox(height: HzSpace.s2),
                       Text(
                         destination.label,
@@ -167,7 +170,7 @@ class HorizontRail extends StatelessWidget {
     required this.onSelected,
     this.header,
     this.footer,
-    this.width = 240,
+    this.width = HzSize.sidebar,
     super.key,
   });
 
@@ -275,7 +278,7 @@ class _RailItem extends StatelessWidget {
             ),
             child: Row(
               children: [
-                Icon(destination.icon, size: 18, color: fg),
+                Icon(destination.icon, size: HzIconSize.row, color: fg),
                 const SizedBox(width: HzSpace.s8),
                 Expanded(
                   child: Text(

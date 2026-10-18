@@ -29,8 +29,10 @@ class HorizontColors {
     required this.warningTint,
     required this.critical,
     required this.criticalTint,
+    required this.onCritical,
     required this.info,
     required this.infoTint,
+    required this.dataRamp,
   });
 
   /// The slots of [product] in [brightness], from the tokens. Embedded in a
@@ -64,8 +66,10 @@ class HorizontColors {
       warningTint: s.warningTint,
       critical: s.critical,
       criticalTint: s.criticalTint,
+      onCritical: s.onCritical,
       info: s.info,
       infoTint: s.infoTint,
+      dataRamp: dark ? HzColors.dataRampDark : HzColors.dataRampLight,
     );
   }
 
@@ -81,7 +85,9 @@ class HorizontColors {
   /// Hairlines between rows and sections.
   final Color line;
 
-  /// Stronger lines: input borders, outlined buttons.
+  /// The one outline of everything framed: fields, buttons, cards, dialogs,
+  /// sheets, menus, the switch's off track. At least 3:1 on [bg],
+  /// [surface] and [sunken] (WCAG 1.4.11).
   final Color lineStrong;
 
   /// Text, ink.
@@ -123,11 +129,20 @@ class HorizontColors {
   /// Background of [critical].
   final Color criticalTint;
 
+  /// Text and icons on [critical], e.g. a `FilledButton` for an
+  /// irreversible action.
+  final Color onCritical;
+
   /// Status: note, information.
   final Color info;
 
   /// Background of [info].
   final Color infoTint;
+
+  /// Sequential data ramp for heatmaps and densities, five steps from little
+  /// to much. One hue, neither accent nor status; read the value from a
+  /// legend or label too, never from the colour alone.
+  final List<Color> dataRamp;
 
   /// Interpolates every slot; used by the theme's `lerp`.
   static HorizontColors lerp(HorizontColors a, HorizontColors b, double t) {
@@ -151,8 +166,10 @@ class HorizontColors {
       warningTint: l(a.warningTint, b.warningTint),
       critical: l(a.critical, b.critical),
       criticalTint: l(a.criticalTint, b.criticalTint),
+      onCritical: l(a.onCritical, b.onCritical),
       info: l(a.info, b.info),
       infoTint: l(a.infoTint, b.infoTint),
+      dataRamp: [for (var i = 0; i < a.dataRamp.length; i++) l(a.dataRamp[i], b.dataRamp[i])],
     );
   }
 }

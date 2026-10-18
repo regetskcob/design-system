@@ -116,7 +116,9 @@ fast_forward
 replay
 handyman
 push_pin
+push_pin:fill
 star
+star:fill
 picture_as_pdf
 table_chart
 data_object

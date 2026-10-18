@@ -76,6 +76,19 @@ class HorizontTheme extends ThemeExtension<HorizontTheme> {
   /// Height of a list row for [density].
   double get rowHeight => density == HorizontDensity.touch ? HzSize.row : HzSize.rowDense;
 
+  /// The style of a `FilledButton` for an action that acts outward and
+  /// cannot be undone: [HorizontColors.critical] with
+  /// [HorizontColors.onCritical]. Never the primary action in the accent;
+  /// confirm it with `showAdaptiveDialog` first.
+  ///
+  /// ```dart
+  /// FilledButton(style: HorizontTheme.of(context).criticalButton, …)
+  /// ```
+  ButtonStyle get criticalButton => FilledButton.styleFrom(
+        backgroundColor: colors.critical,
+        foregroundColor: colors.onCritical,
+      );
+
   @override
   HorizontTheme copyWith({
     HorizontProduct? product,

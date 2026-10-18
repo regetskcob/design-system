@@ -84,7 +84,7 @@ class HorizontBadge extends StatelessWidget {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(status.icon, size: 14, color: fg),
+                Icon(status.icon, size: HzIconSize.badge, color: fg),
                 const SizedBox(width: HzSpace.s4),
                 Text(label, style: horizontTextStyle(HzType.label, fg).copyWith(fontSize: 12, height: 16 / 12)),
               ],

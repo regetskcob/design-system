@@ -203,4 +203,15 @@ void main() {
       greaterThanOrEqualTo(HzSize.controlDesktop),
     );
   });
+
+  test('error and critical buttons use on-critical', () {
+    for (final b in Brightness.values) {
+      final c = HorizontColors.resolve(HorizontProduct.knx, b);
+      final theme = buildHorizontTheme(HorizontProduct.knx, b);
+      expect(theme.colorScheme.onError, c.onCritical);
+      final style = theme.extension<HorizontTheme>()!.criticalButton;
+      expect(style.backgroundColor?.resolve({}), c.critical);
+      expect(style.foregroundColor?.resolve({}), c.onCritical);
+    }
+  });
 }

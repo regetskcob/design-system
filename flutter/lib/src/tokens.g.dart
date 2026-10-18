@@ -8,7 +8,7 @@
 import 'package:flutter/widgets.dart';
 
 /// Version of the tokens this file was generated from.
-const String horizontTokensVersion = '0.6.0';
+const String horizontTokensVersion = '0.6.1';
 
 /// The neutral colours of one brightness.
 @immutable
@@ -61,6 +61,7 @@ class HzStatus {
     required this.warningTint,
     required this.critical,
     required this.criticalTint,
+    required this.onCritical,
     required this.info,
     required this.infoTint,
   });
@@ -82,6 +83,9 @@ class HzStatus {
 
   /// `critical-tint`
   final Color criticalTint;
+
+  /// `on-critical`
+  final Color onCritical;
 
   /// `info`
   final Color info;
@@ -122,7 +126,7 @@ abstract final class HzColors {
     surface: Color(0xFFFFFFFF),
     sunken: Color(0xFFF1F1EC),
     line: Color(0xFFE3E3DC),
-    lineStrong: Color(0xFFC8C9C0),
+    lineStrong: Color(0xFF8A8B84),
     text: Color(0xFF1B1C19),
     textMuted: Color(0xFF5C5E57),
     textFaint: Color(0xFF85877F),
@@ -135,6 +139,7 @@ abstract final class HzColors {
     warningTint: Color(0xFFF6EBD9),
     critical: Color(0xFFB3261E),
     criticalTint: Color(0xFFF7E1DF),
+    onCritical: Color(0xFFFFFFFF),
     info: Color(0xFF2F5E9E),
     infoTint: Color(0xFFE2EAF5),
   );
@@ -144,7 +149,7 @@ abstract final class HzColors {
     surface: Color(0xFF1A1B18),
     sunken: Color(0xFF0C0D0B),
     line: Color(0xFF2B2D28),
-    lineStrong: Color(0xFF42453E),
+    lineStrong: Color(0xFF656760),
     text: Color(0xFFE7E7E0),
     textMuted: Color(0xFFA0A398),
     textFaint: Color(0xFF6E7168),
@@ -157,9 +162,26 @@ abstract final class HzColors {
     warningTint: Color(0xFF2C2414),
     critical: Color(0xFFF0A097),
     criticalTint: Color(0xFF301B19),
+    onCritical: Color(0xFF121311),
     info: Color(0xFF9DBBE3),
     infoTint: Color(0xFF1A2333),
   );
+  /// Sequential data ramp, light: little to much.
+  static const List<Color> dataRampLight = [
+    Color(0xFFD8EBF6),
+    Color(0xFFA4CBDF),
+    Color(0xFF69A4C1),
+    Color(0xFF377E9D),
+    Color(0xFF0F5773),
+  ];
+  /// Sequential data ramp, dark: little to much.
+  static const List<Color> dataRampDark = [
+    Color(0xFF1A313C),
+    Color(0xFF2A5365),
+    Color(0xFF3E7A95),
+    Color(0xFF61A2C0),
+    Color(0xFF9DCCE4),
+  ];
 }
 
 /// The products of Horizont with their accents.
@@ -236,7 +258,7 @@ enum HorizontProduct {
       surface: Color(0xFF1E2616),
       sunken: Color(0xFF0E120A),
       line: Color(0xFF2F3A24),
-      lineStrong: Color(0xFF4A5838),
+      lineStrong: Color(0xFF667154),
       text: Color(0xFFE6E2D3),
       textMuted: Color(0xFFB4BA9E),
       textFaint: Color(0xFF7D8466),
@@ -278,7 +300,7 @@ enum HorizontHost {
       surface: Color(0xFFFFFFFF),
       sunken: Color(0xFFF2F2F2),
       line: Color(0xFFDCDCDC),
-      lineStrong: Color(0xFFBDBDBD),
+      lineStrong: Color(0xFF8B8B8B),
       text: Color(0xFF212121),
       textMuted: Color(0xFF666666),
       textFaint: Color(0xFF9E9E9E),
@@ -288,7 +310,7 @@ enum HorizontHost {
       surface: Color(0xFF1C1C1C),
       sunken: Color(0xFF0B0B0B),
       line: Color(0xFF2F2F2F),
-      lineStrong: Color(0xFF474747),
+      lineStrong: Color(0xFF676767),
       text: Color(0xFFE1E1E1),
       textMuted: Color(0xFF9B9B9B),
       textFaint: Color(0xFF6F6F6F),
@@ -373,10 +395,34 @@ abstract final class HzSize {
   static const double page = 1120.0;
   /// 200
   static const double rail = 200.0;
+  /// 240
+  static const double sidebar = 240.0;
+  /// 300
+  static const double inspector = 300.0;
+  /// 240
+  static const double gridCard = 240.0;
+  /// 400
+  static const double form = 400.0;
+  /// 320
+  static const double search = 320.0;
   /// 28
   static const double controlDesktop = 28.0;
   /// 52
   static const double toolbarDesktop = 52.0;
+}
+
+/// Icon sizes: in a badge, inline in text, in rows and rails, in bars and buttons, in the tab bar.
+abstract final class HzIconSize {
+  /// 14
+  static const double badge = 14.0;
+  /// 16
+  static const double inline = 16.0;
+  /// 18
+  static const double row = 18.0;
+  /// 22
+  static const double bar = 22.0;
+  /// 24
+  static const double tab = 24.0;
 }
 
 /// Window size classes by available width.
@@ -770,8 +816,12 @@ abstract final class HorizontSymbols {
   static const IconData handyman = IconData(0xf10b, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
   /// `push_pin`
   static const IconData pushPin = IconData(0xf10d, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
+  /// `push_pin_fill`
+  static const IconData pushPinFill = IconData(0xff10d, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
   /// `star`
   static const IconData star = IconData(0xf09a, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
+  /// `star_fill`
+  static const IconData starFill = IconData(0xff09a, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
   /// `picture_as_pdf`
   static const IconData pictureAsPdf = IconData(0xe415, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
   /// `table_chart`

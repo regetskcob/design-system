@@ -3,6 +3,8 @@
 ///
 /// Build the theme with [buildHorizontTheme] for light and dark, read it
 /// with [HorizontTheme.of], call [registerHorizontLicenses] in `main()`.
+/// Tests load the fonts with `loadHorizontFonts` from
+/// `package:horizont/testing.dart`.
 /// Rules and the reasoning behind them: CLAUDE.md and docs/flutter.md in
 /// https://github.com/regetskcob/horizont.
 library;
@@ -18,6 +20,7 @@ export 'src/tokens.g.dart'
         HorizontSymbols,
         HzBreakpoint,
         HzFont,
+        HzIconSize,
         HzLine,
         HzMotion,
         HzRadius,
@@ -27,7 +30,9 @@ export 'src/tokens.g.dart'
         HzTypeSpec,
         horizontTokensVersion;
 export 'src/widgets/field.dart';
+export 'src/widgets/hints.dart';
 export 'src/widgets/kennung.dart';
 export 'src/widgets/mark.dart';
+export 'src/widgets/metric.dart';
 export 'src/widgets/navigation.dart';
 export 'src/widgets/status.dart';

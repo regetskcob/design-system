@@ -67,7 +67,7 @@ ThemeData buildHorizontTheme(
     tertiaryContainer: c.infoTint,
     onTertiaryContainer: c.info,
     error: c.critical,
-    onError: dark ? c.bg : c.surface,
+    onError: c.onCritical,
     errorContainer: c.criticalTint,
     onErrorContainer: c.critical,
     surface: c.bg,
@@ -151,7 +151,7 @@ ThemeData buildHorizontTheme(
       barBackgroundColor: c.surface,
       scaffoldBackgroundColor: c.bg,
     ),
-    iconTheme: IconThemeData(color: c.text, size: 22, weight: 300),
+    iconTheme: IconThemeData(color: c.text, size: HzIconSize.bar, weight: 300),
     extensions: [
       HorizontTheme(
         product: product,
@@ -175,7 +175,10 @@ ThemeData buildHorizontTheme(
       centerTitle: false,
       toolbarHeight: pointer ? HzSize.toolbarDesktop : 56,
       titleTextStyle: t(HzType.title1),
-      actionsIconTheme: IconThemeData(color: c.accentText, size: 22),
+      actionsIconTheme: IconThemeData(
+        color: c.accentText,
+        size: HzIconSize.bar,
+      ),
       shape: Border(bottom: hairline),
     ),
     cardTheme: CardThemeData(

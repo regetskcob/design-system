@@ -1,6 +1,6 @@
 {
   "_comment": "Horizont, das Designsystem von regetskcob und seinen Projekten. Einzige Quelle der Tokens: die Dokumentation (site/layouts/home.html) und die CSS-Schicht (web/css/tokens.css) lesen sie hier, Generatoren fuer Flutter und Swift sollen es ebenso tun. Farben je light und dark, beide von Hand gesetzt, nie aus einem Seed abgeleitet.",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "color": {
     "neutral": {
       "light": {
@@ -8,7 +8,7 @@
         "surface": "#FFFFFF",
         "sunken": "#F1F1EC",
         "line": "#E3E3DC",
-        "line-strong": "#C8C9C0",
+        "line-strong": "#8A8B84",
         "text": "#1B1C19",
         "text-muted": "#5C5E57",
         "text-faint": "#85877F"
@@ -18,7 +18,7 @@
         "surface": "#1A1B18",
         "sunken": "#0C0D0B",
         "line": "#2B2D28",
-        "line-strong": "#42453E",
+        "line-strong": "#656760",
         "text": "#E7E7E0",
         "text-muted": "#A0A398",
         "text-faint": "#6E7168"
@@ -32,6 +32,7 @@
         "warning-tint": "#F6EBD9",
         "critical": "#B3261E",
         "critical-tint": "#F7E1DF",
+        "on-critical": "#FFFFFF",
         "info": "#2F5E9E",
         "info-tint": "#E2EAF5"
       },
@@ -42,6 +43,7 @@
         "warning-tint": "#2C2414",
         "critical": "#F0A097",
         "critical-tint": "#301B19",
+        "on-critical": "#121311",
         "info": "#9DBBE3",
         "info-tint": "#1A2333"
       }
@@ -172,7 +174,7 @@
           "surface": "#1E2616",
           "sunken": "#0E120A",
           "line": "#2F3A24",
-          "line-strong": "#4A5838",
+          "line-strong": "#667154",
           "text": "#E6E2D3",
           "text-muted": "#B4BA9E",
           "text-faint": "#7D8466"
@@ -198,6 +200,11 @@
         }
       }
     },
+    "data": {
+      "_comment": "Sequenzielle Datenrampe fuer Heatmaps und Dichten: ein Ton (Graben, 230 Grad), fuenf Stufen von wenig nach viel, im Dunkeln umgekehrt verankert. Kein Akzent, kein Status. Die Stufen steigen in der Helligkeit monoton, die letzte hat mindestens 3:1 auf jeder Flaeche.",
+      "light": ["#D8EBF6", "#A4CBDF", "#69A4C1", "#377E9D", "#0F5773"],
+      "dark": ["#1A313C", "#2A5365", "#3E7A95", "#61A2C0", "#9DCCE4"]
+    },
     "host": {
       "home-assistant": {
         "name": "Home Assistant",
@@ -207,7 +214,7 @@
           "surface": "#FFFFFF",
           "sunken": "#F2F2F2",
           "line": "#DCDCDC",
-          "line-strong": "#BDBDBD",
+          "line-strong": "#8B8B8B",
           "text": "#212121",
           "text-muted": "#666666",
           "text-faint": "#9E9E9E"
@@ -217,7 +224,7 @@
           "surface": "#1C1C1C",
           "sunken": "#0B0B0B",
           "line": "#2F2F2F",
-          "line-strong": "#474747",
+          "line-strong": "#676767",
           "text": "#E1E1E1",
           "text-muted": "#9B9B9B",
           "text-faint": "#6F6F6F"
@@ -359,8 +366,20 @@
     "text-column": 720,
     "page": 1120,
     "rail": 200,
+    "sidebar": 240,
+    "inspector": 300,
+    "grid-card": 240,
+    "form": 400,
+    "search": 320,
     "control-desktop": 28,
     "toolbar-desktop": 52
+  },
+  "icon-size": {
+    "badge": 14,
+    "inline": 16,
+    "row": 18,
+    "bar": 22,
+    "tab": 24
   },
   "breakpoint": {
     "compact": 0,

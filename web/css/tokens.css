@@ -18,6 +18,9 @@
 {{- range $k, $v := $c.status.light }}
   --{{ $k }}: light-dark({{ $v }}, {{ index $c.status.dark $k }});
 {{- end }}
+{{- range $i, $v := $c.data.light }}
+  --data-{{ add $i 1 }}: light-dark({{ $v }}, {{ index $c.data.dark $i }});
+{{- end }}
 {{- range $k, $v := .font }}
   --font-{{ $k }}: {{ $v | safeCSS }};
 {{- end }}
@@ -37,6 +40,9 @@
   --ease-exit: {{ .motion.exit | safeCSS }};
 {{- range $k, $v := .size }}
   --size-{{ $k }}: {{ $v }}px;
+{{- end }}
+{{- range $k, $v := (index . "icon-size") }}
+  --icon-{{ $k }}: {{ $v }}px;
 {{- end }}
 {{- range $k, $v := .device }}
 {{- if ne $k "_comment" }}

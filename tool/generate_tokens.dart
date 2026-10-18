@@ -46,6 +46,15 @@ void main() {
     _const(out, 'neutral${_cap(mode)}', 'HzNeutrals', neutral[mode] as Map<String, dynamic>);
     _const(out, 'status${_cap(mode)}', 'HzStatus', status[mode] as Map<String, dynamic>);
   }
+  final data = color['data'] as Map<String, dynamic>;
+  for (final mode in ['light', 'dark']) {
+    final ramp = (data[mode] as List<dynamic>).cast<String>();
+    out
+      ..writeln('  /// Sequential data ramp, $mode: little to much.')
+      ..writeln('  static const List<Color> dataRamp${_cap(mode)} = [')
+      ..writeAll(ramp.map((v) => '    Color(0xFF${v.substring(1).toUpperCase()}),\n'))
+      ..writeln('  ];');
+  }
   out.writeln('}\n');
 
   out
@@ -140,6 +149,7 @@ void main() {
   _numbers(out, 'HzRadius', 'Corner radii.', 'r', tokens['radius'] as Map<String, dynamic>);
   _numbers(out, 'HzLine', 'Line widths.', '', tokens['line'] as Map<String, dynamic>);
   _numbers(out, 'HzSize', 'Sizes of targets, rows, columns and bars.', '', tokens['size'] as Map<String, dynamic>);
+  _numbers(out, 'HzIconSize', 'Icon sizes: in a badge, inline in text, in rows and rails, in bars and buttons, in the tab bar.', '', tokens['icon-size'] as Map<String, dynamic>);
   _numbers(out, 'HzBreakpoint', 'Window size classes by available width.', '', tokens['breakpoint'] as Map<String, dynamic>);
 
   final motion = tokens['motion'] as Map<String, dynamic>;
