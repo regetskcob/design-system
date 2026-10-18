@@ -173,8 +173,10 @@ a { color: var(--accent-text); text-underline-offset: 3px; text-decoration-thick
 .mock-tabbar { flex: none; display: grid; grid-template-columns: repeat(4, 1fr); border-top: var(--line-hairline) solid var(--line); background: var(--surface); padding-bottom: 18px; }
 .mock-tab { display: grid; justify-items: center; gap: 3px; padding: 8px 0 4px; font: 500 10px/1 var(--font-sans); color: var(--text-muted); position: relative; }
 .mock-tab svg { width: 22px; height: 22px; }
-.mock-tab[aria-current] { color: var(--text); }
-.mock-tab[aria-current]::before { content: ""; position: absolute; top: -1px; left: 30%; right: 30%; border-top: var(--line-selection) solid var(--accent); }
+.mock-tab[aria-current] { color: var(--accent-text); font-weight: 600; }
+.mock-tab[aria-current]::before { content: ""; position: absolute; inset: 4px 18% 0; border-radius: var(--r-6); background: var(--accent-tint); z-index: -1; }
+.mock-tab[aria-current] svg { width: 24px; height: 24px; color: var(--accent); }
+.mock-tab { isolation: isolate; }
 .mock-tabbar.android { padding-bottom: 12px; }
 .mock-tabbar.android .mock-tab { padding-top: 12px; font-size: 11px; }
 
@@ -184,7 +186,7 @@ a { color: var(--accent-text); text-underline-offset: 3px; text-decoration-thick
 .mock-sum b { display: block; font: 400 22px/1.1 var(--font-mono); font-variant-numeric: tabular-nums; }
 .mock-sum span { font: 600 9.5px/1.4 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); }
 
-.mock-fab { position: absolute; right: 16px; bottom: 96px; height: 48px; padding: 0 18px; border-radius: var(--r-10); background: var(--accent); color: var(--on-accent); display: flex; align-items: center; gap: 8px; font: 500 14px/1 var(--font-sans); }
+.mock-fab { position: absolute; right: 16px; bottom: 96px; width: 56px; height: 56px; border-radius: var(--r-10); background: var(--accent); color: var(--on-accent); display: flex; align-items: center; justify-content: center; }
 .mock-fab svg { width: 20px; height: 20px; }
 
 /* Desktop window (macOS) */

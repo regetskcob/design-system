@@ -355,6 +355,21 @@ wandert es ins Paket (mit Token, Test und Tag). Pfade beziehen sich auf
   tragen `expertOnly`; ohne Expertenmodus eine Gruppe „Werkzeuge“. Der
   Schalter für den Expertenmodus ist am Fuß angeheftet (`MoreMenu.pinned`).
 
+### Startbildschirm (`lib/ui/connect_screen.dart`)
+
+- Kopf als Lockup: App-Icon, darüber eine Kennung („MIT KNX/IP-GATEWAY
+  VERBINDEN“), daneben der Name in `titleLarge`.
+- Unter 840 eine Spalte mit `Widths.form` (400). Ab 840 zwei Spalten im
+  Verhältnis 3:2, zusammen höchstens `HzSize.page`: links das Formular mit
+  der Hauptaktion, rechts Zuletzt verwendet, Kopplung, „Ohne Verbindung“
+  (Demo, Aufnahmen) und die Einstellungen mit dem Expertenmodus.
+- Ohne Expertenmodus nur die nötigen Felder. Weitere Felder (Port,
+  Tunneladresse, Optionen, Keyring) klappen beim Umschalten mit
+  `AnimatedSize` (Dauer und Kurve aus `Motion`) auf und zu, statt zu springen.
+  Ein abweichender Wert bleibt sichtbar, auch ohne Expertenmodus.
+- Felder mit `HorizontField` (Beschriftung darüber, nicht im Rahmen), die
+  Sprachwahl als `SegmentedButton` mittig unter allem.
+
 ### Übersicht als Dashboard (`lib/ui/value_board.dart`)
 
 - **Sektionskopf:** Kennung mit Zähler links, rechts leise Symbolknöpfe

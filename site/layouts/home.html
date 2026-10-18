@@ -380,8 +380,8 @@ Fotos | je Einrichtung
     <table class="doc-platforms">
       <thead><tr><th>Plattform</th><th>Navigation</th><th>Horizont</th><th>Produkte</th></tr></thead>
       <tbody>
-        <tr><td>iOS, iPadOS</td><td>Tab-Bar mit Beschriftung, Sheets mit Detents, Wischen zurück</td><td>Kleiner Titel mit Kennung darüber statt Large Title. Die Auswahl ist eine Linie über dem Tab.</td><td>alle drei</td></tr>
-        <tr><td>Android</td><td>NavigationBar, ab 600 dp NavigationRail, Predictive Back</td><td>M3-Bausteine mit eigenem ColorScheme. Indikator als Linie statt Pille, höchstens ein FAB pro Screen, Radius 10.</td><td>alle drei</td></tr>
+        <tr><td>iOS, iPadOS</td><td>Tab-Bar mit Beschriftung, Sheets mit Detents, Wischen zurück</td><td>Kleiner Titel mit Kennung darüber statt Large Title. Das gewählte Tab liegt auf accent-tint, das Icon größer im Akzent. Die Hauptaktion als FAB, am Telefon nur mit Symbol.</td><td>alle drei</td></tr>
+        <tr><td>Android</td><td>NavigationBar, ab 600 dp NavigationRail, Predictive Back</td><td>M3-Bausteine mit eigenem ColorScheme. Gewähltes Ziel auf accent-tint statt Pille, höchstens ein FAB pro Screen (am Telefon nur mit Symbol, ab 600 dp mit Wort), Radius 10.</td><td>alle drei</td></tr>
         <tr><td>macOS, Windows, Linux</td><td>Seitenleiste und Werkzeugleiste, Menüleiste</td><td>Dichte Zeilen (28 px), Hover-Zustände, Tastatur zuerst. Kein App Bar.</td><td>KNX, Panzergefecht</td></tr>
         <tr><td>Web-App</td><td>wie Desktop, ab 840 px Seitenleiste</td><td>Sichtbarer Fokus, gleiche Tokens als CSS.</td><td>KNX, Panzergefecht /play/</td></tr>
         <tr><td>Home Assistant</td><td>Ingress im Rahmen von HA</td><td>Neutrale von HA übernehmen, Akzent und Schrift bleiben.</td><td>KNX Add-on</td></tr>
@@ -417,7 +417,7 @@ Fotos | je Einrichtung
             <span class="mock-tab"><svg><use href="#i-map"/></svg>Karte</span>
           </nav>
         </div></figure>
-        <p class="mock-caption">iOS: Kennung über dem kleinen Titel, Aktionen rechts oben, Tab-Bar mit Linie über dem aktiven Tab. Kein Large Title, keine Karten pro Zeile.</p>
+        <p class="mock-caption">iOS: Kennung über dem kleinen Titel, Aktionen rechts oben, das aktive Tab getönt. Kein Large Title, keine Karten pro Zeile.</p>
       </div>
       <div>
         <figure class="hz-device hz-device--android" style="--w:380px"><div class="hz-device-screen mock-phone" data-theme="dark">
@@ -427,7 +427,7 @@ Fotos | je Einrichtung
             <div class="mock-navbar-row"><div class="t-title-1">Übersicht</div><button class="mock-icon-btn" type="button" aria-label="Suchen"><svg><use href="#i-search"/></svg></button></div>
           </div>
           <div class="mock-scroll">{{ partial "site/mock-jagd.html" . }}</div>
-          <span class="mock-fab"><svg><use href="#i-plus"/></svg>Meldung</span>
+          <span class="mock-fab" aria-label="Meldung"><svg><use href="#i-plus"/></svg></span>
           <nav class="mock-tabbar android">
             <span class="mock-tab" aria-current="page"><svg><use href="#i-tree"/></svg>Übersicht</span>
             <span class="mock-tab"><svg><use href="#i-tasks"/></svg>Aufgaben</span>
@@ -435,7 +435,7 @@ Fotos | je Einrichtung
             <span class="mock-tab"><svg><use href="#i-map"/></svg>Karte</span>
           </nav>
         </div></figure>
-        <p class="mock-caption">Android: dieselbe Seite im Pixel-Rahmen. Ein erweiterter FAB für die eine Hauptaktion, NavigationBar mit Linie statt Pille.</p>
+        <p class="mock-caption">Android: dieselbe Seite im Pixel-Rahmen. Der FAB für die eine Hauptaktion, am Telefon nur mit Symbol, NavigationBar mit Tönung statt Pille.</p>
       </div>
     </div>
 
@@ -578,7 +578,7 @@ Fotos | je Einrichtung
       <div><figure class="hz-device hz-device--iphone" style="--w:190px"><div class="hz-device-screen"><div class="fz fz-phone"><i class="soft">Status</i><i>Kopf · Kennung + Titel</i><i class="on">Kennzahlen</i><i>Abschnitte</i><i>Tab-Bar</i></div></div></figure><span class="t-kennung hz-kennung">Aufteilung</span></div>
       <dl class="doc-facts ff-facts">
       <dt>Breite</dt><dd>unter 600 pt, eine Spalte, Rand 16</dd>
-      <dt>Aufbau</dt><dd>Kopf mit Kennung und Titel, darunter höchstens eine Kennzahlenleiste, dann Abschnitte mit Kennzeile. Tab-Bar mit drei bis fünf Zielen, eine Hauptaktion als FAB oder oben rechts.</dd>
+      <dt>Aufbau</dt><dd>Kopf mit Kennung und Titel, darunter höchstens eine Kennzahlenleiste, dann Abschnitte mit Kennzeile. Tab-Bar mit drei bis fünf Zielen. Die eine Hauptaktion als FAB mit Symbol; ein Begleiter wie Pause steht links davon in derselben Flucht, ebenfalls ohne Wort.</dd>
       </dl>
       <div class="ff-ex"><figure class="hz-device hz-device--iphone" style="--w:360px"><div class="hz-device-screen mock-phone" data-theme="light">{{ partial "site/ff-phone-knx.html" . }}</div></figure><p class="mock-caption">KNX Monitor, Übersicht: oben die Busaktivität der letzten 60 Sekunden, darunter Werte groß in Mono mit Verlauf und Mittelwert.</p></div>
     </div>
@@ -588,7 +588,8 @@ Fotos | je Einrichtung
       <div><figure class="hz-device hz-device--ipad" style="--w:300px"><div class="hz-device-screen"><div class="fz fz-ipad"><i class="soft">Seiten­leiste + Kenn­zahlen</i><i>Ebenen</i><i class="soft">Werkzeuge</i><i class="on">Inspektor</i><i style="grid-column:2;grid-row:2">Inhalt · Karte</i></div></div></figure><span class="t-kennung hz-kennung">Aufteilung</span></div>
       <dl class="doc-facts ff-facts">
       <dt>Breite</dt><dd>600 bis 1200 pt, Rand 24. Hochkant zwei Spalten, quer drei.</dd>
-      <dt>Aufbau</dt><dd>Seitenleiste statt Tab-Bar, mit den Kennzahlen am Fuß. In der Mitte der Inhalt, rechts der Inspektor für das Gewählte. Ebenen und Werkzeuge schweben nicht, sie sitzen auf einer Fläche mit Haarlinie.</dd>
+      <dt>Aufbau</dt><dd>Seitenleiste statt Tab-Bar, mit den Kennzahlen am Fuß. In der Mitte der Inhalt, rechts der Inspektor für das Gewählte. Ebenen und Werkzeuge schweben nicht, sie sitzen auf einer Fläche mit Haarlinie. Die Hauptaktion als FAB mit Wort, die Suche rechts in der Titelzeile.</dd>
+      <dt>Ausnahme</dt><dd>Hat ein Bildschirm wenige gleichrangige Ansichten desselben Inhalts (KNX Monitor: Übersicht, Objekte, Live), bleiben sie unten als Tab-Bar. Das Menü wird dann zur einklappbaren Seitenleiste links; in der Leiste steht erst Zurück, dann ihr Umschalter.</dd>
       <dt>Karten</dt><dd>Die Grundkarte bleibt ruhig wie die Feldflur: Flächen, Wege, Wasser in Linien und Tönen. Farbe tragen nur Reviergrenze, Auswahl und Zustand.</dd>
       </dl>
       <div class="ff-ex"><figure class="hz-device hz-device--ipad" style="--w:720px"><div class="hz-device-screen" data-theme="light">{{ partial "site/ff-ipad-jagd.html" . }}</div></figure><p class="mock-caption" style="max-width:none">Jagdaufseher, Karte: links das Revier mit den vier Kennzahlen, in der Mitte die Feldflur mit Grenze und Einrichtungen, rechts die gewählte Kanzel.</p></div>
@@ -650,13 +651,13 @@ Fotos | je Einrichtung
   <div class="doc-rail"><span class="t-kennung">11 — Umsetzung</span></div>
   <div>
     <h2 class="t-headline">Was danach käme.</h2>
-    <p>Diese Seite und die Tokens kommen aus dem Repository <a href="https://github.com/regetskcob/horizont">horizont</a>. Die Apps und ihre Landingpages sind noch unverändert.</p>
+    <p>Diese Seite und die Tokens kommen aus dem Repository <a href="https://github.com/regetskcob/horizont">horizont</a>. KNX Monitor ist umgestellt, App und Landingpage auf v0.6.0. Es ist die Referenz für die übrigen Apps: Entscheidungen in <span class="hz-mono">CLAUDE.md</span>, Muster in <span class="hz-mono">docs/flutter.md</span> unter „Referenz: KNX Monitor“.</p>
     <ol class="doc-todo">
-      <li><span><b>Entscheidungen, erledigt.</b> Zwei Grün bleiben (Tanne dunkel leuchtender), Mona Sans, Kennung über dem Titel statt Large Title, Gelände als Ausnahme.</span></li>
+      <li><span><b>Entscheidungen, erledigt.</b> Zwei Grün bleiben (Tanne dunkel leuchtender), Mona Sans, Kennung über dem Titel statt Large Title, Gelände als Ausnahme. Aus KNX Monitor: Tab-Bar mit Tönung, FAB auf Touch (am Telefon nur Symbol), Ansichten unten und Menü links, Expertenmodus, Unumkehrbares in critical mit Bestätigung, Datenlisten in Seitenbreite.</span></li>
       <li><span><b>Schriften, erledigt.</b> Mona Sans, Literata und Monaspace für Web und Flutter, Material Symbols Sharp als Subset.</span></li>
       <li><span><b>Flutter-Paket <span class="hz-mono">horizont</span>, erledigt.</b> Tokens aus <span class="hz-mono">tokens/horizont.json</span> generiert, ThemeExtension, ColorScheme von Hand je Produkt und Modus, Grund-Widgets, Kontraste als Test. Einbinden per Git-Abhängigkeit mit Tag.</span></li>
       <li><span><b>App-Icons, erledigt.</b> Für alle Plattformen unter <span class="hz-mono">icons/export/</span>, erzeugt aus den Partials.</span></li>
-      <li><span><b>Pro App eine Umstellung.</b> Theme ersetzen, harte Farben (Zustand, Priorität, Ort) auf Status-Tokens, Radien auf die Skala. KNX Monitor zuerst, es hat schon Tokens.</span></li>
+      <li><span><b>Pro App eine Umstellung.</b> Theme ersetzen, harte Farben (Zustand, Priorität, Ort) auf Status-Tokens, Radien auf die Skala. KNX Monitor erledigt; Jagdaufseher und Panzergefecht folgen und übernehmen seine Muster.</span></li>
       <li><span><b>Landingpages als Feldseite.</b> Modul einbinden, die Seite aus <span class="hz-mono">horizont/feld/*</span> zusammensetzen, Screenshots mit <span class="hz-mono">horizont/device.html</span>.</span></li>
       <li><span><b>Blog angleichen.</b> Neutrale und Kennungen übernehmen, Literata bleibt, der Kopf bekommt die Linie.</span></li>
     </ol>
