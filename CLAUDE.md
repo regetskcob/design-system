@@ -145,8 +145,8 @@ oder Seite schreiben.
 
 | Gerät | Aufteilung |
 | --- | --- |
-| iPhone (kompakt) | Kopf mit Kennung und kleinem Titel, höchstens eine Kennzahlenleiste, Abschnitte mit Kennzeile, Tab-Bar mit 3 bis 5 Zielen. Die eine Hauptaktion als FAB mit Wort (alle Touch-Plattformen). |
-| iPad (mittel/erweitert) | Hauptaktion als FAB wie am Telefon. Seitenleiste statt Tab-Bar, Kennzahlen am Fuß der Seitenleiste, Inhalt in der Mitte, Inspektor rechts (quer). Ebenen und Werkzeuge sitzen auf einer Fläche mit Haarlinie. |
+| iPhone (kompakt) | Kopf mit Kennung und kleinem Titel, höchstens eine Kennzahlenleiste, Abschnitte mit Kennzeile, Tab-Bar mit 3 bis 5 Zielen. Die eine Hauptaktion als FAB (alle Touch-Plattformen), am Telefon nur mit Symbol, ab 600 mit Wort. |
+| iPad (mittel/erweitert) | Hauptaktion als FAB wie am Telefon. Seitenleiste statt Tab-Bar, Kennzahlen am Fuß der Seitenleiste, Inhalt in der Mitte, Inspektor rechts (quer). Ebenen und Werkzeuge sitzen auf einer Fläche mit Haarlinie. Ausnahme: wenige gleichrangige Ansichten eines Inhalts (KNX Monitor: Übersicht, Objekte, Live) bleiben unten als Tab-Bar, das Menü wird zur einklappbaren Seitenleiste (entschieden, siehe unten). |
 | Mac (groß) | Werkzeugleiste 52 mit Umschalter, Suche und der Hauptaktion (kein FAB mit Zeiger), Seitenleiste 200 bis 240 mit Kennungen, Inhalt als Raster aus Karten (mindestens 240), Inspektor 280 bis 320. Dichte Zeilen, Tastatur zuerst. |
 | Apple TV | Sicherer Rand 60/80, Schrift × 1,5. Titel mit Kennung, ein Regal aus großen Kacheln, unten Details und eine Aktion. Fokus: Kachel +6 % und Akzentring. HUD im Spiel nur in den Ecken, die Mitte bleibt frei. |
 | Apple Watch | Uhrzeit oben rechts, ein Wert groß in Mono, eine Aktion. Die Krone blättert. Fläche schwarz oder Gelände. |
@@ -219,6 +219,48 @@ ohne zu fragen:
   in der Leiste neben Kennung, Titel und Symbolen war sie am iPhone kaum
   lesbar. Mit Zeiger (Mac, Windows, Linux) sitzt sie in der Werkzeugleiste.
 
+## Entscheidungen aus KNX Monitor (v0.6.0 und danach)
+
+KNX Monitor ist die erste App auf Horizont. Was der Nutzer dort am Gerät
+entschieden hat, gilt für alle folgenden Apps. Die Muster dazu mit Code
+stehen in [docs/flutter.md](docs/flutter.md), „Referenz: KNX Monitor“.
+
+- **FAB am Telefon nur mit Symbol.** Unter 600 ist der FAB quadratisch (56)
+  mit Symbol und Tooltip, ab 600 `extended` mit Wort. Ein Umschalter, der
+  neben der Hauptaktion im FAB-Platz steht (Pause), trägt nie ein Wort.
+  Beide stehen in einer Flucht und gleich hoch. Während eine Suche den Fokus
+  hat, verschwinden sie.
+- **Ansichten unten, Menü links.** Hat ein Bildschirm wenige gleichrangige
+  Ansichten desselben Inhalts, bleiben sie auch auf dem Tablet unten als
+  Tab-Bar. Das Menü (Werkzeuge, Daten) wird ab 600 zur Seitenleiste links,
+  ein- und ausklappbar, der Zustand bleibt gespeichert. Links in der Leiste
+  steht erst Zurück, dann der Umschalter der Seitenleiste. Mit Zeiger wird
+  die Tab-Bar zum `SegmentedButton` in der Werkzeugleiste.
+- **Suche in der Titelzeile.** Ab 600 sitzt das Suchfeld rechtsbündig in der
+  AppBar statt als eigene Zeile darunter.
+- **Das Menü heißt „Menü“**, nicht „…“ oder „Mehr“.
+- **Expertenmodus statt Einstellungsseite für Fachfunktionen.** Ein Schalter,
+  fest am Fuß des Menüs (eigene Fläche `sunken` mit Haarlinie oben) und auf
+  dem Startbildschirm. Ohne ihn sieht man nur die Alltagswerkzeuge in einer
+  Gruppe „Werkzeuge“. Was Expertenmodus ist, legt die App fest und schreibt
+  es in ihr README.
+- **Unumkehrbares nur mit Bestätigung, in critical.** Eine Aktion, die nach
+  außen wirkt und sich nicht zurücknehmen lässt (KNX: Aufnahme auf den Bus
+  senden), steht nie als Hauptaktion im Akzent. Sie zeigt vorher einen
+  Hinweis (warning) und fragt mit `showAdaptiveDialog` nach. Ihr Knopf ist
+  ein `FilledButton` in `critical`, der Bestätigungsknopf `destructive`.
+- **Auswahl auf Karten:** Eine gewählte Karte trägt 2 px Akzent als Umriss
+  und `accent-tint` als Fläche, dazu ein Häkchen oben rechts. Das ist die
+  „Auswahl ist eine Linie“ für Karten, keine Ausnahme.
+- **Datenlisten nutzen die Seitenbreite.** `HzSize.textColumn` (720) gilt für
+  Text, den man liest. Listen von Daten (Aufnahmen, Prüfergebnisse) gehen auf
+  dem Tablet bis `HzSize.page` (1120), sonst bleibt rechts und links zu viel
+  leer.
+- **Startbildschirm in Systemweiß und -schwarz.** Der native Launch Screen
+  kann keine Token-Farben, also liegen Icon und Fläche auf reinem Weiß bzw.
+  Schwarz, vorgeflacht als PNG. Der Flutter-Splash danach nimmt dieselben
+  Werte, sonst springt die Farbe beim Übergang.
+
 Neue offene Fragen kommen als Issue mit dem Label `question` und werden vom
 Nutzer entschieden, nicht von der Sitzung.
 
@@ -259,6 +301,7 @@ Nutzer entschieden, nicht von der Sitzung.
   kommt er hierher, nicht in die Seite.
 - **Wer Horizont nutzt:** der Blog (Hugo-Modul, `hugo mod get
   github.com/regetskcob/horizont@main`) und die Vorschau unter
-  `/preview/` (Repository `regetskcob/preview`). Die Apps und Landingpages
-  sind noch nicht umgestellt, siehe die Reihenfolge in
+  `/preview/` (Repository `regetskcob/preview`). KNX Monitor (App und
+  Landingpage) hängt an v0.6.0 und ist die Referenz für die anderen Apps;
+  Jagdaufseher und Panzergefecht folgen, siehe
   [docs/flutter.md](docs/flutter.md).

@@ -213,8 +213,9 @@ Nicht das Paket `material_symbols_icons`, es bündelt alle Symbole.
   accent-tint, `showSelectedIcon: false`.
 - **Switch:** Spur accent, Daumen on-accent. Er ist die einzige runde Form
   neben Ortspunkt und Avatar.
-- **FAB** (Touch: Telefon und Tablet, alle Plattformen; höchstens einer; mit Zeiger stattdessen in der Werkzeugleiste): `elevation: 0`, Radius 10, Akzent,
-  als `FloatingActionButton.extended` mit Wort.
+- **FAB** (Touch: Telefon und Tablet, alle Plattformen; höchstens einer; mit Zeiger stattdessen in der Werkzeugleiste): `elevation: 0`, Radius 10, Akzent.
+  Unter 600 quadratisch mit Symbol und Tooltip, ab 600
+  `FloatingActionButton.extended` mit Wort (entschieden bei KNX Monitor).
 - **Dialog, BottomSheet:** `elevation: 0`, Radius 10 (große Sheets 16),
   Rand `outline` (line-strong).
 - **Divider:** outlineVariant, Dicke 1, Abstand 1.
@@ -249,6 +250,10 @@ Panzergefecht. Jede App in einer eigenen Sitzung und einem eigenen Branch,
 mit Goldens vorher und nachher.
 
 ### KNX Monitor (`~/Debug-KNX`, Repo `regetskcob/KNX-Monitor`)
+
+Umgestellt auf v0.6.0 (Branch `horizont`, regetskcob/KNX-Monitor#23). Was
+dabei entstanden ist, steht unten unter „Referenz: KNX Monitor“. Die Punkte
+hier waren der Plan:
 
 - Theme in `lib/theme/`: `brand.dart`, `app_theme.dart` (heute
   `fromSeed(lime)` mit vielen Überschreibungen), `palette.dart` (auch für
@@ -311,6 +316,136 @@ mit Goldens vorher und nachher.
 - Watch: Start mit Name und einer Hauptaktion, im Gefecht nur „n übrig“ und
   die Panzerung.
 - Icon: der Panzer in Seitenansicht auf dem Horizont.
+
+## Referenz: KNX Monitor
+
+KNX Monitor ist die erste App auf Horizont. Die folgenden Muster sind dort
+gebaut und am iPhone und iPad abgenommen. Die nächsten Apps übernehmen sie,
+statt eigene zu erfinden. Wird ein Muster in einer zweiten App gebraucht,
+wandert es ins Paket (mit Token, Test und Tag). Pfade beziehen sich auf
+`regetskcob/KNX-Monitor`.
+
+### Aufbau des Theme-Ordners
+
+- `lib/theme/tokens.dart`: App-Namen für Paketwerte (`Gap`, `Radii`,
+  `Lines`, `Widths`, `Breakpoints`, `Motion`, `metaSeparator` = „ · “). Nur
+  Aliase und Ableitungen, keine eigenen Zahlen.
+- `lib/theme/palette.dart`: `context.hz`, `context.hzTheme` und
+  `context.mono(style)`. **`mono` setzt `fontFamily: HzFont.mono` und
+  `package: HzFont.package` neu**; wer stattdessen die Familie eines Stils
+  mit `copyWith` weiterreicht, verdoppelt das Paketpräfix und bekommt still
+  die Ersatzschrift.
+- `lib/theme/app_icons.dart`: App-Namen auf `HorizontSymbols`.
+
+### Bildschirmrahmen (`lib/ui/log_view.dart`)
+
+- **Touch unter 600:** Tab-Bar unten, Menü als eigene Seite, Suche als Zeile
+  unter der AppBar.
+- **Touch ab 600:** Tab-Bar bleibt unten. Menü als Seitenleiste links
+  (`Widths.sidebar` 240), ein- und ausklappbar, Zustand gespeichert. Suche
+  rechtsbündig in der AppBar (`Widths.search` 320).
+- **Zeiger:** Ansichten als `SegmentedButton` in der Werkzeugleiste, die
+  Hauptaktion daneben, kein FAB.
+- **FAB-Platz:** links ein schwebender Begleiter (Pause bzw. Abspieler),
+  rechts die Hauptaktion. Beide mit `FloatingActionButtonLocation.startFloat`
+  in einer Zeile; der Begleiter steckt in `IntrinsicHeight`, sonst wächst er
+  auf volle Höhe. Pause ist ein quadratischer Knopf mit Umriss (56 Telefon,
+  48 Tablet), nie mit Wort.
+- **Menü:** Gruppen mit Kennung und Zähler, Zeilen mit Haarlinie. Werkzeuge
+  tragen `expertOnly`; ohne Expertenmodus eine Gruppe „Werkzeuge“. Der
+  Schalter für den Expertenmodus ist am Fuß angeheftet (`MoreMenu.pinned`).
+
+### Übersicht als Dashboard (`lib/ui/value_board.dart`)
+
+- **Sektionskopf:** Kennung mit Zähler links, rechts leise Symbolknöpfe
+  (Anheften, „+“, Auf-/Zuklappen). Zugeklappt steht rechts der neueste Wert
+  in Mono, höchstens die halbe Zeile. Angeheftet = Symbol in `accent-text`
+  auf `accent-tint`. Ist der Kopf schmal, kürzt der Begriff mit „…“, der
+  Zähler bleibt (`SectionLabel(oneLine: true)`).
+- **Karten im Raster:** Spalten = Breite / 240 (`columnsFor`), Zeilen gleich
+  hoch über `IntrinsicHeight`. Name in Sans, Wert groß in Mono, darunter
+  Adresse, DPT, Zeit und Absender klein in Mono, rechts ein Verlauf mit
+  gestrichelter Mittelwertlinie. Neue Werte tönen die Karte kurz in
+  `accent-tint`.
+- **Kleine Sektionen teilen sich eine Zeile**, solange ihre Karten zusammen
+  in die Spaltenzahl passen; jede behält ihren Kopf und die Kartenbreite des
+  Rasters. Sonst bleibt rechts Fläche leer.
+- **Angeheftete Sektionen** liegen oben auf einem eigenen Band: `sunken`
+  über die volle Breite, unten eine Haarlinie, ohne Radius.
+- **Unter 600** werden aus Karten Zeilen mit Haarlinie, keine Karte pro
+  Zeile.
+- **Nichts springt während der Bedienung:** Neue Karten und Sektionen kommen
+  ans Ende und werden erst nach 1,5 s Ruhe einsortiert.
+
+### Auswahl wie im Dashboard (`lib/ui/address_picker.dart`)
+
+Müssen Nutzer aus vielen Einträgen wählen (Adressen für ein Diagramm, fürs
+Senden), dann nicht über Chips oder lange Häkchenlisten, sondern in der
+Ansicht, die sie kennen: dieselben Sektionen und Karten, mit Werten.
+
+- Vollbild-Dialog (`fullscreenDialog`), links Schließen, rechts ein
+  `FilledButton` „Übernehmen · n“.
+- Unter der AppBar ein Filterfeld mit der Filtersprache der App, daneben
+  „gewählt / möglich“ in Mono, bei erreichter Höchstzahl in `warning`.
+- Häkchen je Karte (oben rechts) und je Sektion (im Kopf: alle/keine).
+
+### Kennzahlen und Werte
+
+- `Metric`: Kennung als Begriff, darunter der Wert in `titleMedium` Mono, eine
+  Größe für alle; Zustand als Parameter (Wort und Zeichen).
+- `AddressTitle`: Adresse in Mono, Name dahinter in Sans.
+- Telegrammtyp als quadratisches Kennzeichen mit Buchstabe (W/R/A), Radius 2,
+  Fläche `*-tint`, wächst mit der Schrift.
+- Aktivitätsleiste: Kennzahlen nebeneinander in einer Größe, die Balken der
+  letzten 60 s rechts bündig auf derselben Grundlinie.
+
+### Hinweise und Gefahr (`lib/ui/replay_sheet.dart`)
+
+- **Hinweis:** Zeile auf `*-tint`, Radius 6, Zeichen in der Statusfarbe,
+  Text in `text`. Für Warnungen vor einer Aktion, nicht als Ersatz für das
+  Status-Badge.
+- **Unumkehrbare Aktion:** Hinweis (warning) oben, Auswahl und Optionen in
+  der Mitte, unten rechts ein `FilledButton` in `critical` mit Anzahl im Wort
+  („122 Telegramme senden“). Danach `showAdaptiveDialog` mit Anzahl, Ziel und
+  „lässt sich nicht rückgängig machen“. Während sie läuft, schließt das
+  Sheet nur über „Stopp“ (`PopScope`, `isDismissible: false`), Fortschritt
+  als Linie und `Metric`s.
+- **Original bleibt:** Wer Daten vor so einer Aktion bearbeitet, arbeitet auf
+  einer Kopie; „Als Kopie speichern“ und „Zurücksetzen“ erscheinen erst, wenn
+  etwas geändert ist.
+
+### Sekundärfunktion per langem Druck
+
+Ein langer Druck darf eine Variante der Aktion auslösen (Aufnahme mit 10 s
+Vorlauf), nie etwas anderes. Dann: Tooltip auf Touch abschalten
+(`TooltipTriggerMode.manual`, mit Zeiger bleibt er), im Tooltip-Text die
+Variante nennen, `Semantics(onLongPressHint:)` setzen,
+`HapticFeedback.mediumImpact` und eine Snackbar, die sagt, was passiert ist.
+
+### Diagramme und Zeitreihen
+
+- Serienfarben sind Datenfarben (`Palette.series`), keine Statusfarben.
+  Legende als `InputChip` mit eckigem Farbfeld, Wert unter dem Fadenkreuz in
+  Mono.
+- Eine Achse je Einheit, die Einheit steht in jeder Beschriftung, nicht
+  zusätzlich darüber; Beschriftungen einzeilig mit „…“.
+- Die Diagramme teilen sich die Bildschirmhöhe, bis der Nutzer eine Höhe
+  zieht.
+- Gespeicherte Diagramme gehören zur Anlage (Projekt, sonst Gateway), nicht
+  zum Gerät.
+- Heatmaps wählen die Auflösung nach der Zeitspanne: bis 1 h je Minute, bis
+  12 h je 5 Minuten, bis 7 Tage Tag × Stunde, darüber Wochentag × Stunde. Die
+  Auflösung steht in der Kennung („AKTIVITÄT · JE MINUTE“).
+- Abspielen einer Aufzeichnung: schwebende Leiste im FAB-Platz, über dem
+  Regler die Dichte der Ereignisse als Balken, Zeiten in Mono.
+
+### Prüfen
+
+- Goldens (`test/golden_test.dart`, Tag `golden`) für Telefon, iPad und Mac,
+  hell und dunkel, Textgröße 1, das Telefon auch 2. Live-Daten über eine timerfreie
+  Simulation mit fester Uhr, sonst hängen die Tests.
+- CI schließt die Goldens aus (`--exclude-tags golden`); sie werden lokal
+  erzeugt und angesehen.
 
 ## Prüfen vor dem Abschluss
 
