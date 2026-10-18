@@ -78,6 +78,7 @@
   "lan": "0xeb2f",
   "power": "0xe63c",
   "cloud_off": "0xe2c1",
+  "cloud": "0xf15c",
   "space_dashboard": "0xe66b",
   "video_library": "0xe04a",
   "show_chart": "0xe6e1",
