@@ -18,7 +18,7 @@
 {{- $colors := index site.Data.horizont.color.product $p "icon" -}}
 {{- $stroke := cond $icon $colors.glyph "currentColor" -}}
 {{- $label := index site.Data.horizont.color.product $p "name" -}}
-<svg class="hz-mark" width="{{ $size }}" height="{{ $size }}" viewBox="0 0 100 100" role="img" aria-label="{{ $label }}" fill="none" stroke="{{ $stroke }}" stroke-width="{{ cond $icon 5 7 }}" stroke-linecap="square" stroke-linejoin="miter">
+<svg xmlns="http://www.w3.org/2000/svg" class="hz-mark" width="{{ $size }}" height="{{ $size }}" viewBox="0 0 100 100" role="img" aria-label="{{ $label }}" fill="none" stroke="{{ $stroke }}" stroke-width="{{ cond $icon 5 7 }}" stroke-linecap="square" stroke-linejoin="miter">
   {{- if $icon }}
   <rect width="100" height="100" rx="22.4" fill="{{ $colors.field }}" stroke="none"/>
   {{- end }}
