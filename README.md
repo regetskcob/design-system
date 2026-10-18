@@ -5,7 +5,7 @@ und Panzergefecht. Leitbild: minimalistisch wie die niederrheinische Feldflur.
 
 Dokumentation und Entwürfe: https://www.regetskcob.de/horizont/
 
-Stand: v0.4, Entscheidungen getroffen (#1), Schriften gebündelt (#2), Flutter-Paket (#3) und Hugo-Komponenten da. Die Apps und ihre Landingpages nutzen das System noch nicht.
+Stand: v0.5, Entscheidungen getroffen (#1), Schriften gebündelt (#2), Flutter-Paket (#3), Hugo-Komponenten und App-Icons für alle Plattformen (#4) da. Die Apps und ihre Landingpages nutzen das System noch nicht.
 
 Wer Oberflächen umsetzt, ob Mensch oder Claude-Sitzung, beginnt mit
 [CLAUDE.md](CLAUDE.md) (Leitbild, Regeln, Tokens, offene Entscheidungen,
@@ -22,8 +22,8 @@ bzw. [docs/web.md](docs/web.md) für Hugo-Seiten.
 | `web/shortcodes/` | Hugo-Shortcodes für Inhalte: `hz-device`, `hz-kennung`, `hz-badge`, `hz-symbol`, `hz-facts` |
 | `web/fonts/` | Literata, Mona Sans, Monaspace Argon (SIL OFL, `OFL.txt`) und Material Symbols Sharp als Subset (Apache 2.0), als WOFF2 |
 | `flutter/` | Flutter-Paket `horizont`: Theme, Widgets, Schriften (`flutter/fonts/`), Showcase-App und Goldens (`flutter/example/`) |
-| `icons/` | Liste der genutzten Material Symbols und ihre Codepoints |
-| `tool/` | `generate_tokens.dart` (Tokens für Flutter), `build_symbols.py` (Material Symbols zuschneiden) |
+| `icons/` | Material-Symbols-Liste und Codepoints, die SVG-Quellen der App-Icons (`icons/svg/`) und die fertigen Sätze je Plattform (`icons/export/`) |
+| `tool/` | `generate_tokens.dart` (Tokens für Flutter), `build_symbols.py` (Material Symbols zuschneiden), `export_icons.py` (App-Icons für alle Plattformen) |
 | `site/` | Nur die Dokumentationsseite |
 | `docs/` | Umsetzungsleitfäden für Flutter und Web |
 | `CLAUDE.md` | Kurzfassung aller Regeln für Claude-Sitzungen |
@@ -46,6 +46,27 @@ Jeder Push auf `main` baut die Seite und veröffentlicht sie über GitHub Pages
 die Domain `www.regetskcob.de` trägt, erscheint dieses Repository als
 Projektseite unter `/horizont/`.
 
-## Geplant
+## App-Icons
 
-- `icons/` mit SVG-Quellen und Export für iOS, Android und Favicons
+`icons/export/<produkt>/` enthält die fertigen Sätze. Die Apps kopieren sie
+und erzeugen sie nicht selbst.
+
+| Ordner | Inhalt |
+| --- | --- |
+| `ios/AppIcon.appiconset/` | 1024 ohne Alpha, Xcode leitet die übrigen Größen ab |
+| `watchos/` | 1024 ohne Alpha, das System maskiert den Kreis |
+| `macos/AppIcon.iconset/` | nach Apples Vorlage (824 auf 1024, Schatten), alle Größen; `iconutil -c icns` macht daraus die `.icns` |
+| `android/` | adaptive Ebenen (Vorder-, Hintergrund, monochrom) für alle Dichten, `ic_launcher.xml`, das klassische Icon, `playstore-512.png` |
+| `tvos/` | Vorder- und Hintergrundebene in 400×240, 800×480 und 1280×768 |
+| `web/` | `favicon.svg` und `favicon-32.png` (Glyphe), `apple-touch-icon.png`, `icon-192/512.png`, `icon-512-maskable.png` |
+
+Neu erzeugen, nachdem sich ein Icon oder seine Farben geändert haben:
+
+```sh
+python3 -m venv .venv && .venv/bin/pip install pillow
+.venv/bin/python tool/export_icons.py
+```
+
+Das Skript baut die Doku-Seite, die die SVG-Quellen aus den Partials
+veröffentlicht, und rendert sie mit Chrome.
+

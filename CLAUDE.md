@@ -147,6 +147,11 @@ Einrichtungen.
   Dritteln. Davor steht ein Gegenstand in drei Tönen mit dunkler Kontur (1,6
   von 100) und weichem Schatten nach rechts unten. Farben unter
   `color.product.<id>.icon`.
+- **Plattform-Sätze:** `icons/export/<produkt>/` (iOS, watchOS, macOS,
+  Android adaptiv mit monochrom, tvOS in Ebenen, Web). Erzeugt von
+  `tool/export_icons.py` aus den Partials; Icons in den Apps nie von Hand
+  zeichnen oder skalieren, sondern kopieren. Nach einer Änderung an Icon oder
+  Farben das Skript neu laufen lassen.
 - **Glyphe** für Kopf, Fuß und Favicon unter 32 px:
   `web/partials/mark.html`, Strich 7 von 100, eckige Enden.
 - **Absender:** Jedes Produkt trägt in Fußzeile, Über-Dialog und Store-Text
@@ -205,7 +210,7 @@ Nutzer entschieden, nicht von der Sitzung.
   bewussten Änderung mit `cd flutter/example && flutter test
   --update-goldens` neu erzeugen und ansehen.
 - Versionen: Tokens (`version` im JSON), Paket (`flutter/pubspec.yaml`) und
-  Git-Tag (`v0.4.0`) laufen gemeinsam. Die Apps hängen an einem Tag, nie an
+  Git-Tag (`v0.5.0`) laufen gemeinsam. Die Apps hängen an einem Tag, nie an
   `main`. Hugo hängt die
   Ordner per `module.mounts` ein (`hugo.toml`).
 - Lokal ansehen:

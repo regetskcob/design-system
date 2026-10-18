@@ -9,6 +9,27 @@
 {{- $css := slice $tokens (resources.Get "css/horizont/components.css") (resources.Get "css/site/page.css") | resources.Concat "css/horizont.css" | minify | fingerprint -}}
 {{- $products := slice "regetskcob" "jagdaufseher" "knx" "panzergefecht" -}}
 {{- $neutrals := slice "bg" "surface" "sunken" "line" "line-strong" "text-faint" "text-muted" "text" -}}
+{{- /* The icon sources of every product as files under icons/<product>/,
+       for download and for tool/export_icons.py, which renders the
+       platform sets from them. */ -}}
+{{- range $products }}
+  {{- $p := . }}
+  {{- $c := index $hz.color.product $p "icon" }}
+  {{- $files := dict
+      "rounded.svg" (partial "horizont/app-icon.html" (dict "product" $p "size" 1024))
+      "bleed.svg" (partial "horizont/app-icon.html" (dict "product" $p "size" 1024 "shape" "bleed"))
+      "adaptive-back.svg" (partial "horizont/app-icon.html" (dict "product" $p "size" 1024 "shape" "adaptive" "layer" "back"))
+      "adaptive-front.svg" (partial "horizont/app-icon.html" (dict "product" $p "size" 1024 "shape" "adaptive" "layer" "front"))
+      "tv-back.svg" (partial "horizont/app-icon.html" (dict "product" $p "size" 1280 "shape" "tv" "layer" "back"))
+      "tv-front.svg" (partial "horizont/app-icon.html" (dict "product" $p "size" 1280 "shape" "tv" "layer" "front"))
+      "glyph.svg" (partial "horizont/mark.html" (dict "product" $p "size" 1024 "color" "#000000"))
+      "favicon.svg" (printf `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 100 100"><rect width="100" height="100" rx="22.4" fill="%s"/><svg x="10" y="8" width="80" height="80" viewBox="0 0 100 100">%s</svg></svg>` $c.field (partial "horizont/mark.html" (dict "product" $p "size" 80 "color" $c.glyph)))
+  }}
+  {{- range $name, $svg := $files }}
+    {{- $r := $svg | resources.FromString (printf "icons/%s/%s" $p $name) }}
+    {{- $_ := $r.Publish }}
+  {{- end }}
+{{- end }}
 <!doctype html>
 <html lang="de-DE" data-product="regetskcob">
 <head>
@@ -127,6 +148,7 @@
       <dt>Absender</dt><dd>Jedes Produkt trägt in Fußzeile, Über-Dialog und Store-Text „ein Projekt von regetskcob“ mit der nackten Linie.</dd>
       <dt>App-Icon</dt><dd>Bühne aus Himmel und Boden, Horizont bei zwei Dritteln, ein Gegenstand mit Kontur 1,6 von 100 in drei Tönen, Schatten nach rechts unten. Verlauf und Unschärfe sind hier erlaubt: das Icon ist ein Bild, keine Oberfläche.</dd>
       <dt>Glyphe</dt><dd>Strich 7 von 100, eckige Enden, in der Textfarbe oder im Akzent.</dd>
+      <dt>Dateien</dt><dd>SVG-Quellen je Produkt: {{ range $products }}<a href="{{ printf "icons/%s/rounded.svg" . | relURL }}">{{ (index $hz.color.product . "name") }}</a> {{ end }}(dazu <span class="hz-mono">bleed</span>, <span class="hz-mono">adaptive-*</span>, <span class="hz-mono">tv-*</span>, <span class="hz-mono">glyph</span>, <span class="hz-mono">favicon</span>). Die fertigen Sätze für iOS, watchOS, macOS, Android, tvOS und das Web liegen im Repository unter <span class="hz-mono">icons/export/</span>.</dd>
     </dl>
   </div>
 </section>
@@ -632,6 +654,7 @@ Fotos | je Einrichtung
       <li><span><b>Entscheidungen, erledigt.</b> Zwei Grün bleiben (Tanne dunkel leuchtender), Mona Sans, Kennung über dem Titel statt Large Title, Gelände als Ausnahme.</span></li>
       <li><span><b>Schriften, erledigt.</b> Mona Sans, Literata und Monaspace für Web und Flutter, Material Symbols Sharp als Subset.</span></li>
       <li><span><b>Flutter-Paket <span class="hz-mono">horizont</span>, erledigt.</b> Tokens aus <span class="hz-mono">tokens/horizont.json</span> generiert, ThemeExtension, ColorScheme von Hand je Produkt und Modus, Grund-Widgets, Kontraste als Test. Einbinden per Git-Abhängigkeit mit Tag.</span></li>
+      <li><span><b>App-Icons, erledigt.</b> Für alle Plattformen unter <span class="hz-mono">icons/export/</span>, erzeugt aus den Partials.</span></li>
       <li><span><b>Pro App eine Umstellung.</b> Theme ersetzen, harte Farben (Zustand, Priorität, Ort) auf Status-Tokens, Radien auf die Skala. KNX Monitor zuerst, es hat schon Tokens.</span></li>
       <li><span><b>Landingpages als Feldseite.</b> Modul einbinden, die Seite aus <span class="hz-mono">horizont/feld/*</span> zusammensetzen, Screenshots mit <span class="hz-mono">horizont/device.html</span>.</span></li>
       <li><span><b>Blog angleichen.</b> Neutrale und Kennungen übernehmen, Literata bleibt, der Kopf bekommt die Linie.</span></li>
