@@ -121,7 +121,11 @@ oder Seite schreiben.
   Felder, `10` Karten und Sheets, `16` nur große Sheets. Rund ist nur, was
   rund sein muss (Schalter, Ortspunkt, Avatar). Keine Pillen-Knöpfe, keine
   Pillen-Chips.
-- **Linien:** 1 px Haarlinie, 2 px Auswahl und Fokus.
+- **Linien:** 1 px Haarlinie, 2 px Auswahl und Fokus. Ein Umriss, eine
+  Farbe: Alles mit Rahmen (Karte, Feld, Knopf, Segment, Chip, Dialog, Sheet,
+  Menü) trägt die Haarlinie in `line-strong`. `line` trennt nur Zeilen und
+  Abschnitte (Listen, Kopf- und Fußlinien). So stehen Karte und Feld
+  nebeneinander gleich ruhig.
 - **Bewegung:** 120 / 200 / 320 ms, Kurve `cubic-bezier(0.2, 0, 0, 1)`, ohne
   Federn. Bei reduzierter Bewegung 0.
 - **Größen:** Tippziel 44, Zeile 44, dichte Zeile 28. Mit Zeiger (Mac,

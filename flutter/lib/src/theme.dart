@@ -103,7 +103,11 @@ ThemeData buildHorizontTheme(
   final control = pointer ? HzSize.controlDesktop : HzSize.touch;
   const r6 = BorderRadius.all(Radius.circular(HzRadius.r6));
   const r10 = BorderRadius.all(Radius.circular(HzRadius.r10));
+  // One outline for everything that has one (card, field, button, segment,
+  // chip, dialog, sheet, menu): line-strong. `line` only separates rows and
+  // sections.
   final hairline = BorderSide(color: c.line, width: HzLine.hairline);
+  final outline = BorderSide(color: c.lineStrong, width: HzLine.hairline);
   final buttonText = t(HzType.label).copyWith(fontSize: pointer ? 13 : 15);
   final buttonPadding = EdgeInsets.symmetric(horizontal: pointer ? HzSpace.s12 : HzSpace.s16);
   final buttonSize = WidgetStatePropertyAll(Size(0, control));
@@ -171,7 +175,7 @@ ThemeData buildHorizontTheme(
       elevation: 0,
       margin: EdgeInsets.zero,
       surfaceTintColor: Colors.transparent,
-      shape: RoundedRectangleBorder(borderRadius: r10, side: hairline),
+      shape: RoundedRectangleBorder(borderRadius: r10, side: outline),
     ),
     dividerTheme: DividerThemeData(color: c.line, thickness: HzLine.hairline, space: HzLine.hairline),
     listTileTheme: ListTileThemeData(
@@ -262,7 +266,7 @@ ThemeData buildHorizontTheme(
       backgroundColor: c.sunken,
       selectedColor: c.accentTint,
       labelStyle: t(HzType.label),
-      side: BorderSide(color: c.line),
+      side: outline,
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(HzRadius.r2))),
       showCheckmark: false,
     ),
@@ -311,7 +315,7 @@ ThemeData buildHorizontTheme(
       backgroundColor: c.surface,
       elevation: 0,
       surfaceTintColor: Colors.transparent,
-      shape: RoundedRectangleBorder(borderRadius: r10, side: hairline),
+      shape: RoundedRectangleBorder(borderRadius: r10, side: outline),
       titleTextStyle: t(HzType.title2),
       contentTextStyle: t(HzType.body),
     ),
@@ -324,7 +328,7 @@ ThemeData buildHorizontTheme(
       dragHandleColor: c.lineStrong,
       shape: RoundedRectangleBorder(
         borderRadius: const BorderRadius.vertical(top: Radius.circular(HzRadius.r16)),
-        side: hairline,
+        side: outline,
       ),
     ),
     popupMenuTheme: PopupMenuThemeData(
@@ -332,7 +336,7 @@ ThemeData buildHorizontTheme(
       elevation: 0,
       surfaceTintColor: Colors.transparent,
       textStyle: t(HzType.body),
-      shape: RoundedRectangleBorder(borderRadius: r10, side: hairline),
+      shape: RoundedRectangleBorder(borderRadius: r10, side: outline),
     ),
     snackBarTheme: SnackBarThemeData(
       backgroundColor: c.text,

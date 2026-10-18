@@ -191,7 +191,7 @@ Nicht das Paket `material_symbols_icons`, es bündelt alle Symbole.
   eines Large Title. Titel in `titleLarge`, Aktionen als Icon-Buttons im
   Akzent.
 - **Card:** `elevation: 0`, Farbe n.surface, Radius 10, Rand
-  `outlineVariant`. Sparsam einsetzen, Listen brauchen keine Karten.
+  `outline` (line-strong, wie Felder und Knöpfe). Sparsam einsetzen, Listen brauchen keine Karten.
 - **Listen:** `ListTile` mit Trennlinie, die am Text beginnt (Einzug wie das
   Leading). Meta-Zeilen (IDs, Datum) im Stil `data` klein.
 - **Knöpfe:** `FilledButton` (Akzent) nur für die eine Hauptaktion,
@@ -215,7 +215,7 @@ Nicht das Paket `material_symbols_icons`, es bündelt alle Symbole.
 - **FAB** (Touch: Telefon und Tablet, alle Plattformen; höchstens einer; mit Zeiger stattdessen in der Werkzeugleiste): `elevation: 0`, Radius 10, Akzent,
   als `FloatingActionButton.extended` mit Wort.
 - **Dialog, BottomSheet:** `elevation: 0`, Radius 10 (große Sheets 16),
-  Rand outlineVariant.
+  Rand `outline` (line-strong).
 - **Divider:** outlineVariant, Dicke 1, Abstand 1.
 - **Rückmeldung:** setzt das Paket je Plattform (Welle nur auf Android), siehe „Plattformgefühl“. Nicht in der App überschreiben.
 - **Tab-Bar:** `HorizontTabBar` aus dem Paket. Lange Wörter bekommen in der
