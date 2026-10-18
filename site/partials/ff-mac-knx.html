@@ -1,0 +1,45 @@
+{{- /* KNX Monitor on the Mac: objects grouped by room, inspector with history. */ -}}
+<div class="ff-mac">
+  <div class="mock-titlebar">
+    <span class="mock-lights"><i></i><i></i><i></i></span>
+    <b style="font-size:12px">Demo-Haus</b>
+    <span class="ff-bars">{{ partial "site/ff-bars.html" . }}130 Tel./min</span>
+    <span style="flex:1"></span>
+    <div class="hz-segmented" role="group"><button type="button" aria-pressed="false">Übersicht</button><button type="button" aria-pressed="true">Objekte</button><button type="button" aria-pressed="false">Live</button></div>
+    <input class="hz-input hz-mono" style="min-height:24px;width:150px;font-size:10px" placeholder="Name, Gerät, 1/2/3" aria-label="Filter">
+  </div>
+  <aside class="mock-sidebar">
+    <span class="t-kennung">Bus</span>
+    <div class="mock-side-item"><svg><use href="#i-dash"/></svg>Übersicht</div>
+    <div class="mock-side-item" aria-current="page"><svg><use href="#i-shapes"/></svg>Objekte<span class="count">312</span></div>
+    <div class="mock-side-item"><svg><use href="#i-pulse"/></svg>Live</div>
+    <span class="t-kennung">Prüfung</span>
+    <div class="mock-side-item"><svg><use href="#i-check-doc"/></svg>Gesundheit<span class="count" style="color:var(--critical)">3</span></div>
+    <div class="mock-side-item"><svg><use href="#i-topology"/></svg>Topologie</div>
+    <div class="mock-side-item"><svg><use href="#i-chart"/></svg>Statistik</div>
+  </aside>
+  <div class="ff-grid">
+    {{- $rooms := slice (slice "EG Arbeitszimmer" 4 true) (slice "EG Flur" 4 false) }}
+    {{- range $rooms }}
+    <div class="ff-group"><span class="t-kennung hz-kennung">{{ index . 0 }} · {{ index . 1 }}</span></div>
+    <div class="ff-cards">
+      <div class="hz-card ff-obj"><header><svg><use href="#i-bulb"/></svg><b>L01 Licht</b><span>2 Adressen</span></header><p>↙<span>Rückmeldung</span><b>Aus</b></p><p>↗<span>Schalten</span><b>Aus</b></p></div>
+      <div class="hz-card ff-obj"><header><svg><use href="#i-bulb"/></svg><b>L02 Dimmer</b><span>2 Adressen</span></header><p>↙<span>Dimmwert</span><b>10 %</b></p><p>↗<span>Dimmen</span><b>30 %</b></p></div>
+      <div class="hz-card ff-obj"><header><svg><use href="#i-blind"/></svg><b>F01 Jalousie</b><span>3 Adressen</span></header><p>↙<span>Position</span><b>0 %</b></p><p>↗<span>Auf/Ab</span><b>Auf</b></p><p>↗<span>Stopp</span><b>–</b></p></div>
+      <div class="hz-card ff-obj"{{ if index . 2 }} aria-selected="true"{{ end }}><header><svg><use href="#i-thermo"/></svg><b>Heizung</b><span>4 Adressen</span></header><p>↙<span>Ist-Temperatur</span><b class="hi">{{ if index . 2 }}20,68{{ else }}22,06{{ end }} °C</b></p><p>↙<span>Ventil</span><b>Inaktiv</b></p><p>↗<span>Soll-Temperatur</span><b>21,5 °C</b></p><p>↙<span>Stellwert</span><b>20 %</b></p></div>
+    </div>
+    {{- end }}
+  </div>
+  <aside class="ff-macinsp">
+    <span class="t-kennung hz-kennung">Objekt · 3/1/1 · DPT 9.001</span>
+    <b style="font-size:13px">EG Arbeitszimmer Ist-Temperatur</b>
+    <span class="v">20,68 °C</span>
+    <span class="hz-mono hz-muted" style="font-size:10px">21:51:30 · Raumbediengerät 1.1.14</span>
+    <svg viewBox="0 0 200 70" preserveAspectRatio="none" aria-hidden="true"><path class="grid" d="M0 17.5h200M0 35h200M0 52.5h200"/><path d="M0 50l12-2 12 1 12-4 12-6 12-3 12 1 12-5 12-4 12 2 12-1 12-6 12-3 12 1 12 4 12 2 12-1"/></svg>
+    <span class="t-kennung hz-kennung">24 h · min 19,4 · max 21,9</span>
+    <div style="margin-top:auto;display:grid;gap:6px">
+      <span class="hz-button hz-button--primary">Wert lesen</span>
+      <span class="hz-button hz-button--secondary">In Aufnahme</span>
+    </div>
+  </aside>
+</div>

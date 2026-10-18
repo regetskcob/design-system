@@ -31,7 +31,7 @@
   <span class="t-kennung hz-kennung">v{{ $hz.version }} · Entwurf</span>
   <span class="doc-spacer"></span>
   <nav aria-label="Abschnitte">
-    <a href="#prinzipien">Prinzipien</a><a href="#marken">Marken</a><a href="#farbe">Farbe</a><a href="#schrift">Schrift</a><a href="#komponenten">Komponenten</a><a href="#plattformen">Plattformen</a><a href="#entwuerfe">Entwürfe</a>
+    <a href="#prinzipien">Prinzipien</a><a href="#marken">Marken</a><a href="#farbe">Farbe</a><a href="#schrift">Schrift</a><a href="#komponenten">Komponenten</a><a href="#plattformen">Plattformen</a><a href="#entwuerfe">Entwürfe</a><a href="#formfaktoren">Formfaktoren</a>
   </nav>
   <div class="hz-segmented" role="group" aria-label="Darstellung">
     <button type="button" data-set-theme="" aria-pressed="true">Auto</button><button type="button" data-set-theme="light" aria-pressed="false">Hell</button><button type="button" data-set-theme="dark" aria-pressed="false">Dunkel</button>
@@ -555,8 +555,87 @@
   </div>
 </section>
 
+<section class="doc-section" id="formfaktoren">
+  <div class="doc-rail"><span class="t-kennung">10 — Formfaktoren</span></div>
+  <div>
+    <h2 class="t-headline">Vom Handgelenk bis zum Fernseher.</h2>
+    <p>Grobe Aufteilungen für jede Gerätegröße, links als Zonen, rechts als Beispiel aus einer der Apps. Gebaut wird nach verfügbarer Breite, nicht nach Gerät: ein iPad im geteilten Bildschirm bekommt die iPhone-Aufteilung. Übernommen ist, was in den Apps heute schon trägt: die Aktivitätsleiste und die Raumkarten von KNX Monitor, die Kennzahlen und die Revierkarte von Jagdaufseher, Warteraum, Fahrzeugwahl und HUD von Panzergefecht.</p>
+
+    <h3 class="t-title-2">iPhone · kompakt</h3>
+    <div class="ff" data-product="knx">
+      <div><figure class="hz-device hz-device--iphone" style="--w:190px"><div class="hz-device-screen"><div class="fz fz-phone"><i class="soft">Status</i><i>Kopf · Kennung + Titel</i><i class="on">Kennzahlen</i><i>Abschnitte</i><i>Tab-Bar</i></div></div></figure><span class="t-kennung hz-kennung">Aufteilung</span></div>
+      <dl class="doc-facts ff-facts">
+      <dt>Breite</dt><dd>unter 600 pt, eine Spalte, Rand 16</dd>
+      <dt>Aufbau</dt><dd>Kopf mit Kennung und Titel, darunter höchstens eine Kennzahlenleiste, dann Abschnitte mit Kennzeile. Tab-Bar mit drei bis fünf Zielen, eine Hauptaktion als FAB oder oben rechts.</dd>
+      </dl>
+      <div class="ff-ex"><figure class="hz-device hz-device--iphone" style="--w:360px"><div class="hz-device-screen mock-phone" data-theme="light">{{ partial "site/ff-phone-knx.html" . }}</div></figure><p class="mock-caption">KNX Monitor, Übersicht: oben die Busaktivität der letzten 60 Sekunden, darunter Werte groß in Mono mit Verlauf und Mittelwert.</p></div>
+    </div>
+
+    <h3 class="t-title-2">iPad · mittel bis erweitert</h3>
+    <div class="ff" data-product="jagdaufseher">
+      <div><figure class="hz-device hz-device--ipad" style="--w:300px"><div class="hz-device-screen"><div class="fz fz-ipad"><i class="soft">Seiten­leiste + Kenn­zahlen</i><i>Ebenen</i><i class="soft">Werkzeuge</i><i class="on">Inspektor</i><i style="grid-column:2;grid-row:2">Inhalt · Karte</i></div></div></figure><span class="t-kennung hz-kennung">Aufteilung</span></div>
+      <dl class="doc-facts ff-facts">
+      <dt>Breite</dt><dd>600 bis 1200 pt, Rand 24. Hochkant zwei Spalten, quer drei.</dd>
+      <dt>Aufbau</dt><dd>Seitenleiste statt Tab-Bar, mit den Kennzahlen am Fuß. In der Mitte der Inhalt, rechts der Inspektor für das Gewählte. Ebenen und Werkzeuge schweben nicht, sie sitzen auf einer Fläche mit Haarlinie.</dd>
+      <dt>Karten</dt><dd>Die Grundkarte bleibt ruhig wie die Feldflur: Flächen, Wege, Wasser in Linien und Tönen. Farbe tragen nur Reviergrenze, Auswahl und Zustand.</dd>
+      </dl>
+      <div class="ff-ex"><figure class="hz-device hz-device--ipad" style="--w:720px"><div class="hz-device-screen" data-theme="light">{{ partial "site/ff-ipad-jagd.html" . }}</div></figure><p class="mock-caption" style="max-width:none">Jagdaufseher, Karte: links das Revier mit den vier Kennzahlen, in der Mitte die Feldflur mit Grenze und Einrichtungen, rechts die gewählte Kanzel.</p></div>
+    </div>
+
+    <h3 class="t-title-2">Mac · groß</h3>
+    <div class="ff" data-product="knx">
+      <div><figure class="hz-device hz-device--laptop" style="--w:300px"><div class="hz-device-screen"><div class="fz fz-mac"><i class="soft">Werkzeugleiste</i><i class="soft">Seiten­leiste</i><i>Gruppe</i><i>Raster aus Karten</i><i class="on">Inspektor</i></div></div></figure><span class="t-kennung hz-kennung">Aufteilung</span></div>
+      <dl class="doc-facts ff-facts">
+      <dt>Breite</dt><dd>ab 1200 pt, Seitenleiste 200 bis 240, Inspektor 280 bis 320</dd>
+      <dt>Aufbau</dt><dd>Werkzeugleiste mit Umschalter und Suche, Seitenleiste mit Kennungen, Inhalt als Raster aus Karten (mindestens 240 breit), Inspektor mit Verlauf. Dichte Zeilen, Tastatur zuerst.</dd>
+      </dl>
+      <div class="ff-ex"><figure class="hz-device hz-device--laptop" style="--w:780px"><div class="hz-device-screen" data-theme="light">{{ partial "site/ff-mac-knx.html" . }}</div></figure><p class="mock-caption" style="max-width:none">KNX Monitor, Objekte: Räume als Gruppen, je Gerät eine Karte mit Status (↙) und Befehl (↗). Die Aktivität sitzt klein in der Werkzeugleiste, rechts der Verlauf des gewählten Werts.</p></div>
+    </div>
+
+    <h3 class="t-title-2">Apple TV · zehn Fuß</h3>
+    <div class="ff" data-product="panzergefecht">
+      <div>
+        <figure class="hz-device hz-device--tv" style="--w:300px"><div class="hz-device-screen" data-theme="dark"><div class="fz fz-tv"><i>Titel + Kennung</i><i class="on">Fokus</i><i>Kachel</i><i>Kachel</i><i>Kachel</i><i class="soft">Details</i><i class="on">Aktion</i></div></div></figure>
+        <span class="t-kennung hz-kennung">Aufteilung · Menü</span>
+        <figure class="hz-device hz-device--tv" style="--w:300px"><div class="hz-device-screen" data-theme="dark"><div class="fz fz-hud"><i class="on">Panzerung</i><i></i><i>Mitte frei</i><i>Karte</i><i class="on" style="grid-column:3;grid-row:1">Lage</i></div></div></figure>
+        <span class="t-kennung hz-kennung">Aufteilung · HUD</span>
+      </div>
+      <dl class="doc-facts ff-facts">
+      <dt>Fläche</dt><dd>1920 × 1080, sicherer Rand 60 oben und unten, 80 seitlich. Schrift × 1,5.</dd>
+      <dt>Aufbau</dt><dd>Titel mit Kennung, darunter ein Regal aus großen Kacheln, unten Details und die eine Aktion. Fokus statt Zeiger: die fokussierte Kachel wächst um 6 % und trägt den Ring im Akzent.</dd>
+      <dt>Im Spiel</dt><dd>HUD nur in den Ecken, die Mitte bleibt frei: oben links Panzerung, oben rechts Lage, unten rechts die runde Übersichtskarte.</dd>
+      </dl>
+      <div class="ff-ex"><figure class="hz-device hz-device--tv" style="--w:780px"><div class="hz-device-screen ff-tv-screen" data-theme="dark">{{ partial "site/ff-tv-pg.html" . }}</div></figure><p class="mock-caption" style="max-width:none">Panzergefecht, Warteraum: die Fahrzeuge als Regal, Hermelin im Fokus, darunter die Werte als Balken und der Start.</p></div>
+    </div>
+
+    <h3 class="t-title-2">Apple Watch · ein Blick</h3>
+    <div class="ff" data-product="panzergefecht">
+      <div><figure class="hz-device hz-device--watch" style="--w:130px"><div class="hz-device-screen"><div class="fz fz-watch"><i>Zeit</i><i>Ein Wert</i><i class="on">Eine Aktion</i></div></div></figure><span class="t-kennung hz-kennung">Aufteilung</span></div>
+      <dl class="doc-facts ff-facts">
+      <dt>Fläche</dt><dd>41 bis 49 mm, Rand 4 bis 8, Hintergrund schwarz oder Gelände</dd>
+      <dt>Aufbau</dt><dd>Uhrzeit oben rechts, ein Wert groß in Mono, eine Aktion. Die Krone blättert, die Seitentaste bleibt dem System.</dd>
+      </dl>
+      <div class="ff-ex" style="display:flex;gap:32px;flex-wrap:wrap;align-items:flex-end">
+        <figure class="hz-device hz-device--watch" style="--w:190px"><div class="hz-device-screen"><div class="ff-watch">
+          <span class="time">18:16</span>
+          <h5>Panzergefecht</h5><span class="k">Panzer-3524</span>
+          <span class="wbtn primary" style="margin-top:auto">Einzelspieler</span>
+          <span class="wbtn">Mehrspieler</span>
+        </div></div></figure>
+        <figure class="hz-device hz-device--watch" style="--w:190px"><div class="hz-device-screen"><div class="ff-watch terrain">
+          <span class="time">18:18</span>
+          <svg class="tank" viewBox="0 0 40 40" aria-hidden="true"><rect x="10" y="6" width="20" height="30" rx="3" fill="#3D3D3B" stroke="#1C2416"/><rect x="13" y="9" width="14" height="24" rx="2" fill="#C9B27E" stroke="#1C2416"/><circle cx="20" cy="22" r="5" fill="#C2A878" stroke="#1C2416"/><rect x="19" y="2" width="2" height="16" fill="#1C2416"/></svg>
+          <span class="big">3</span><span class="k">übrig · Gefecht</span>
+          <div class="bar"></div>
+        </div></div></figure>
+        <p class="mock-caption">Start mit dem eigenen Namen und einer Hauptaktion, im Gefecht nur die Zahl der übrigen Panzer und die Panzerung.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="doc-section" id="umsetzung">
-  <div class="doc-rail"><span class="t-kennung">10 — Umsetzung</span></div>
+  <div class="doc-rail"><span class="t-kennung">11 — Umsetzung</span></div>
   <div>
     <h2 class="t-headline">Was danach käme.</h2>
     <p>Diese Seite und die Tokens kommen aus dem Repository <a href="https://github.com/regetskcob/design-system">design-system</a>. Die Apps und ihre Landingpages sind noch unverändert.</p>

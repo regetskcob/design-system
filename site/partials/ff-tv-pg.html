@@ -1,0 +1,27 @@
+{{- /* Panzergefecht on the TV: the vehicle shelf of the waiting room. */ -}}
+<div class="ff-tv">
+  <div>
+    <span class="k">Warteraum · Code UNM3C · Leicht · Gelände zufällig · Alle gegen alle</span>
+    <h4>Dein Panzer</h4>
+  </div>
+  <div class="ff-shelf">
+    <div class="ff-tile focus">{{ partial "site/ff-tank.html" "#C9B27E" }}<b>Hermelin</b><span>Schützenpanzer</span></div>
+    <div class="ff-tile">{{ partial "site/ff-tank.html" "#8A9A5B" }}<b>Spitzmaus</b><span>Waffenträger</span></div>
+    <div class="ff-tile">{{ partial "site/ff-tank.html" "#B8A06A" }}<b>Fuchs</b><span>Radpanzer</span></div>
+    <div class="ff-tile locked">{{ partial "site/ff-tank.html" "#6B6F5A" }}<b>Habicht</b><span>ab Stufe 2</span></div>
+  </div>
+  <div class="ff-tv-detail">
+    <div>
+      <p>Schnellfeuer mit der Maschinenkanone</p>
+      <div class="ff-stat">Panzerung<i style="--v:52%"></i></div>
+      <div class="ff-stat">Tempo<i style="--v:70%"></i></div>
+      <div class="ff-stat">Wendigkeit<i style="--v:74%"></i></div>
+      <div class="ff-stat">Feuerkraft<i style="--v:60%"></i></div>
+    </div>
+    <div class="ff-tv-crew">
+      <span class="k">Besatzungen im Raum · 1</span>
+      <span>Panzer-6821 <span class="hz-mono" style="color:var(--text-muted);font-size:1.1cqw">du · wartet</span></span>
+      <span class="ff-tv-btn">Starten</span>
+    </div>
+  </div>
+</div>

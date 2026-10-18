@@ -360,3 +360,41 @@
   height: calc(var(--w, 700px) * 0.008); background: var(--device-body);
   border-radius: 2px;
 }
+
+/* iPad in landscape: even bezel, camera on the long top edge, top button. */
+.hz-device--ipad {
+  padding: calc(var(--w, 600px) * 0.024);
+  background: var(--device-body);
+  border-radius: calc(var(--w, 600px) * 0.045);
+  box-shadow: 0 0 0 1px var(--device-edge);
+}
+.hz-device--ipad > .hz-device-screen { aspect-ratio: 1180 / 820; border-radius: calc(var(--w, 600px) * 0.022); }
+.hz-device--ipad::before {
+  content: ""; position: absolute; left: 50%; top: calc(var(--w, 600px) * 0.0095);
+  width: calc(var(--w, 600px) * 0.006); aspect-ratio: 1; transform: translateX(-50%);
+  border-radius: 50%; background: var(--device-button);
+}
+.hz-device--ipad::after {
+  content: ""; position: absolute; top: -3px; right: 9%; width: 7%; height: 3px;
+  border-radius: 2px 2px 0 0; background: var(--device-button);
+}
+
+/* Apple Watch: rounded body, Digital Crown and side button on the right.
+   The screen is black like the real one; apps draw on top of it. */
+.hz-device--watch {
+  padding: calc(var(--w, 160px) * 0.075);
+  background: var(--device-body);
+  border-radius: calc(var(--w, 160px) * 0.27);
+  box-shadow: 0 0 0 1px var(--device-edge);
+}
+.hz-device--watch > .hz-device-screen { aspect-ratio: 396 / 484; border-radius: calc(var(--w, 160px) * 0.2); background: #000; }
+.hz-device--watch::before {
+  content: ""; position: absolute; right: calc(var(--w, 160px) * -0.045); top: 24%;
+  width: calc(var(--w, 160px) * 0.05); height: 15%;
+  border-radius: 0 3px 3px 0; background: var(--device-button);
+  box-shadow: inset -1px 0 0 var(--device-edge);
+}
+.hz-device--watch::after {
+  content: ""; position: absolute; right: -3px; top: 50%; width: 3px; height: 20%;
+  border-radius: 0 2px 2px 0; background: var(--device-button);
+}

@@ -1,0 +1,35 @@
+{{- /* KNX Monitor overview on the iPhone: activity, alarms, values. */ -}}
+<div class="mock-status"><span>9:41</span><span class="hz-mono" style="font-size:11px">5G 87</span></div>
+<div class="mock-navbar">
+  <div class="mock-navbar-row"><span class="t-kennung hz-kennung">Demo-Haus · Tunnel</span><span><button class="mock-icon-btn" type="button" aria-label="Suchen"><svg><use href="#i-search"/></svg></button><button class="mock-icon-btn" type="button" aria-label="Aufnahme"><svg><use href="#i-record"/></svg></button></span></div>
+  <div class="t-title-1">Übersicht</div>
+</div>
+<div class="mock-scroll">
+  <div class="ff-activity">
+    <span class="t-kennung">Ø Tel./min</span><span class="t-kennung" style="text-align:right">Gesamt 12 480</span>
+    <b>123</b>{{ partial "site/ff-bars.html" . }}
+  </div>
+  <div class="hz-section-head" style="padding-top:16px"><span class="t-kennung hz-kennung">Alarme &amp; Störungen · 1</span></div>
+  <div class="ff-value">
+    <span class="n">Rauchmelder Flur</span><span class="hz-badge hz-badge--positive"><svg><use href="#i-ok"/></svg>Ruhe</span>
+    <span class="v">Kein Alarm</span><span></span>
+    <span class="m">6/0/0 · DPT 1.005 · 21:51:20</span><span></span>
+  </div>
+  <div class="hz-section-head" style="padding-top:16px"><span class="t-kennung hz-kennung">Helligkeit · 5</span><span class="t-label" style="color:var(--accent-text)">Alle</span></div>
+  <div class="ff-value">
+    <span class="n">Außenhelligkeit</span><span class="mock-type w">W</span>
+    <span class="v">10 193,92 lx</span><svg viewBox="0 0 70 24"><path class="avg" d="M0 12h70"/><path d="M0 6l10 2 10-1 10 3 10 2 10 4 10 3 10 2"/></svg>
+    <span class="m">4/0/2 · DPT 9.004 · Wetterstation</span><span class="m">Ø 10 406,4</span>
+  </div>
+  <div class="ff-value">
+    <span class="n">EG Wohnzimmer Helligkeit</span><span></span>
+    <span class="v">168,32 lx</span><svg viewBox="0 0 70 24"><path class="avg" d="M0 14h70"/><path d="M0 18l10-1 10-3 10 1 10-4 10-2 10 1 10-2"/></svg>
+    <span class="m">8/1/0 · DPT 9.004 · Präsenzmelder</span><span class="m">Ø 160,1</span>
+  </div>
+</div>
+<span class="mock-fab"><svg><use href="#i-plus"/></svg>Schreiben</span>
+<nav class="mock-tabbar" style="grid-template-columns:repeat(3,1fr)">
+  <span class="mock-tab" aria-current="page"><svg><use href="#i-dash"/></svg>Übersicht</span>
+  <span class="mock-tab"><svg><use href="#i-shapes"/></svg>Objekte</span>
+  <span class="mock-tab"><svg><use href="#i-pulse"/></svg>Live</span>
+</nav>
