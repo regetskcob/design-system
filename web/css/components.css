@@ -407,3 +407,17 @@
 [data-density="desktop"] .hz-input { min-height: var(--size-control-desktop); font-size: 0.8125rem; }
 [data-density="desktop"] .hz-segmented button { min-height: 24px; padding: 0 var(--s-12); font-size: 0.75rem; }
 [data-density="desktop"] .hz-row { min-height: var(--size-row-dense); padding-block: var(--s-4); }
+
+/* --- Lockup: mark and name on one baseline ---
+   The horizon of a mark lies on its lower third. Next to a name it sits on
+   the baseline of the text, like a line drawn under the word: the mark's
+   bottom goes to the baseline, then moves down by a third of its height.
+   --mark sets its size, 1.15em by default. */
+.hz-lockup { display: inline-flex; align-items: baseline; gap: 0.4em; }
+.hz-lockup > .hz-mark {
+  flex: none;
+  width: var(--mark, 1.15em);
+  height: var(--mark, 1.15em);
+  position: relative;
+  top: calc(var(--mark, 1.15em) / 3);
+}

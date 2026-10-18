@@ -27,7 +27,7 @@
 {{ partial "horizont/icons.html" . }}
 
 <header class="doc-bar">
-  <a class="doc-brand" href="#top">{{ partial "horizont/mark.html" (dict "product" "regetskcob" "size" 22) }}<span>Horizont</span></a>
+  <a class="doc-brand hz-lockup" href="#top">{{ partial "horizont/mark.html" (dict "product" "regetskcob" "size" 22) }}<span>Horizont</span></a>
   <span class="t-kennung hz-kennung">v{{ $hz.version }} · Entwurf</span>
   <span class="doc-spacer"></span>
   <nav aria-label="Abschnitte">
@@ -117,8 +117,8 @@
       {{- range after 1 $products }}
       {{- $d := index $hz.color.product . }}
       <div class="doc-lockup hz-card" data-product="{{ . }}">
-        <span style="color:var(--accent-text)">{{ partial "horizont/mark.html" (dict "product" . "size" 24) }}</span><b>{{ $d.name }}</b>
-        <span class="doc-endorse">{{ partial "horizont/mark.html" (dict "product" "regetskcob" "size" 16) }}ein Projekt von regetskcob</span>
+        <span class="hz-lockup"><span class="hz-lockup" style="color:var(--accent-text)">{{ partial "horizont/mark.html" (dict "product" . "size" 24) }}</span><b>{{ $d.name }}</b></span>
+        <span class="doc-endorse hz-lockup">{{ partial "horizont/mark.html" (dict "product" "regetskcob" "size" 16) }}ein Projekt von regetskcob</span>
       </div>
       {{- end }}
     </div>
@@ -464,7 +464,7 @@
       <div class="mock-browser" data-theme="light">
         <div class="mock-browser-bar"><span class="mock-lights" style="display:flex;gap:6px"><i style="width:10px;height:10px;border-radius:50%;background:var(--line-strong)"></i><i style="width:10px;height:10px;border-radius:50%;background:var(--line-strong)"></i><i style="width:10px;height:10px;border-radius:50%;background:var(--line-strong)"></i></span><div class="mock-url">regetskcob.de/jagdaufseher/</div></div>
         <div class="lp">
-          <div class="lp-head"><span style="color:var(--accent-text)">{{ partial "horizont/mark.html" (dict "product" "jagdaufseher" "size" 24) }}</span><b>Jagdaufseher</b><nav><span>Funktionen</span><span>Datenschutz</span><span>EN</span></nav></div>
+          <div class="lp-head"><span class="hz-lockup"><span class="hz-lockup" style="color:var(--accent-text)">{{ partial "horizont/mark.html" (dict "product" "jagdaufseher" "size" 24) }}</span><b>Jagdaufseher</b></span><nav><span>Funktionen</span><span>Datenschutz</span><span>EN</span></nav></div>
           <div class="lp-hero">
             <div>
               <span class="t-kennung hz-kennung">01 — In Entwicklung · iPhone · iPad · Android</span>
@@ -489,7 +489,7 @@
             <div><h3 class="t-headline" style="font-size:1.5rem">Ein Revier, mehrere Jäger.</h3><p>Aufgaben mit Frist, Meldungen und Strecke für alle, die dazugehören, ohne Gruppenchat.</p></div>
             <dl><dt>Abgleich</dt><dd>offline zuerst</dd><dt>Konto</dt><dd>jederzeit löschbar</dd></dl>
           </div>
-          <div class="lp-foot">{{ partial "horizont/mark.html" (dict "product" "regetskcob" "size" 16) }}<span>ein Projekt von regetskcob</span><span>Impressum · Datenschutz</span></div>
+          <div class="lp-foot"><span class="hz-lockup">{{ partial "horizont/mark.html" (dict "product" "regetskcob" "size" 16) }}<span>ein Projekt von regetskcob</span></span><span>Impressum · Datenschutz</span></div>
         </div>
       </div>
       <p class="mock-caption" style="max-width:none">Statt Hero, Kachelraster und Pille: die Überschrift in Literata links, rechts das Produkt selbst. Darunter liegt die Horizontlinie im Akzent, dann nummerierte Abschnitte mit Fakten in Mono. KNX Monitor und Panzergefecht (dunkel, Gelände) nutzen dieselbe Vorlage.</p>
@@ -500,7 +500,7 @@
       <div class="mock-browser" data-theme="light">
         <div class="mock-browser-bar"><span></span><div class="mock-url">regetskcob.de/knx/</div></div>
         <div class="lp">
-          <div class="lp-head"><span style="color:var(--accent-text)">{{ partial "horizont/mark.html" (dict "product" "knx" "size" 24) }}</span><b>KNX Monitor</b><nav><span>Funktionen</span><span>Add-on</span><span>Datenschutz</span><span>EN</span></nav></div>
+          <div class="lp-head"><span class="hz-lockup"><span class="hz-lockup" style="color:var(--accent-text)">{{ partial "horizont/mark.html" (dict "product" "knx" "size" 24) }}</span><b>KNX Monitor</b></span><nav><span>Funktionen</span><span>Add-on</span><span>Datenschutz</span><span>EN</span></nav></div>
           <div class="lp-hero">
             <div>
               <span class="t-kennung hz-kennung">01 — Version 1.4 · Mac · Windows · Linux · iOS · Android · Home Assistant</span>
@@ -523,7 +523,7 @@
             </div></figure>
           </div>
           <div class="lp-horizon"></div>
-          <div class="lp-foot">{{ partial "horizont/mark.html" (dict "product" "regetskcob" "size" 16) }}<span>ein Projekt von regetskcob</span><span>Impressum · Datenschutz</span></div>
+          <div class="lp-foot"><span class="hz-lockup">{{ partial "horizont/mark.html" (dict "product" "regetskcob" "size" 16) }}<span>ein Projekt von regetskcob</span></span><span>Impressum · Datenschutz</span></div>
         </div>
       </div>
     </div>
@@ -531,7 +531,7 @@
       <div class="mock-browser" data-theme="dark">
         <div class="mock-browser-bar"><span></span><div class="mock-url">panzergefecht.de</div></div>
         <div class="lp">
-          <div class="lp-head"><span style="color:var(--accent-text)">{{ partial "horizont/mark.html" (dict "product" "panzergefecht" "size" 24) }}</span><b>Panzergefecht</b><nav><span>Modi</span><span>Geräte</span><span>Hilfe</span><span>EN</span></nav></div>
+          <div class="lp-head"><span class="hz-lockup"><span class="hz-lockup" style="color:var(--accent-text)">{{ partial "horizont/mark.html" (dict "product" "panzergefecht" "size" 24) }}</span><b>Panzergefecht</b></span><nav><span>Modi</span><span>Geräte</span><span>Hilfe</span><span>EN</span></nav></div>
           <div class="lp-hero">
             <div>
               <span class="t-kennung hz-kennung">01 — Im Browser · iPhone · Mac · Apple TV · Android</span>
@@ -547,7 +547,7 @@
             <div><h3 class="t-headline" style="font-size:1.5rem">Letzter Panzer, Flagge, Verteidigung.</h3><p>Dazu geteilter Bildschirm und Duell, allein gegen die CPU oder zusammen.</p></div>
             <dl><dt>Gelände</dt><dd>Wald, Wüste, Winter, Stadt, Berge, Inseln</dd><dt>Steuerung</dt><dd>Handy, Siri Remote</dd></dl>
           </div>
-          <div class="lp-foot">{{ partial "horizont/mark.html" (dict "product" "regetskcob" "size" 16) }}<span>ein Projekt von regetskcob</span><span>Impressum · Datenschutz</span></div>
+          <div class="lp-foot"><span class="hz-lockup">{{ partial "horizont/mark.html" (dict "product" "regetskcob" "size" 16) }}<span>ein Projekt von regetskcob</span></span><span>Impressum · Datenschutz</span></div>
         </div>
       </div>
       <p class="mock-caption" style="max-width:none">KNX Monitor zeigt rechts die Telegrammliste auf dem MacBook, Panzergefecht die Lobby auf dem Fernseher. Panzergefecht bleibt dunkel auf Gelände, das Signalgelb gehört dem einen Knopf „Jetzt spielen“. Aufbau, Kennungen, Horizontlinie und Fußzeile sind bei allen drei gleich.</p>
