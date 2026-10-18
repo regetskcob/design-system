@@ -212,7 +212,7 @@ Nicht das Paket `material_symbols_icons`, es bündelt alle Symbole.
   accent-tint, `showSelectedIcon: false`.
 - **Switch:** Spur accent, Daumen on-accent. Er ist die einzige runde Form
   neben Ortspunkt und Avatar.
-- **FAB** (nur Android, höchstens einer): `elevation: 0`, Radius 10, Akzent,
+- **FAB** (Touch: Telefon und Tablet, alle Plattformen; höchstens einer; mit Zeiger stattdessen in der Werkzeugleiste): `elevation: 0`, Radius 10, Akzent,
   als `FloatingActionButton.extended` mit Wort.
 - **Dialog, BottomSheet:** `elevation: 0`, Radius 10 (große Sheets 16),
   Rand outlineVariant.

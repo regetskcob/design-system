@@ -135,9 +135,9 @@ oder Seite schreiben.
 
 | Gerät | Aufteilung |
 | --- | --- |
-| iPhone (kompakt) | Kopf mit Kennung und kleinem Titel, höchstens eine Kennzahlenleiste, Abschnitte mit Kennzeile, Tab-Bar mit 3 bis 5 Zielen. Eine Hauptaktion oben rechts oder als FAB (Android). |
-| iPad (mittel/erweitert) | Seitenleiste statt Tab-Bar, Kennzahlen am Fuß der Seitenleiste, Inhalt in der Mitte, Inspektor rechts (quer). Ebenen und Werkzeuge sitzen auf einer Fläche mit Haarlinie. |
-| Mac (groß) | Werkzeugleiste 52 mit Umschalter und Suche, Seitenleiste 200 bis 240 mit Kennungen, Inhalt als Raster aus Karten (mindestens 240), Inspektor 280 bis 320. Dichte Zeilen, Tastatur zuerst. |
+| iPhone (kompakt) | Kopf mit Kennung und kleinem Titel, höchstens eine Kennzahlenleiste, Abschnitte mit Kennzeile, Tab-Bar mit 3 bis 5 Zielen. Die eine Hauptaktion als FAB mit Wort (alle Touch-Plattformen). |
+| iPad (mittel/erweitert) | Hauptaktion als FAB wie am Telefon. Seitenleiste statt Tab-Bar, Kennzahlen am Fuß der Seitenleiste, Inhalt in der Mitte, Inspektor rechts (quer). Ebenen und Werkzeuge sitzen auf einer Fläche mit Haarlinie. |
+| Mac (groß) | Werkzeugleiste 52 mit Umschalter, Suche und der Hauptaktion (kein FAB mit Zeiger), Seitenleiste 200 bis 240 mit Kennungen, Inhalt als Raster aus Karten (mindestens 240), Inspektor 280 bis 320. Dichte Zeilen, Tastatur zuerst. |
 | Apple TV | Sicherer Rand 60/80, Schrift × 1,5. Titel mit Kennung, ein Regal aus großen Kacheln, unten Details und eine Aktion. Fokus: Kachel +6 % und Akzentring. HUD im Spiel nur in den Ecken, die Mitte bleibt frei. |
 | Apple Watch | Uhrzeit oben rechts, ein Wert groß in Mono, eine Aktion. Die Krone blättert. Fläche schwarz oder Gelände. |
 | Landingpage | „Feldseite“: Kopf mit Lockup, Hero links mit Kennung und Literata-Überschrift, rechts das Produkt im Geräterahmen, darunter die Horizontlinie (2 px Akzent), nummerierte Abschnitte mit Kennung links und Fakten in Mono, Fuß „ein Projekt von regetskcob“. Kein zentrierter Hero, kein Kachelraster, keine Badge-Pille. |
@@ -199,6 +199,11 @@ ohne zu fragen:
   Kennung, der große iOS-Titel wird nicht genutzt.
 - **Gelände** ist als einzige Ausnahme freigegeben: Panzergefecht hat im
   Dunkeln eigene Neutrale.
+- **Hauptaktion als FAB auf Touch** (entschieden bei der Umstellung von KNX
+  Monitor, regetskcob/KNX-Monitor#23): Auf Telefon und Tablet steht die eine
+  Hauptaktion als schwebender Knopf mit Wort, auf iOS wie auf Android. Oben
+  in der Leiste neben Kennung, Titel und Symbolen war sie am iPhone kaum
+  lesbar. Mit Zeiger (Mac, Windows, Linux) sitzt sie in der Werkzeugleiste.
 
 Neue offene Fragen kommen als Issue mit dem Label `question` und werden vom
 Nutzer entschieden, nicht von der Sitzung.
