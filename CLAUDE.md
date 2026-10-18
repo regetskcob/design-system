@@ -194,9 +194,19 @@ Nutzer entschieden, nicht von der Sitzung.
 - Werte nur in `tokens/horizont.json` ändern. CSS (`web/css/tokens.css`)
   und Doku lesen sie von dort.
 - Aufbau: `tokens/` (Quelle), `web/` (wiederverwendbare Web-Schicht: CSS,
-  Partials, Schriften), `flutter/` (Schriften, später das Paket), `icons/`
-  (Liste und Codepoints der Symbole), `tool/` (Skripte), `site/` (nur die
-  Dokumentationsseite). Hugo hängt die
+  Partials, Schriften), `flutter/` (das Paket `horizont` mit Schriften,
+  Showcase-App unter `flutter/example/` und Tests), `icons/` (Liste und
+  Codepoints der Symbole), `tool/` (`generate_tokens.dart`,
+  `build_symbols.py`), `site/` (nur die Dokumentationsseite).
+- Nach jeder Änderung an `tokens/` oder `icons/`:
+  `dart run tool/generate_tokens.dart`, dann `cd flutter && flutter test`.
+  Die Kontrasttests sind die AA-Prüfung des ganzen Systems. Schlägt einer
+  fehl, wird der Token korrigiert, nicht der Test. Goldens nach einer
+  bewussten Änderung mit `cd flutter/example && flutter test
+  --update-goldens` neu erzeugen und ansehen.
+- Versionen: Tokens (`version` im JSON), Paket (`flutter/pubspec.yaml`) und
+  Git-Tag (`v0.3.0`) laufen gemeinsam. Die Apps hängen an einem Tag, nie an
+  `main`. Hugo hängt die
   Ordner per `module.mounts` ein (`hugo.toml`).
 - Lokal ansehen:
   `hugo server --baseURL http://localhost:1313/design-system/`

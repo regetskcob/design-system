@@ -1,0 +1,38 @@
+name: Flutter package
+# Checks the Flutter package: the generated tokens are fresh, the package and
+# the example analyze clean, the tests pass. Goldens differ between macOS and
+# Linux and run locally only (dart_test.yaml, tag "golden").
+on:
+  push:
+    branches: [main]
+    paths: ['flutter/**', 'tokens/**', 'icons/**', 'tool/**', '.github/workflows/flutter.yml']
+  pull_request:
+    paths: ['flutter/**', 'tokens/**', 'icons/**', 'tool/**', '.github/workflows/flutter.yml']
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 3.47.6
+          channel: stable
+          cache: true
+      - name: Generated tokens are fresh
+        run: |
+          dart run tool/generate_tokens.dart
+          git diff --exit-code flutter/lib/src/tokens.g.dart
+      - name: Package
+        working-directory: flutter
+        run: |
+          flutter pub get
+          flutter analyze --fatal-infos
+          flutter test --exclude-tags golden
+      - name: Example
+        working-directory: flutter/example
+        run: |
+          flutter pub get
+          flutter analyze --fatal-infos

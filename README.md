@@ -5,7 +5,7 @@ und Panzergefecht. Leitbild: minimalistisch wie die niederrheinische Feldflur.
 
 Dokumentation und Entwürfe: https://www.regetskcob.de/design-system/
 
-Stand: v0.2, die Grundentscheidungen sind getroffen (#1). Die Apps und ihre Landingpages nutzen das System noch nicht.
+Stand: v0.3, Entscheidungen getroffen (#1), Schriften gebündelt (#2), Flutter-Paket da (#3). Die Apps und ihre Landingpages nutzen das System noch nicht.
 
 Wer Oberflächen umsetzt, ob Mensch oder Claude-Sitzung, beginnt mit
 [CLAUDE.md](CLAUDE.md) (Leitbild, Regeln, Tokens, offene Entscheidungen,
@@ -20,9 +20,9 @@ bzw. [docs/web.md](docs/web.md) für Hugo-Seiten.
 | `web/css/` | Die Web-Schicht: `tokens.css` (Hugo-Template, erzeugt die CSS-Variablen aus den Tokens) und `components.css` (Knöpfe, Felder, Listen, Status, Tabellen) |
 | `web/partials/` | Marken (`mark.html`), illustrierte App-Icons (`app-icon.html`), Platzhalter-Ikonen (`icons.html`) |
 | `web/fonts/` | Literata, Mona Sans, Monaspace Argon (SIL OFL, `OFL.txt`) und Material Symbols Sharp als Subset (Apache 2.0), als WOFF2 |
-| `flutter/fonts/` | Dieselben Schriften als TTF/OTF für Flutter |
+| `flutter/` | Flutter-Paket `horizont`: Theme, Widgets, Schriften (`flutter/fonts/`), Showcase-App und Goldens (`flutter/example/`) |
 | `icons/` | Liste der genutzten Material Symbols und ihre Codepoints |
-| `tool/` | `build_symbols.py`: schneidet Material Symbols Sharp auf die Liste zu |
+| `tool/` | `generate_tokens.dart` (Tokens für Flutter), `build_symbols.py` (Material Symbols zuschneiden) |
 | `site/` | Nur die Dokumentationsseite |
 | `docs/` | Umsetzungsleitfäden für Flutter und Web |
 | `CLAUDE.md` | Kurzfassung aller Regeln für Claude-Sitzungen |
@@ -47,7 +47,5 @@ Projektseite unter `/design-system/`.
 
 ## Geplant
 
-- Flutter-Paket `horizont` unter `flutter/`, die Tokens daraus generiert, per
-  Git-Abhängigkeit mit festem Tag in allen drei Apps
 - `web/` als Hugo-Modul für den Blog und die Landingpages
 - `icons/` mit SVG-Quellen und Export für iOS, Android und Favicons

@@ -1,0 +1,59 @@
+name: horizont
+description: >-
+  Horizont, the design system of regetskcob, Jagdaufseher, KNX Monitor and
+  Panzergefecht: tokens, theme, fonts, icons and the few widgets every app
+  needs.
+version: 0.3.0
+publish_to: none
+repository: https://github.com/regetskcob/design-system
+
+environment:
+  sdk: ^3.9.0
+  flutter: ">=3.35.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  assets:
+    - fonts/OFL.txt
+    - fonts/MaterialSymbols-LICENSE.txt
+  fonts:
+    - family: Literata
+      fonts:
+        - asset: fonts/Literata-Light.ttf
+          weight: 300
+        - asset: fonts/Literata-LightItalic.ttf
+          weight: 300
+          style: italic
+        - asset: fonts/Literata-SemiBold.ttf
+          weight: 600
+    - family: MonaSans
+      fonts:
+        - asset: fonts/MonaSans-Regular.ttf
+          weight: 400
+        - asset: fonts/MonaSans-Medium.ttf
+          weight: 500
+        - asset: fonts/MonaSans-SemiBold.ttf
+          weight: 600
+    - family: MonaSansDisplayExpanded
+      fonts:
+        - asset: fonts/MonaSansDisplayExpanded-Bold.ttf
+          weight: 700
+        - asset: fonts/MonaSansDisplayExpanded-Black.ttf
+          weight: 900
+    - family: MonaspaceArgon
+      fonts:
+        - asset: fonts/MonaspaceArgon-Regular.otf
+          weight: 400
+        - asset: fonts/MonaspaceArgon-SemiBold.otf
+          weight: 600
+    - family: MaterialSymbolsSharp
+      fonts:
+        - asset: fonts/MaterialSymbolsSharp-300.ttf
+          weight: 300

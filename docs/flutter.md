@@ -10,31 +10,39 @@ Wenn in der Sitzung verfügbar, zusätzlich die Skills
 steht. Die CLAUDE.md der jeweiligen App (l10n, Zustandsverwaltung,
 Commit-Regeln) gilt weiter.
 
-## Stand und Ziel
+## Das Paket
 
-- **Heute:** Jede App hat ihr eigenes Theme. Ein gemeinsames Flutter-Paket
-  gibt es noch nicht.
-- **Ziel:** ein Paket `horizont` unter `flutter/` in diesem Repository. Die
-  Tokens erzeugt ein Generator aus `tokens/horizont.json`
-  (`lib/src/tokens.g.dart`), dazu eine `ThemeExtension`, je Produkt und Modus
-  ein von Hand gesetztes `ColorScheme` und `buildHorizontTheme(product,
-  brightness, density)`. Die Apps binden es per Git-Abhängigkeit mit festem
-  Tag ein:
+Das Paket `horizont` liegt unter `flutter/` (Anleitung: `flutter/README.md`).
+Die Apps binden es per Git-Abhängigkeit mit festem Tag ein:
 
-  ```yaml
-  dependencies:
-    horizont:
-      git:
-        url: https://github.com/regetskcob/design-system.git
-        path: flutter
-        ref: v0.1.0
-  ```
+```yaml
+dependencies:
+  horizont:
+    git:
+      url: https://github.com/regetskcob/design-system.git
+      path: flutter
+      ref: v0.3.0
+```
 
-- **Bis das Paket existiert:** In der App liegt ein Ordner `lib/theme/`
-  (KNX hat ihn schon), dessen Werte zeilengenau aus `tokens/horizont.json`
-  übernommen sind. Jede Datei bekommt den Hinweis, dass die Quelle das
-  Token-File ist. Keine eigenen Werte erfinden. Was fehlt, wird erst in den
-  Tokens ergänzt.
+Es bringt mit:
+
+- `buildHorizontTheme(product, brightness, density:)` mit dem von Hand
+  gesetzten `ColorScheme` aus der Tabelle unten, der Typografie und allen
+  Komponenten-Themes.
+- Die Extension `HorizontTheme`, gelesen mit `HorizontTheme.of(context)`.
+  Sie assertet, statt still auf einen Ersatz zurückzufallen.
+- `HorizontColors`, `HorizontSymbols`, die Werte `HzSpace`, `HzRadius`,
+  `HzLine`, `HzSize`, `HzBreakpoint`, `HzMotion`, `HzType`.
+- Die Widgets `Kennung`, `HorizontBadge`, `HorizontTabBar`, `HorizontRail`,
+  `HorizontMark` und `HorizontLockup`, dazu `resolveMotion`.
+- `registerHorizontLicenses()` für die Lizenzseite.
+
+Tests im Paket: Kontrast (AA) für jedes Produkt und jeden Modus, Theme,
+Widgets inklusive Grundlinie des Lockups. Goldens der Showcase-App liegen in
+`flutter/example/test/goldens/`.
+
+In einer App gilt: Nichts davon nachbauen. Fehlt etwas, kommt es ins Paket,
+mit Token, Test und neuem Tag.
 
 ## Grundsätze
 
@@ -165,6 +173,10 @@ Nicht das Paket `material_symbols_icons`, es bündelt alle Symbole.
   Rand outlineVariant.
 - **Divider:** outlineVariant, Dicke 1, Abstand 1.
 - **Ripple:** `InkRipple.splashFactory`, kein Sparkle.
+- **Tab-Bar:** `HorizontTabBar` aus dem Paket. Lange Wörter bekommen in der
+  ARB einen weichen Trennstrich (`Einrich\u00ADtungen`). Bei großer Schrift
+  höchstens vier Ziele, sonst ab 600 die Rail. Labels nie kürzen,
+  abschneiden oder verkleinern.
 
 ## Dichte und Formfaktoren
 
