@@ -26,6 +26,7 @@ export 'src/tokens.g.dart'
         HzType,
         HzTypeSpec,
         horizontTokensVersion;
+export 'src/widgets/field.dart';
 export 'src/widgets/kennung.dart';
 export 'src/widgets/mark.dart';
 export 'src/widgets/navigation.dart';
