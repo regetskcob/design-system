@@ -191,7 +191,7 @@ Nicht das Paket `material_symbols_icons`, es bündelt alle Symbole.
   eines Large Title. Titel in `titleLarge`, Aktionen als Icon-Buttons im
   Akzent.
 - **Card:** `elevation: 0`, Farbe n.surface, Radius 10, Rand
-  `outline` (line-strong, wie Felder und Knöpfe). Sparsam einsetzen, Listen brauchen keine Karten.
+  `outline` (line-strong, wie Felder und Knöpfe). Sparsam einsetzen, Listen brauchen keine Karten. Steht ein Kasten zwischen Feldern und Knöpfen (Formular), bekommt er Radius 6 wie sie.
 - **Listen:** `ListTile` mit Trennlinie, die am Text beginnt (Einzug wie das
   Leading). Meta-Zeilen (IDs, Datum) im Stil `data` klein.
 - **Knöpfe:** `FilledButton` (Akzent) nur für die eine Hauptaktion,

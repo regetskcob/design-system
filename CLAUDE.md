@@ -120,7 +120,11 @@ oder Seite schreiben.
   geklemmt oder abgeschnitten.
 - **Abstand:** 4er-Raster, nur `0 2 4 8 12 16 24 32 48 64 96`.
 - **Radien:** `0` Tabellen, `2` Status und Kennzeichen, `6` Knöpfe und
-  Felder, `10` Karten und Sheets, `16` nur große Sheets. Rund ist nur, was
+  Felder, `10` Karten und Sheets, `16` nur große Sheets. Was in einer Reihe
+  mit Feldern und Knöpfen steht (Kasten im Formular, Hinweis über einem
+  Knopf, Kachel in einer Seitenleiste), nimmt deren Radius 6, nicht den der
+  Karte: Nebeneinander sollen Rundungen gleich sein. `10` nur für frei
+  stehende Karten (Raster, Übersicht) und Sheets. Rund ist nur, was
   rund sein muss (Schalter, Ortspunkt, Avatar). Keine Pillen-Knöpfe, keine
   Pillen-Chips.
 - **Linien:** 1 px Haarlinie, 2 px Auswahl und Fokus. Ein Umriss, eine
