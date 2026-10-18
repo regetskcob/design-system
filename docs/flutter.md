@@ -21,7 +21,7 @@ dependencies:
     git:
       url: https://github.com/regetskcob/horizont.git
       path: flutter
-      ref: v0.5.0
+      ref: v0.5.1
 ```
 
 Es bringt mit:

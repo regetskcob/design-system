@@ -214,7 +214,7 @@ Nutzer entschieden, nicht von der Sitzung.
   bewussten Änderung mit `cd flutter/example && flutter test
   --update-goldens` neu erzeugen und ansehen.
 - Versionen: Tokens (`version` im JSON), Paket (`flutter/pubspec.yaml`) und
-  Git-Tag (`v0.5.0`) laufen gemeinsam. Die Apps hängen an einem Tag, nie an
+  Git-Tag (`v0.5.1`) laufen gemeinsam. Die Apps hängen an einem Tag, nie an
   `main`. Hugo hängt die
   Ordner per `module.mounts` ein (`hugo.toml`).
 - Lokal ansehen:
