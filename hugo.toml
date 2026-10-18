@@ -20,6 +20,13 @@ description = 'Horizont, das Designsystem von regetskcob und seinen Projekten Ja
     source = 'tokens'
     target = 'data'
   [[module.mounts]]
+    source = 'icons'
+    target = 'data/horizont_icons'
+    includeFiles = ['*.json']
+  [[module.mounts]]
+    source = 'web/shortcodes'
+    target = 'layouts/_shortcodes'
+  [[module.mounts]]
     source = 'web/css'
     target = 'assets/css/horizont'
   [[module.mounts]]

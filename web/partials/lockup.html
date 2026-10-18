@@ -1,0 +1,21 @@
+{{- /*
+  Mark and name on one baseline: the mark's horizon lies on the baseline of
+  the name, like a line under the word.
+
+    partial "horizont/lockup.html" (dict "product" "knx" "label" "KNX Monitor" "href" "/knx/")
+
+  product   regetskcob | jagdaufseher | knx | panzergefecht (default regetskcob)
+  label     the name; defaults to the product's name from the tokens
+  href      makes the lockup a link
+  mark      size of the mark as CSS length (default 1.15em, via --mark)
+*/ -}}
+{{- $p := .product | default "regetskcob" -}}
+{{- $label := .label | default (index site.Data.horizont.color.product $p "name") -}}
+{{- $style := "" -}}
+{{- with .mark }}{{ $style = printf "--mark:%s" . }}{{ end -}}
+{{- $inner := printf "%s<span>%s</span>" (partial "horizont/mark.html" (dict "product" $p "size" 24)) $label -}}
+{{- if .href -}}
+<a class="hz-lockup" href="{{ .href }}"{{ with $style }} style="{{ . | safeCSS }}"{{ end }}>{{ $inner | safeHTML }}</a>
+{{- else -}}
+<span class="hz-lockup"{{ with $style }} style="{{ . | safeCSS }}"{{ end }}>{{ $inner | safeHTML }}</span>
+{{- end -}}

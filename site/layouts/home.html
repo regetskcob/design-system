@@ -322,6 +322,29 @@
       <dt>Web</dt><dd><span class="hz-mono">figure.hz-device.hz-device--iphone</span> mit <span class="hz-mono">--w</span> als Außenbreite, darin <span class="hz-mono">.hz-device-screen</span>. Varianten: iphone, android, laptop, tv, dazu <span class="hz-mono">--cropped</span> für ein Telefon, das am Abschnittsrand endet.</dd>
       <dt>Stores</dt><dd>App-Store- und Play-Store-Bilder nutzen dieselben Rahmen auf Papier oder Gelände, mit einer Kennung und einem Satz in Literata darüber.</dd>
     </dl>
+
+    <h3 class="t-title-3">Für Hugo-Seiten</h3>
+    <p>Die Landingpages und der Blog bekommen dieselben Bausteine als Partials (für Layouts) und Shortcodes (für Inhalte), aus dem Modul <span class="hz-mono">github.com/regetskcob/horizont</span>. Links der Aufruf, rechts das Ergebnis.</p>
+    <div class="doc-hugo">
+      <div class="doc-hugo-row"><pre>{{ `{{ partial "horizont/lockup.html" (dict "product" "knx") }}` }}</pre><div class="doc-hugo-live">{{ range $products }}<span data-product="{{ . }}">{{ partial "horizont/lockup.html" (dict "product" .) }}</span>{{ end }}</div></div>
+      <div class="doc-hugo-row"><pre>{{ `{{ partial "horizont/kennung.html" "Einrichtungen · 14" }}
+{{< hz-kennung "Einrichtungen · 14" >}}` }}</pre><div class="doc-hugo-live">{{ partial "horizont/kennung.html" "Einrichtungen · 14" }}</div></div>
+      <div class="doc-hugo-row"><pre>{{ `{{ partial "horizont/badge.html" (dict "status" "warning" "label" "Prüfen") }}
+{{< hz-badge warning >}}Prüfen{{< /hz-badge >}}` }}</pre><div class="doc-hugo-live">{{ range slice (slice "positive" "Gut") (slice "warning" "Prüfen") (slice "critical" "Defekt") (slice "info" "Hinweis") (slice "neutral" "Unbekannt") }}{{ partial "horizont/badge.html" (dict "status" (index . 0) "label" (index . 1)) }}{{ end }}</div></div>
+      <div class="doc-hugo-row"><pre>{{ `{{ partial "horizont/symbol.html" "forest" }}
+{{< hz-symbol map "Karte" >}}` }}</pre><div class="doc-hugo-live">{{ range slice "forest" "checklist" "pets" "map" "bolt" "account_tree" "sports_esports" "tv" }}{{ partial "horizont/symbol.html" . }}{{ end }}</div></div>
+      <div class="doc-hugo-row"><pre>{{ `{{< hz-facts >}}
+Zustand | gut, prüfen, defekt
+Fotos | je Einrichtung
+{{< /hz-facts >}}` }}</pre><div>{{ partial "horizont/facts.html" (dict "items" (slice (slice "Zustand" "gut, prüfen, defekt") (slice "Fotos" "je Einrichtung"))) }}</div></div>
+      <div class="doc-hugo-row"><pre>{{ `{{< hz-device src="uebersicht.png"
+    device="iphone" width="300"
+    alt="Übersicht des Reviers" >}}` }}</pre><div class="doc-hugo-live" data-product="jagdaufseher">{{ partial "horizont/device.html" (dict "device" "iphone" "width" 160 "inner" "<div style=\"position:absolute;inset:0;display:grid;place-items:center;text-align:center\"><span class=\"t-kennung hz-kennung\">Bild aus dem Beitrag</span></div>") }}</div></div>
+      <div class="doc-hugo-row"><pre>{{ `{{ partial "horizont/feld/head.html" … }}
+{{ partial "horizont/feld/hero.html" … }}
+{{ partial "horizont/feld/section.html" … }}
+{{ partial "horizont/feld/foot.html" … }}` }}</pre><div><p class="hz-muted t-callout" style="margin:0">Die ganze Landingpage aus fünf Teilen, siehe „Landingpage · Feldseite“ unter Entwürfe. Parameter stehen im Kopf jeder Datei in <span class="hz-mono">web/partials/feld/</span>.</p></div></div>
+    </div>
   </div>
 </section>
 
@@ -460,36 +483,22 @@
     </div>
 
     <h3 class="t-title-2">Landingpage · Feldseite</h3>
+    <p>Gebaut aus den Hugo-Partials von Horizont (<span class="hz-mono">horizont/feld/*</span>, siehe „Für Hugo-Seiten“ bei den Komponenten). Jede Landingpage ruft dieselben fünf Teile auf.</p>
     <div class="mock-stage" data-product="jagdaufseher">
       <div class="mock-browser" data-theme="light">
         <div class="mock-browser-bar"><span class="mock-lights" style="display:flex;gap:6px"><i style="width:10px;height:10px;border-radius:50%;background:var(--line-strong)"></i><i style="width:10px;height:10px;border-radius:50%;background:var(--line-strong)"></i><i style="width:10px;height:10px;border-radius:50%;background:var(--line-strong)"></i></span><div class="mock-url">regetskcob.de/jagdaufseher/</div></div>
-        <div class="lp">
-          <div class="lp-head"><span class="hz-lockup"><span class="hz-lockup" style="color:var(--accent-text)">{{ partial "horizont/mark.html" (dict "product" "jagdaufseher" "size" 24) }}</span><b>Jagdaufseher</b></span><nav><span>Funktionen</span><span>Datenschutz</span><span>EN</span></nav></div>
-          <div class="lp-hero">
-            <div>
-              <span class="t-kennung hz-kennung">01 — In Entwicklung · iPhone · iPad · Android</span>
-              <h1 class="t-display">Das Revier im Blick, auch ohne Netz.</h1>
-              <p>Hochsitze, Kirrungen, Aufgaben und Strecke an einem Ort, geteilt mit allen, die im Revier jagen. Was draußen erfasst wird, gleicht sich ab, sobald wieder Empfang da ist.</p>
-              <div class="lp-actions"><span class="hz-button hz-button--primary">Beta anfragen<svg><use href="#i-arrow"/></svg></span><span class="hz-button hz-button--secondary">So funktioniert es</span></div>
-            </div>
-            <figure class="hz-device hz-device--iphone hz-device--cropped lp-shot" style="--w:250px;--h:372px"><div class="hz-device-screen"><div style="width:340px;transform:scale(.694);transform-origin:top left">
-              <div class="mock-status"><span>9:41</span><span class="hz-mono" style="font-size:11px">5G 87</span></div>
-              <div class="mock-navbar"><span class="t-kennung hz-kennung">Hegering Nord · 412 ha</span><div class="t-title-1">Übersicht</div></div>
-              {{ partial "site/mock-jagd.html" . }}
-            </div></div></figure>
-          </div>
-          <div class="lp-horizon"></div>
-          <div class="lp-sec">
-            <span class="t-kennung hz-kennung">02 — Einrichtungen</span>
-            <div><h3 class="t-headline" style="font-size:1.5rem">Jeder Hochsitz mit seinem Zustand.</h3><p>Prüfen, fotografieren, als defekt melden. Wer als Nächstes rausfährt, sieht, was zu tun ist.</p></div>
-            <dl><dt>Zustand</dt><dd>gut, prüfen, defekt</dd><dt>Fotos</dt><dd>je Einrichtung</dd><dt>Karte</dt><dd>Lage im Revier</dd></dl>
-          </div>
-          <div class="lp-sec">
-            <span class="t-kennung hz-kennung">03 — Gemeinsam</span>
-            <div><h3 class="t-headline" style="font-size:1.5rem">Ein Revier, mehrere Jäger.</h3><p>Aufgaben mit Frist, Meldungen und Strecke für alle, die dazugehören, ohne Gruppenchat.</p></div>
-            <dl><dt>Abgleich</dt><dd>offline zuerst</dd><dt>Konto</dt><dd>jederzeit löschbar</dd></dl>
-          </div>
-          <div class="lp-foot"><span class="hz-lockup">{{ partial "horizont/mark.html" (dict "product" "regetskcob" "size" 16) }}<span>ein Projekt von regetskcob</span></span><span>Impressum · Datenschutz</span></div>
+        <div class="hz-feld">
+          {{ partial "horizont/feld/head.html" (dict "product" "jagdaufseher" "href" "#" "nav" (slice (dict "name" "Funktionen" "url" "#") (dict "name" "Datenschutz" "url" "#") (dict "name" "EN" "url" "#"))) }}
+          {{ partial "horizont/feld/hero.html" (dict
+              "kennung" "01 — In Entwicklung · iPhone · iPad · Android"
+              "title" "Das Revier im Blick, auch ohne Netz."
+              "text" "Hochsitze, Kirrungen, Aufgaben und Strecke an einem Ort, geteilt mit allen, die im Revier jagen. Was draußen erfasst wird, gleicht sich ab, sobald wieder Empfang da ist."
+              "primary" (dict "label" "Beta anfragen" "url" "#")
+              "secondary" (dict "label" "So funktioniert es" "url" "#")
+              "aside" (partial "horizont/device.html" (dict "device" "iphone" "width" 250 "cropped" true "height" 372 "inner" (partial "site/lp-jagd-screen.html" .)))) }}
+          {{ partial "horizont/feld/section.html" (dict "kennung" "02 — Einrichtungen" "title" "Jeder Hochsitz mit seinem Zustand." "text" "Prüfen, fotografieren, als defekt melden. Wer als Nächstes rausfährt, sieht, was zu tun ist." "facts" (slice (slice "Zustand" "gut, prüfen, defekt") (slice "Fotos" "je Einrichtung") (slice "Karte" "Lage im Revier"))) }}
+          {{ partial "horizont/feld/section.html" (dict "kennung" "03 — Gemeinsam" "title" "Ein Revier, mehrere Jäger." "text" "Aufgaben mit Frist, Meldungen und Strecke für alle, die dazugehören, ohne Gruppenchat." "facts" (slice (slice "Abgleich" "offline zuerst") (slice "Konto" "jederzeit löschbar"))) }}
+          {{ partial "horizont/feld/foot.html" (dict "senderHref" "#" "links" (slice (dict "name" "Impressum" "url" "#") (dict "name" "Datenschutz" "url" "#"))) }}
         </div>
       </div>
       <p class="mock-caption" style="max-width:none">Statt Hero, Kachelraster und Pille: die Überschrift in Literata links, rechts das Produkt selbst. Darunter liegt die Horizontlinie im Akzent, dann nummerierte Abschnitte mit Fakten in Mono. KNX Monitor und Panzergefecht (dunkel, Gelände) nutzen dieselbe Vorlage.</p>
@@ -499,55 +508,35 @@
     <div class="mock-stage" data-product="knx">
       <div class="mock-browser" data-theme="light">
         <div class="mock-browser-bar"><span></span><div class="mock-url">regetskcob.de/knx/</div></div>
-        <div class="lp">
-          <div class="lp-head"><span class="hz-lockup"><span class="hz-lockup" style="color:var(--accent-text)">{{ partial "horizont/mark.html" (dict "product" "knx" "size" 24) }}</span><b>KNX Monitor</b></span><nav><span>Funktionen</span><span>Add-on</span><span>Datenschutz</span><span>EN</span></nav></div>
-          <div class="lp-hero">
-            <div>
-              <span class="t-kennung hz-kennung">01 — Version 1.4 · Mac · Windows · Linux · iOS · Android · Home Assistant</span>
-              <h1 class="t-display">Der Bus, lesbar gemacht.</h1>
-              <p>Telegramme live mitlesen, mit den Namen aus dem ETS-Projekt. Über KNXnet/IP, auf dem Rechner, dem Telefon oder als Add-on in Home Assistant.</p>
-              <div class="lp-actions"><span class="hz-button hz-button--primary">Herunterladen<svg><use href="#i-arrow"/></svg></span><span class="hz-button hz-button--secondary">Als Add-on installieren</span></div>
-            </div>
-            <figure class="hz-device hz-device--laptop lp-device" style="--w:420px"><div class="hz-device-screen lp-data">
-              <div class="mock-titlebar" style="height:18px;gap:6px;padding:0 6px"><span class="mock-lights" style="gap:3px"><i style="width:5px;height:5px"></i><i style="width:5px;height:5px"></i><i style="width:5px;height:5px"></i></span><b style="font-size:7.5px">Live</b><span class="mock-conn"><span class="hz-badge hz-badge--positive" style="height:11px;font-size:7px;padding:0 4px 0 2px"><svg style="width:7px;height:7px"><use href="#i-ok"/></svg>Verbunden</span></span></div>
-              <table class="hz-table">
-                <thead><tr><th>Zeit</th><th>Ziel</th><th>Typ</th><th class="hz-num">Wert</th></tr></thead>
-                <tbody>
-                  <tr><td class="hz-mono">14:32:07.412</td><td class="hz-mono">1/2/3</td><td><span class="mock-type w">W</span></td><td class="hz-mono hz-num">Ein</td></tr>
-                  <tr><td class="hz-mono">14:32:08.120</td><td class="hz-mono">3/1/7</td><td><span class="mock-type w">W</span></td><td class="hz-mono hz-num">21,4 °C</td></tr>
-                  <tr><td class="hz-mono">14:32:09.004</td><td class="hz-mono">2/1/1</td><td><span class="mock-type r">R</span></td><td class="hz-mono hz-num">–</td></tr>
-                  <tr aria-selected="true"><td class="hz-mono">14:32:09.031</td><td class="hz-mono">2/1/1</td><td><span class="mock-type a">A</span></td><td class="hz-mono hz-num">64 %</td></tr>
-                  <tr><td class="hz-mono">14:32:11.250</td><td class="hz-mono">4/0/1</td><td><span class="mock-type w">W</span></td><td class="hz-mono hz-num">3 412 W</td></tr>
-                </tbody>
-              </table>
-            </div></figure>
-          </div>
-          <div class="lp-horizon"></div>
-          <div class="lp-foot"><span class="hz-lockup">{{ partial "horizont/mark.html" (dict "product" "regetskcob" "size" 16) }}<span>ein Projekt von regetskcob</span></span><span>Impressum · Datenschutz</span></div>
+        <div class="hz-feld">
+          {{ partial "horizont/feld/head.html" (dict "product" "knx" "href" "#" "nav" (slice (dict "name" "Funktionen" "url" "#") (dict "name" "Add-on" "url" "#") (dict "name" "Datenschutz" "url" "#") (dict "name" "EN" "url" "#"))) }}
+          {{ partial "horizont/feld/hero.html" (dict
+              "kennung" "01 — Version 1.4 · Mac · Windows · Linux · iOS · Android · Home Assistant"
+              "title" "Der Bus, lesbar gemacht."
+              "text" "Telegramme live mitlesen, mit den Namen aus dem ETS-Projekt. Über KNXnet/IP, auf dem Rechner, dem Telefon oder als Add-on in Home Assistant."
+              "primary" (dict "label" "Herunterladen" "url" "#")
+              "secondary" (dict "label" "Als Add-on installieren" "url" "#")
+              "asideCenter" true
+              "aside" (partial "horizont/device.html" (dict "device" "laptop" "width" 420 "inner" (partial "site/lp-knx-screen.html" .)))) }}
+          {{ partial "horizont/feld/foot.html" (dict "senderHref" "#" "links" (slice (dict "name" "Impressum" "url" "#") (dict "name" "Datenschutz" "url" "#"))) }}
         </div>
       </div>
     </div>
     <div class="mock-stage" data-product="panzergefecht">
       <div class="mock-browser" data-theme="dark">
         <div class="mock-browser-bar"><span></span><div class="mock-url">panzergefecht.de</div></div>
-        <div class="lp">
-          <div class="lp-head"><span class="hz-lockup"><span class="hz-lockup" style="color:var(--accent-text)">{{ partial "horizont/mark.html" (dict "product" "panzergefecht" "size" 24) }}</span><b>Panzergefecht</b></span><nav><span>Modi</span><span>Geräte</span><span>Hilfe</span><span>EN</span></nav></div>
-          <div class="lp-hero">
-            <div>
-              <span class="t-kennung hz-kennung">01 — Im Browser · iPhone · Mac · Apple TV · Android</span>
-              <h1 class="t-display">Gefecht im Wohnzimmer.</h1>
-              <p>Ein Spiel von oben auf wechselndem Gelände, allein gegen die CPU, gegeneinander oder gemeinsam gegen Wellen. Das Handy wird zum Controller, der Fernseher zum Gefechtsfeld. Ohne Werbung.</p>
-              <div class="lp-actions"><span class="hz-button hz-button--primary">Jetzt spielen<svg><use href="#i-arrow"/></svg></span><span class="hz-button hz-button--secondary">App laden</span></div>
-            </div>
-            <figure class="hz-device hz-device--tv lp-device" style="--w:420px"><div class="hz-device-screen mock-tv">{{ partial "site/mock-tv.html" . }}</div></figure>
-          </div>
-          <div class="lp-horizon"></div>
-          <div class="lp-sec">
-            <span class="t-kennung hz-kennung">02 — Modi</span>
-            <div><h3 class="t-headline" style="font-size:1.5rem">Letzter Panzer, Flagge, Verteidigung.</h3><p>Dazu geteilter Bildschirm und Duell, allein gegen die CPU oder zusammen.</p></div>
-            <dl><dt>Gelände</dt><dd>Wald, Wüste, Winter, Stadt, Berge, Inseln</dd><dt>Steuerung</dt><dd>Handy, Siri Remote</dd></dl>
-          </div>
-          <div class="lp-foot"><span class="hz-lockup">{{ partial "horizont/mark.html" (dict "product" "regetskcob" "size" 16) }}<span>ein Projekt von regetskcob</span></span><span>Impressum · Datenschutz</span></div>
+        <div class="hz-feld">
+          {{ partial "horizont/feld/head.html" (dict "product" "panzergefecht" "href" "#" "nav" (slice (dict "name" "Modi" "url" "#") (dict "name" "Geräte" "url" "#") (dict "name" "Hilfe" "url" "#") (dict "name" "EN" "url" "#"))) }}
+          {{ partial "horizont/feld/hero.html" (dict
+              "kennung" "01 — Im Browser · iPhone · Mac · Apple TV · Android"
+              "title" "Gefecht im Wohnzimmer."
+              "text" "Ein Spiel von oben auf wechselndem Gelände, allein gegen die CPU, gegeneinander oder gemeinsam gegen Wellen. Das Handy wird zum Controller, der Fernseher zum Gefechtsfeld. Ohne Werbung."
+              "primary" (dict "label" "Jetzt spielen" "url" "#")
+              "secondary" (dict "label" "App laden" "url" "#")
+              "asideCenter" true
+              "aside" (partial "horizont/device.html" (dict "device" "tv" "width" 420 "inner" (printf "<div class=\"mock-tv\" style=\"height:100%%\">%s</div>" (partial "site/mock-tv.html" .))))) }}
+          {{ partial "horizont/feld/section.html" (dict "kennung" "02 — Modi" "title" "Letzter Panzer, Flagge, Verteidigung." "text" "Dazu geteilter Bildschirm und Duell, allein gegen die CPU oder zusammen." "facts" (slice (slice "Gelände" "Wald, Wüste, Winter, Stadt, Berge, Inseln") (slice "Steuerung" "Handy, Siri Remote"))) }}
+          {{ partial "horizont/feld/foot.html" (dict "senderHref" "#" "links" (slice (dict "name" "Impressum" "url" "#") (dict "name" "Datenschutz" "url" "#"))) }}
         </div>
       </div>
       <p class="mock-caption" style="max-width:none">KNX Monitor zeigt rechts die Telegrammliste auf dem MacBook, Panzergefecht die Lobby auf dem Fernseher. Panzergefecht bleibt dunkel auf Gelände, das Signalgelb gehört dem einen Knopf „Jetzt spielen“. Aufbau, Kennungen, Horizontlinie und Fußzeile sind bei allen drei gleich.</p>
@@ -644,7 +633,7 @@
       <li><span><b>Schriften, erledigt.</b> Mona Sans, Literata und Monaspace für Web und Flutter, Material Symbols Sharp als Subset.</span></li>
       <li><span><b>Flutter-Paket <span class="hz-mono">horizont</span>, erledigt.</b> Tokens aus <span class="hz-mono">tokens/horizont.json</span> generiert, ThemeExtension, ColorScheme von Hand je Produkt und Modus, Grund-Widgets, Kontraste als Test. Einbinden per Git-Abhängigkeit mit Tag.</span></li>
       <li><span><b>Pro App eine Umstellung.</b> Theme ersetzen, harte Farben (Zustand, Priorität, Ort) auf Status-Tokens, Radien auf die Skala. KNX Monitor zuerst, es hat schon Tokens.</span></li>
-      <li><span><b>Landingpages als Feldseite.</b> <span class="hz-mono">web/</span> als Hugo-Modul einbinden, Aufbau wie oben.</span></li>
+      <li><span><b>Landingpages als Feldseite.</b> Modul einbinden, die Seite aus <span class="hz-mono">horizont/feld/*</span> zusammensetzen, Screenshots mit <span class="hz-mono">horizont/device.html</span>.</span></li>
       <li><span><b>Blog angleichen.</b> Neutrale und Kennungen übernehmen, Literata bleibt, der Kopf bekommt die Linie.</span></li>
     </ol>
   </div>

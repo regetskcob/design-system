@@ -1,0 +1,12 @@
+{{- /*
+  A status: glyph, word and colour on its tint. Never colour alone.
+
+    partial "horizont/badge.html" (dict "status" "warning" "label" "Prüfen")
+
+  status    positive | warning | critical | info | neutral
+*/ -}}
+{{- $glyph := dict "positive" "check_circle" "warning" "warning" "critical" "report" "info" "info" "neutral" "circle" -}}
+{{- $s := .status | default "neutral" -}}
+{{- if not (index $glyph $s) }}{{ errorf "horizont/badge: unknown status %q" $s }}{{ end -}}
+<span class="hz-badge{{ if ne $s "neutral" }} hz-badge--{{ $s }}{{ end }}">{{ partial "horizont/symbol.html" (index $glyph $s) }}{{ .label }}</span>
+{{- /**/ -}}

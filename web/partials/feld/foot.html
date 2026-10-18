@@ -1,0 +1,13 @@
+{{- /*
+  Foot of a Feldseite: the sender "ein Projekt von regetskcob" with the
+  bare mark, legal links on the right.
+
+    partial "horizont/feld/foot.html" (dict "links" (slice (dict "name" "Impressum" "url" "/legal/") (dict "name" "Datenschutz" "url" "datenschutz/")))
+*/ -}}
+<footer class="hz-feld-foot">
+  {{ partial "horizont/lockup.html" (dict "product" "regetskcob" "label" (.sender | default "ein Projekt von regetskcob") "href" (.senderHref | default "https://www.regetskcob.de/")) }}
+  {{- with .links }}
+  <span class="hz-feld-links">{{ range . }}<a href="{{ .url }}">{{ .name }}</a>{{ end }}</span>
+  {{- end }}
+</footer>
+{{- /**/ -}}

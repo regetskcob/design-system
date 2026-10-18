@@ -1,0 +1,16 @@
+{{- /*
+  Facts, one per line as "Term | Value" (value in inline Markdown):
+
+    {{< hz-facts >}}
+    Zustand | gut, prüfen, defekt
+    Fotos | je Einrichtung
+    {{< /hz-facts >}}
+*/ -}}
+{{- $items := slice -}}
+{{- range split (strings.TrimSpace .Inner) "\n" -}}
+  {{- $parts := split . "|" -}}
+  {{- if ge (len $parts) 2 -}}
+    {{- $items = $items | append (dict "term" (strings.TrimSpace (index $parts 0)) "value" (strings.TrimSpace (delimit (after 1 $parts) "|"))) -}}
+  {{- end -}}
+{{- end -}}
+{{- partial "horizont/facts.html" (dict "items" $items "term" (.Get "term")) -}}

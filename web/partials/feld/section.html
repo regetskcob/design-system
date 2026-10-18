@@ -1,0 +1,23 @@
+{{- /*
+  A numbered section of a Feldseite: Kennung on the left, headline and text
+  in the middle, facts on the right.
+
+    partial "horizont/feld/section.html" (dict
+      "id" "einrichtungen" "kennung" "02 — Einrichtungen"
+      "title" "Jeder Hochsitz mit seinem Zustand."
+      "text" "Prüfen, fotografieren, als defekt melden. …"
+      "facts" (slice (slice "Zustand" "gut, prüfen, defekt") (slice "Fotos" "je Einrichtung")))
+*/ -}}
+<section class="hz-feld-section"{{ with .id }} id="{{ . }}"{{ end }}>
+  {{ partial "horizont/kennung.html" .kennung }}
+  <div>
+    <h2>{{ .title }}</h2>
+    {{ with .text }}<p>{{ . | markdownify }}</p>{{ end }}
+  </div>
+  {{- with .facts }}
+  {{ partial "horizont/facts.html" (dict "items" .) }}
+  {{- else }}
+  <div></div>
+  {{- end }}
+</section>
+{{- /**/ -}}

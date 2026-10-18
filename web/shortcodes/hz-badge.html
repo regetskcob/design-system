@@ -1,0 +1,2 @@
+{{- /* A status: {{< hz-badge warning >}}Prüfen{{< /hz-badge >}} (positive, warning, critical, info, neutral) */ -}}
+{{- partial "horizont/badge.html" (dict "status" (.Get 0) "label" (.Inner | strings.TrimSpace)) -}}

@@ -1,0 +1,17 @@
+{{- /*
+  A screenshot from the page bundle in its device frame.
+
+    {{< hz-device src="uebersicht.png" device="iphone" width="300" alt="Übersicht des Reviers" >}}
+
+  src       file in the page bundle (resized to WebP) or a URL
+  device    iphone | android | ipad | laptop | tv | watch (default iphone)
+  width     outer width in px (default 300)
+  caption   optional caption under the device
+*/ -}}
+{{- $src := .Get "src" -}}
+{{- $args := dict "device" (.Get "device" | default "iphone") "width" (int (.Get "width" | default 300)) "alt" (.Get "alt") -}}
+{{- with .Page.Resources.Get $src }}{{ $args = merge $args (dict "image" .) }}{{ else }}{{ $args = merge $args (dict "src" $src) }}{{ end -}}
+<div class="hz-device-block" style="display:grid;justify-items:center;gap:var(--s-12);margin:var(--s-32) 0">
+  {{ partial "horizont/device.html" $args }}
+  {{- with .Get "caption" }}<p class="hz-muted" style="margin:0;font-size:.875rem;text-align:center">{{ . | markdownify }}</p>{{ end }}
+</div>

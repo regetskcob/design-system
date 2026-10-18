@@ -5,7 +5,7 @@ und Panzergefecht. Leitbild: minimalistisch wie die niederrheinische Feldflur.
 
 Dokumentation und Entwürfe: https://www.regetskcob.de/horizont/
 
-Stand: v0.3, Entscheidungen getroffen (#1), Schriften gebündelt (#2), Flutter-Paket da (#3). Die Apps und ihre Landingpages nutzen das System noch nicht.
+Stand: v0.4, Entscheidungen getroffen (#1), Schriften gebündelt (#2), Flutter-Paket (#3) und Hugo-Komponenten da. Die Apps und ihre Landingpages nutzen das System noch nicht.
 
 Wer Oberflächen umsetzt, ob Mensch oder Claude-Sitzung, beginnt mit
 [CLAUDE.md](CLAUDE.md) (Leitbild, Regeln, Tokens, offene Entscheidungen,
@@ -18,7 +18,8 @@ bzw. [docs/web.md](docs/web.md) für Hugo-Seiten.
 | --- | --- |
 | `tokens/horizont.json` | Die einzige Quelle aller Werte: Farben hell und dunkel, Produkt-Akzente, Status, Schrift, Abstand, Radien, Linien, Bewegung, Icon-Paletten |
 | `web/css/` | Die Web-Schicht: `tokens.css` (Hugo-Template, erzeugt die CSS-Variablen aus den Tokens) und `components.css` (Knöpfe, Felder, Listen, Status, Tabellen) |
-| `web/partials/` | Marken (`mark.html`), illustrierte App-Icons (`app-icon.html`), Platzhalter-Ikonen (`icons.html`) |
+| `web/partials/` | Hugo-Partials: Marke, App-Icon, Lockup, Geräterahmen, Kennung, Badge, Symbol, Fakten, Feldseite (`feld/`) |
+| `web/shortcodes/` | Hugo-Shortcodes für Inhalte: `hz-device`, `hz-kennung`, `hz-badge`, `hz-symbol`, `hz-facts` |
 | `web/fonts/` | Literata, Mona Sans, Monaspace Argon (SIL OFL, `OFL.txt`) und Material Symbols Sharp als Subset (Apache 2.0), als WOFF2 |
 | `flutter/` | Flutter-Paket `horizont`: Theme, Widgets, Schriften (`flutter/fonts/`), Showcase-App und Goldens (`flutter/example/`) |
 | `icons/` | Liste der genutzten Material Symbols und ihre Codepoints |
@@ -47,5 +48,4 @@ Projektseite unter `/horizont/`.
 
 ## Geplant
 
-- `web/` als Hugo-Modul für den Blog und die Landingpages
 - `icons/` mit SVG-Quellen und Export für iOS, Android und Favicons

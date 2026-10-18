@@ -10,7 +10,7 @@ dependencies:
     git:
       url: https://github.com/regetskcob/horizont.git
       path: flutter
-      ref: v0.3.0
+      ref: v0.4.0
 ```
 
 ```dart

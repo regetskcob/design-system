@@ -1,0 +1,12 @@
+{{- /*
+  A Kennung: small mono capitals that name a section, an id or a place.
+  Pass the text in normal case; CSS sets it in capitals, so screen readers
+  and translations keep the words.
+
+    partial "horizont/kennung.html" "Einrichtungen · 14"
+    partial "horizont/kennung.html" (dict "text" "02 — Modi" "tag" "p")
+*/ -}}
+{{- $text := . -}}
+{{- $tag := "span" -}}
+{{- if reflect.IsMap . }}{{ $text = .text }}{{ $tag = .tag | default "span" }}{{ end -}}
+{{- printf "<%s class=\"t-kennung hz-kennung\">%s</%s>" $tag (htmlEscape $text) $tag | safeHTML -}}

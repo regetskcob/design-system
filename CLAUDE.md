@@ -205,7 +205,7 @@ Nutzer entschieden, nicht von der Sitzung.
   bewussten Änderung mit `cd flutter/example && flutter test
   --update-goldens` neu erzeugen und ansehen.
 - Versionen: Tokens (`version` im JSON), Paket (`flutter/pubspec.yaml`) und
-  Git-Tag (`v0.3.0`) laufen gemeinsam. Die Apps hängen an einem Tag, nie an
+  Git-Tag (`v0.4.0`) laufen gemeinsam. Die Apps hängen an einem Tag, nie an
   `main`. Hugo hängt die
   Ordner per `module.mounts` ein (`hugo.toml`).
 - Lokal ansehen:
@@ -218,6 +218,12 @@ Nutzer entschieden, nicht von der Sitzung.
 - Commit-Nachrichten auf Englisch, Betreff als Satz, im Text das Warum.
   Code-Kommentare englisch, Oberflächentexte deutsch. Keine Geburtsdaten,
   Wohnorte oder andere persönlichen Angaben in Texten.
+- **Hugo:** Landingpages und Blog setzen sich aus den Partials unter
+  `web/partials/` (Lockup, Geräterahmen, Kennung, Badge, Symbol, Fakten,
+  Feldseite) und den Shortcodes unter `web/shortcodes/` (`hz-device`,
+  `hz-kennung`, `hz-badge`, `hz-symbol`, `hz-facts`) zusammen, nie aus
+  nachgebautem HTML. Die Mounts stehen in `docs/web.md`. Fehlt ein Baustein,
+  kommt er hierher, nicht in die Seite.
 - **Wer Horizont nutzt:** der Blog (Hugo-Modul, `hugo mod get
   github.com/regetskcob/horizont@main`) und die Vorschau unter
   `/preview/` (Repository `regetskcob/preview`). Die Apps und Landingpages

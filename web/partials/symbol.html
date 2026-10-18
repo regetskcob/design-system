@@ -1,0 +1,16 @@
+{{- /*
+  A Material Symbols Sharp icon by name (icons/material-symbols.txt). Needs
+  the data mount of icons/ as data/horizont_icons (docs/web.md).
+
+    partial "horizont/symbol.html" "forest"
+    partial "horizont/symbol.html" (dict "name" "map" "label" "Karte")
+
+  Without a label the icon is decorative and hidden from screen readers.
+*/ -}}
+{{- $name := . -}}
+{{- $label := "" -}}
+{{- if reflect.IsMap . }}{{ $name = .name }}{{ $label = .label | default "" }}{{ end -}}
+{{- $code := index (index site.Data.horizont_icons "material-symbols") $name -}}
+{{- if not $code }}{{ errorf "horizont/symbol: %q is not in icons/material-symbols.txt" $name }}{{ end -}}
+<span class="hz-symbol"{{ with $label }} role="img" aria-label="{{ . }}"{{ else }} aria-hidden="true"{{ end }}>{{ printf "&#x%s;" (strings.TrimPrefix "0x" $code) | safeHTML }}</span>
+{{- /**/ -}}

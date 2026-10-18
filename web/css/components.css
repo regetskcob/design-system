@@ -441,3 +441,58 @@
   position: relative;
   top: calc(var(--mark, 1.15em) / 3);
 }
+
+/* --- Facts: a term in mono capitals and its value on one baseline ---
+   The term column has a fixed width (--facts-term), so lists below each
+   other line up. */
+.hz-facts {
+  display: grid;
+  grid-template-columns: var(--facts-term, 8rem) minmax(0, 1fr);
+  gap: var(--s-8) var(--s-16);
+  align-items: baseline;
+  align-content: start;
+  margin: 0;
+}
+.hz-facts dt {
+  font: 600 0.6875rem/1.6 var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.hz-facts dd { margin: 0; }
+
+/* --- Feldseite: the landing page of every product ---
+   Head with lockup, hero left (Kennung, Literata headline, one primary
+   action) with the product in its device on the right, the horizon line in
+   the accent, numbered sections, the footer with the sender. Built by the
+   partials under horizont/feld/. */
+.hz-feld { container-type: inline-size; max-width: var(--size-page); margin: 0 auto; }
+.hz-feld-head { display: flex; align-items: baseline; gap: var(--s-12); padding: var(--s-16) var(--s-32); border-bottom: var(--line-hairline) solid var(--line); }
+.hz-feld-head .hz-lockup { color: var(--text); text-decoration: none; font-weight: 600; }
+.hz-feld-head .hz-lockup .hz-mark { color: var(--accent-text); }
+.hz-feld-head nav { margin-left: auto; display: flex; gap: var(--s-24); font-size: 0.8125rem; }
+.hz-feld-head nav a { color: var(--text-muted); text-decoration: none; }
+.hz-feld-head nav a:hover, .hz-feld-head nav a[aria-current] { color: var(--text); }
+.hz-feld-head nav a[aria-current] { text-decoration: underline var(--accent) var(--line-selection); text-underline-offset: 0.4em; }
+.hz-feld-hero { display: grid; grid-template-columns: 1.25fr 1fr; gap: var(--s-48); padding: var(--s-64) var(--s-32) 0; align-items: end; }
+.hz-feld-hero h1 { margin: var(--s-16) 0 var(--s-24); font-size: clamp(2rem, 5.2cqw, 3.25rem); line-height: 1.08; text-wrap: balance; }
+.hz-feld-hero p { color: var(--text-muted); max-width: 46ch; margin: 0 0 var(--s-32); }
+.hz-feld-actions { display: flex; gap: var(--s-12); flex-wrap: wrap; margin-bottom: var(--s-64); }
+.hz-feld-aside { align-self: end; justify-self: center; }
+.hz-feld-aside--center { align-self: center; margin-bottom: var(--s-64); }
+.hz-feld-horizon { border: 0; border-top: var(--line-selection) solid var(--accent); margin: 0; }
+.hz-feld-section { display: grid; grid-template-columns: 180px 1fr 1fr; gap: var(--s-32); padding: var(--s-48) var(--s-32); border-bottom: var(--line-hairline) solid var(--line); }
+.hz-feld-section h2 { margin: 0 0 var(--s-12); font: 300 1.5rem/1.25 var(--font-serif); text-wrap: balance; }
+.hz-feld-section p { margin: 0; color: var(--text-muted); font-size: 0.9375rem; }
+.hz-feld-section .hz-facts { --facts-term: 5.5rem; font-size: 0.875rem; }
+.hz-feld-foot { display: flex; align-items: baseline; gap: var(--s-8); padding: var(--s-24) var(--s-32); color: var(--text-muted); font-size: 0.8125rem; }
+.hz-feld-foot .hz-feld-links { margin-left: auto; display: flex; gap: var(--s-16); }
+.hz-feld-foot a { color: inherit; }
+@container (max-width: 720px) {
+  .hz-feld-head { padding: var(--s-16); }
+  .hz-feld-head nav { display: none; }
+  .hz-feld-hero { grid-template-columns: 1fr; padding: var(--s-48) var(--s-16) 0; }
+  .hz-feld-aside { display: none; }
+  .hz-feld-section { grid-template-columns: 1fr; gap: var(--s-12); padding: var(--s-32) var(--s-16); }
+  .hz-feld-foot { padding: var(--s-24) var(--s-16); flex-wrap: wrap; }
+}

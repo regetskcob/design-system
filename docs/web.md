@@ -17,11 +17,18 @@ Monitor und Panzergefecht, Jagdaufseher liegt im Blog unter
       source = 'tokens'
       target = 'data'
     [[module.imports.mounts]]
+      source = 'icons'
+      target = 'data/horizont_icons'
+      includeFiles = ['*.json']
+    [[module.imports.mounts]]
       source = 'web/css'
       target = 'assets/css/horizont'
     [[module.imports.mounts]]
       source = 'web/partials'
       target = 'layouts/_partials/horizont'
+    [[module.imports.mounts]]
+      source = 'web/shortcodes'
+      target = 'layouts/_shortcodes'
     # Mona Sans, Material Symbols, Literata and Monaspace; the blog's theme
     # brings its own Literata and Monaspace in the same folders.
     [[module.imports.mounts]]
@@ -107,32 +114,57 @@ Höhe). `--w` ist die Außenbreite, alles andere folgt daraus:
 </figure>
 ```
 
-## Partials
+## Partials (für Layouts)
+
+Jede Datei erklärt ihre Parameter im Kopf. Alle lesen Farben und Werte aus
+den Tokens. Eigene Werte in einem Layout sind ein Fehler.
+
+| Partial | Zweck |
+| --- | --- |
+| `horizont/lockup.html` | Marke und Name auf einer Grundlinie (`product`, `label`, `href`) |
+| `horizont/mark.html` | die Glyphe allein (`product`, `size`) |
+| `horizont/app-icon.html` | das illustrierte App-Icon (`product`, `size`, `variant`) |
+| `horizont/kennung.html` | Kennung (Text oder `dict "text" "tag"`) |
+| `horizont/badge.html` | Status mit Zeichen und Wort (`status`, `label`) |
+| `horizont/symbol.html` | Material Symbol per Name (`name`, optional `label`) |
+| `horizont/facts.html` | Begriff und Wert auf einer Grundlinie (`items`, `term`) |
+| `horizont/device.html` | Screenshot im Geräterahmen (`device`, `width`, `image` oder `src`, `alt`, `cropped`) |
+| `horizont/feld/head.html`, `hero.html`, `section.html`, `foot.html` | die Feldseite (siehe unten) |
+| `horizont/icons.html` | Platzhalter-Ikonen der Doku als SVG-Sprite |
 
 ```go-html-template
-{{/* Glyph in the text colour, for heads, footers, lockups */}}
-{{ partial "horizont/mark.html" (dict "product" "knx" "size" 24) }}
-
-{{/* Illustrated app icon; Panzergefecht has variant "side" (default) or "top" */}}
-{{ partial "horizont/app-icon.html" (dict "product" "jagdaufseher" "size" 128) }}
+{{ partial "horizont/lockup.html" (dict "product" "knx" "href" "/knx/") }}
+{{ partial "horizont/badge.html" (dict "status" "warning" "label" "Prüfen") }}
+{{ partial "horizont/device.html" (dict "device" "iphone" "width" 300 "image" ($.Resources.Get "overview.png") "alt" "Übersicht") }}
 
 {{/* SVG favicon from the app icon */}}
 {{ $fav := partial "horizont/app-icon.html" (dict "product" "regetskcob" "size" 64) | resources.FromString "favicon.svg" }}
 <link rel="icon" type="image/svg+xml" href="{{ $fav.RelPermalink }}">
-
-{{/* Placeholder UI icons as a sprite: <svg><use href="#i-stand"/></svg> */}}
-{{ partial "horizont/icons.html" . }}
 ```
 
-Lockup mit Marke und Name:
+## Shortcodes (für Inhalte)
 
-```html
-<a class="hz-lockup" href="/">{{ partial "horizont/mark.html" (dict "product" "regetskcob" "size" 22) }}<span>regetskcob</span></a>
+Für Beiträge im Blog und Texte der Landingpages:
+
+```markdown
+{{< hz-device src="uebersicht.png" device="iphone" width="300" alt="Übersicht des Reviers" caption="Die Übersicht" >}}
+{{< hz-kennung "Einrichtungen · 14" >}}
+{{< hz-badge warning >}}Prüfen{{< /hz-badge >}}
+{{< hz-symbol map "Karte" >}}
+{{< hz-facts >}}
+Zustand | gut, prüfen, defekt
+Fotos | je Einrichtung
+{{< /hz-facts >}}
 ```
+
+`hz-device` nimmt ein Bild aus dem Page Bundle, verkleinert es auf WebP in
+doppelter Breite und setzt es in den Rahmen. Ein Screenshot ohne `alt` bricht
+den Build ab.
 
 ## Landingpage („Feldseite“)
 
-Aufbau, wie in der Doku unter „Entwürfe“:
+Aufbau, wie in der Doku unter „Entwürfe“, zusammengesetzt aus den fünf
+Partials unter `horizont/feld/` in einem `<div class="hz-feld">`:
 
 1. Kopf: Lockup mit Glyphe im Akzent und Produktname (Mona Sans 600), rechts
    die Navigation leise.

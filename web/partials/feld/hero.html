@@ -1,0 +1,34 @@
+{{- /*
+  Hero of a Feldseite: left a Kennung, the headline in Literata, one
+  paragraph and at most two actions; right the product in its device.
+
+    partial "horizont/feld/hero.html" (dict
+      "kennung" "01 — In Entwicklung · iPhone · iPad · Android"
+      "title" "Das Revier im Blick, auch ohne Netz."
+      "text" "Hochsitze, Kirrungen, Aufgaben und Strecke an einem Ort …"
+      "primary" (dict "label" "Beta anfragen" "url" "mailto:…")
+      "secondary" (dict "label" "So funktioniert es" "url" "#funktionen")
+      "aside" (partial "horizont/device.html" (dict "device" "iphone" "width" 250 "cropped" true "height" 372 "image" $shot "alt" "…"))
+      "asideCenter" false)
+
+  text is Markdown. asideCenter true centres the aside (data, a TV)
+  instead of letting it stand on the horizon (a cropped phone).
+*/ -}}
+<section class="hz-feld-hero">
+  <div>
+    {{ with .kennung }}{{ partial "horizont/kennung.html" . }}{{ end }}
+    <h1 class="t-display">{{ .title }}</h1>
+    {{ with .text }}<p>{{ . | markdownify }}</p>{{ end }}
+    {{- if or .primary .secondary }}
+    <div class="hz-feld-actions">
+      {{- with .primary }}<a class="hz-button hz-button--primary" href="{{ .url }}">{{ .label }}{{ partial "horizont/symbol.html" "arrow_forward" }}</a>{{ end }}
+      {{- with .secondary }}<a class="hz-button hz-button--secondary" href="{{ .url }}">{{ .label }}</a>{{ end }}
+    </div>
+    {{- end }}
+  </div>
+  {{- with .aside }}
+  <div class="hz-feld-aside{{ if $.asideCenter }} hz-feld-aside--center{{ end }}">{{ . | safeHTML }}</div>
+  {{- end }}
+</section>
+<hr class="hz-feld-horizon">
+{{- /**/ -}}

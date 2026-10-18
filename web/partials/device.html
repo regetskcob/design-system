@@ -1,0 +1,34 @@
+{{- /*
+  A screenshot in its device: minimal, but true to the real thing.
+
+    partial "horizont/device.html" (dict "device" "iphone" "width" 300 "image" $img "alt" "Übersicht des Reviers")
+    partial "horizont/device.html" (dict "device" "laptop" "width" 640 "src" "/img/mac.png" "alt" "…")
+    partial "horizont/device.html" (dict "device" "iphone" "width" 250 "cropped" true "height" 372 "inner" $html)
+
+  device    iphone | android | ipad | laptop | tv | watch
+  width     outer width in px (default 300)
+  image     an image Resource; rendered as WebP at twice the width
+  src, alt  a plain image URL instead, with its alt text (alt is required)
+  inner     HTML for the screen instead of an image (mockups)
+  cropped   the phone ends at the section's edge; height = screen height
+  theme     light | dark for the screen (default: follows the page)
+*/ -}}
+{{- $d := .device | default "iphone" -}}
+{{- if not (in (slice "iphone" "android" "ipad" "laptop" "tv" "watch") $d) }}{{ errorf "horizont/device: unknown device %q" $d }}{{ end -}}
+{{- $w := .width | default 300 -}}
+{{- $style := printf "--w:%dpx" (int $w) -}}
+{{- with .height }}{{ $style = printf "%s;--h:%dpx" $style (int .) }}{{ end -}}
+{{- if and (or .image .src) (not .alt) }}{{ errorf "horizont/device: a screenshot needs alt text" }}{{ end -}}
+<figure class="hz-device hz-device--{{ $d }}{{ if .cropped }} hz-device--cropped{{ end }}{{ with .class }} {{ . }}{{ end }}" style="{{ $style | safeCSS }}">
+  <div class="hz-device-screen"{{ with .theme }} data-theme="{{ . }}"{{ end }}>
+  {{- with .image }}
+    {{- $img := .Resize (printf "%dx webp" (mul (int $w) 2)) }}
+    <img src="{{ $img.RelPermalink }}" width="{{ div $img.Width 2 }}" height="{{ div $img.Height 2 }}" alt="{{ $.alt }}" loading="lazy" style="display:block;width:100%;height:auto">
+  {{- else }}{{ with .src }}
+    <img src="{{ . }}" alt="{{ $.alt }}" loading="lazy" style="display:block;width:100%;height:auto">
+  {{- else }}
+    {{ $.inner | safeHTML }}
+  {{- end }}{{ end }}
+  </div>
+</figure>
+{{- /**/ -}}

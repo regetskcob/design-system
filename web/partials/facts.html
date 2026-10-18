@@ -1,0 +1,19 @@
+{{- /*
+  Facts: term in mono capitals, value next to it on one baseline.
+
+    partial "horizont/facts.html" (dict "items" (slice (slice "Zustand" "gut, prüfen, defekt") (slice "Fotos" "je Einrichtung")))
+
+  items     list of [term, value] or of dicts with term and value;
+            values are Markdown (inline)
+  term      width of the term column as CSS length (default 8rem)
+*/ -}}
+<dl class="hz-facts"{{ with .term }} style="--facts-term:{{ . | safeCSS }}"{{ end }}>
+{{- range .items }}
+  {{- if reflect.IsMap . }}
+  <dt>{{ .term }}</dt><dd>{{ .value | markdownify }}</dd>
+  {{- else }}
+  <dt>{{ index . 0 }}</dt><dd>{{ index . 1 | markdownify }}</dd>
+  {{- end }}
+{{- end }}
+</dl>
+{{- /**/ -}}
