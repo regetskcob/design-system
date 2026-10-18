@@ -1,0 +1,39 @@
+# Horizont, the design system of regetskcob and its projects. Built as a
+# GitHub Pages project site: the user site regetskcob.github.io has the custom
+# domain www.regetskcob.de, so this repository is served under
+# https://www.regetskcob.de/design-system/ (the deploy passes the base URL).
+baseURL = 'https://www.regetskcob.de/design-system/'
+languageCode = 'de-DE'
+title = 'Horizont'
+disableKinds = ['taxonomy', 'term', 'section', 'page', 'rss', 'sitemap', 'robotsTXT', '404']
+
+[params]
+description = 'Horizont, das Designsystem von regetskcob und seinen Projekten Jagdaufseher, KNX Monitor und Panzergefecht.'
+
+# The repository is laid out by what it is, not by what Hugo expects:
+#   tokens/  the single source of all values
+#   web/     the reusable web layer (CSS, partials, fonts), later a Hugo
+#            module for the blog and the landing pages
+#   site/    this documentation page only
+[module]
+  [[module.mounts]]
+    source = 'tokens'
+    target = 'data'
+  [[module.mounts]]
+    source = 'web/css'
+    target = 'assets/css/horizont'
+  [[module.mounts]]
+    source = 'web/partials'
+    target = 'layouts/_partials/horizont'
+  [[module.mounts]]
+    source = 'web/fonts'
+    target = 'static/fonts'
+  [[module.mounts]]
+    source = 'site/css'
+    target = 'assets/css/site'
+  [[module.mounts]]
+    source = 'site/partials'
+    target = 'layouts/_partials/site'
+  [[module.mounts]]
+    source = 'site/layouts'
+    target = 'layouts'

@@ -1,0 +1,342 @@
+{
+  "_comment": "Horizont, das Designsystem von regetskcob und seinen Projekten. Einzige Quelle der Tokens: die Dokumentation (site/layouts/home.html) und die CSS-Schicht (web/css/tokens.css) lesen sie hier, Generatoren fuer Flutter und Swift sollen es ebenso tun. Farben je light und dark, beide von Hand gesetzt, nie aus einem Seed abgeleitet.",
+  "version": "0.1",
+  "color": {
+    "neutral": {
+      "light": {
+        "bg": "#FAFAF7",
+        "surface": "#FFFFFF",
+        "sunken": "#F1F1EC",
+        "line": "#E3E3DC",
+        "line-strong": "#C8C9C0",
+        "text": "#1B1C19",
+        "text-muted": "#5C5E57",
+        "text-faint": "#85877F"
+      },
+      "dark": {
+        "bg": "#121311",
+        "surface": "#1A1B18",
+        "sunken": "#0C0D0B",
+        "line": "#2B2D28",
+        "line-strong": "#42453E",
+        "text": "#E7E7E0",
+        "text-muted": "#A0A398",
+        "text-faint": "#6E7168"
+      }
+    },
+    "status": {
+      "light": {
+        "positive": "#2E7A4B",
+        "positive-tint": "#E3F0E7",
+        "warning": "#9A5B00",
+        "warning-tint": "#F6EBD9",
+        "critical": "#B3261E",
+        "critical-tint": "#F7E1DF",
+        "info": "#2F5E9E",
+        "info-tint": "#E2EAF5"
+      },
+      "dark": {
+        "positive": "#7FC79B",
+        "positive-tint": "#18281E",
+        "warning": "#EBBE6A",
+        "warning-tint": "#2C2414",
+        "critical": "#F0A097",
+        "critical-tint": "#301B19",
+        "info": "#9DBBE3",
+        "info-tint": "#1A2333"
+      }
+    },
+    "product": {
+      "regetskcob": {
+        "name": "regetskcob",
+        "role": "Dachmarke, Blog",
+        "accentName": "Tinte",
+        "light": {
+          "accent": "#1B1C19",
+          "on-accent": "#FAFAF7",
+          "accent-tint": "#ECECE6",
+          "accent-text": "#1B1C19"
+        },
+        "dark": {
+          "accent": "#E7E7E0",
+          "on-accent": "#121311",
+          "accent-tint": "#262823",
+          "accent-text": "#E7E7E0"
+        },
+        "icon": {
+          "field": "#1B1C19",
+          "glyph": "#FAFAF7",
+          "sky": "#F1EFE6",
+          "sky2": "#D3D1C6",
+          "ground": "#3A3B35",
+          "ground2": "#26271F",
+          "horizon": "#FBFAF4",
+          "outline": "#151612",
+          "obj": {
+            "light": "#B9BBAF",
+            "mid": "#7F8176",
+            "dark": "#4A4C44",
+            "bark": "#A4A69A",
+            "sun": "#FFFFFF"
+          }
+        }
+      },
+      "jagdaufseher": {
+        "name": "Jagdaufseher",
+        "role": "Revierverwaltung, iOS und Android",
+        "accentName": "Tanne",
+        "light": {
+          "accent": "#2F5D3A",
+          "on-accent": "#FFFFFF",
+          "accent-tint": "#E2EBE1",
+          "accent-text": "#2F5D3A"
+        },
+        "dark": {
+          "accent": "#8FC49B",
+          "on-accent": "#0F1A12",
+          "accent-tint": "#1C2A1F",
+          "accent-text": "#9FD0AA"
+        },
+        "icon": {
+          "field": "#2F5D3A",
+          "glyph": "#EEF2EA",
+          "sky": "#B9CCAA",
+          "sky2": "#7E9C72",
+          "ground": "#2F5D3A",
+          "ground2": "#1E3E26",
+          "horizon": "#E4EEDA",
+          "outline": "#1A2116",
+          "obj": {
+            "light": "#DDBB80",
+            "mid": "#AC8550",
+            "dark": "#6E5232",
+            "firs": "#5F7F57"
+          }
+        }
+      },
+      "knx": {
+        "name": "KNX Monitor",
+        "role": "Busdiagnose, alle Plattformen und Home Assistant",
+        "accentName": "Bus",
+        "light": {
+          "accent": "#437F18",
+          "on-accent": "#FFFFFF",
+          "accent-tint": "#E8F2DC",
+          "accent-text": "#3E7516"
+        },
+        "dark": {
+          "accent": "#9BD45E",
+          "on-accent": "#12200A",
+          "accent-tint": "#1D2913",
+          "accent-text": "#A8DC6E"
+        },
+        "icon": {
+          "field": "#7AB929",
+          "glyph": "#12200A",
+          "sky": "#C6E59A",
+          "sky2": "#8CC63F",
+          "ground": "#437F18",
+          "ground2": "#2F6410",
+          "horizon": "#EAF6D8",
+          "outline": "#12200A",
+          "obj": {
+            "light": "#FFFFFF",
+            "mid": "#DCE7CF",
+            "red": "#D23C2E",
+            "grey": "#3A3D38",
+            "cable": "#3A7215",
+            "redDark": "#A82C21",
+            "greyDark": "#262824"
+          }
+        }
+      },
+      "panzergefecht": {
+        "name": "Panzergefecht",
+        "role": "Spiel, Web, Apple-Geräte und Android",
+        "accentName": "Signalgelb",
+        "light": {
+          "accent": "#8F6400",
+          "on-accent": "#FFFFFF",
+          "accent-tint": "#F5ECD6",
+          "accent-text": "#7F5900"
+        },
+        "dark": {
+          "accent": "#FFB300",
+          "on-accent": "#1A1405",
+          "accent-tint": "#2E2810",
+          "accent-text": "#FFC233"
+        },
+        "_neutralDark": "Die eine Ausnahme: ein Spiel darf eine eigene, getoente Flaeche haben (Gelaende). Nur dunkel, nur die Neutralen, Linien und Typografie bleiben.",
+        "neutralDark": {
+          "bg": "#141A0E",
+          "surface": "#1E2616",
+          "sunken": "#0E120A",
+          "line": "#2F3A24",
+          "line-strong": "#4A5838",
+          "text": "#E6E2D3",
+          "text-muted": "#B4BA9E",
+          "text-faint": "#7D8466"
+        },
+        "icon": {
+          "field": "#1E2616",
+          "glyph": "#FFB300",
+          "sky": "#A3A877",
+          "sky2": "#7B8A4C",
+          "ground": "#55603A",
+          "ground2": "#3A4426",
+          "horizon": "#D9C48F",
+          "outline": "#1C2416",
+          "obj": {
+            "light": "#7FA843",
+            "mid": "#6B9038",
+            "dark": "#4E6B2A",
+            "muzzle": "#3A5520",
+            "track": "#3D3D3B",
+            "tread": "#2A2A28",
+            "wheel": "#5A5B55"
+          }
+        }
+      }
+    }
+  },
+  "font": {
+    "serif": "\"Literata\", Georgia, ui-serif, serif",
+    "sans": "\"Mona Sans\", ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+    "mono": "\"Monaspace Argon\", ui-monospace, \"SF Mono\", Menlo, monospace"
+  },
+  "type": {
+    "display": {
+      "family": "serif",
+      "size": 44,
+      "line": 48,
+      "weight": 300,
+      "tracking": -0.01
+    },
+    "headline": {
+      "family": "serif",
+      "size": 30,
+      "line": 36,
+      "weight": 300,
+      "tracking": -0.005
+    },
+    "title-1": {
+      "family": "sans",
+      "size": 24,
+      "line": 30,
+      "weight": 600,
+      "tracking": -0.01
+    },
+    "title-2": {
+      "family": "sans",
+      "size": 20,
+      "line": 26,
+      "weight": 600,
+      "tracking": -0.005
+    },
+    "title-3": {
+      "family": "sans",
+      "size": 17,
+      "line": 24,
+      "weight": 600,
+      "tracking": 0
+    },
+    "body": {
+      "family": "sans",
+      "size": 16,
+      "line": 24,
+      "weight": 400,
+      "tracking": 0
+    },
+    "reading": {
+      "family": "serif",
+      "size": 18,
+      "line": 28,
+      "weight": 300,
+      "tracking": 0
+    },
+    "callout": {
+      "family": "sans",
+      "size": 14,
+      "line": 20,
+      "weight": 400,
+      "tracking": 0
+    },
+    "label": {
+      "family": "sans",
+      "size": 13,
+      "line": 16,
+      "weight": 500,
+      "tracking": 0.01
+    },
+    "caption": {
+      "family": "sans",
+      "size": 12,
+      "line": 16,
+      "weight": 400,
+      "tracking": 0.01
+    },
+    "data": {
+      "family": "mono",
+      "size": 14,
+      "line": 20,
+      "weight": 400,
+      "tracking": 0
+    },
+    "kennung": {
+      "family": "mono",
+      "size": 11,
+      "line": 16,
+      "weight": 600,
+      "tracking": 0.08,
+      "upper": true
+    }
+  },
+  "space": {
+    "0": 0,
+    "2": 2,
+    "4": 4,
+    "8": 8,
+    "12": 12,
+    "16": 16,
+    "24": 24,
+    "32": 32,
+    "48": 48,
+    "64": 64,
+    "96": 96
+  },
+  "radius": {
+    "0": 0,
+    "2": 2,
+    "6": 6,
+    "10": 10,
+    "16": 16
+  },
+  "line": {
+    "hairline": 1,
+    "rule": 1,
+    "selection": 2,
+    "focus": 2
+  },
+  "motion": {
+    "fast": 120,
+    "base": 200,
+    "slow": 320,
+    "standard": "cubic-bezier(0.2, 0, 0, 1)",
+    "exit": "cubic-bezier(0.3, 0, 1, 1)"
+  },
+  "size": {
+    "touch": 44,
+    "row": 44,
+    "row-dense": 28,
+    "text-column": 720,
+    "page": 1120,
+    "rail": 200
+  },
+  "breakpoint": {
+    "compact": 0,
+    "medium": 600,
+    "expanded": 840,
+    "large": 1200
+  },
+  "_icon": "App-Icons: Buehne aus Himmel (sky->sky2) und Boden (ground) mit der Horizontlinie auf dem unteren Drittel, ein illustrierter Gegenstand mit dunkler Kontur (outline) in drei Toenen (obj), weicher Schatten. field/glyph gelten fuer die reduzierte Marke in Kopf- und Fusszeilen."
+}

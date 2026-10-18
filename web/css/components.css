@@ -1,0 +1,267 @@
+/* Horizont, web components. Built only on the tokens (tokens.css), no raw
+   colour, size or duration here: a landing page or a web app takes both files
+   and sets data-product on <html>. The fonts are expected in fonts/ next to
+   the css/ folder the stylesheet is published in.
+
+   Signature, everywhere the same:
+   - lines instead of shadows: 1px hairlines separate, nothing floats
+   - selection is a 2px line in the accent (the horizon), never a pill
+   - Kennungen: small mono capitals that label a section, an id, a value
+   - the accent marks one thing per view: the main action and the selection */
+
+@font-face { font-family: "Literata"; src: url("../fonts/Literata/Literata-Light.woff2") format("woff2"); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: "Literata"; src: url("../fonts/Literata/Literata-LightItalic.woff2") format("woff2"); font-weight: 300; font-style: italic; font-display: swap; }
+@font-face { font-family: "Literata"; src: url("../fonts/Literata/Literata-SemiBold.woff2") format("woff2"); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "Monaspace Argon"; src: url("../fonts/Monaspace/MonaspaceArgon-Regular.woff") format("woff"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Monaspace Argon"; src: url("../fonts/Monaspace/MonaspaceArgon-SemiBold.woff") format("woff"); font-weight: 600; font-display: swap; }
+
+.hz {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+.hz :focus-visible {
+  outline: var(--line-focus) solid var(--accent);
+  outline-offset: 2px;
+}
+
+.hz-muted { color: var(--text-muted); }
+.hz-kennung { color: var(--text-muted); }
+.hz-mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+
+.hz-rule {
+  border: 0;
+  border-top: var(--line-hairline) solid var(--line);
+  margin: 0;
+}
+
+/* --- Buttons --- */
+
+.hz-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-8);
+  min-height: var(--size-touch);
+  padding: 0 var(--s-16);
+  border: var(--line-hairline) solid transparent;
+  border-radius: var(--r-6);
+  font: 500 0.9375rem/1 var(--font-sans);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color var(--motion-fast) var(--ease-standard),
+    border-color var(--motion-fast) var(--ease-standard);
+}
+
+.hz-button svg { width: 18px; height: 18px; }
+
+.hz-button--primary { background: var(--accent); color: var(--on-accent); }
+.hz-button--primary:hover { background: color-mix(in srgb, var(--accent) 88%, var(--text)); }
+.hz-button--secondary { background: transparent; color: var(--text); border-color: var(--line-strong); }
+.hz-button--secondary:hover { background: var(--sunken); }
+.hz-button--quiet { background: transparent; color: var(--accent-text); padding: 0 var(--s-8); }
+.hz-button--quiet:hover { background: var(--accent-tint); }
+.hz-button--critical { background: transparent; color: var(--critical); border-color: currentColor; }
+.hz-button--dense { min-height: 32px; padding: 0 var(--s-12); font-size: 0.8125rem; }
+.hz-button:disabled { opacity: 1; background: var(--sunken); color: var(--text-faint); border-color: var(--line); cursor: not-allowed; }
+
+/* --- Fields --- */
+
+.hz-field { display: grid; gap: var(--s-4); }
+.hz-field label { font: 500 0.8125rem/1.25 var(--font-sans); color: var(--text); }
+.hz-field .hz-help { font-size: 0.75rem; color: var(--text-muted); }
+.hz-field .hz-error { font-size: 0.75rem; color: var(--critical); display: flex; gap: var(--s-4); align-items: center; }
+
+.hz-input {
+  min-height: var(--size-touch);
+  padding: 0 var(--s-12);
+  background: var(--surface);
+  color: var(--text);
+  border: var(--line-hairline) solid var(--line-strong);
+  border-radius: var(--r-6);
+  font: 400 1rem/1 var(--font-sans);
+}
+
+.hz-input:focus { outline: none; border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+.hz-input[aria-invalid="true"] { border-color: var(--critical); }
+.hz-input.hz-mono { font-family: var(--font-mono); font-size: 0.875rem; }
+
+/* --- Lists ---
+   Rows are separated by a hairline that starts at the text, not at the edge
+   (the leading slot hangs out). No zebra, no cards per row. */
+
+.hz-list { list-style: none; margin: 0; padding: 0; background: var(--surface); }
+
+.hz-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--s-12);
+  min-height: var(--size-row);
+  padding: var(--s-8) var(--s-16);
+  position: relative;
+}
+
+.hz-row + .hz-row::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: var(--row-inset, var(--s-16));
+  right: 0;
+  border-top: var(--line-hairline) solid var(--line);
+}
+
+.hz-row--inset { --row-inset: 52px; }
+.hz-row .hz-row-lead { width: 24px; height: 24px; color: var(--text-muted); display: grid; place-items: center; }
+.hz-row .hz-row-lead svg { width: 22px; height: 22px; }
+.hz-row .hz-row-title { font: 400 1rem/1.3 var(--font-sans); }
+.hz-row .hz-row-meta { font: 400 0.75rem/1.4 var(--font-mono); color: var(--text-muted); font-variant-numeric: tabular-nums; }
+.hz-row .hz-row-trail { color: var(--text-faint); display: flex; align-items: center; gap: var(--s-8); }
+.hz-row[aria-selected="true"] { background: var(--accent-tint); }
+.hz-row[aria-selected="true"]::after {
+  content: ""; position: absolute; left: 0; top: 0; bottom: 0;
+  border-left: var(--line-selection) solid var(--accent);
+}
+
+/* --- Section header (Kennzeile) --- */
+
+.hz-section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: var(--s-24) var(--s-16) var(--s-8);
+  border-bottom: var(--line-hairline) solid var(--line);
+}
+
+/* --- Status ---
+   Never colour alone: every state has its own glyph and its word. */
+
+.hz-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-4);
+  height: 22px;
+  padding: 0 var(--s-8) 0 var(--s-4);
+  border-radius: var(--r-2);
+  font: 500 0.75rem/1 var(--font-sans);
+  background: var(--sunken);
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.hz-badge svg { width: 14px; height: 14px; }
+.hz-badge--positive { background: var(--positive-tint); color: var(--positive); }
+.hz-badge--warning { background: var(--warning-tint); color: var(--warning); }
+.hz-badge--critical { background: var(--critical-tint); color: var(--critical); }
+.hz-badge--info { background: var(--info-tint); color: var(--info); }
+.hz-badge--accent { background: var(--accent-tint); color: var(--accent-text); }
+
+/* --- Segments and tabs: the selected one carries the line --- */
+
+.hz-segmented {
+  display: inline-flex;
+  border: var(--line-hairline) solid var(--line-strong);
+  border-radius: var(--r-6);
+  overflow: hidden;
+}
+
+.hz-segmented button {
+  min-height: 32px;
+  padding: 0 var(--s-16);
+  border: 0;
+  background: transparent;
+  color: var(--text-muted);
+  font: 500 0.8125rem/1 var(--font-sans);
+  cursor: pointer;
+  box-shadow: inset 0 calc(-1 * var(--line-selection)) 0 transparent;
+}
+
+.hz-segmented button + button { border-left: var(--line-hairline) solid var(--line); }
+.hz-segmented button[aria-pressed="true"] {
+  color: var(--text);
+  background: var(--surface);
+  box-shadow: inset 0 calc(-1 * var(--line-selection)) 0 var(--accent);
+}
+
+.hz-tabs {
+  display: flex;
+  gap: var(--s-24);
+  border-bottom: var(--line-hairline) solid var(--line);
+}
+
+.hz-tabs a {
+  padding: var(--s-12) 0;
+  color: var(--text-muted);
+  text-decoration: none;
+  font: 500 0.875rem/1 var(--font-sans);
+  border-bottom: var(--line-selection) solid transparent;
+  margin-bottom: -1px;
+}
+
+.hz-tabs a[aria-current] { color: var(--text); border-bottom-color: var(--accent); }
+
+/* --- Switch: the one round shape, so on and off read at a glance --- */
+
+.hz-switch {
+  appearance: none;
+  width: 40px; height: 24px;
+  border-radius: 12px;
+  background: var(--line-strong);
+  position: relative;
+  cursor: pointer;
+  transition: background-color var(--motion-fast) var(--ease-standard);
+  margin: 0;
+}
+
+.hz-switch::after {
+  content: "";
+  position: absolute; top: 3px; left: 3px;
+  width: 18px; height: 18px; border-radius: 50%;
+  background: var(--surface);
+  transition: transform var(--motion-fast) var(--ease-standard);
+}
+
+.hz-switch:checked { background: var(--accent); }
+.hz-switch:checked::after { transform: translateX(16px); background: var(--on-accent); }
+
+/* --- Surface: rare. Grouping comes from space and lines first. --- */
+
+.hz-card {
+  background: var(--surface);
+  border: var(--line-hairline) solid var(--line);
+  border-radius: var(--r-10);
+}
+
+/* --- Data table: values in mono, columns aligned, hairlines only --- */
+
+.hz-table { width: 100%; border-collapse: collapse; font-size: 0.8125rem; }
+.hz-table th {
+  text-align: left;
+  font: 600 0.6875rem/1 var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: var(--s-8) var(--s-12);
+  border-bottom: var(--line-hairline) solid var(--line-strong);
+  white-space: nowrap;
+}
+
+.hz-table td {
+  padding: 0 var(--s-12);
+  height: var(--size-row-dense);
+  border-bottom: var(--line-hairline) solid var(--line);
+  white-space: nowrap;
+}
+
+.hz-table td.hz-mono { font-size: 0.75rem; }
+.hz-table tr[aria-selected="true"] td { background: var(--accent-tint); }
+.hz-table tr[aria-selected="true"] td:first-child { box-shadow: inset var(--line-selection) 0 0 var(--accent); }
+.hz-table .hz-num { text-align: right; }
+
+/* A row without a leading icon: the title starts at the edge. */
+.hz-row:has(> span:empty:first-child) { grid-template-columns: 1fr auto; }
+.hz-row > span:empty:first-child { display: none; }

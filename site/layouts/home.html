@@ -1,0 +1,641 @@
+{{- /*
+  The documentation of Horizont, published at regetskcob.de/design-system/.
+  It is itself the first page built on the system's web layer (web/css). The
+  swatches, the type scale and the marks are read from tokens/horizont.json,
+  so the page cannot drift from the tokens.
+*/ -}}
+{{- $hz := site.Data.horizont -}}
+{{- $tokens := resources.Get "css/horizont/tokens.css" | resources.ExecuteAsTemplate "css/horizont-tokens.css" $hz -}}
+{{- $css := slice $tokens (resources.Get "css/horizont/components.css") (resources.Get "css/site/page.css") | resources.Concat "css/horizont.css" | minify | fingerprint -}}
+{{- $products := slice "regetskcob" "jagdaufseher" "knx" "panzergefecht" -}}
+{{- $neutrals := slice "bg" "surface" "sunken" "line" "line-strong" "text-faint" "text-muted" "text" -}}
+<!doctype html>
+<html lang="de-DE" data-product="regetskcob">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Horizont · regetskcob</title>
+  <meta name="description" content="{{ site.Params.description }}">
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}">
+  <script>
+    /* Theme before first paint, so a dark choice does not flash light. */
+    try { var t = localStorage.getItem("hz-theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
+</head>
+<body class="hz">
+{{ partial "horizont/icons.html" . }}
+
+<header class="doc-bar">
+  <a class="doc-brand" href="#top">{{ partial "horizont/mark.html" (dict "product" "regetskcob" "size" 22) }}<span>Horizont</span></a>
+  <span class="t-kennung hz-kennung">v{{ $hz.version }} · Entwurf</span>
+  <span class="doc-spacer"></span>
+  <nav aria-label="Abschnitte">
+    <a href="#prinzipien">Prinzipien</a><a href="#marken">Marken</a><a href="#farbe">Farbe</a><a href="#schrift">Schrift</a><a href="#komponenten">Komponenten</a><a href="#plattformen">Plattformen</a><a href="#entwuerfe">Entwürfe</a>
+  </nav>
+  <div class="hz-segmented" role="group" aria-label="Darstellung">
+    <button type="button" data-set-theme="" aria-pressed="true">Auto</button><button type="button" data-set-theme="light" aria-pressed="false">Hell</button><button type="button" data-set-theme="dark" aria-pressed="false">Dunkel</button>
+  </div>
+</header>
+
+<main class="doc-main" id="top">
+
+<section class="doc-hero">
+  <span class="t-kennung hz-kennung">Designsystem · regetskcob · Jagdaufseher · KNX Monitor · Panzergefecht</span>
+  <h1 class="t-display">Minimalistisch wie die niederrheinische Feldflur.</h1>
+  <p class="t-reading">Weites Land, ein tiefer Horizont, wenige klare Linien: Feldränder, Gräben, eine Reihe Kopfweiden. Dort steht nichts, was nicht hingehört. Nach diesem Bild arbeitet Horizont, die Designsprache für den Blog und drei Produkte, über iOS, Android, macOS, Web, TV und Uhr.</p>
+</section>
+
+<section class="doc-section" id="ausgangslage">
+  <div class="doc-rail"><span class="t-kennung">01 — Ausgangslage</span></div>
+  <div>
+    <h2 class="t-headline">Drei Produkte, dreimal dieselbe Vorlage.</h2>
+    <dl class="doc-facts">
+      <dt>Jagdaufseher</dt><dd>Material 3 aus dem Seed #2F5D3A, Systemschrift, Radien zwischen 4 und 20 nach Gefühl, Zustände in Colors.green/orange/red. Landingpage mit Badge-Pille, Hero und Kachelraster.</dd>
+      <dt>KNX Monitor</dt><dd>Die sauberste Basis: eigene Tokens, Grün #437F18 mit geprüftem Kontrast, Radien 18/12/8. Keine eigene Schrift, Werte ohne Mono. Landingpage mit Eyebrow, Kachelraster, FAQ.</dd>
+      <dt>Panzergefecht</dt><dd>Nur dunkel, Oliv und Amber, Roboto fett in Versalien, Fasen an Panels. Landingpage mit zentriertem Hero und Icon-Raster.</dd>
+      <dt>Blog</dt><dd>Literata und Monaspace, Grau ohne Akzent, ruhig. Die einzige Oberfläche mit eigener Haltung.</dd>
+    </dl>
+    <p>Gemeinsam haben sie drei Grüntöne, drei Radien-Skalen, Systemschrift und das SaaS-Muster aus Hero, Kachel und Pille. Es fehlt nicht an Gestaltung, sondern an einem gemeinsamen Grund. Den gibt der Blog schon vor: Literata, Monaspace, viel Weißraum. Horizont macht daraus ein System.</p>
+  </div>
+</section>
+
+<section class="doc-section" id="prinzipien">
+  <div class="doc-rail"><span class="t-kennung">02 — Prinzipien</span></div>
+  <div>
+    <h2 class="t-headline">Was die Feldflur vorgibt.</h2>
+    <dl class="doc-facts">
+      <dt>Weiter Himmel</dt><dd>Weißraum. Der Bildschirm darf leer sein, wo nichts zu sagen ist.</dd>
+      <dt>Feldränder, Gräben</dt><dd>Haarlinien. Sie ordnen die Fläche, ohne sich in den Vordergrund zu stellen.</dd>
+      <dt>Äcker, Wiesen</dt><dd>Flächen ohne Rahmen und Schatten, nur durch Ton und Linie getrennt.</dd>
+      <dt>Der eine Baum</dt><dd>Der eine Gegenstand, an dem das Auge hängen bleibt: die Hauptaktion, die Auswahl, der Akzent.</dd>
+      <dt>Tiefer Horizont</dt><dd>Die Linie auf dem unteren Drittel, in jeder Marke und unter jedem Hero.</dd>
+      <dt>Jahreszeiten</dt><dd>Hell und dunkel: dieselbe Flur, anderes Licht. Beides gleichwertig von Hand gesetzt.</dd>
+    </dl>
+    <h3 class="t-title-3">Sechs Regeln, sonst nichts</h3>
+    <ol class="doc-principles">
+      <li><strong>Inhalt vor Oberfläche</strong><span>Werte, Bilder und Texte tragen den Bildschirm. Flächen und Rahmen nur, wenn sie etwas ordnen.</span></li>
+      <li><strong>Linien statt Schatten</strong><span>Eine Haarlinie trennt, nichts schwebt. Keine Verläufe, kein Glow, keine Elevation in der Oberfläche.</span></li>
+      <li><strong>Eine Farbe pro Produkt</strong><span>Alles ist Papier und Tinte. Der Akzent markiert die Hauptaktion und die Auswahl, sonst nichts.</span></li>
+      <li><strong>Drei Stimmen</strong><span>Literata für das, was man liest. Mona Sans für das, was man bedient. Monaspace für das, was gemessen wird.</span></li>
+      <li><strong>Zustand nie nur als Farbe</strong><span>Jeder Status hat Wort, Form und Farbe. Er funktioniert in Graustufen, in der Sonne und bei Rotgrünschwäche.</span></li>
+      <li><strong>Plattform ja, Mode nein</strong><span>Navigation, Gesten und Systemdialoge folgen iOS, Android und macOS. Farbe, Schrift, Linie und Ton folgen Horizont.</span></li>
+    </ol>
+  </div>
+</section>
+
+<section class="doc-section" id="marken">
+  <div class="doc-rail"><span class="t-kennung">03 — Marken</span></div>
+  <div>
+    <h2 class="t-headline">Ein Stück Feldflur, eine Linie.</h2>
+    <p>Jedes App-Icon ist ein kleines Bild vom Land: Himmel oben, Boden unten, dazwischen der Horizont auf dem unteren Drittel, gesetzt nach der Drittelregel der Landschaftsfotografie. Die helle Linie läuft durch jedes Icon, das ist das Familienmerkmal. Davor steht genau ein Gegenstand, gezeichnet wie das bisherige Panzergefecht-Icon: kräftige Formen in drei Tönen, dunkle Kontur, weicher Schatten, ein unscharfer Hintergrund.</p>
+    <dl class="doc-facts">
+      <dt>regetskcob</dt><dd>Eine Buche allein auf dem flachen Land, dahinter die tiefe Sonne. In Graustufen, wie die Dachmarke.</dd>
+      <dt>Jagdaufseher</dt><dd>Eine Kanzel am Waldrand, Holz vor Tanne.</dd>
+      <dt>KNX Monitor</dt><dd>Das grüne Buskabel ist der Horizont, darauf sitzt die rot-graue Busklemme mit ihren Leitereinführungen. Mehr braucht es nicht, jeder Elektriker erkennt sie.</dd>
+      <dt>Panzergefecht</dt><dd>Der Panzer in Seitenansicht, auf dem Horizont wie Kanzel und Buche. Farben und Zeichenweise vom bisherigen Icon.</dd>
+    </dl>
+    <div class="doc-marks">
+      {{- range $products }}
+      {{- $d := index $hz.color.product . }}
+      <div class="doc-mark" data-product="{{ . }}">
+        {{ partial "horizont/mark.html" (dict "product" . "size" 128 "icon" true) }}
+        <div class="doc-mark-name">{{ $d.name }}</div>
+        <div class="doc-mark-role">{{ $d.role }}</div>
+        <div class="doc-mark-small">
+          {{ partial "horizont/mark.html" (dict "product" . "size" 60 "icon" true) }}
+          {{ partial "horizont/mark.html" (dict "product" . "size" 40 "icon" true) }}
+          {{ partial "horizont/mark.html" (dict "product" . "size" 29 "icon" true) }}
+          <span style="color:var(--accent-text)">{{ partial "horizont/mark.html" (dict "product" . "size" 24) }}</span>
+        </div>
+      </div>
+      {{- end }}
+    </div>
+    <h3 class="t-title-3">Reduzierte Marke für Kopf- und Fußzeilen</h3>
+    <p>Unter 32 px trägt keine Illustration. Kopfzeilen, Fußzeilen und Favicons nutzen deshalb die Glyphe: dieselbe Linie und derselbe Gegenstand, nur als Strich.</p>
+    <div class="doc-lockups">
+      {{- range after 1 $products }}
+      {{- $d := index $hz.color.product . }}
+      <div class="doc-lockup hz-card" data-product="{{ . }}">
+        <span style="color:var(--accent-text)">{{ partial "horizont/mark.html" (dict "product" . "size" 24) }}</span><b>{{ $d.name }}</b>
+        <span class="doc-endorse">{{ partial "horizont/mark.html" (dict "product" "regetskcob" "size" 16) }}ein Projekt von regetskcob</span>
+      </div>
+      {{- end }}
+    </div>
+    <dl class="doc-facts">
+      <dt>Wortmarke</dt><dd>Der Produktname in Mona Sans SemiBold, ausgeschrieben, nie als eigene Logo-Typo.</dd>
+      <dt>Absender</dt><dd>Jedes Produkt trägt in Fußzeile, Über-Dialog und Store-Text „ein Projekt von regetskcob“ mit der nackten Linie.</dd>
+      <dt>App-Icon</dt><dd>Bühne aus Himmel und Boden, Horizont bei zwei Dritteln, ein Gegenstand mit Kontur 1,6 von 100 in drei Tönen, Schatten nach rechts unten. Verlauf und Unschärfe sind hier erlaubt: das Icon ist ein Bild, keine Oberfläche.</dd>
+      <dt>Glyphe</dt><dd>Strich 7 von 100, eckige Enden, in der Textfarbe oder im Akzent.</dd>
+    </dl>
+  </div>
+</section>
+
+<section class="doc-section" id="farbe">
+  <div class="doc-rail"><span class="t-kennung">04 — Farbe</span></div>
+  <div>
+    <h2 class="t-headline">Papier, Tinte und ein Akzent.</h2>
+    <p>Die Neutralen sind kein reines Grau, sie tragen einen Hauch Oliv, wie Papier in einem Feldbuch. Alle Werte sind von Hand für hell und dunkel gesetzt und geprüft. Nichts wird aus einem Seed abgeleitet, also auch kein <code class="hz-mono">ColorScheme.fromSeed</code>.</p>
+    {{- range slice "light" "dark" }}
+    {{- $mode := . }}
+    <h3 class="t-title-3">Neutral, {{ cond (eq . "light") "hell" "dunkel" }}</h3>
+    <div class="doc-swatches" data-theme="{{ . }}">
+      {{- range $neutrals }}
+      <div class="doc-swatch">
+        <div class="chip" style="background:var(--{{ . }});color:var({{ if in (slice "text" "text-muted" "text-faint" "line-strong") . }}--bg{{ else }}--text{{ end }})"></div>
+        <div class="meta" style="background:var(--surface);color:var(--text)"><b>{{ . }}</b><code>{{ index $hz.color.neutral $mode . }}</code></div>
+      </div>
+      {{- end }}
+    </div>
+    {{- end }}
+
+    <h3 class="t-title-3">Akzente</h3>
+    <p>Pro Produkt genau einer. <span class="hz-mono">accent</span> füllt die Hauptaktion, <span class="hz-mono">accent-text</span> ist die Variante für Text und Linien (mindestens 4,5:1), <span class="hz-mono">accent-tint</span> hinterlegt die Auswahl. Die Kontrastwerte rechnet die Seite live aus den Tokens.</p>
+    <div class="doc-accents">
+      {{- range $products }}
+      {{- $p := . }}
+      {{- $d := index $hz.color.product . }}
+      <div class="doc-accent" data-product="{{ $p }}">
+        <div class="doc-accent-head">{{ partial "horizont/mark.html" (dict "product" $p "size" 32 "icon" true) }}<div><b>{{ $d.accentName }}</b><br><span class="hz-muted t-caption">{{ $d.name }}</span></div></div>
+        {{- range slice "light" "dark" }}
+        <div class="doc-accent-body" data-theme="{{ . }}" style="background:var(--bg);color:var(--text)">
+          <div class="doc-accent-bar"><div style="background:var(--accent)"></div><div style="background:var(--accent-tint)"></div><div style="background:var(--surface)"></div></div>
+          <div class="doc-accent-row"><span class="hz-button hz-button--primary hz-button--dense">Speichern</span><span class="hz-badge hz-badge--accent">Ausgewählt</span><span style="color:var(--accent-text);font-size:.8125rem;text-decoration:underline;text-underline-offset:3px">Link</span></div>
+          <div class="t-kennung hz-kennung">{{ index $d . "accent" }} · Text <span data-contrast="accent-text bg"></span> · Fläche <span data-contrast="on-accent accent"></span></div>
+        </div>
+        {{- end }}
+      </div>
+      {{- end }}
+    </div>
+    <dl class="doc-facts">
+      <dt>Zwei Grün</dt><dd>Tanne und Bus liegen beide im Grün, mit Absicht: Jagd ist Wald, und KNX ist das grüne Buskabel und eine schon eingeführte Marke. Unterschieden werden sie über den Ton (135° gegen 95°) und die Helligkeit. Im Icon trägt Tanne eine helle Linie auf dunklem Feld, Bus eine dunkle Linie auf hellem Feld. Ein Wechsel von KNX auf Blau wäre deutlicher, kostet aber die Wiedererkennung.</dd>
+      <dt>Tinte</dt><dd>Die Dachmarke hat keine Farbe. Der Blog bleibt schwarzweiß, die Bilder bringen die Farbe mit.</dd>
+    </dl>
+
+    <h3 class="t-title-3">Status</h3>
+    <p>Die Statusfarben teilen sich alle Produkte. Jede trägt ihr eigenes Zeichen: Haken, Dreieck, Achteck, Kreis. Damit ersetzen sie die bisherigen <span class="hz-mono">Colors.green/orange/red</span> in Jagdaufseher und die Warnfarben von KNX Monitor.</p>
+    <div class="doc-split">
+      {{- range slice "light" "dark" }}
+      <div data-theme="{{ . }}"><div class="doc-accent-row">
+        <span class="hz-badge hz-badge--positive"><svg><use href="#i-ok"/></svg>Gut</span>
+        <span class="hz-badge hz-badge--warning"><svg><use href="#i-warn"/></svg>Prüfen</span>
+        <span class="hz-badge hz-badge--critical"><svg><use href="#i-crit"/></svg>Defekt</span>
+        <span class="hz-badge hz-badge--info"><svg><use href="#i-info"/></svg>Hinweis</span>
+        <span class="hz-badge"><svg><use href="#i-dot"/></svg>Unbekannt</span>
+      </div></div>
+      {{- end }}
+    </div>
+
+    <h3 class="t-title-3">Die eine Ausnahme: Gelände</h3>
+    <p>Ein Spiel braucht Atmosphäre. Panzergefecht darf deshalb im Dunkeln eigene, olivgetönte Neutrale haben. Das gilt nur für die Neutralen, Linien, Schrift und Komponenten bleiben gleich. Die Farben der Spielwelt (Teams, Tarnanstriche, Gelände der Karten) gehören dem Spiel, nicht dem System.</p>
+    <div class="doc-split">
+      <div data-theme="dark" data-product="regetskcob"><span class="t-kennung hz-kennung">Neutral dunkel</span><p class="t-title-2" style="margin:8px 0 0">Gefecht starten</p><p class="hz-muted t-callout" style="margin:4px 0 0">Text auf bg #121311</p></div>
+      <div data-theme="dark" data-product="panzergefecht"><span class="t-kennung hz-kennung">Gelände dunkel</span><p class="t-title-2" style="margin:8px 0 0">Gefecht starten</p><p class="hz-muted t-callout" style="margin:4px 0 0">Text auf bg #141A0E</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="doc-section" id="schrift">
+  <div class="doc-rail"><span class="t-kennung">05 — Schrift</span></div>
+  <div>
+    <h2 class="t-headline">Lesen, bedienen, messen.</h2>
+    <div class="doc-voices">
+      <div class="doc-voice"><span class="t-kennung hz-kennung">Lesen</span><div class="big" style="font-family:var(--font-serif);font-weight:300">Aa</div><b>Literata</b><p class="hz-muted t-callout">Überschriften der Landingpages, Blog, längere Texte, Onboarding. Leicht (300), nie fett. Schon im Blog.</p></div>
+      <div class="doc-voice"><span class="t-kennung hz-kennung">Bedienen</span><div class="big" style="font-family:var(--font-sans);font-weight:600">Aa</div><b>Mona Sans</b><p class="hz-muted t-callout">Alles, was man antippt: Titel, Listen, Knöpfe, Formulare. 400, 500, 600. Breite Schnitte (Expanded) nur für Panzergefecht.</p></div>
+      <div class="doc-voice"><span class="t-kennung hz-kennung">Messen</span><div class="big" style="font-family:var(--font-mono)">0/1/2</div><b>Monaspace Argon</b><p class="hz-muted t-callout">Werte, Zeiten, Adressen, Kennungen, Koordinaten. Immer mit Tabellenziffern. Schon im Blog.</p></div>
+    </div>
+    <p style="margin-top:24px">Mona Sans und Monaspace kommen von denselben Gestaltern (GitHub Next), sie teilen Proportionen und Strichstärke. Beide stehen unter der SIL Open Font License, ebenso Literata. Alle drei werden gebündelt, nie aus dem Netz geladen.</p>
+    <p class="hz-muted t-callout">Hinweis zum Entwurf: Mona Sans liegt noch nicht im Repository, die Seite zeigt so lange die Systemschrift (SF Pro auf dem Mac).</p>
+    <table class="doc-scale">
+      {{- range slice "display" "headline" "title-1" "title-2" "title-3" "reading" "body" "callout" "label" "caption" "data" "kennung" }}
+      {{- $t := index $hz.type . }}
+      <tr>
+        <td class="t-kennung hz-kennung">{{ . }}</td>
+        <td class="sample t-{{ . }}">{{ if eq $t.family "mono" }}{{ if eq . "kennung" }}Einrichtungen · 14{{ else }}14:32:09.031  1/2/3  21,4 °C{{ end }}{{ else if eq $t.family "serif" }}Das Revier im Blick{{ else }}Kanzel am Bruch prüfen{{ end }}</td>
+        <td>{{ $t.family }} {{ $t.size }}/{{ $t.line }} · {{ $t.weight }}</td>
+      </tr>
+      {{- end }}
+    </table>
+    <dl class="doc-facts">
+      <dt>Kennung</dt><dd>Das wiedererkennbarste Element: kleine Mono-Versalien mit Sperrung, die einen Abschnitt, eine Nummer oder einen Wert benennen. Wie die Legende einer topografischen Karte. Sie ersetzt die Eyebrow-Pille der Landingpages und die Abschnittstitel der Apps.</dd>
+      <dt>Dynamic Type</dt><dd>Die Skala ist die Basis bei Standardgröße. In den Apps skaliert alles mit der Systemschriftgröße, nichts wird abgeschnitten oder geklemmt.</dd>
+    </dl>
+  </div>
+</section>
+
+<section class="doc-section" id="grundlagen">
+  <div class="doc-rail"><span class="t-kennung">06 — Grundlagen</span></div>
+  <div>
+    <h2 class="t-headline">Raster, Radien, Linien, Bewegung.</h2>
+    <h3 class="t-title-3">Abstand im 4er-Raster</h3>
+    <div class="doc-spaces">
+      {{- range slice 4 8 12 16 24 32 48 64 96 }}
+      <div class="doc-space"><span>{{ . }}</span><i style="width:{{ . }}px"></i></div>
+      {{- end }}
+    </div>
+    <h3 class="t-title-3">Radien: klein und wenige</h3>
+    <div class="doc-radii">
+      {{- range $k, $v := dict "0" "Tabellen, Linien" "2" "Status, Kennzeichen" "6" "Knöpfe, Felder" "10" "Karten, Sheets" "16" "nur große Sheets" }}
+      <div class="doc-radius"><i style="border-top-left-radius:{{ $k }}px"></i>{{ $k }} · {{ $v }}</div>
+      {{- end }}
+    </div>
+    <p>Rund ist nur, was rund sein muss: der Schalter, der Punkt eines Ortes, ein Avatar. Pillenförmige Knöpfe und Chips gibt es nicht.</p>
+    <h3 class="t-title-3">Linien</h3>
+    <dl class="doc-facts">
+      <dt>1 px</dt><dd>Haarlinie, trennt Zeilen, Abschnitte, Flächen. In Listen beginnt sie am Text, nicht am Rand.</dd>
+      <dt>2 px</dt><dd>Auswahl und Fokus, immer im Akzent. Der aktive Tab, die gewählte Zeile, der fokussierte Knopf tragen die Linie. Der Horizont, im Kleinen.</dd>
+      <dt>Schatten</dt><dd>Keine. Ein Sheet oder Menü hebt sich durch Fläche und Linie ab. Wo die Plattform einen Schatten zwingend zeichnet (macOS-Fenster, iOS-Menüs), bleibt er.</dd>
+    </dl>
+    <h3 class="t-title-3">Bewegung</h3>
+    <p>Kurz, ohne Federn, ohne Überschwingen. Bei reduzierter Bewegung fällt alles auf 0. Fahr mit der Maus über die Bahnen.</p>
+    <div class="doc-motion">
+      {{- range slice "fast" "base" "slow" }}
+      <div class="doc-motion-row"><span class="t-kennung hz-kennung">{{ . }} · {{ index $hz.motion . }} ms</span><div class="doc-motion-track {{ . }}"><i></i></div></div>
+      {{- end }}
+    </div>
+    <dl class="doc-facts">
+      <dt>Kurve</dt><dd class="hz-mono">{{ $hz.motion.standard }}</dd>
+      <dt>Fenster</dt><dd>Kompakt unter 600, mittel bis 840, erweitert bis 1200, groß darüber, wie die Fenstergrößen von Material 3. Gebaut wird nach verfügbarer Breite, nie nach Gerät.</dd>
+      <dt>Ziel</dt><dd>Mindestens 44 × 44 pt pro Tippziel, auch bei dichten Zeilen.</dd>
+      <dt>Ikonen</dt><dd>Material Symbols Sharp, Strichstärke 300, eckig, passend zur Linie. Gebündelt als Schrift-Subset. Auf dieser Seite noch Platzhalter im selben Stil.</dd>
+    </dl>
+  </div>
+</section>
+
+<section class="doc-section" id="komponenten">
+  <div class="doc-rail"><span class="t-kennung">07 — Komponenten</span></div>
+  <div>
+    <h2 class="t-headline">Wenige Bausteine, überall gleich.</h2>
+    <p>Wähle ein Produkt und einen Modus, die Bausteine wechseln nur ihren Akzent.</p>
+    <div class="doc-switcher">
+      <div class="hz-segmented" role="group" aria-label="Produkt" data-pg="product">
+        {{- range $i, $p := $products }}<button type="button" data-value="{{ $p }}" aria-pressed="{{ cond (eq $i 1) "true" "false" }}">{{ (index $hz.color.product $p).name }}</button>{{ end }}
+      </div>
+      <div class="hz-segmented" role="group" aria-label="Modus" data-pg="theme">
+        <button type="button" data-value="light" aria-pressed="true">Hell</button><button type="button" data-value="dark" aria-pressed="false">Dunkel</button>
+      </div>
+    </div>
+    <div class="doc-playground" id="playground" data-product="jagdaufseher" data-theme="light">
+      <div class="doc-pg-row"><span class="t-kennung">Knöpfe</span><div class="doc-pg-items">
+        <button class="hz-button hz-button--primary" type="button"><svg><use href="#i-plus"/></svg>Meldung erfassen</button>
+        <button class="hz-button hz-button--secondary" type="button">Abbrechen</button>
+        <button class="hz-button hz-button--quiet" type="button">Alle anzeigen</button>
+        <button class="hz-button hz-button--critical" type="button">Löschen</button>
+        <button class="hz-button hz-button--primary" type="button" disabled>Gesperrt</button>
+      </div></div>
+      <div class="doc-pg-row"><span class="t-kennung">Felder</span><div class="doc-pg-items" style="align-items:start">
+        <div class="hz-field" style="width:240px"><label for="f1">Name</label><input id="f1" class="hz-input" value="Kanzel am Bruch"><span class="hz-help">So heißt sie im Revier.</span></div>
+        <div class="hz-field" style="width:180px"><label for="f2">Gruppenadresse</label><input id="f2" class="hz-input hz-mono" value="1/2/300" aria-invalid="true"><span class="hz-error"><svg width="14" height="14"><use href="#i-crit"/></svg>Höchstens 1/7/255</span></div>
+      </div></div>
+      <div class="doc-pg-row"><span class="t-kennung">Auswahl</span><div class="doc-pg-items">
+        <div class="hz-segmented" role="group"><button type="button" aria-pressed="true">Liste</button><button type="button" aria-pressed="false">Karte</button></div>
+        <nav class="hz-tabs" style="flex:1;min-width:240px"><a href="#" aria-current="page">Übersicht</a><a href="#">Aufgaben</a><a href="#">Wild</a></nav>
+        <label style="display:flex;gap:8px;align-items:center;font-size:.875rem"><input type="checkbox" class="hz-switch" checked>Offline speichern</label>
+      </div></div>
+      <div class="doc-pg-row"><span class="t-kennung">Liste</span><div>
+        <ul class="hz-list hz-card" style="overflow:hidden;max-width:420px">
+          <li class="hz-row hz-row--inset"><span class="hz-row-lead"><svg><use href="#i-stand"/></svg></span><span><span class="hz-row-title">Kanzel am Bruch</span><br><span class="hz-row-meta">K-07 · geprüft 12.10.</span></span><span class="hz-badge hz-badge--positive"><svg><use href="#i-ok"/></svg>Gut</span></li>
+          <li class="hz-row hz-row--inset" aria-selected="true"><span class="hz-row-lead"><svg><use href="#i-stand"/></svg></span><span><span class="hz-row-title">Leiter Schlagkante</span><br><span class="hz-row-meta">L-03 · geprüft 28.09.</span></span><span class="hz-badge hz-badge--warning"><svg><use href="#i-warn"/></svg>Prüfen</span></li>
+          <li class="hz-row hz-row--inset"><span class="hz-row-lead"><svg><use href="#i-feeder"/></svg></span><span><span class="hz-row-title">Kirrung Erlenweg</span><br><span class="hz-row-meta">KI-02 · beschickt 15.10.</span></span><span class="hz-row-trail"><svg width="16" height="16"><use href="#i-chev"/></svg></span></li>
+        </ul>
+      </div></div>
+      <div class="doc-pg-row"><span class="t-kennung">Daten</span><div class="doc-scroll">
+        <table class="hz-table" style="min-width:460px">
+          <thead><tr><th>Zeit</th><th>Ziel</th><th>Typ</th><th class="hz-num">Wert</th><th>Name</th></tr></thead>
+          <tbody>
+            <tr><td class="hz-mono">14:32:07.412</td><td class="hz-mono">1/2/3</td><td><span class="mock-type w">W</span></td><td class="hz-mono hz-num">Ein</td><td>Wohnzimmer Decke</td></tr>
+            <tr aria-selected="true"><td class="hz-mono">14:32:08.120</td><td class="hz-mono">3/1/7</td><td><span class="mock-type w">W</span></td><td class="hz-mono hz-num">21,4 °C</td><td>Bad Isttemperatur</td></tr>
+            <tr><td class="hz-mono">14:32:09.004</td><td class="hz-mono">2/1/1</td><td><span class="mock-type r">R</span></td><td class="hz-mono hz-num">–</td><td>Küche Jalousie</td></tr>
+          </tbody>
+        </table>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<section class="doc-section" id="plattformen">
+  <div class="doc-rail"><span class="t-kennung">08 — Plattformen</span></div>
+  <div>
+    <h2 class="t-headline">Native Form, gemeinsame Sprache.</h2>
+    <p>Horizont ersetzt keine Plattform. Was das Betriebssystem vorgibt, bleibt: Navigation, Gesten, Systemdialoge, Teilen, Tastenkürzel. Horizont bestimmt Farbe, Schrift, Linie, Abstand und Ton.</p>
+    <div class="doc-scroll">
+    <table class="doc-platforms">
+      <thead><tr><th>Plattform</th><th>Navigation</th><th>Horizont</th><th>Produkte</th></tr></thead>
+      <tbody>
+        <tr><td>iOS, iPadOS</td><td>Tab-Bar mit Beschriftung, Sheets mit Detents, Wischen zurück</td><td>Kleiner Titel mit Kennung darüber statt Large Title. Die Auswahl ist eine Linie über dem Tab.</td><td>alle drei</td></tr>
+        <tr><td>Android</td><td>NavigationBar, ab 600 dp NavigationRail, Predictive Back</td><td>M3-Bausteine mit eigenem ColorScheme. Indikator als Linie statt Pille, höchstens ein FAB pro Screen, Radius 10.</td><td>alle drei</td></tr>
+        <tr><td>macOS, Windows, Linux</td><td>Seitenleiste und Werkzeugleiste, Menüleiste</td><td>Dichte Zeilen (28 px), Hover-Zustände, Tastatur zuerst. Kein App Bar.</td><td>KNX, Panzergefecht</td></tr>
+        <tr><td>Web-App</td><td>wie Desktop, ab 840 px Seitenleiste</td><td>Sichtbarer Fokus, gleiche Tokens als CSS.</td><td>KNX, Panzergefecht /play/</td></tr>
+        <tr><td>Home Assistant</td><td>Ingress im Rahmen von HA</td><td>Neutrale von HA übernehmen, Akzent und Schrift bleiben.</td><td>KNX Add-on</td></tr>
+        <tr><td>tvOS, Android TV</td><td>Fokus statt Zeiger, Siri Remote</td><td>Fokusring 3 px im Akzent mit Abstand, Schrift × 1,5, Abstände für 3 m Sehabstand.</td><td>Panzergefecht</td></tr>
+        <tr><td>watchOS, Wear OS</td><td>eine Aufgabe pro Screen</td><td>Schwarze Fläche, Mono-Werte, der Akzent nur für die eine Aktion.</td><td>Panzergefecht</td></tr>
+        <tr><td>Landingpage</td><td>Feldseite: Leiste mit Kennungen und Inhalt</td><td>Literata-Überschrift links, kein zentrierter Hero, kein Kachelraster. Die Horizontlinie unter dem Hero, im Fuß „ein Projekt von regetskcob“.</td><td>alle, Blog</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</section>
+
+<section class="doc-section" id="entwuerfe">
+  <div class="doc-rail"><span class="t-kennung">09 — Entwürfe</span></div>
+  <div>
+    <h2 class="t-headline">So sähe es aus.</h2>
+    <p>Vier Entwürfe, einer pro Gerätefamilie. Die Inhalte sind Beispiele, die Bausteine sind die von oben.</p>
+
+    <h3 class="t-title-2">Jagdaufseher · iPhone hell, Android dunkel</h3>
+    <div class="mock-stage" data-product="jagdaufseher">
+      <div>
+        <div class="mock-phone" data-theme="light">
+          <div class="mock-status"><span>9:41</span><span class="island"></span><span class="hz-mono" style="font-size:11px">5G 87</span></div>
+          <div class="mock-navbar">
+            <div class="mock-navbar-row"><span class="t-kennung hz-kennung">Hegering Nord · 412 ha</span><span><button class="mock-icon-btn" type="button" aria-label="Suchen"><svg><use href="#i-search"/></svg></button><button class="mock-icon-btn" type="button" aria-label="Neu"><svg><use href="#i-plus"/></svg></button></span></div>
+            <div class="t-title-1">Übersicht</div>
+          </div>
+          <div class="mock-scroll">{{ partial "site/mock-jagd.html" . }}</div>
+          <nav class="mock-tabbar">
+            <span class="mock-tab" aria-current="page"><svg><use href="#i-tree"/></svg>Übersicht</span>
+            <span class="mock-tab"><svg><use href="#i-tasks"/></svg>Aufgaben</span>
+            <span class="mock-tab"><svg><use href="#i-antler"/></svg>Wild</span>
+            <span class="mock-tab"><svg><use href="#i-map"/></svg>Karte</span>
+          </nav>
+        </div>
+        <p class="mock-caption">iOS: Kennung über dem kleinen Titel, Aktionen rechts oben, Tab-Bar mit Linie über dem aktiven Tab. Kein Large Title, keine Karten pro Zeile.</p>
+      </div>
+      <div>
+        <div class="mock-phone" data-theme="dark" style="border-radius:32px">
+          <div class="mock-status android"><span>9:41</span><span class="island"></span><span class="hz-mono" style="font-size:11px">87 %</span></div>
+          <div class="mock-navbar" style="padding-top:12px">
+            <span class="t-kennung hz-kennung">Hegering Nord · 412 ha</span>
+            <div class="mock-navbar-row"><div class="t-title-1">Übersicht</div><button class="mock-icon-btn" type="button" aria-label="Suchen"><svg><use href="#i-search"/></svg></button></div>
+          </div>
+          <div class="mock-scroll">{{ partial "site/mock-jagd.html" . }}</div>
+          <span class="mock-fab"><svg><use href="#i-plus"/></svg>Meldung</span>
+          <nav class="mock-tabbar android">
+            <span class="mock-tab" aria-current="page"><svg><use href="#i-tree"/></svg>Übersicht</span>
+            <span class="mock-tab"><svg><use href="#i-tasks"/></svg>Aufgaben</span>
+            <span class="mock-tab"><svg><use href="#i-antler"/></svg>Wild</span>
+            <span class="mock-tab"><svg><use href="#i-map"/></svg>Karte</span>
+          </nav>
+        </div>
+        <p class="mock-caption">Android: dieselbe Seite mit Android-Rahmen. Ein erweiterter FAB für die eine Hauptaktion, NavigationBar mit Linie statt Pille.</p>
+      </div>
+    </div>
+
+    <h3 class="t-title-2">KNX Monitor · macOS, dunkel</h3>
+    <div class="mock-stage" data-product="knx">
+      <div style="width:100%">
+        <div class="doc-scroll"><div class="mock-window" data-theme="dark" style="min-width:760px">
+          <div class="mock-titlebar">
+            <span class="mock-lights"><i></i><i></i><i></i></span>
+            <b style="font-size:13px">Musterhaus.knxproj</b>
+            <span class="mock-conn"><span class="hz-badge hz-badge--positive"><svg><use href="#i-ok"/></svg>Verbunden</span><span class="hz-mono hz-muted" style="font-size:11px">192.168.1.40 · Tunnel · 23 Tel/s</span></span>
+          </div>
+          <aside class="mock-sidebar">
+            <span class="t-kennung">Bus</span>
+            <div class="mock-side-item" aria-current="page"><svg><use href="#i-pulse"/></svg>Live<span class="count">12 480</span></div>
+            <div class="mock-side-item"><svg><use href="#i-terminal"/></svg>Busmonitor</div>
+            <div class="mock-side-item"><svg><use href="#i-grid"/></svg>Objekte<span class="count">312</span></div>
+            <span class="t-kennung">Projekt</span>
+            <div class="mock-side-item"><svg><use href="#i-topology"/></svg>Topologie</div>
+            <div class="mock-side-item"><svg><use href="#i-chart"/></svg>Statistik</div>
+            <div class="mock-side-item"><svg><use href="#i-record"/></svg>Aufnahmen<span class="count">3</span></div>
+            <span class="t-kennung">Prüfung</span>
+            <div class="mock-side-item"><svg><use href="#i-check-doc"/></svg>Projektcheck<span class="count" style="color:var(--warning)">2</span></div>
+          </aside>
+          <div class="mock-content">
+            <div class="mock-toolbar">
+              <input class="hz-input hz-mono" placeholder="Filter: 1/2/* oder Name" aria-label="Filter">
+              <div class="hz-segmented" role="group"><button type="button" aria-pressed="true">Alle</button><button type="button" aria-pressed="false">Schreiben</button><button type="button" aria-pressed="false">Lesen</button><button type="button" aria-pressed="false">Antwort</button></div>
+              <span style="flex:1"></span>
+              <button class="hz-button hz-button--secondary hz-button--dense" type="button"><svg><use href="#i-pause"/></svg>Pause</button>
+            </div>
+            <table class="hz-table">
+              <thead><tr><th>Zeit</th><th>Quelle</th><th>Ziel</th><th>Typ</th><th>DPT</th><th class="hz-num">Wert</th><th>Name</th></tr></thead>
+              <tbody>
+                {{- range slice
+                  (slice "14:32:07.412" "1.1.12" "1/2/3" "w" "1.001" "Ein" "Wohnzimmer Decke")
+                  (slice "14:32:07.498" "1.1.12" "1/3/3" "w" "1.001" "Ein" "Wohnzimmer Decke Status")
+                  (slice "14:32:08.120" "1.1.20" "3/1/7" "w" "9.001" "21,4 °C" "Bad Isttemperatur")
+                  (slice "14:32:09.004" "1.1.3" "2/1/1" "r" "5.001" "–" "Küche Jalousie Position")
+                  (slice "14:32:09.031" "1.1.30" "2/1/1" "a" "5.001" "64 %" "Küche Jalousie Position")
+                  (slice "14:32:10.776" "1.1.12" "1/2/9" "w" "1.001" "Aus" "Flur Spots")
+                  (slice "14:32:11.250" "1.0.5" "4/0/1" "w" "14.056" "3 412 W" "Hausanschluss Leistung")
+                  (slice "14:32:12.903" "1.1.20" "3/1/8" "w" "9.001" "20,9 °C" "Kinderzimmer Isttemperatur")
+                  (slice "14:32:13.118" "1.1.12" "1/2/3" "w" "1.001" "Aus" "Wohnzimmer Decke")
+                }}
+                <tr{{ if eq (index . 0) "14:32:09.031" }} aria-selected="true"{{ end }}><td class="hz-mono">{{ index . 0 }}</td><td class="hz-mono">{{ index . 1 }}</td><td class="hz-mono">{{ index . 2 }}</td><td><span class="mock-type {{ index . 3 }}">{{ upper (index . 3) }}</span></td><td class="hz-mono hz-muted">{{ index . 4 }}</td><td class="hz-mono hz-num">{{ index . 5 }}</td><td>{{ index . 6 }}</td></tr>
+                {{- end }}
+              </tbody>
+            </table>
+            <div class="mock-detail">
+              <span class="t-kennung hz-kennung">Quelle</span><span class="t-kennung hz-kennung">Ziel</span><span class="t-kennung hz-kennung">DPT</span><span class="t-kennung hz-kennung">Roh</span><span class="t-kennung hz-kennung">Gerät</span>
+              <span class="hz-mono">1.1.30</span><span class="hz-mono">2/1/1</span><span class="hz-mono">5.001 %</span><span class="hz-mono">0xA3</span><span>Jalousieaktor Küche, Kanal B</span>
+            </div>
+          </div>
+        </div></div>
+        <p class="mock-caption" style="max-width:none">macOS: Seitenleiste mit Kennungen, Werte durchgehend in Mono und rechtsbündig. Der Telegrammtyp hat Buchstabe und Farbe (W, R, A), die gewählte Zeile trägt die Linie.</p>
+      </div>
+    </div>
+
+    <h3 class="t-title-2">Panzergefecht · Apple TV, Gelände</h3>
+    <div class="mock-stage" data-product="panzergefecht">
+      <div style="width:100%">
+        <div class="mock-tv" data-theme="dark">
+          <div class="mock-tv-left">
+            <span class="k">Lobby · Raum 7F3K</span>
+            <h4 class="mock-tv-title">Gefecht</h4>
+            <p>Code mit dem Handy scannen, es wird zum Controller. Oder Panzergefecht auf dem Handy öffnen und den Code eingeben.</p>
+            <div style="display:flex;gap:3cqw;align-items:flex-end;margin-top:auto">
+              <div class="mock-qr"><svg viewBox="0 0 21 21" shape-rendering="crispEdges">
+                {{- range $i := seq 0 440 }}
+                {{- $x := mod $i 21 }}{{ $y := div $i 21 }}
+                {{- $finder := or (and (lt $x 7) (lt $y 7)) (and (gt $x 13) (lt $y 7)) (and (lt $x 7) (gt $y 13)) }}
+                {{- if $finder }}
+                  {{- $fx := cond (gt $x 13) (sub $x 14) $x }}{{ $fy := cond (gt $y 13) (sub $y 14) $y }}
+                  {{- if or (eq $fx 0) (eq $fx 6) (eq $fy 0) (eq $fy 6) (and (ge $fx 2) (le $fx 4) (ge $fy 2) (le $fy 4)) }}<rect x="{{ $x }}" y="{{ $y }}" width="1" height="1" fill="#141A0E"/>{{ end }}
+                {{- else if and (not (or (and (lt $x 8) (lt $y 8)) (and (gt $x 12) (lt $y 8)) (and (lt $x 8) (gt $y 12)))) (lt (mod (add (mul $x 7) (mul $y 13) (mul $x $y)) 5) 2) }}<rect x="{{ $x }}" y="{{ $y }}" width="1" height="1" fill="#141A0E"/>
+                {{- end }}
+                {{- end }}
+              </svg></div>
+              <div class="mock-tv-code" aria-label="Code 7F3K"><span>7</span><span>F</span><span>3</span><span>K</span></div>
+            </div>
+          </div>
+          <div class="mock-tv-right">
+            <span class="k">Spieler · 3/4</span>
+            <div class="mock-slot"><span class="team" style="background:#E5533D">R</span><span>Spieler 1</span><span class="dev">iPhone</span></div>
+            <div class="mock-slot"><span class="team" style="background:#4A90E2">B</span><span>Spieler 2</span><span class="dev">Siri Remote</span></div>
+            <div class="mock-slot"><span class="team" style="background:#E5533D">R</span><span>Spieler 3</span><span class="dev">Android</span></div>
+            <div class="mock-slot empty"><span class="team" style="outline:1px dashed var(--line-strong);color:var(--text-faint)">·</span><span>Wartet auf Controller …</span><span></span></div>
+            <span class="k" style="margin-top:2cqw">Modus</span>
+            <div style="font-size:1.8cqw">Letzter Panzer · Wald</div>
+            <span class="mock-tv-btn">Gefecht starten</span>
+          </div>
+        </div>
+        <p class="mock-caption" style="max-width:none">tvOS: Gelände als Fläche, der Code groß in Mono, Teams mit Buchstabe und Farbe. Der fokussierte Knopf trägt den Fokusring mit Abstand. Die Überschrift nutzt den breiten Schnitt, das ist der Spielcharakter, ohne Fasen und Effekte.</p>
+      </div>
+    </div>
+
+    <h3 class="t-title-2">Landingpage · Feldseite</h3>
+    <div class="mock-stage" data-product="jagdaufseher">
+      <div class="mock-browser" data-theme="light">
+        <div class="mock-browser-bar"><span class="mock-lights" style="display:flex;gap:6px"><i style="width:10px;height:10px;border-radius:50%;background:var(--line-strong)"></i><i style="width:10px;height:10px;border-radius:50%;background:var(--line-strong)"></i><i style="width:10px;height:10px;border-radius:50%;background:var(--line-strong)"></i></span><div class="mock-url">regetskcob.de/jagdaufseher/</div></div>
+        <div class="lp">
+          <div class="lp-head"><span style="color:var(--accent-text)">{{ partial "horizont/mark.html" (dict "product" "jagdaufseher" "size" 24) }}</span><b>Jagdaufseher</b><nav><span>Funktionen</span><span>Datenschutz</span><span>EN</span></nav></div>
+          <div class="lp-hero">
+            <div>
+              <span class="t-kennung hz-kennung">01 — In Entwicklung · iPhone · iPad · Android</span>
+              <h1 class="t-display">Das Revier im Blick, auch ohne Netz.</h1>
+              <p>Hochsitze, Kirrungen, Aufgaben und Strecke an einem Ort, geteilt mit allen, die im Revier jagen. Was draußen erfasst wird, gleicht sich ab, sobald wieder Empfang da ist.</p>
+              <div class="lp-actions"><span class="hz-button hz-button--primary">Beta anfragen<svg><use href="#i-arrow"/></svg></span><span class="hz-button hz-button--secondary">So funktioniert es</span></div>
+            </div>
+            <div class="lp-shot"><div style="width:320px;transform:scale(.7);transform-origin:top left">
+              <div class="mock-navbar"><span class="t-kennung hz-kennung">Hegering Nord · 412 ha</span><div class="t-title-1">Übersicht</div></div>
+              {{ partial "site/mock-jagd.html" . }}
+            </div></div>
+          </div>
+          <div class="lp-horizon"></div>
+          <div class="lp-sec">
+            <span class="t-kennung hz-kennung">02 — Einrichtungen</span>
+            <div><h3 class="t-headline" style="font-size:1.5rem">Jeder Hochsitz mit seinem Zustand.</h3><p>Prüfen, fotografieren, als defekt melden. Wer als Nächstes rausfährt, sieht, was zu tun ist.</p></div>
+            <dl><dt>Zustand</dt><dd>gut, prüfen, defekt</dd><dt>Fotos</dt><dd>je Einrichtung</dd><dt>Karte</dt><dd>Lage im Revier</dd></dl>
+          </div>
+          <div class="lp-sec">
+            <span class="t-kennung hz-kennung">03 — Gemeinsam</span>
+            <div><h3 class="t-headline" style="font-size:1.5rem">Ein Revier, mehrere Jäger.</h3><p>Aufgaben mit Frist, Meldungen und Strecke für alle, die dazugehören, ohne Gruppenchat.</p></div>
+            <dl><dt>Abgleich</dt><dd>offline zuerst</dd><dt>Konto</dt><dd>jederzeit löschbar</dd></dl>
+          </div>
+          <div class="lp-foot">{{ partial "horizont/mark.html" (dict "product" "regetskcob" "size" 16) }}<span>ein Projekt von regetskcob</span><span>Impressum · Datenschutz</span></div>
+        </div>
+      </div>
+      <p class="mock-caption" style="max-width:none">Statt Hero, Kachelraster und Pille: die Überschrift in Literata links, rechts das Produkt selbst. Darunter liegt die Horizontlinie im Akzent, dann nummerierte Abschnitte mit Fakten in Mono. KNX Monitor und Panzergefecht (dunkel, Gelände) nutzen dieselbe Vorlage.</p>
+    </div>
+
+    <h3 class="t-title-2">Dieselbe Feldseite für KNX Monitor und Panzergefecht</h3>
+    <div class="mock-stage" data-product="knx">
+      <div class="mock-browser" data-theme="light">
+        <div class="mock-browser-bar"><span></span><div class="mock-url">regetskcob.de/knx/</div></div>
+        <div class="lp">
+          <div class="lp-head"><span style="color:var(--accent-text)">{{ partial "horizont/mark.html" (dict "product" "knx" "size" 24) }}</span><b>KNX Monitor</b><nav><span>Funktionen</span><span>Add-on</span><span>Datenschutz</span><span>EN</span></nav></div>
+          <div class="lp-hero">
+            <div>
+              <span class="t-kennung hz-kennung">01 — Version 1.4 · Mac · Windows · Linux · iOS · Android · Home Assistant</span>
+              <h1 class="t-display">Der Bus, lesbar gemacht.</h1>
+              <p>Telegramme live mitlesen, mit den Namen aus dem ETS-Projekt. Über KNXnet/IP, auf dem Rechner, dem Telefon oder als Add-on in Home Assistant.</p>
+              <div class="lp-actions"><span class="hz-button hz-button--primary">Herunterladen<svg><use href="#i-arrow"/></svg></span><span class="hz-button hz-button--secondary">Als Add-on installieren</span></div>
+            </div>
+            <div class="lp-data">
+              <table class="hz-table">
+                <thead><tr><th>Zeit</th><th>Ziel</th><th>Typ</th><th class="hz-num">Wert</th></tr></thead>
+                <tbody>
+                  <tr><td class="hz-mono">14:32:07.412</td><td class="hz-mono">1/2/3</td><td><span class="mock-type w">W</span></td><td class="hz-mono hz-num">Ein</td></tr>
+                  <tr><td class="hz-mono">14:32:08.120</td><td class="hz-mono">3/1/7</td><td><span class="mock-type w">W</span></td><td class="hz-mono hz-num">21,4 °C</td></tr>
+                  <tr><td class="hz-mono">14:32:09.004</td><td class="hz-mono">2/1/1</td><td><span class="mock-type r">R</span></td><td class="hz-mono hz-num">–</td></tr>
+                  <tr aria-selected="true"><td class="hz-mono">14:32:09.031</td><td class="hz-mono">2/1/1</td><td><span class="mock-type a">A</span></td><td class="hz-mono hz-num">64 %</td></tr>
+                  <tr><td class="hz-mono">14:32:11.250</td><td class="hz-mono">4/0/1</td><td><span class="mock-type w">W</span></td><td class="hz-mono hz-num">3 412 W</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="lp-horizon"></div>
+          <div class="lp-foot">{{ partial "horizont/mark.html" (dict "product" "regetskcob" "size" 16) }}<span>ein Projekt von regetskcob</span><span>Impressum · Datenschutz</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="mock-stage" data-product="panzergefecht">
+      <div class="mock-browser" data-theme="dark">
+        <div class="mock-browser-bar"><span></span><div class="mock-url">panzergefecht.de</div></div>
+        <div class="lp">
+          <div class="lp-head"><span style="color:var(--accent-text)">{{ partial "horizont/mark.html" (dict "product" "panzergefecht" "size" 24) }}</span><b>Panzergefecht</b><nav><span>Modi</span><span>Geräte</span><span>Hilfe</span><span>EN</span></nav></div>
+          <div class="lp-hero">
+            <div>
+              <span class="t-kennung hz-kennung">01 — Im Browser · iPhone · Mac · Apple TV · Android</span>
+              <h1 class="t-display">Gefecht im Wohnzimmer.</h1>
+              <p>Ein Spiel von oben auf wechselndem Gelände, allein gegen die CPU, gegeneinander oder gemeinsam gegen Wellen. Das Handy wird zum Controller, der Fernseher zum Gefechtsfeld. Ohne Werbung.</p>
+              <div class="lp-actions"><span class="hz-button hz-button--primary">Jetzt spielen<svg><use href="#i-arrow"/></svg></span><span class="hz-button hz-button--secondary">App laden</span></div>
+            </div>
+            <div class="lp-iconshot">{{ partial "horizont/app-icon.html" (dict "product" "panzergefecht" "size" 200) }}</div>
+          </div>
+          <div class="lp-horizon"></div>
+          <div class="lp-sec">
+            <span class="t-kennung hz-kennung">02 — Modi</span>
+            <div><h3 class="t-headline" style="font-size:1.5rem">Letzter Panzer, Flagge, Verteidigung.</h3><p>Dazu geteilter Bildschirm und Duell, allein gegen die CPU oder zusammen.</p></div>
+            <dl><dt>Gelände</dt><dd>Wald, Wüste, Winter, Stadt, Berge, Inseln</dd><dt>Steuerung</dt><dd>Handy, Siri Remote</dd></dl>
+          </div>
+          <div class="lp-foot">{{ partial "horizont/mark.html" (dict "product" "regetskcob" "size" 16) }}<span>ein Projekt von regetskcob</span><span>Impressum · Datenschutz</span></div>
+        </div>
+      </div>
+      <p class="mock-caption" style="max-width:none">KNX Monitor zeigt rechts statt eines Telefons die Daten selbst: die Telegrammliste ist das Produkt. Panzergefecht bleibt dunkel auf Gelände, das Signalgelb gehört dem einen Knopf „Jetzt spielen“. Aufbau, Kennungen, Horizontlinie und Fußzeile sind bei allen drei gleich.</p>
+    </div>
+  </div>
+</section>
+
+<section class="doc-section" id="umsetzung">
+  <div class="doc-rail"><span class="t-kennung">10 — Umsetzung</span></div>
+  <div>
+    <h2 class="t-headline">Was danach käme.</h2>
+    <p>Diese Seite und die Tokens kommen aus dem Repository <a href="https://github.com/regetskcob/design-system">design-system</a>. Die Apps und ihre Landingpages sind noch unverändert.</p>
+    <ol class="doc-todo">
+      <li><span><b>Offene Entscheidungen.</b> Die zwei Grün, Mona Sans, Kennung über dem Titel statt Large Title, Gelände als Ausnahme.</span></li>
+      <li><span><b>Schriften bündeln.</b> Mona Sans laden (OFL), Literata und Monaspace als TTF für Flutter, Material Symbols Sharp als Subset.</span></li>
+      <li><span><b>Flutter-Paket <span class="hz-mono">horizont</span>.</b> Tokens aus <span class="hz-mono">tokens/horizont.json</span> generiert, ThemeExtension, ColorScheme von Hand je Produkt und Modus. Eingebunden per Git-Abhängigkeit in alle drei Apps.</span></li>
+      <li><span><b>Pro App eine Umstellung.</b> Theme ersetzen, harte Farben (Zustand, Priorität, Ort) auf Status-Tokens, Radien auf die Skala. KNX Monitor zuerst, es hat schon Tokens.</span></li>
+      <li><span><b>Landingpages als Feldseite.</b> <span class="hz-mono">web/</span> als Hugo-Modul einbinden, Aufbau wie oben.</span></li>
+      <li><span><b>Blog angleichen.</b> Neutrale und Kennungen übernehmen, Literata bleibt, der Kopf bekommt die Linie.</span></li>
+    </ol>
+  </div>
+</section>
+
+</main>
+
+<script>
+(function () {
+  var root = document.documentElement;
+
+  /* Page theme: Auto follows the system, Hell and Dunkel are remembered. */
+  var themeButtons = document.querySelectorAll("[data-set-theme]");
+  function setTheme(t) {
+    if (t) root.dataset.theme = t; else delete root.dataset.theme;
+    themeButtons.forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.setTheme === (t || ""))); });
+    try { if (t) localStorage.setItem("hz-theme", t); else localStorage.removeItem("hz-theme"); } catch (e) {}
+    measure();
+  }
+  themeButtons.forEach(function (b) { b.addEventListener("click", function () { setTheme(b.dataset.setTheme); }); });
+  setTheme(root.dataset.theme || "");
+
+  /* Playground: product and mode of the component section. */
+  var pg = document.getElementById("playground");
+  document.querySelectorAll("[data-pg]").forEach(function (group) {
+    group.addEventListener("click", function (ev) {
+      var b = ev.target.closest("button"); if (!b) return;
+      group.querySelectorAll("button").forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
+      pg.dataset[group.dataset.pg] = b.dataset.value;
+    });
+  });
+
+  /* Contrast of two tokens, read from the computed colours where they are
+     used, so light-dark() and data-theme are already resolved. */
+  function rgb(el, v) {
+    var probe = document.createElement("span");
+    probe.style.color = "var(--" + v + ")";
+    el.appendChild(probe);
+    var m = getComputedStyle(probe).color.match(/[\d.]+/g).map(Number);
+    probe.remove();
+    return m.slice(0, 3);
+  }
+  function lum(c) {
+    return c.map(function (x) { x /= 255; return x <= 0.03928 ? x / 12.92 : Math.pow((x + 0.055) / 1.055, 2.4); })
+      .reduce(function (a, x, i) { return a + x * [0.2126, 0.7152, 0.0722][i]; }, 0);
+  }
+  function measure() {
+    document.querySelectorAll("[data-contrast]").forEach(function (el) {
+      var v = el.dataset.contrast.split(" ");
+      var a = lum(rgb(el, v[0])), b = lum(rgb(el, v[1]));
+      var r = (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
+      el.textContent = r.toFixed(1).replace(".", ",") + ":1";
+    });
+  }
+  measure();
+})();
+</script>
+</body>
+</html>

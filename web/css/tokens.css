@@ -1,0 +1,77 @@
+{{- /*
+  Horizont tokens as CSS custom properties, generated from tokens/horizont.json
+  (resources.ExecuteAsTemplate in site/layouts/home.html). Edit the JSON, not
+  the output.
+
+  Light and dark through light-dark(): a subtree switches with color-scheme,
+  so a mockup can be dark on a light page ([data-theme]). A product sets its
+  accent on its subtree with [data-product].
+*/ -}}
+{{- $c := .color -}}
+{{- $nl := $c.neutral.light -}}
+{{- $nd := $c.neutral.dark -}}
+:root {
+  color-scheme: light dark;
+{{- range $k, $v := $nl }}
+  --{{ $k }}: light-dark({{ $v }}, {{ index $nd $k }});
+{{- end }}
+{{- range $k, $v := $c.status.light }}
+  --{{ $k }}: light-dark({{ $v }}, {{ index $c.status.dark $k }});
+{{- end }}
+{{- range $k, $v := .font }}
+  --font-{{ $k }}: {{ $v | safeCSS }};
+{{- end }}
+{{- range $k, $v := .space }}
+  --s-{{ $k }}: {{ $v }}px;
+{{- end }}
+{{- range $k, $v := .radius }}
+  --r-{{ $k }}: {{ $v }}px;
+{{- end }}
+{{- range $k, $v := .line }}
+  --line-{{ $k }}: {{ $v }}px;
+{{- end }}
+  --motion-fast: {{ .motion.fast }}ms;
+  --motion-base: {{ .motion.base }}ms;
+  --motion-slow: {{ .motion.slow }}ms;
+  --ease-standard: {{ .motion.standard | safeCSS }};
+  --ease-exit: {{ .motion.exit | safeCSS }};
+{{- range $k, $v := .size }}
+  --size-{{ $k }}: {{ $v }}px;
+{{- end }}
+}
+
+[data-theme="light"] { color-scheme: light; }
+[data-theme="dark"] { color-scheme: dark; }
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --motion-fast: 0ms; --motion-base: 0ms; --motion-slow: 0ms; }
+}
+
+{{ range $p, $d := $c.product }}
+[data-product="{{ $p }}"] {
+{{- range $k, $v := $d.light }}
+  --{{ $k }}: light-dark({{ $v }}, {{ index $d.dark $k }});
+{{- end }}
+{{- with $d.neutralDark }}
+{{- range $k, $v := . }}
+  --{{ $k }}: light-dark({{ index $nl $k }}, {{ $v }});
+{{- end }}
+{{- end }}
+}
+{{ end }}
+
+{{- range $k, $v := .type }}
+.t-{{ $k }} {
+  font-family: var(--font-{{ $v.family }});
+  font-size: {{ div $v.size 16.0 }}rem;
+  line-height: {{ printf "%.4g" (div $v.line $v.size) }};
+  font-weight: {{ $v.weight }};
+  letter-spacing: {{ $v.tracking }}em;
+{{- if eq $v.family "mono" }}
+  font-variant-numeric: tabular-nums;
+{{- end }}
+{{- if $v.upper }}
+  text-transform: uppercase;
+{{- end }}
+}
+{{- end }}
