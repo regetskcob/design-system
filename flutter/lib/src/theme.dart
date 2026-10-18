@@ -47,8 +47,10 @@ ThemeData buildHorizontTheme(
   final pointer = resolvedDensity == HorizontDensity.pointer;
   // Android shows its ripple; Apple platforms, Windows, Linux and the web
   // show no splash, only the press highlight below.
-  final android = target == TargetPlatform.android || target == TargetPlatform.fuchsia;
-  TextStyle t(HzTypeSpec spec, [Color? color]) => horizontTextStyle(spec, color ?? c.text);
+  final android =
+      target == TargetPlatform.android || target == TargetPlatform.fuchsia;
+  TextStyle t(HzTypeSpec spec, [Color? color]) =>
+      horizontTextStyle(spec, color ?? c.text);
 
   final scheme = ColorScheme(
     brightness: brightness,
@@ -109,7 +111,9 @@ ThemeData buildHorizontTheme(
   final hairline = BorderSide(color: c.line, width: HzLine.hairline);
   final outline = BorderSide(color: c.lineStrong, width: HzLine.hairline);
   final buttonText = t(HzType.label).copyWith(fontSize: pointer ? 13 : 15);
-  final buttonPadding = EdgeInsets.symmetric(horizontal: pointer ? HzSpace.s12 : HzSpace.s16);
+  final buttonPadding = EdgeInsets.symmetric(
+    horizontal: pointer ? HzSpace.s12 : HzSpace.s16,
+  );
   final buttonSize = WidgetStatePropertyAll(Size(0, control));
 
   return ThemeData(
@@ -124,9 +128,13 @@ ThemeData buildHorizontTheme(
     dividerColor: c.line,
     platform: platform,
     visualDensity: pointer ? VisualDensity.compact : VisualDensity.standard,
-    materialTapTargetSize: pointer ? MaterialTapTargetSize.shrinkWrap : MaterialTapTargetSize.padded,
+    materialTapTargetSize: pointer
+        ? MaterialTapTargetSize.shrinkWrap
+        : MaterialTapTargetSize.padded,
     splashFactory: android ? InkSparkle.splashFactory : NoSplash.splashFactory,
-    highlightColor: android ? null : c.text.withValues(alpha: dark ? 0.10 : 0.06),
+    highlightColor: android
+        ? null
+        : c.text.withValues(alpha: dark ? 0.10 : 0.06),
     hoverColor: c.text.withValues(alpha: dark ? 0.06 : 0.04),
     pageTransitionsTheme: const PageTransitionsTheme(
       builders: {
@@ -177,7 +185,11 @@ ThemeData buildHorizontTheme(
       surfaceTintColor: Colors.transparent,
       shape: RoundedRectangleBorder(borderRadius: r10, side: outline),
     ),
-    dividerTheme: DividerThemeData(color: c.line, thickness: HzLine.hairline, space: HzLine.hairline),
+    dividerTheme: DividerThemeData(
+      color: c.line,
+      thickness: HzLine.hairline,
+      space: HzLine.hairline,
+    ),
     listTileTheme: ListTileThemeData(
       contentPadding: const EdgeInsets.symmetric(horizontal: HzSpace.s16),
       minVerticalPadding: pointer ? HzSpace.s4 : HzSpace.s8,
@@ -186,7 +198,10 @@ ThemeData buildHorizontTheme(
       iconColor: c.textMuted,
       textColor: c.text,
       titleTextStyle: t(HzType.body),
-      subtitleTextStyle: t(HzType.data, c.textMuted).copyWith(fontSize: 12, height: 16 / 12),
+      subtitleTextStyle: t(
+        HzType.data,
+        c.textMuted,
+      ).copyWith(fontSize: 12, height: 16 / 12),
       selectedColor: c.text,
       selectedTileColor: c.accentTint,
     ),
@@ -200,8 +215,13 @@ ThemeData buildHorizontTheme(
         ),
         textStyle: WidgetStatePropertyAll(buttonText),
         minimumSize: buttonSize,
+        // The size is already the density's control height (28 with a
+        // pointer); compact visual density must not shrink it further.
+        visualDensity: VisualDensity.standard,
         padding: WidgetStatePropertyAll(buttonPadding),
-        shape: const WidgetStatePropertyAll(RoundedRectangleBorder(borderRadius: r6)),
+        shape: const WidgetStatePropertyAll(
+          RoundedRectangleBorder(borderRadius: r6),
+        ),
         elevation: const WidgetStatePropertyAll(0),
       ),
     ),
@@ -210,9 +230,14 @@ ThemeData buildHorizontTheme(
         foregroundColor: WidgetStatePropertyAll(c.text),
         textStyle: WidgetStatePropertyAll(buttonText),
         minimumSize: buttonSize,
+        // The size is already the density's control height (28 with a
+        // pointer); compact visual density must not shrink it further.
+        visualDensity: VisualDensity.standard,
         padding: WidgetStatePropertyAll(buttonPadding),
         side: WidgetStatePropertyAll(BorderSide(color: c.lineStrong)),
-        shape: const WidgetStatePropertyAll(RoundedRectangleBorder(borderRadius: r6)),
+        shape: const WidgetStatePropertyAll(
+          RoundedRectangleBorder(borderRadius: r6),
+        ),
       ),
     ),
     textButtonTheme: TextButtonThemeData(
@@ -220,14 +245,24 @@ ThemeData buildHorizontTheme(
         foregroundColor: WidgetStatePropertyAll(c.accentText),
         textStyle: WidgetStatePropertyAll(buttonText),
         minimumSize: buttonSize,
-        padding: const WidgetStatePropertyAll(EdgeInsets.symmetric(horizontal: HzSpace.s8)),
-        shape: const WidgetStatePropertyAll(RoundedRectangleBorder(borderRadius: r6)),
+        // The size is already the density's control height (28 with a
+        // pointer); compact visual density must not shrink it further.
+        visualDensity: VisualDensity.standard,
+        padding: const WidgetStatePropertyAll(
+          EdgeInsets.symmetric(horizontal: HzSpace.s8),
+        ),
+        shape: const WidgetStatePropertyAll(
+          RoundedRectangleBorder(borderRadius: r6),
+        ),
       ),
     ),
     iconButtonTheme: IconButtonThemeData(
       style: ButtonStyle(
         foregroundColor: WidgetStatePropertyAll(c.accentText),
-        minimumSize: WidgetStatePropertyAll(Size.square(pointer ? HzSize.controlDesktop : HzSize.touch)),
+        minimumSize: WidgetStatePropertyAll(
+          Size.square(pointer ? HzSize.controlDesktop : HzSize.touch),
+        ),
+        visualDensity: VisualDensity.standard,
       ),
     ),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
@@ -244,19 +279,31 @@ ThemeData buildHorizontTheme(
       filled: true,
       fillColor: c.surface,
       isDense: pointer,
-      contentPadding: EdgeInsets.symmetric(horizontal: HzSpace.s12, vertical: pointer ? HzSpace.s8 : HzSpace.s12),
+      contentPadding: EdgeInsets.symmetric(
+        horizontal: HzSpace.s12,
+        vertical: pointer ? HzSpace.s8 : HzSpace.s12,
+      ),
       labelStyle: t(HzType.label),
       floatingLabelStyle: t(HzType.label, c.accentText),
       helperStyle: t(HzType.caption, c.textMuted),
       errorStyle: t(HzType.caption, c.critical),
       hintStyle: t(HzType.body, c.textFaint),
-      border: OutlineInputBorder(borderRadius: r6, borderSide: BorderSide(color: c.lineStrong)),
-      enabledBorder: OutlineInputBorder(borderRadius: r6, borderSide: BorderSide(color: c.lineStrong)),
+      border: OutlineInputBorder(
+        borderRadius: r6,
+        borderSide: BorderSide(color: c.lineStrong),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: r6,
+        borderSide: BorderSide(color: c.lineStrong),
+      ),
       focusedBorder: OutlineInputBorder(
         borderRadius: r6,
         borderSide: BorderSide(color: c.accent, width: HzLine.focus),
       ),
-      errorBorder: OutlineInputBorder(borderRadius: r6, borderSide: BorderSide(color: c.critical)),
+      errorBorder: OutlineInputBorder(
+        borderRadius: r6,
+        borderSide: BorderSide(color: c.critical),
+      ),
       focusedErrorBorder: OutlineInputBorder(
         borderRadius: r6,
         borderSide: BorderSide(color: c.critical, width: HzLine.focus),
@@ -267,7 +314,9 @@ ThemeData buildHorizontTheme(
       selectedColor: c.accentTint,
       labelStyle: t(HzType.label),
       side: outline,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(HzRadius.r2))),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(HzRadius.r2)),
+      ),
       showCheckmark: false,
     ),
     tabBarTheme: TabBarThemeData(
@@ -278,33 +327,47 @@ ThemeData buildHorizontTheme(
       dividerColor: c.line,
       dividerHeight: HzLine.hairline,
       indicatorSize: TabBarIndicatorSize.label,
-      indicator: UnderlineTabIndicator(borderSide: BorderSide(color: c.accent, width: HzLine.selection)),
+      indicator: UnderlineTabIndicator(
+        borderSide: BorderSide(color: c.accent, width: HzLine.selection),
+      ),
       overlayColor: const WidgetStatePropertyAll(Colors.transparent),
     ),
     segmentedButtonTheme: SegmentedButtonThemeData(
       style: ButtonStyle(
         backgroundColor: WidgetStateProperty.resolveWith(
-          (s) => s.contains(WidgetState.selected) ? c.accentTint : Colors.transparent,
+          (s) => s.contains(WidgetState.selected)
+              ? c.accentTint
+              : Colors.transparent,
         ),
         foregroundColor: WidgetStateProperty.resolveWith(
           (s) => s.contains(WidgetState.selected) ? c.text : c.textMuted,
         ),
         textStyle: WidgetStatePropertyAll(t(HzType.label)),
         side: WidgetStatePropertyAll(BorderSide(color: c.lineStrong)),
-        shape: const WidgetStatePropertyAll(RoundedRectangleBorder(borderRadius: r6)),
+        shape: const WidgetStatePropertyAll(
+          RoundedRectangleBorder(borderRadius: r6),
+        ),
         minimumSize: WidgetStatePropertyAll(Size(0, pointer ? 24 : 36)),
       ),
     ),
     switchTheme: SwitchThemeData(
-      thumbColor: WidgetStateProperty.resolveWith((s) => s.contains(WidgetState.selected) ? c.onAccent : c.surface),
-      trackColor: WidgetStateProperty.resolveWith((s) => s.contains(WidgetState.selected) ? c.accent : c.lineStrong),
+      thumbColor: WidgetStateProperty.resolveWith(
+        (s) => s.contains(WidgetState.selected) ? c.onAccent : c.surface,
+      ),
+      trackColor: WidgetStateProperty.resolveWith(
+        (s) => s.contains(WidgetState.selected) ? c.accent : c.lineStrong,
+      ),
       trackOutlineColor: const WidgetStatePropertyAll(Colors.transparent),
     ),
     checkboxTheme: CheckboxThemeData(
-      fillColor: WidgetStateProperty.resolveWith((s) => s.contains(WidgetState.selected) ? c.accent : Colors.transparent),
+      fillColor: WidgetStateProperty.resolveWith(
+        (s) => s.contains(WidgetState.selected) ? c.accent : Colors.transparent,
+      ),
       checkColor: WidgetStatePropertyAll(c.onAccent),
       side: BorderSide(color: c.lineStrong, width: 1.5),
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(HzRadius.r2))),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(HzRadius.r2)),
+      ),
     ),
     progressIndicatorTheme: ProgressIndicatorThemeData(
       color: c.accent,
@@ -327,7 +390,9 @@ ThemeData buildHorizontTheme(
       showDragHandle: true,
       dragHandleColor: c.lineStrong,
       shape: RoundedRectangleBorder(
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(HzRadius.r16)),
+        borderRadius: const BorderRadius.vertical(
+          top: Radius.circular(HzRadius.r16),
+        ),
         side: outline,
       ),
     ),
@@ -347,7 +412,10 @@ ThemeData buildHorizontTheme(
       shape: const RoundedRectangleBorder(borderRadius: r6),
     ),
     tooltipTheme: TooltipThemeData(
-      decoration: BoxDecoration(color: c.text, borderRadius: const BorderRadius.all(Radius.circular(HzRadius.r2))),
+      decoration: BoxDecoration(
+        color: c.text,
+        borderRadius: const BorderRadius.all(Radius.circular(HzRadius.r2)),
+      ),
       textStyle: t(HzType.caption, c.bg),
     ),
     scrollbarTheme: ScrollbarThemeData(
@@ -365,11 +433,14 @@ class _CupertinoSwitch extends Adaptation<SwitchThemeData> {
   final Color accent;
 
   @override
-  SwitchThemeData adapt(ThemeData theme, SwitchThemeData defaultValue) => switch (theme.platform) {
+  SwitchThemeData adapt(ThemeData theme, SwitchThemeData defaultValue) =>
+      switch (theme.platform) {
         TargetPlatform.iOS || TargetPlatform.macOS => SwitchThemeData(
-            trackColor: WidgetStateProperty.resolveWith((s) => s.contains(WidgetState.selected) ? accent : null),
-            thumbColor: const WidgetStatePropertyAll(CupertinoColors.white),
+          trackColor: WidgetStateProperty.resolveWith(
+            (s) => s.contains(WidgetState.selected) ? accent : null,
           ),
+          thumbColor: const WidgetStatePropertyAll(CupertinoColors.white),
+        ),
         _ => defaultValue,
       };
 }

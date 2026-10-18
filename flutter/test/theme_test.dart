@@ -4,31 +4,49 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:horizont/horizont.dart';
 
 void main() {
-  test('every product and brightness carries the extension and a hand-set scheme', () {
-    for (final product in HorizontProduct.values) {
-      for (final brightness in Brightness.values) {
-        final theme = buildHorizontTheme(product, brightness);
-        final ext = theme.extension<HorizontTheme>();
-        expect(ext, isNotNull);
-        expect(ext!.product, product);
-        expect(theme.colorScheme.brightness, brightness);
-        expect(theme.colorScheme.primary, ext.colors.accent);
-        expect(theme.colorScheme.surface, ext.colors.bg);
-        expect(theme.colorScheme.surfaceTint, Colors.transparent);
+  test(
+    'every product and brightness carries the extension and a hand-set scheme',
+    () {
+      for (final product in HorizontProduct.values) {
+        for (final brightness in Brightness.values) {
+          final theme = buildHorizontTheme(product, brightness);
+          final ext = theme.extension<HorizontTheme>();
+          expect(ext, isNotNull);
+          expect(ext!.product, product);
+          expect(theme.colorScheme.brightness, brightness);
+          expect(theme.colorScheme.primary, ext.colors.accent);
+          expect(theme.colorScheme.surface, ext.colors.bg);
+          expect(theme.colorScheme.surfaceTint, Colors.transparent);
+        }
       }
-    }
-  });
+    },
+  );
 
   test('Panzergefecht uses Gelände in the dark only', () {
-    final dark = HorizontColors.resolve(HorizontProduct.panzergefecht, Brightness.dark);
-    final light = HorizontColors.resolve(HorizontProduct.panzergefecht, Brightness.light);
-    final knxDark = HorizontColors.resolve(HorizontProduct.knx, Brightness.dark);
+    final dark = HorizontColors.resolve(
+      HorizontProduct.panzergefecht,
+      Brightness.dark,
+    );
+    final light = HorizontColors.resolve(
+      HorizontProduct.panzergefecht,
+      Brightness.light,
+    );
+    final knxDark = HorizontColors.resolve(
+      HorizontProduct.knx,
+      Brightness.dark,
+    );
     expect(dark.bg, isNot(knxDark.bg));
-    expect(light.bg, HorizontColors.resolve(HorizontProduct.knx, Brightness.light).bg);
+    expect(
+      light.bg,
+      HorizontColors.resolve(HorizontProduct.knx, Brightness.light).bg,
+    );
   });
 
   test('pointer density uses 28 pt controls', () {
-    final touch = buildHorizontTheme(HorizontProduct.knx, Brightness.light).extension<HorizontTheme>()!;
+    final touch = buildHorizontTheme(
+      HorizontProduct.knx,
+      Brightness.light,
+    ).extension<HorizontTheme>()!;
     final pointer = buildHorizontTheme(
       HorizontProduct.knx,
       Brightness.light,
@@ -39,14 +57,22 @@ void main() {
   });
 
   test('lerp interpolates colours and snaps the product', () {
-    final a = buildHorizontTheme(HorizontProduct.knx, Brightness.light).extension<HorizontTheme>()!;
-    final b = buildHorizontTheme(HorizontProduct.jagdaufseher, Brightness.dark).extension<HorizontTheme>()!;
+    final a = buildHorizontTheme(
+      HorizontProduct.knx,
+      Brightness.light,
+    ).extension<HorizontTheme>()!;
+    final b = buildHorizontTheme(
+      HorizontProduct.jagdaufseher,
+      Brightness.dark,
+    ).extension<HorizontTheme>()!;
     expect(a.lerp(b, 0.25).product, HorizontProduct.knx);
     expect(a.lerp(b, 0.75).product, HorizontProduct.jagdaufseher);
     expect(a.lerp(b, 0.5).colors.bg, Color.lerp(a.colors.bg, b.colors.bg, 0.5));
   });
 
-  testWidgets('of() asserts when the theme was not built by Horizont', (tester) async {
+  testWidgets('of() asserts when the theme was not built by Horizont', (
+    tester,
+  ) async {
     await tester.pumpWidget(
       MaterialApp(
         home: Builder(
@@ -60,22 +86,28 @@ void main() {
     expect(tester.takeException(), isAssertionError);
   });
 
-  testWidgets('resolveMotion collapses to zero under reduced motion', (tester) async {
+  testWidgets('resolveMotion collapses to zero under reduced motion', (
+    tester,
+  ) async {
     late Duration full;
     late Duration reduced;
     await tester.pumpWidget(
       Column(
         children: [
-          Builder(builder: (context) {
-            full = resolveMotion(context, HzMotion.base);
-            return const SizedBox();
-          }),
+          Builder(
+            builder: (context) {
+              full = resolveMotion(context, HzMotion.base);
+              return const SizedBox();
+            },
+          ),
           MediaQuery(
             data: const MediaQueryData(disableAnimations: true),
-            child: Builder(builder: (context) {
-              reduced = resolveMotion(context, HzMotion.base);
-              return const SizedBox();
-            }),
+            child: Builder(
+              builder: (context) {
+                reduced = resolveMotion(context, HzMotion.base);
+                return const SizedBox();
+              },
+            ),
           ),
         ],
       ),
@@ -85,35 +117,90 @@ void main() {
   });
 
   group('native feel per platform', () {
-    ThemeData build(TargetPlatform p) => buildHorizontTheme(HorizontProduct.knx, Brightness.light, platform: p);
+    ThemeData build(TargetPlatform p) =>
+        buildHorizontTheme(HorizontProduct.knx, Brightness.light, platform: p);
 
     test('Android keeps its ripple, the others only the press highlight', () {
-      expect(build(TargetPlatform.android).splashFactory, InkSparkle.splashFactory);
-      for (final p in [TargetPlatform.iOS, TargetPlatform.macOS, TargetPlatform.windows, TargetPlatform.linux]) {
+      expect(
+        build(TargetPlatform.android).splashFactory,
+        InkSparkle.splashFactory,
+      );
+      for (final p in [
+        TargetPlatform.iOS,
+        TargetPlatform.macOS,
+        TargetPlatform.windows,
+        TargetPlatform.linux,
+      ]) {
         expect(build(p).splashFactory, NoSplash.splashFactory, reason: p.name);
       }
     });
 
     test('native page transitions with their back gestures', () {
-      final android = build(TargetPlatform.android).pageTransitionsTheme.builders;
+      final android = build(
+        TargetPlatform.android,
+      ).pageTransitionsTheme.builders;
       final ios = build(TargetPlatform.iOS).pageTransitionsTheme.builders;
-      expect(android[TargetPlatform.android], isA<PredictiveBackPageTransitionsBuilder>());
+      expect(
+        android[TargetPlatform.android],
+        isA<PredictiveBackPageTransitionsBuilder>(),
+      );
       expect(ios[TargetPlatform.iOS], isA<CupertinoPageTransitionsBuilder>());
       expect(ios[TargetPlatform.macOS], isA<CupertinoPageTransitionsBuilder>());
     });
 
     test('desktops get pointer density by default, phones touch', () {
-      expect(build(TargetPlatform.macOS).extension<HorizontTheme>()!.density, HorizontDensity.pointer);
-      expect(build(TargetPlatform.windows).extension<HorizontTheme>()!.density, HorizontDensity.pointer);
-      expect(build(TargetPlatform.iOS).extension<HorizontTheme>()!.density, HorizontDensity.touch);
-      expect(build(TargetPlatform.android).extension<HorizontTheme>()!.density, HorizontDensity.touch);
+      expect(
+        build(TargetPlatform.macOS).extension<HorizontTheme>()!.density,
+        HorizontDensity.pointer,
+      );
+      expect(
+        build(TargetPlatform.windows).extension<HorizontTheme>()!.density,
+        HorizontDensity.pointer,
+      );
+      expect(
+        build(TargetPlatform.iOS).extension<HorizontTheme>()!.density,
+        HorizontDensity.touch,
+      );
+      expect(
+        build(TargetPlatform.android).extension<HorizontTheme>()!.density,
+        HorizontDensity.touch,
+      );
     });
 
     test('Cupertino widgets take the accent but keep the system font', () {
       final theme = build(TargetPlatform.iOS);
       final cupertino = MaterialBasedCupertinoThemeData(materialTheme: theme);
-      expect(cupertino.primaryColor, theme.extension<HorizontTheme>()!.colors.accent);
+      expect(
+        cupertino.primaryColor,
+        theme.extension<HorizontTheme>()!.colors.accent,
+      );
       expect(cupertino.textTheme.textStyle.fontFamily, isNot(HzFont.sans));
     });
+  });
+
+  testWidgets('with a pointer, buttons keep the 28 pt control height', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: buildHorizontTheme(
+          HorizontProduct.knx,
+          Brightness.light,
+          density: HorizontDensity.pointer,
+        ),
+        home: Scaffold(
+          body: Center(
+            child: OutlinedButton(
+              onPressed: () {},
+              child: const Text('Kopieren'),
+            ),
+          ),
+        ),
+      ),
+    );
+    expect(
+      tester.getSize(find.byType(OutlinedButton)).height,
+      greaterThanOrEqualTo(HzSize.controlDesktop),
+    );
   });
 }
