@@ -104,13 +104,15 @@ class _Tab extends StatelessWidget {
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(
-              horizontal: HzSpace.s8,
+              horizontal: HzSpace.s4,
               vertical: HzSpace.s4,
             ),
             // The selection is a light tint behind icon and word, radius 6
             // (no pill); the icon is larger and in the accent.
             child: Center(
-              // The tint hugs icon and word instead of filling the slot.
+              // The tint hugs icon and word instead of filling the slot; it
+              // never takes more height than its content.
+              heightFactor: 1,
               child: DecoratedBox(
                 decoration: BoxDecoration(
                   color: selected ? c.accentTint : null,
@@ -120,7 +122,7 @@ class _Tab extends StatelessWidget {
                 ),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
-                    horizontal: HzSpace.s16,
+                    horizontal: HzSpace.s12,
                     vertical: HzSpace.s4,
                   ),
                   child: Column(

@@ -113,4 +113,23 @@ void main() {
       );
     },
   );
+
+  testWidgets('the tab bar is only as tall as its tabs', (tester) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: buildHorizontTheme(HorizontProduct.knx, Brightness.light),
+        home: Scaffold(
+          bottomNavigationBar: HorizontTabBar(
+            destinations: const [
+              HorizontDestination(icon: HorizontSymbols.home, label: 'A'),
+              HorizontDestination(icon: HorizontSymbols.map, label: 'B'),
+            ],
+            selectedIndex: 0,
+            onSelected: (_) {},
+          ),
+        ),
+      ),
+    );
+    expect(tester.getSize(find.byType(HorizontTabBar)).height, lessThan(120));
+  });
 }
