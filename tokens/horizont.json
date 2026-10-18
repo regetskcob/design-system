@@ -1,6 +1,6 @@
 {
   "_comment": "Horizont, das Designsystem von regetskcob und seinen Projekten. Einzige Quelle der Tokens: die Dokumentation (site/layouts/home.html) und die CSS-Schicht (web/css/tokens.css) lesen sie hier, Generatoren fuer Flutter und Swift sollen es ebenso tun. Farben je light und dark, beide von Hand gesetzt, nie aus einem Seed abgeleitet.",
-  "version": "0.1",
+  "version": "0.2",
   "color": {
     "neutral": {
       "light": {
@@ -92,10 +92,10 @@
           "accent-text": "#2F5D3A"
         },
         "dark": {
-          "accent": "#8FC49B",
+          "accent": "#6CCB8A",
           "on-accent": "#0F1A12",
           "accent-tint": "#1C2A1F",
-          "accent-text": "#9FD0AA"
+          "accent-text": "#7ED399"
         },
         "icon": {
           "field": "#2F5D3A",

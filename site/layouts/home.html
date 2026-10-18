@@ -168,7 +168,7 @@
       {{- end }}
     </div>
     <dl class="doc-facts">
-      <dt>Zwei Grün</dt><dd>Tanne und Bus liegen beide im Grün, mit Absicht: Jagd ist Wald, und KNX ist das grüne Buskabel und eine schon eingeführte Marke. Unterschieden werden sie über den Ton (135° gegen 95°) und die Helligkeit. Im Icon trägt Tanne eine helle Linie auf dunklem Feld, Bus eine dunkle Linie auf hellem Feld. Ein Wechsel von KNX auf Blau wäre deutlicher, kostet aber die Wiedererkennung.</dd>
+      <dt>Zwei Grün</dt><dd>Tanne und Bus liegen beide im Grün, so entschieden: Jagd ist Wald, und KNX ist das grüne Buskabel und eine schon eingeführte Marke. Unterschieden werden sie über den Ton (Tanne um 140°, Bus um 90°) und den Charakter. Tanne ist im Hellen ein tiefes Waldgrün und im Dunkeln ein leuchtendes Grün, Bus ein gelbliches Lime. Im Icon trägt Tanne eine helle Linie auf dunklem Feld, Bus eine dunkle Linie auf hellem Feld.</dd>
       <dt>Tinte</dt><dd>Die Dachmarke hat keine Farbe. Der Blog bleibt schwarzweiß, die Bilder bringen die Farbe mit.</dd>
     </dl>
 
@@ -205,7 +205,7 @@
       <div class="doc-voice"><span class="t-kennung hz-kennung">Messen</span><div class="big" style="font-family:var(--font-mono)">0/1/2</div><b>Monaspace Argon</b><p class="hz-muted t-callout">Werte, Zeiten, Adressen, Kennungen, Koordinaten. Immer mit Tabellenziffern. Schon im Blog.</p></div>
     </div>
     <p style="margin-top:24px">Mona Sans und Monaspace kommen von denselben Gestaltern (GitHub Next), sie teilen Proportionen und Strichstärke. Beide stehen unter der SIL Open Font License, ebenso Literata. Alle drei werden gebündelt, nie aus dem Netz geladen.</p>
-    <p class="hz-muted t-callout">Hinweis zum Entwurf: Mona Sans liegt noch nicht im Repository, die Seite zeigt so lange die Systemschrift (SF Pro auf dem Mac).</p>
+    <p class="hz-muted t-callout">Mona Sans ist die Bedienschrift (SIL OFL 1.1, auch gewerblich frei). Bis sie gebündelt ist, zeigt die Seite die Systemschrift (SF Pro auf dem Mac).</p>
     <table class="doc-scale">
       {{- range slice "display" "headline" "title-1" "title-2" "title-3" "reading" "body" "callout" "label" "caption" "data" "kennung" }}
       {{- $t := index $hz.type . }}
@@ -640,7 +640,7 @@
     <h2 class="t-headline">Was danach käme.</h2>
     <p>Diese Seite und die Tokens kommen aus dem Repository <a href="https://github.com/regetskcob/design-system">design-system</a>. Die Apps und ihre Landingpages sind noch unverändert.</p>
     <ol class="doc-todo">
-      <li><span><b>Offene Entscheidungen.</b> Die zwei Grün, Mona Sans, Kennung über dem Titel statt Large Title, Gelände als Ausnahme.</span></li>
+      <li><span><b>Entscheidungen, erledigt.</b> Zwei Grün bleiben (Tanne dunkel leuchtender), Mona Sans, Kennung über dem Titel statt Large Title, Gelände als Ausnahme.</span></li>
       <li><span><b>Schriften bündeln.</b> Mona Sans laden (OFL), Literata und Monaspace als TTF für Flutter, Material Symbols Sharp als Subset.</span></li>
       <li><span><b>Flutter-Paket <span class="hz-mono">horizont</span>.</b> Tokens aus <span class="hz-mono">tokens/horizont.json</span> generiert, ThemeExtension, ColorScheme von Hand je Produkt und Modus. Eingebunden per Git-Abhängigkeit in alle drei Apps.</span></li>
       <li><span><b>Pro App eine Umstellung.</b> Theme ersetzen, harte Farben (Zustand, Priorität, Ort) auf Status-Tokens, Radien auf die Skala. KNX Monitor zuerst, es hat schon Tokens.</span></li>

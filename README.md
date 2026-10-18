@@ -5,7 +5,7 @@ und Panzergefecht. Leitbild: minimalistisch wie die niederrheinische Feldflur.
 
 Dokumentation und Entwürfe: https://www.regetskcob.de/design-system/
 
-Stand: Entwurf v0.1. Die Apps und ihre Landingpages nutzen das System noch nicht.
+Stand: v0.2, die Grundentscheidungen sind getroffen (#1). Die Apps und ihre Landingpages nutzen das System noch nicht.
 
 Wer Oberflächen umsetzt, ob Mensch oder Claude-Sitzung, beginnt mit
 [CLAUDE.md](CLAUDE.md) (Leitbild, Regeln, Tokens, offene Entscheidungen,

@@ -61,7 +61,7 @@ wird daher für alle Formfaktoren mitgedacht, nicht nur für das Telefon.
   Abschnitte, IDs und Lagen, etwa `EINRICHTUNGEN · 14`, `HEGERING NORD ·
   412 HA` oder `01 — IN ENTWICKLUNG`. Sie ersetzt Eyebrow-Pillen und
   Abschnittstitel. Über dem Seitentitel steht eine Kennung statt eines Large
-  Title.
+  Title (entschieden, siehe unten).
 - **Auswahl ist eine Linie:** 2 px im Akzent, unter dem aktiven Tab bzw.
   über ihm in der Tab-Bar, links an der gewählten Zeile, unten im Segment.
   Nie eine Pille als Indikator. Ein Tint (`accent-tint`) darf dazukommen.
@@ -93,7 +93,7 @@ oder Seite schreiben.
   | Produkt | Akzent | hell | dunkel |
   | --- | --- | --- | --- |
   | regetskcob | Tinte | #1B1C19 | #E7E7E0 |
-  | Jagdaufseher | Tanne | #2F5D3A | #8FC49B |
+  | Jagdaufseher | Tanne | #2F5D3A | #6CCB8A |
   | KNX Monitor | Bus | #437F18 | #9BD45E |
   | Panzergefecht | Signalgelb | #8F6400 | #FFB300 |
 
@@ -163,17 +163,25 @@ Perspektive, kein Schatten, nur Schwarz und Aluminium. Titelleisten und
 Steuerelemente im Rahmen haben die Größe, die sie auf dem echten Bildschirm
 hätten.
 
-## Offene Entscheidungen
+## Entscheidungen (v0.2)
 
-Diese Punkte entscheidet der Nutzer. Nicht eigenmächtig festlegen, sondern
-nachfragen:
+Vom Nutzer entschieden (regetskcob/design-system#1). Nicht wieder aufmachen,
+ohne zu fragen:
 
-- **Mona Sans** ist noch nicht gebündelt. Bis zur Freigabe die Systemschrift
-  verwenden (SF Pro, Roboto).
-- **Zwei Grün:** Tanne und Bus bleiben vorerst. Ein Wechsel von KNX auf Blau
-  ist besprochen, aber nicht beschlossen.
-- **Kennung statt Large Title auf iOS** ist Entwurf.
-- Die Freigabe der **Gelände-Ausnahme** für Panzergefecht steht aus.
+- **Zwei Grün bleiben.** Tanne für Jagdaufseher, Bus (Lime) für KNX Monitor.
+  Im Dunkeln trägt Jagdaufseher ein leuchtendes Grün (#6CCB8A, Text
+  #7ED399), kein blasses Mint.
+- **Mona Sans** ist die Bedienschrift (SIL OFL 1.1, kostenlos, auch
+  gewerblich und gebündelt in Apps nutzbar, nur nicht allein verkäuflich).
+  Bis sie gebündelt ist (regetskcob/design-system#2), fällt alles auf die
+  Systemschrift zurück.
+- **Kennung statt Large Title auf iOS:** über dem kleinen Titel steht eine
+  Kennung, der große iOS-Titel wird nicht genutzt.
+- **Gelände** ist als einzige Ausnahme freigegeben: Panzergefecht hat im
+  Dunkeln eigene Neutrale.
+
+Neue offene Fragen kommen als Issue mit dem Label `question` und werden vom
+Nutzer entschieden, nicht von der Sitzung.
 
 ## Arbeitsweise in diesem Repository
 
