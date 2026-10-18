@@ -57,7 +57,10 @@ wird daher für alle Formfaktoren mitgedacht, nicht nur für das Telefon.
    nativ anfühlen: Das Paket hält Rückmeldung, Übergänge, Zurück-Gesten,
    Dichte und adaptive Widgets nativ (`docs/flutter.md`, „Plattformgefühl“),
    und die App baut keine Systemdialoge nach. Bewusst abweichend sind nur
-   Mona Sans, die Kennung mit linkem Titel und die Auswahl als Linie.
+   Mona Sans, die Kennung mit linkem Titel, die Auswahl als Linie, die
+   Tab-Bar unten mit Tönung statt Linie und die Hauptaktion als FAB auch
+   auf iOS (in der Leiste des iPhones war sie kaum lesbar). Alle fünf sind
+   entschieden, siehe unten.
 
 ## Erkennungszeichen
 
@@ -70,9 +73,13 @@ wird daher für alle Formfaktoren mitgedacht, nicht nur für das Telefon.
 - **Auswahl ist eine Linie:** 2 px im Akzent, unter dem aktiven Tab, links
   an der gewählten Zeile, unten im Segment. Nie eine Pille als Indikator.
   Ein Tint (`accent-tint`) darf dazukommen. Ausnahme Tab-Bar unten: dort
-  liegt das gewählte Ziel auf `accent-tint` (Radius 6), das Icon größer und
-  im Akzent, ohne Linie (entschieden, siehe unten).
+  liegt das gewählte Ziel auf `accent-tint` (Radius 6, die Tönung umschließt
+  Icon und Wort), das Icon 24 in `accent-text`, das Wort halbfett in `text`,
+  ohne Linie (entschieden, siehe unten).
 - **Fokus:** 2 px Akzent mit 2 px Abstand, auf dem Fernseher 3 px.
+- **Felder:** Die Beschriftung steht über dem Feld (`label`, 13/16, 500, in
+  `text`), nie schwebend im Rahmen; darunter höchstens eine Hilfezeile
+  (Flutter `HorizontField`, Web `.hz-field`).
 - **Lockup:** Steht eine Marke neben einem Namen, liegt ihre Horizontlinie
   auf der Grundlinie des Textes (web: `.hz-lockup`). Marke und Text nie
   mittig zueinander ausrichten.
@@ -89,9 +96,15 @@ nur dort werden sie geändert. Nie Farben, Größen oder Zeiten hart in eine App
 oder Seite schreiben.
 
 - **Neutrale** (hell/dunkel): `bg`, `surface`, `sunken`, `line`,
-  `line-strong`, `text`, `text-muted`, `text-faint` (nur dekorativ, kein
+  `line-strong` (der Umriss, mindestens 3:1 zu `bg`, `surface` und
+  `sunken`), `text`, `text-muted`, `text-faint` (nur dekorativ, kein
   Lesetext). Sie haben einen Hauch Oliv, kein reines Grau.
-- **Status:** `positive`, `warning`, `critical`, `info`, jeweils mit `-tint`.
+- **Status:** `positive`, `warning`, `critical`, `info`, jeweils mit `-tint`,
+  dazu `on-critical` (Schrift auf einer Fläche in `critical`).
+- **Daten:** `color.data` ist eine sequenzielle Rampe in fünf Stufen (ein
+  Ton, wenig nach viel) für Heatmaps und Dichten, im Dunkeln umgekehrt
+  verankert. Sie ist weder Akzent noch Status; der Wert steht immer auch in
+  Legende oder Beschriftung. Serienfarben von Diagrammen gehören der App.
 - **Produkte** (`color.product.<id>`, ids `regetskcob`, `jagdaufseher`,
   `knx`, `panzergefecht`): `accent` (Fläche der Hauptaktion), `on-accent`,
   `accent-tint` (Auswahl-Hintergrund), `accent-text` (Text, Links, Linien,
@@ -108,7 +121,9 @@ oder Seite schreiben.
   Produkt eingebettet, etwa das KNX-Monitor-Add-on in Home Assistants
   Ingress, nimmt es die Neutralen des Gastgebers
   (`buildHorizontTheme(…, host: HorizontHost.homeAssistant)`). Akzent,
-  Status, Schrift und Linien bleiben Horizont.
+  Status, Schrift und Linien bleiben Horizont. Gastgeber gibt es nur in
+  Flutter: Eingebettet läuft die App, keine Hugo-Seite, deshalb kennt
+  `web/css/tokens.css` kein `[data-host]`.
 - **Gelände:** Panzergefecht hat im Dunkeln eigene, olivgetönte Neutrale
   (`neutralDark`). Das ist die einzige Ausnahme, und sie gilt nur für die
   Neutralen. Spielwelt-Farben (Teams, Tarnanstriche, Kartengelände) gehören
@@ -128,15 +143,25 @@ oder Seite schreiben.
   rund sein muss (Schalter, Ortspunkt, Avatar). Keine Pillen-Knöpfe, keine
   Pillen-Chips.
 - **Linien:** 1 px Haarlinie, 2 px Auswahl und Fokus. Ein Umriss, eine
-  Farbe: Alles mit Rahmen (Karte, Feld, Knopf, Segment, Chip, Dialog, Sheet,
-  Menü) trägt die Haarlinie in `line-strong`. `line` trennt nur Zeilen und
-  Abschnitte (Listen, Kopf- und Fußlinien). So stehen Karte und Feld
-  nebeneinander gleich ruhig.
+  Farbe: Alles mit Rahmen (Karte, Feld, Knopf, Segment, Chip,
+  Kontrollkästchen, Dialog, Sheet, Menü) trägt die Haarlinie in
+  `line-strong`, ebenso die Spur des ausgeschalteten Schalters.
+  `line-strong` hat mindestens 3:1 zu jeder Fläche, damit Felder und Knöpfe
+  als Bedienelement erkennbar sind (WCAG 1.4.11). `line` trennt nur Zeilen
+  und Abschnitte (Listen, Kopf- und Fußlinien) und bleibt leise. So stehen
+  Karte und Feld nebeneinander gleich.
 - **Bewegung:** 120 / 200 / 320 ms, Kurve `cubic-bezier(0.2, 0, 0, 1)`, ohne
   Federn. Bei reduzierter Bewegung 0.
 - **Größen:** Tippziel 44, Zeile 44, dichte Zeile 28. Mit Zeiger (Mac,
   Web-App am Rechner) sind Steuerelemente 24 bis 28 hoch
-  (`control-desktop`), die Werkzeugleiste 52 (`toolbar-desktop`).
+  (`control-desktop`), die Werkzeugleiste 52 (`toolbar-desktop`). Breiten:
+  Lesespalte 720 (`text-column`), Seite 1120 (`page`), Formular 400
+  (`form`), Suche in der Titelzeile 320 (`search`), Seitenleiste 240
+  (`sidebar`; mit Zeiger darf sie bis 200 schmal werden, `rail`), Inspektor
+  300 (`inspector`), Karte im Raster mindestens 240 (`grid-card`).
+- **Symbolgrößen** (`icon-size`): 14 im Status-Badge, 16 in einer
+  Textzeile, 18 in Zeilen und Seitenleisten, 22 in Leisten und Knöpfen, 24
+  in der Tab-Bar.
 - **Fenstergrößen:** kompakt < 600, mittel < 840, erweitert < 1200, groß ab
   1200. Gebaut wird nach verfügbarer Breite, nie nach Gerät.
 - **Geräterahmen:** Hardwarefarben unter `device`.
@@ -146,8 +171,8 @@ oder Seite schreiben.
 | Gerät | Aufteilung |
 | --- | --- |
 | iPhone (kompakt) | Kopf mit Kennung und kleinem Titel, höchstens eine Kennzahlenleiste, Abschnitte mit Kennzeile, Tab-Bar mit 3 bis 5 Zielen. Die eine Hauptaktion als FAB (alle Touch-Plattformen), am Telefon nur mit Symbol, ab 600 mit Wort. |
-| iPad (mittel/erweitert) | Hauptaktion als FAB wie am Telefon. Seitenleiste statt Tab-Bar, Kennzahlen am Fuß der Seitenleiste, Inhalt in der Mitte, Inspektor rechts (quer). Ebenen und Werkzeuge sitzen auf einer Fläche mit Haarlinie. Ausnahme: wenige gleichrangige Ansichten eines Inhalts (KNX Monitor: Übersicht, Objekte, Live) bleiben unten als Tab-Bar, das Menü wird zur einklappbaren Seitenleiste (entschieden, siehe unten). |
-| Mac (groß) | Werkzeugleiste 52 mit Umschalter, Suche und der Hauptaktion (kein FAB mit Zeiger), Seitenleiste 200 bis 240 mit Kennungen, Inhalt als Raster aus Karten (mindestens 240), Inspektor 280 bis 320. Dichte Zeilen, Tastatur zuerst. |
+| iPad (mittel/erweitert) | Hauptaktion als FAB, ab 600 mit Wort. Seitenleiste statt Tab-Bar, Kennzahlen am Fuß der Seitenleiste, Inhalt in der Mitte, Inspektor rechts (quer). Ebenen und Werkzeuge sitzen auf einer Fläche mit Haarlinie. Ausnahme: wenige gleichrangige Ansichten eines Inhalts (KNX Monitor: Übersicht, Objekte, Live) bleiben unten als Tab-Bar, das Menü wird zur einklappbaren Seitenleiste (entschieden, siehe unten). |
+| Mac (groß) | Werkzeugleiste 52 mit Umschalter, Suche und der Hauptaktion (kein FAB mit Zeiger), Seitenleiste 200 bis 240 mit Kennungen, Inhalt als Raster aus Karten (mindestens 240), Inspektor 300. Dichte Zeilen, Tastatur zuerst. |
 | Apple TV | Sicherer Rand 60/80, Schrift × 1,5. Titel mit Kennung, ein Regal aus großen Kacheln, unten Details und eine Aktion. Fokus: Kachel +6 % und Akzentring. HUD im Spiel nur in den Ecken, die Mitte bleibt frei. |
 | Apple Watch | Uhrzeit oben rechts, ein Wert groß in Mono, eine Aktion. Die Krone blättert. Fläche schwarz oder Gelände. |
 | Landingpage | „Feldseite“: Kopf mit Lockup, Hero links mit Kennung und Literata-Überschrift, rechts das Produkt im Geräterahmen, darunter die Horizontlinie (2 px Akzent), nummerierte Abschnitte mit Kennung links und Fakten in Mono, Fuß „ein Projekt von regetskcob“. Kein zentrierter Hero, kein Kachelraster, keine Badge-Pille. |
@@ -179,7 +204,9 @@ Einrichtungen.
   (`flutter/fonts/MaterialSymbolsSharp-300.ttf`,
   `web/fonts/MaterialSymbols/…woff2`). Es enthält genau die Namen aus
   `icons/material-symbols.txt`, die Codepoints stehen in
-  `icons/material-symbols.json`. Fehlt ein Symbol: Namen in die Liste
+  `icons/material-symbols.json`. Eine Zeile `name:fill` nimmt die gefüllte
+  Form dazu (`name_fill`, etwa `star_fill`, `push_pin_fill`); gefüllt heißt
+  „an“ (angeheftet, Favorit), nie Zierde. Fehlt ein Symbol: Namen in die Liste
   eintragen, dann `tool/build_symbols.py` neu laufen lassen (Anleitung im
   Kopf der Datei). Nie den ganzen Font bündeln. Die SVGs in
   `web/partials/icons.html` sind Platzhalter der Doku.
@@ -211,13 +238,20 @@ ohne zu fragen:
   Dunkeln eigene Neutrale.
 - **Tab-Bar mit Tönung statt Linie** (entschieden bei KNX Monitor): Die
   2-px-Linie über dem gewählten Tab wirkte am Gerät wie ein Fehler. Das
-  gewählte Ziel liegt auf `accent-tint` (Radius 6, keine Pille), Icon 24
-  im Akzent, Wort halbfett.
+  gewählte Ziel liegt auf `accent-tint` (Radius 6, keine Pille), die Tönung
+  umschließt Icon und Wort und füllt nicht das ganze Feld. Icon 24 in
+  `accent-text`, Wort halbfett in `text`.
 - **Hauptaktion als FAB auf Touch** (entschieden bei der Umstellung von KNX
   Monitor, regetskcob/KNX-Monitor#23): Auf Telefon und Tablet steht die eine
-  Hauptaktion als schwebender Knopf mit Wort, auf iOS wie auf Android. Oben
-  in der Leiste neben Kennung, Titel und Symbolen war sie am iPhone kaum
-  lesbar. Mit Zeiger (Mac, Windows, Linux) sitzt sie in der Werkzeugleiste.
+  Hauptaktion als schwebender Knopf, auf iOS wie auf Android. Oben in der
+  Leiste neben Kennung, Titel und Symbolen war sie am iPhone kaum lesbar.
+  Unter 600 ist der FAB quadratisch (56) mit Symbol und Tooltip, ab 600
+  `extended` mit Wort. Mit Zeiger (Mac, Windows, Linux) sitzt sie in der
+  Werkzeugleiste, kein FAB.
+- **Ein Umriss mit 3:1** (entschieden für v0.6.1): `line-strong` wurde
+  dunkler, statt einen eigenen Rand für Bedienelemente einzuführen. Karten,
+  Dialoge und Sheets tragen damit dieselbe, kräftigere Linie wie Felder und
+  Knöpfe; die eine Umrissfarbe bleibt.
 
 ## Entscheidungen aus KNX Monitor (v0.6.0 und danach)
 
@@ -225,11 +259,11 @@ KNX Monitor ist die erste App auf Horizont. Was der Nutzer dort am Gerät
 entschieden hat, gilt für alle folgenden Apps. Die Muster dazu mit Code
 stehen in [docs/flutter.md](docs/flutter.md), „Referenz: KNX Monitor“.
 
-- **FAB am Telefon nur mit Symbol.** Unter 600 ist der FAB quadratisch (56)
-  mit Symbol und Tooltip, ab 600 `extended` mit Wort. Ein Umschalter, der
-  neben der Hauptaktion im FAB-Platz steht (Pause), trägt nie ein Wort.
-  Beide stehen in einer Flucht und gleich hoch. Während eine Suche den Fokus
-  hat, verschwinden sie.
+- **FAB am Telefon nur mit Symbol** (die Regel steht oben unter
+  „Hauptaktion als FAB auf Touch“). Ein Umschalter, der neben der
+  Hauptaktion im FAB-Platz steht (Pause), trägt nie ein Wort. Beide stehen
+  in einer Flucht und gleich hoch. Während eine Suche den Fokus hat,
+  verschwinden sie.
 - **Ansichten unten, Menü links.** Hat ein Bildschirm wenige gleichrangige
   Ansichten desselben Inhalts, bleiben sie auch auf dem Tablet unten als
   Tab-Bar. Das Menü (Werkzeuge, Daten) wird ab 600 zur Seitenleiste links,
@@ -248,7 +282,9 @@ stehen in [docs/flutter.md](docs/flutter.md), „Referenz: KNX Monitor“.
   außen wirkt und sich nicht zurücknehmen lässt (KNX: Aufnahme auf den Bus
   senden), steht nie als Hauptaktion im Akzent. Sie zeigt vorher einen
   Hinweis (warning) und fragt mit `showAdaptiveDialog` nach. Ihr Knopf ist
-  ein `FilledButton` in `critical`, der Bestätigungsknopf `destructive`.
+  ein `FilledButton` in `critical` mit Schrift in `on-critical`
+  (`HorizontTheme.of(context).criticalButton`), der Bestätigungsknopf
+  `destructive` (`horizontDialogAction(…, destructive: true)`).
 - **Auswahl auf Karten:** Eine gewählte Karte trägt 2 px Akzent als Umriss
   und `accent-tint` als Fläche, dazu ein Häkchen oben rechts. Das ist die
   „Auswahl ist eine Linie“ für Karten, keine Ausnahme.
@@ -279,8 +315,10 @@ Nutzer entschieden, nicht von der Sitzung.
   fehl, wird der Token korrigiert, nicht der Test. Goldens nach einer
   bewussten Änderung mit `cd flutter/example && flutter test
   --update-goldens` neu erzeugen und ansehen.
+- Jede Änderung, die Apps oder Seiten betrifft, kommt in
+  [CHANGELOG.md](CHANGELOG.md) unter die nächste Version.
 - Versionen: Tokens (`version` im JSON), Paket (`flutter/pubspec.yaml`) und
-  Git-Tag (`v0.6.0`) laufen gemeinsam. Die Apps hängen an einem Tag, nie an
+  Git-Tag (`v0.6.1`) laufen gemeinsam. Die Apps hängen an einem Tag, nie an
   `main`. Hugo hängt die
   Ordner per `module.mounts` ein (`hugo.toml`).
 - Lokal ansehen:
@@ -299,8 +337,9 @@ Nutzer entschieden, nicht von der Sitzung.
   `hz-kennung`, `hz-badge`, `hz-symbol`, `hz-facts`) zusammen, nie aus
   nachgebautem HTML. Die Mounts stehen in `docs/web.md`. Fehlt ein Baustein,
   kommt er hierher, nicht in die Seite.
-- **Wer Horizont nutzt:** der Blog (Hugo-Modul, `hugo mod get
-  github.com/regetskcob/horizont@main`) und die Vorschau unter
+- **Wer Horizont nutzt:** der Blog (Hugo-Modul, in `go.mod` auf einen Tag
+  gepinnt, derzeit v0.5.0; heben mit `hugo mod get
+  github.com/regetskcob/horizont@v0.6.1`) und die Vorschau unter
   `/preview/` (Repository `regetskcob/preview`). KNX Monitor (App und
   Landingpage) hängt an v0.6.0 und ist die Referenz für die anderen Apps;
   Jagdaufseher und Panzergefecht folgen, siehe

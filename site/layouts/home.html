@@ -100,7 +100,7 @@
       <li><strong>Eine Farbe pro Produkt</strong><span>Alles ist Papier und Tinte. Der Akzent markiert die Hauptaktion und die Auswahl, sonst nichts.</span></li>
       <li><strong>Drei Stimmen</strong><span>Literata für das, was man liest. Mona Sans für das, was man bedient. Monaspace für das, was gemessen wird.</span></li>
       <li><strong>Zustand nie nur als Farbe</strong><span>Jeder Status hat Wort, Form und Farbe. Er funktioniert in Graustufen, in der Sonne und bei Rotgrünschwäche.</span></li>
-      <li><strong>Plattform ja, Mode nein</strong><span>Navigation, Gesten und Systemdialoge folgen iOS, Android und macOS. Farbe, Schrift, Linie und Ton folgen Horizont.</span></li>
+      <li><strong>Plattform ja, Mode nein</strong><span>Navigation, Gesten und Systemdialoge folgen iOS, Android und macOS. Farbe, Schrift, Linie und Ton folgen Horizont. Bewusst anders sind nur fünf entschiedene Dinge: Mona Sans, die Kennung über dem Titel, die Auswahl als Linie, die getönte Tab-Bar und die Hauptaktion als FAB auch auf iOS.</span></li>
     </ol>
   </div>
 </section>
@@ -171,6 +171,10 @@
     </div>
     {{- end }}
 
+    <dl class="doc-facts">
+      <dt>Umriss</dt><dd><span class="hz-mono">line-strong</span> ist der eine Umriss von Feld, Knopf, Segment, Schalter, Karte und Dialog. Er hat mindestens 3:1 zu jeder Fläche, damit ein Feld als Bedienelement erkennbar ist (WCAG 1.4.11): hell <span data-theme="light" data-contrast="line-strong bg"></span>, dunkel <span data-theme="dark" data-contrast="line-strong bg"></span> auf <span class="hz-mono">bg</span>. <span class="hz-mono">line</span> trennt nur Zeilen und Abschnitte und bleibt leise.</dd>
+    </dl>
+
     <h3 class="t-title-3">Akzente</h3>
     <p>Pro Produkt genau einer. <span class="hz-mono">accent</span> füllt die Hauptaktion, <span class="hz-mono">accent-text</span> ist die Variante für Text und Linien (mindestens 4,5:1), <span class="hz-mono">accent-tint</span> hinterlegt die Auswahl. Die Kontrastwerte rechnet die Seite live aus den Tokens.</p>
     <div class="doc-accents">
@@ -205,6 +209,16 @@
         <span class="hz-badge hz-badge--info"><svg><use href="#i-info"/></svg>Hinweis</span>
         <span class="hz-badge"><svg><use href="#i-dot"/></svg>Unbekannt</span>
       </div></div>
+      {{- end }}
+    </div>
+
+    <p class="hz-muted t-callout">Auf einer Fläche in <span class="hz-mono">critical</span> (der Knopf einer unumkehrbaren Aktion) steht Schrift in <span class="hz-mono">on-critical</span>: hell <span data-theme="light" data-contrast="on-critical critical"></span>, dunkel <span data-theme="dark" data-contrast="on-critical critical"></span>.</p>
+
+    <h3 class="t-title-3">Daten: eine Rampe</h3>
+    <p>Für Heatmaps und Dichten gibt es eine sequenzielle Rampe in fünf Stufen, ein Ton von wenig nach viel, im Dunkeln umgekehrt verankert. Sie ist weder Akzent noch Status. Der Wert steht immer auch in Legende oder Beschriftung. Serienfarben von Diagrammen gehören der App.</p>
+    <div class="doc-split">
+      {{- range slice "light" "dark" }}
+      <div data-theme="{{ . }}" style="background:var(--bg)"><div class="doc-ramp">{{ range seq 5 }}<i style="background:var(--data-{{ . }})"></i>{{ end }}</div><span class="t-kennung hz-kennung">wenig · viel</span></div>
       {{- end }}
     </div>
 
@@ -257,14 +271,15 @@
     </div>
     <h3 class="t-title-3">Radien: klein und wenige</h3>
     <div class="doc-radii">
-      {{- range $k, $v := dict "0" "Tabellen, Linien" "2" "Status, Kennzeichen" "6" "Knöpfe, Felder" "10" "Karten, Sheets" "16" "nur große Sheets" }}
+      {{- range $k, $v := dict "0" "Tabellen, Linien" "2" "Status, Kennzeichen" "6" "Knöpfe, Felder, Kästen daneben" "10" "frei stehende Karten, Sheets" "16" "nur große Sheets" }}
       <div class="doc-radius"><i style="border-top-left-radius:{{ $k }}px"></i>{{ $k }} · {{ $v }}</div>
       {{- end }}
     </div>
-    <p>Rund ist nur, was rund sein muss: der Schalter, der Punkt eines Ortes, ein Avatar. Pillenförmige Knöpfe und Chips gibt es nicht.</p>
+    <p>Was in einer Reihe mit Feldern und Knöpfen steht, ein Kasten im Formular, ein Hinweis über einem Knopf, eine Kachel in der Seitenleiste, nimmt deren Radius 6, nicht den der Karte: Nebeneinander sind Rundungen gleich. Rund ist nur, was rund sein muss: der Schalter, der Punkt eines Ortes, ein Avatar. Pillenförmige Knöpfe und Chips gibt es nicht.</p>
     <h3 class="t-title-3">Linien</h3>
     <dl class="doc-facts">
-      <dt>1 px</dt><dd>Haarlinie, trennt Zeilen, Abschnitte, Flächen. In Listen beginnt sie am Text, nicht am Rand.</dd>
+      <dt>1 px</dt><dd>Haarlinie in <span class="hz-mono">line</span>, trennt Zeilen und Abschnitte. In Listen beginnt sie am Text, nicht am Rand.</dd>
+      <dt>Umriss</dt><dd>Ein Umriss, eine Farbe: Alles mit Rahmen (Feld, Knopf, Segment, Chip, Karte, Dialog, Sheet, Menü) trägt die Haarlinie in <span class="hz-mono">line-strong</span>, mit mindestens 3:1 zu jeder Fläche. So stehen Karte und Feld nebeneinander gleich.</dd>
       <dt>2 px</dt><dd>Auswahl und Fokus, immer im Akzent. Der aktive Tab, die gewählte Zeile, der fokussierte Knopf tragen die Linie. Der Horizont, im Kleinen.</dd>
       <dt>Schatten</dt><dd>Keine. Ein Sheet oder Menü hebt sich durch Fläche und Linie ab. Wo die Plattform einen Schatten zwingend zeichnet (macOS-Fenster, iOS-Menüs), bleibt er.</dd>
     </dl>
@@ -279,7 +294,9 @@
       <dt>Kurve</dt><dd class="hz-mono">{{ $hz.motion.standard }}</dd>
       <dt>Fenster</dt><dd>Kompakt unter 600, mittel bis 840, erweitert bis 1200, groß darüber, wie die Fenstergrößen von Material 3. Gebaut wird nach verfügbarer Breite, nie nach Gerät.</dd>
       <dt>Ziel</dt><dd>Auf Touch mindestens 44 × 44 pt pro Tippziel, auch bei dichten Zeilen. Mit Zeiger (Mac, Web-App am Rechner) sind Steuerelemente 24 bis 28 pt hoch und die Werkzeugleiste 52 pt: <span class="hz-mono">data-density="desktop"</span>.</dd>
-      <dt>Ikonen</dt><dd>Material Symbols Sharp, Strichstärke 300, eckig, passend zur Linie. Gebündelt als Subset mit genau den Symbolen aus <span class="hz-mono">icons/material-symbols.txt</span> (12 KB), angesprochen über den Codepoint. Zum Beispiel: <span class="hz-symbol" title="forest">&#xea99;</span> <span class="hz-symbol" title="checklist">&#xe6b1;</span> <span class="hz-symbol" title="pets">&#xe91d;</span> <span class="hz-symbol" title="map">&#xe55b;</span> <span class="hz-symbol" title="bolt">&#xea0b;</span> <span class="hz-symbol" title="account_tree">&#xe97a;</span>. Die Mockups nutzen noch gezeichnete Platzhalter im selben Stil.</dd>
+      <dt>Breiten</dt><dd>Lesespalte {{ index $hz.size "text-column" }}, Seite {{ $hz.size.page }}, Formular {{ $hz.size.form }}, Suche in der Titelzeile {{ $hz.size.search }}, Seitenleiste {{ $hz.size.sidebar }} (mit Zeiger ab {{ $hz.size.rail }}), Inspektor {{ $hz.size.inspector }}, Karte im Raster mindestens {{ index $hz.size "grid-card" }}.</dd>
+      <dt>Ikonen</dt><dd>Material Symbols Sharp, Strichstärke 300, eckig, passend zur Linie. Gebündelt als Subset mit genau den Symbolen aus <span class="hz-mono">icons/material-symbols.txt</span> (rund 10 KB als WOFF2, 20 KB als TTF), angesprochen über den Codepoint. Zum Beispiel: <span class="hz-symbol" title="forest">&#xea99;</span> <span class="hz-symbol" title="checklist">&#xe6b1;</span> <span class="hz-symbol" title="pets">&#xe91d;</span> <span class="hz-symbol" title="map">&#xe55b;</span> <span class="hz-symbol" title="bolt">&#xea0b;</span> <span class="hz-symbol" title="account_tree">&#xe97a;</span>. Wenige gibt es auch gefüllt, für einen Zustand, der an ist: <span class="hz-symbol" title="star_fill">&#xff09a;</span> <span class="hz-symbol" title="push_pin_fill">&#xff10d;</span> (angeheftet, Favorit). Die Mockups nutzen noch gezeichnete Platzhalter im selben Stil.</dd>
+      <dt>Ikonengröße</dt><dd>{{ with index $hz "icon-size" }}{{ .badge }} im Status-Badge, {{ .inline }} in einer Textzeile, {{ .row }} in Zeilen und Seitenleisten, {{ .bar }} in Leisten und Knöpfen, {{ .tab }} in der Tab-Bar.{{ end }}</dd>
     </dl>
   </div>
 </section>
@@ -375,16 +392,16 @@ Fotos | je Einrichtung
   <div>
     <h2 class="t-headline">Native Form, gemeinsame Sprache.</h2>
     <p>Horizont ersetzt keine Plattform. Was das Betriebssystem vorgibt, bleibt: Navigation, Gesten, Systemdialoge, Teilen, Tastenkürzel. Horizont bestimmt Farbe, Schrift, Linie, Abstand und Ton.</p>
-    <p>Das Flutter-Paket hält das Gefühl nativ: die Welle nur auf Android, sonst nur das Abdunkeln beim Drücken. Dazu kommen Seitenübergänge mit Wischen zurück (iOS, macOS) und Predictive Back (Android), die Dichte der Plattform und die nativen Schalter, Dialoge und Picker in den Farben des Produkts. Bewusst anders sind nur Mona Sans, die Kennung mit linkem Titel und die Auswahl als Linie.</p>
+    <p>Das Flutter-Paket hält das Gefühl nativ: die Welle nur auf Android, sonst nur das Abdunkeln beim Drücken. Dazu kommen Seitenübergänge mit Wischen zurück (iOS, macOS) und Predictive Back (Android), die Dichte der Plattform und die nativen Schalter, Dialoge und Picker in den Farben des Produkts. Bewusst anders sind nur Mona Sans, die Kennung mit linkem Titel, die Auswahl als Linie, die Tab-Bar unten mit Tönung statt Linie (die Linie wirkte am Gerät wie ein Fehler) und die Hauptaktion als FAB auch auf iOS (oben in der Leiste des iPhones war sie kaum lesbar).</p>
     <div class="doc-scroll">
     <table class="doc-platforms">
       <thead><tr><th>Plattform</th><th>Navigation</th><th>Horizont</th><th>Produkte</th></tr></thead>
       <tbody>
-        <tr><td>iOS, iPadOS</td><td>Tab-Bar mit Beschriftung, Sheets mit Detents, Wischen zurück</td><td>Kleiner Titel mit Kennung darüber statt Large Title. Das gewählte Tab liegt auf accent-tint, das Icon größer im Akzent. Die Hauptaktion als FAB, am Telefon nur mit Symbol.</td><td>alle drei</td></tr>
+        <tr><td>iOS, iPadOS</td><td>Tab-Bar mit Beschriftung, Sheets mit Detents, Wischen zurück</td><td>Kleiner Titel mit Kennung darüber statt Large Title. Das gewählte Tab liegt auf accent-tint, die Tönung umschließt Icon (in accent-text) und Wort. Die Hauptaktion als FAB, am Telefon nur mit Symbol, ab 600 mit Wort.</td><td>alle drei</td></tr>
         <tr><td>Android</td><td>NavigationBar, ab 600 dp NavigationRail, Predictive Back</td><td>M3-Bausteine mit eigenem ColorScheme. Gewähltes Ziel auf accent-tint statt Pille, höchstens ein FAB pro Screen (am Telefon nur mit Symbol, ab 600 dp mit Wort), Radius 10.</td><td>alle drei</td></tr>
         <tr><td>macOS, Windows, Linux</td><td>Seitenleiste und Werkzeugleiste, Menüleiste</td><td>Dichte Zeilen (28 px), Hover-Zustände, Tastatur zuerst. Kein App Bar.</td><td>KNX, Panzergefecht</td></tr>
         <tr><td>Web-App</td><td>wie Desktop, ab 840 px Seitenleiste</td><td>Sichtbarer Fokus, gleiche Tokens als CSS.</td><td>KNX, Panzergefecht /play/</td></tr>
-        <tr><td>Home Assistant</td><td>Ingress im Rahmen von HA</td><td>Neutrale von HA übernehmen, Akzent und Schrift bleiben.</td><td>KNX Add-on</td></tr>
+        <tr><td>Home Assistant</td><td>Ingress im Rahmen von HA</td><td>Neutrale von HA übernehmen (nur im Flutter-Paket), Akzent, Status, Schrift und Linien bleiben.</td><td>KNX Add-on</td></tr>
         <tr><td>tvOS, Android TV</td><td>Fokus statt Zeiger, Siri Remote</td><td>Fokusring 3 px im Akzent mit Abstand, Schrift × 1,5, Abstände für 3 m Sehabstand.</td><td>Panzergefecht</td></tr>
         <tr><td>watchOS, Wear OS</td><td>eine Aufgabe pro Screen</td><td>Schwarze Fläche, Mono-Werte, der Akzent nur für die eine Aktion.</td><td>Panzergefecht</td></tr>
         <tr><td>Landingpage</td><td>Feldseite: Leiste mit Kennungen und Inhalt</td><td>Literata-Überschrift links, kein zentrierter Hero, kein Kachelraster. Screenshots nur im Geräterahmen. Die Horizontlinie unter dem Hero, im Fuß „ein Projekt von regetskcob“.</td><td>alle, Blog</td></tr>
@@ -651,9 +668,9 @@ Fotos | je Einrichtung
   <div class="doc-rail"><span class="t-kennung">11 — Umsetzung</span></div>
   <div>
     <h2 class="t-headline">Was danach käme.</h2>
-    <p>Diese Seite und die Tokens kommen aus dem Repository <a href="https://github.com/regetskcob/horizont">horizont</a>. KNX Monitor ist umgestellt, App und Landingpage auf v0.6.0. Es ist die Referenz für die übrigen Apps: Entscheidungen in <span class="hz-mono">CLAUDE.md</span>, Muster in <span class="hz-mono">docs/flutter.md</span> unter „Referenz: KNX Monitor“.</p>
+    <p>Diese Seite und die Tokens kommen aus dem Repository <a href="https://github.com/regetskcob/horizont">horizont</a>. Horizont steht auf v{{ $hz.version }}, was sich je Version ändert, steht im <a href="https://github.com/regetskcob/horizont/blob/main/CHANGELOG.md">CHANGELOG</a>. KNX Monitor ist umgestellt, App und Landingpage auf v0.6.0. Es ist die Referenz für die übrigen Apps: Entscheidungen in <span class="hz-mono">CLAUDE.md</span>, Muster in <span class="hz-mono">docs/flutter.md</span> unter „Referenz: KNX Monitor“.</p>
     <ol class="doc-todo">
-      <li><span><b>Entscheidungen, erledigt.</b> Zwei Grün bleiben (Tanne dunkel leuchtender), Mona Sans, Kennung über dem Titel statt Large Title, Gelände als Ausnahme. Aus KNX Monitor: Tab-Bar mit Tönung, FAB auf Touch (am Telefon nur Symbol), Ansichten unten und Menü links, Expertenmodus, Unumkehrbares in critical mit Bestätigung, Datenlisten in Seitenbreite.</span></li>
+      <li><span><b>Entscheidungen, erledigt.</b> Zwei Grün bleiben (Tanne dunkel leuchtender), Mona Sans, Kennung über dem Titel statt Large Title, Gelände als Ausnahme. Aus KNX Monitor: Tab-Bar mit Tönung, FAB auf Touch (am Telefon nur Symbol), Ansichten unten und Menü links, Expertenmodus, Unumkehrbares in critical mit Bestätigung, Datenlisten in Seitenbreite. Für v0.6.1: ein Umriss mit 3:1 (line-strong dunkler).</span></li>
       <li><span><b>Schriften, erledigt.</b> Mona Sans, Literata und Monaspace für Web und Flutter, Material Symbols Sharp als Subset.</span></li>
       <li><span><b>Flutter-Paket <span class="hz-mono">horizont</span>, erledigt.</b> Tokens aus <span class="hz-mono">tokens/horizont.json</span> generiert, ThemeExtension, ColorScheme von Hand je Produkt und Modus, Grund-Widgets, Kontraste als Test. Einbinden per Git-Abhängigkeit mit Tag.</span></li>
       <li><span><b>App-Icons, erledigt.</b> Für alle Plattformen unter <span class="hz-mono">icons/export/</span>, erzeugt aus den Partials.</span></li>

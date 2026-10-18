@@ -102,6 +102,8 @@ a { color: var(--accent-text); text-underline-offset: 3px; text-decoration-thick
 .doc-split { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: var(--line-hairline) solid var(--line); border-radius: var(--r-10); overflow: hidden; }
 .doc-split > div { padding: var(--s-24); background: var(--bg); color: var(--text); }
 @media (max-width: 720px) { .doc-split { grid-template-columns: 1fr; } }
+.doc-ramp { display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px; margin-bottom: var(--s-8); }
+.doc-ramp i { height: 32px; border-radius: var(--r-2); }
 
 /* --- Type --- */
 
@@ -171,14 +173,14 @@ a { color: var(--accent-text); text-underline-offset: 3px; text-decoration-thick
 .mock-icon-btn svg { width: 22px; height: 22px; }
 
 .mock-tabbar { flex: none; display: grid; grid-template-columns: repeat(4, 1fr); border-top: var(--line-hairline) solid var(--line); background: var(--surface); padding-bottom: 18px; }
-.mock-tab { display: grid; justify-items: center; gap: 3px; padding: 8px 0 4px; font: 500 10px/1 var(--font-sans); color: var(--text-muted); position: relative; }
+/* Like HorizontTabBar: the tint hugs icon and word (radius 6, no line), the
+   icon in accent-text, the word semibold in text. */
+.mock-tab { justify-self: center; display: grid; justify-items: center; gap: 3px; margin-top: 4px; padding: 4px 10px; border-radius: var(--r-6); font: 500 10px/1 var(--font-sans); color: var(--text-muted); }
 .mock-tab svg { width: 22px; height: 22px; }
-.mock-tab[aria-current] { color: var(--accent-text); font-weight: 600; }
-.mock-tab[aria-current]::before { content: ""; position: absolute; inset: 4px 18% 0; border-radius: var(--r-6); background: var(--accent-tint); z-index: -1; }
-.mock-tab[aria-current] svg { width: 24px; height: 24px; color: var(--accent); }
-.mock-tab { isolation: isolate; }
+.mock-tab[aria-current] { background: var(--accent-tint); color: var(--text); font-weight: 600; }
+.mock-tab[aria-current] svg { color: var(--accent-text); }
 .mock-tabbar.android { padding-bottom: 12px; }
-.mock-tabbar.android .mock-tab { padding-top: 12px; font-size: 11px; }
+.mock-tabbar.android .mock-tab { margin-top: 8px; font-size: 11px; }
 
 .mock-sum { display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: var(--line-hairline) solid var(--line); }
 .mock-sum div { padding: var(--s-12) var(--s-16); }

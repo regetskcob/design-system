@@ -37,11 +37,13 @@ Monitor und Panzergefecht, Jagdaufseher liegt im Blog unter
 ```
 
 ```bash
-hugo mod get github.com/regetskcob/horizont@main
+hugo mod get github.com/regetskcob/horizont@v0.6.1
 ```
 
-Das ändert `go.mod` und `go.sum`. Im CI braucht der Build Go, wie im
-Workflow des Blogs.
+Das ändert `go.mod` und `go.sum`. Wie die Apps hängt eine Seite an einem
+Tag, nie an `main`; was sich zwischen zwei Tags ändert, steht im
+[CHANGELOG](../CHANGELOG.md). Im CI braucht der Build Go, wie im Workflow
+des Blogs.
 
 CSS in der Reihenfolge Tokens, Komponenten, eigene Regeln. `tokens.css` ist
 ein Template:
@@ -71,6 +73,10 @@ Auf `<html>` gehören:
   Zeilen 28).
 - `class="hz"` auf `<body>`: Grundfarben und Schrift.
 
+Gastgeber-Neutrale (Home Assistant) gibt es nur im Flutter-Paket. Im
+Gastgeber läuft die App, keine Hugo-Seite, deshalb kennt das CSS kein
+`data-host`.
+
 Ein bestehendes Theme (wie typo im Blog) wird nicht umgeschrieben. Eine
 Brücke setzt seine Variablen aus den Tokens, siehe
 `assets/css/horizont-blog.css` im Blog.
@@ -79,29 +85,36 @@ Brücke setzt seine Variablen aus den Tokens, siehe
 
 Neutrale `--bg --surface --sunken --line --line-strong --text --text-muted
 --text-faint`, Status `--positive --warning --critical --info` (je mit
-`-tint`), Produkt `--accent --on-accent --accent-tint --accent-text`,
-Schriften `--font-serif --font-sans --font-mono`, Abstände `--s-<n>`, Radien
-`--r-<n>`, Linien `--line-hairline --line-selection --line-focus`, Bewegung
-`--motion-fast|base|slow --ease-standard`, Größen `--size-<name>`,
-Hardware `--device-<name>`. Typo-Klassen `.t-display` bis `.t-kennung`.
+`-tint`) und `--on-critical`, Produkt `--accent --on-accent --accent-tint
+--accent-text`, Datenrampe `--data-1` bis `--data-5` (Heatmaps, wenig nach
+viel), Schriften `--font-serif --font-sans --font-mono`, Abstände
+`--s-<n>`, Radien `--r-<n>`, Linien `--line-hairline --line-selection
+--line-focus`, Bewegung `--motion-fast|base|slow --ease-standard`, Größen
+`--size-<name>` (auch `form`, `search`, `sidebar`, `inspector`,
+`grid-card`), Symbolgrößen `--icon-badge|inline|row|bar|tab`, Hardware
+`--device-<name>`. Typo-Klassen `.t-display` bis `.t-kennung`.
+
+`--line-strong` ist der eine Umriss: Feld, Knopf, Segment, Schalter, Karte,
+Dialog. Er hat mindestens 3:1 zu `--bg`, `--surface` und `--sunken`.
+`--line` trennt nur Zeilen und Abschnitte.
 
 ## Komponenten
 
 | Klasse | Zweck |
 | --- | --- |
 | `.hz-button` + `--primary --secondary --quiet --critical --dense` | Knöpfe, `--primary` nur einmal pro Ansicht |
-| `.hz-field`, `.hz-input`, `.hz-help`, `.hz-error` | Formularfelder; `aria-invalid="true"` für Fehler |
+| `.hz-field`, `.hz-input`, `.hz-help`, `.hz-error` | Formularfelder, Beschriftung über dem Feld; `aria-invalid="true"` für Fehler |
 | `.hz-list`, `.hz-row` (`--inset`), `.hz-row-lead/-title/-meta/-trail` | Listen mit Haarlinie ab dem Text; `aria-selected="true"` trägt die Linie |
 | `.hz-section-head` | Kennzeile über einem Abschnitt |
 | `.hz-badge` + `--positive --warning --critical --info --accent` | Status, immer mit Zeichen und Wort |
 | `.hz-segmented` (Buttons mit `aria-pressed`) | Umschalter, Auswahl als Linie unten |
 | `.hz-tabs` (Links mit `aria-current`) | Tabs, Auswahl als Linie |
 | `.hz-switch` | Schalter (`input type=checkbox`) |
-| `.hz-card` | Fläche mit Haarlinie, Radius 10, selten |
+| `.hz-card` | Fläche mit Umriss in `line-strong`, Radius 10, selten; neben Feldern und Knöpfen Radius 6 |
 | `.hz-table`, `.hz-num`, `.hz-mono` | Datentabellen, Werte in Mono rechtsbündig |
 | `.hz-kennung`, `.hz-muted`, `.hz-mono`, `.hz-rule` | Kennung, gedämpfter Text, Mono, Linie |
 | `.hz-lockup` (`--mark`) | Marke und Name auf einer Grundlinie |
-| `.hz-symbol` | Material-Symbols-Ikone per Codepoint (`&#xea99;` für `forest`, Liste in `icons/material-symbols.json`) |
+| `.hz-symbol` | Material-Symbols-Ikone per Codepoint (`&#xea99;` für `forest`, gefüllt `&#xff09a;` für `star_fill`, Liste in `icons/material-symbols.json`) |
 | `figure.hz-device.hz-device--<gerät>` + `.hz-device-screen` | Geräterahmen für Screenshots |
 
 Die Geräterahmen gibt es als `iphone`, `android`, `ipad`, `laptop`, `tv` und

@@ -5,7 +5,9 @@ und Panzergefecht. Leitbild: minimalistisch wie die niederrheinische Feldflur.
 
 Dokumentation und Entwürfe: https://www.regetskcob.de/horizont/
 
-Stand: v0.5, Entscheidungen getroffen (#1), Schriften gebündelt (#2), Flutter-Paket (#3), Hugo-Komponenten und App-Icons für alle Plattformen (#4) da. Die Apps und ihre Landingpages nutzen das System noch nicht.
+Stand: v0.6.1. KNX Monitor ist als erste App umgestellt (App und Landingpage
+auf v0.6.0), Jagdaufseher und Panzergefecht folgen; der Blog hängt an v0.5.0.
+Was sich je Version geändert hat, steht in [CHANGELOG.md](CHANGELOG.md).
 
 Wer Oberflächen umsetzt, ob Mensch oder Claude-Sitzung, beginnt mit
 [CLAUDE.md](CLAUDE.md) (Leitbild, Regeln, Tokens, offene Entscheidungen,
@@ -16,7 +18,7 @@ bzw. [docs/web.md](docs/web.md) für Hugo-Seiten.
 
 | Ordner | Inhalt |
 | --- | --- |
-| `tokens/horizont.json` | Die einzige Quelle aller Werte: Farben hell und dunkel, Produkt-Akzente, Status, Schrift, Abstand, Radien, Linien, Bewegung, Icon-Paletten |
+| `tokens/horizont.json` | Die einzige Quelle aller Werte: Farben hell und dunkel, Produkt-Akzente, Status, Datenrampe, Gastgeber, Schrift, Abstand, Radien, Linien, Größen, Symbolgrößen, Bewegung, Icon-Paletten |
 | `web/css/` | Die Web-Schicht: `tokens.css` (Hugo-Template, erzeugt die CSS-Variablen aus den Tokens) und `components.css` (Knöpfe, Felder, Listen, Status, Tabellen) |
 | `web/partials/` | Hugo-Partials: Marke, App-Icon, Lockup, Geräterahmen, Kennung, Badge, Symbol, Fakten, Feldseite (`feld/`) |
 | `web/shortcodes/` | Hugo-Shortcodes für Inhalte: `hz-device`, `hz-kennung`, `hz-badge`, `hz-symbol`, `hz-facts` |
@@ -27,6 +29,7 @@ bzw. [docs/web.md](docs/web.md) für Hugo-Seiten.
 | `site/` | Nur die Dokumentationsseite |
 | `docs/` | Umsetzungsleitfäden für Flutter und Web |
 | `CLAUDE.md` | Kurzfassung aller Regeln für Claude-Sitzungen |
+| `CHANGELOG.md` | Was sich je Version geändert hat und was Apps und Seiten beim Heben tun |
 
 Hugo bindet die Ordner über `module.mounts` in `hugo.toml` ein, das Repository
 muss deshalb nicht wie eine Hugo-Seite aussehen.

@@ -21,7 +21,7 @@ dependencies:
     git:
       url: https://github.com/regetskcob/horizont.git
       path: flutter
-      ref: v0.6.0
+      ref: v0.6.1
 ```
 
 Es bringt mit:
@@ -32,10 +32,17 @@ Es bringt mit:
 - Die Extension `HorizontTheme`, gelesen mit `HorizontTheme.of(context)`.
   Sie assertet, statt still auf einen Ersatz zurückzufallen.
 - `HorizontColors`, `HorizontSymbols`, die Werte `HzSpace`, `HzRadius`,
-  `HzLine`, `HzSize`, `HzBreakpoint`, `HzMotion`, `HzType`.
-- Die Widgets `Kennung`, `HorizontBadge`, `HorizontTabBar`, `HorizontRail`,
-  `HorizontMark` und `HorizontLockup`, dazu `resolveMotion`.
+  `HzLine`, `HzSize`, `HzIconSize`, `HzBreakpoint`, `HzMotion`, `HzType`.
+- Die Widgets `Kennung` (mit `count` und `oneLine`),
+  `HorizontSectionHeader`, `HorizontField`, `HorizontBadge`,
+  `HorizontStatusLine`, `HorizontLetterBadge`, `HorizontMetric`,
+  `HorizontMetricRow`, `HorizontEmptyHint`, `HorizontTabBar`,
+  `HorizontRail`, `HorizontMark` und `HorizontLockup`, dazu
+  `horizontDialogAction`, `resolveMotion` und
+  `HorizontTheme.of(context).criticalButton`.
 - `registerHorizontLicenses()` für die Lizenzseite.
+- Für Tests `package:horizont/testing.dart` mit `loadHorizontFonts()`: in
+  `setUpAll` aufrufen, dann zeigen Goldens die echten Schriften und Symbole.
 
 Tests im Paket: Kontrast (AA) für jedes Produkt und jeden Modus, Theme,
 Widgets inklusive Grundlinie des Lockups. Goldens der Showcase-App liegen in
@@ -87,7 +94,11 @@ Für die App selbst gilt:
 Bewusst anders als die Plattform, so entschieden in regetskcob/horizont#1:
 Mona Sans statt Systemschrift in der App-Oberfläche, die Kennung mit linkem
 Titel statt des großen iOS-Titels, die Auswahl als Linie statt als Pille.
-Darüber hinaus weicht nichts ab, ohne dass es entschieden ist.
+Dazu entschieden bei KNX Monitor: die Tab-Bar unten markiert das Ziel mit
+einer Tönung (`accent-tint`) statt einer Linie, weil die Linie am Gerät wie
+ein Fehler wirkte; und die Hauptaktion steht auch auf iOS als FAB, weil sie
+oben in der Leiste des iPhones kaum lesbar war. Darüber hinaus weicht nichts
+ab, ohne dass es entschieden ist.
 
 ## Grundsätze
 
@@ -135,22 +146,29 @@ Token-Schlüssel, `p.` steht für `color.product.<id>.<mode>`, `n.` für
 | inverseSurface / onInverseSurface | n.text / n.bg |
 | surfaceTint | transparent |
 
-`onError` ist `#FFFFFF` in hell und `n.bg` in dunkel. Bei Panzergefecht
-ersetzen im Dunkeln die Werte aus `neutralDark` die `n.*`.
+`onError` ist `s.on-critical` (`#FFFFFF` in hell, `#121311` in dunkel). Bei
+Panzergefecht ersetzen im Dunkeln die Werte aus `neutralDark` die `n.*`.
 
 ## ThemeExtension
 
-Was nicht ins `ColorScheme` passt, kommt in eine `HorizontTokens`-Extension
-mit `static HorizontTokens of(BuildContext context)` (das assertet, wenn die
-Extension fehlt):
+Was nicht ins `ColorScheme` passt, liegt in der Extension `HorizontTheme`,
+gelesen mit `HorizontTheme.of(context)` (das assertet, wenn die Extension
+fehlt):
 
-- Farben: `positive`, `positiveTint`, `warning`, `warningTint`, `critical`,
-  `criticalTint`, `info`, `infoTint`, `textFaint`, `accentText`
-- Abstände `s2 … s96`, Radien `r0 r2 r6 r10 r16`, Linien `hairline` (1) und
-  `selection` (2)
-- Dauern `fast` (120), `base` (200), `slow` (320), Kurve
-  `Cubic(0.2, 0, 0, 1)`
-- Textstile `data` und `kennung` (Monaspace) sowie `reading` (Literata)
+- `colors` (`HorizontColors`): alle Slots, auch `positive`, `positiveTint`,
+  `warning`, `warningTint`, `critical`, `criticalTint`, `onCritical`,
+  `info`, `infoTint`, `textFaint`, `accentText` und `dataRamp` (fünf
+  Stufen für Heatmaps)
+- `product`, `brightness`, `density`, `controlHeight`, `rowHeight`
+- Textstile `data` und `kennung` (Monaspace), `reading` und `display`
+  (Literata)
+- `criticalButton`: der Stil für den `FilledButton` einer unumkehrbaren
+  Aktion
+
+Abstände (`HzSpace.s2 … s96`), Radien (`HzRadius.r0 … r16`), Linien
+(`HzLine.hairline` 1, `selection` 2), Größen (`HzSize`, `HzIconSize`) und
+Bewegung (`HzMotion.fast` 120, `base` 200, `slow` 320, Kurve
+`Cubic(0.2, 0, 0, 1)`) sind Konstanten.
 
 ## Typografie
 
@@ -198,24 +216,33 @@ Nicht das Paket `material_symbols_icons`, es bündelt alle Symbole.
   `OutlinedButton` (Rand line-strong, Text n.text) für die zweite,
   `TextButton` (accent-text) für leise Aktionen. Radius 6, Mindesthöhe 44 auf
   Touch und 28 mit Zeiger.
-- **Felder:** `OutlineInputBorder`, Radius 6, Rand line-strong, im Fokus
-  Akzent 2 px, Fehler critical mit Zeichen in der Hilfezeile.
+- **Felder:** `HorizontField(label:, help:, child:)` setzt die Beschriftung
+  über das Feld; das `TextField` darin hat kein `labelText`, höchstens einen
+  `hintText`. Der Rahmen kommt aus dem Theme: `OutlineInputBorder`, Radius
+  6, Rand line-strong (3:1), im Fokus Akzent 2 px, Fehler critical mit
+  Zeichen in der Hilfezeile.
 - **Status:** ein eigenes Widget `HorizontBadge(kind, label)` mit Fläche
   `*Tint`, Zeichen (Haken, Dreieck, Achteck, Kreis) und Wort, Radius 2.
 - **Auswahl als Linie:** `TabBar` mit `UnderlineTabIndicator(borderSide:
   BorderSide(width: 2, color: primary))` und `dividerColor: outlineVariant`.
   Für `NavigationRail` ein eigenes schlankes Widget, das die 2-px-Linie
   links vom Ziel zeichnet. Die Tab-Bar unten (`HorizontTabBar`) markiert
-  das Ziel mit `accent-tint` (Radius 6) und einem größeren Icon im Akzent. Den Pillen-Indikator
-  von Material 3 nicht nachbauen
-  (`indicatorColor: Colors.transparent` reicht nicht für die Linie).
+  das Ziel mit `accent-tint` (Radius 6), die Tönung umschließt Icon (24, in
+  `accent-text`) und Wort (halbfett, in `text`). Den Pillen-Indikator von
+  Material 3 nicht nachbauen (`indicatorColor: Colors.transparent` reicht
+  nicht für die Linie).
 - **SegmentedButton:** Radius 6, Rand line-strong, Auswahl mit
   accent-tint, `showSelectedIcon: false`.
 - **Switch:** Spur accent, Daumen on-accent. Er ist die einzige runde Form
   neben Ortspunkt und Avatar.
-- **FAB** (Touch: Telefon und Tablet, alle Plattformen; höchstens einer; mit Zeiger stattdessen in der Werkzeugleiste): `elevation: 0`, Radius 10, Akzent.
-  Unter 600 quadratisch mit Symbol und Tooltip, ab 600
+- **FAB** (Touch: Telefon und Tablet, auch auf iOS; höchstens einer; mit
+  Zeiger stattdessen in der Werkzeugleiste): `elevation: 0`, Radius 10,
+  Akzent. Unter 600 quadratisch mit Symbol und Tooltip, ab 600
   `FloatingActionButton.extended` mit Wort (entschieden bei KNX Monitor).
+- **Unumkehrbare Aktion:** `FilledButton(style:
+  HorizontTheme.of(context).criticalButton)`, also `critical` mit
+  `onCritical`. Die Bestätigung im Dialog mit `horizontDialogAction(…,
+  primary: true, destructive: true)`.
 - **Dialog, BottomSheet:** `elevation: 0`, Radius 10 (große Sheets 16),
   Rand `outline` (line-strong).
 - **Divider:** outlineVariant, Dicke 1, Abstand 1.
@@ -230,10 +257,15 @@ Nicht das Paket `material_symbols_icons`, es bündelt alle Symbole.
 - Gebaut wird nach Breite: `LayoutBuilder` bzw.
   `MediaQuery.sizeOf(context).width` gegen 600 / 840 / 1200, nie
   `Platform.isIOS` für das Layout.
-- Unter 600: Tab-Bar, eine Spalte, Rand 16. Ab 600: Seitenleiste
-  (NavigationRail bzw. eigene Seitenleiste), Rand 24. Ab 840 quer:
-  Inspektor rechts. Ab 1200: Raster aus Karten (mindestens 240 breit),
-  Inspektor 280 bis 320.
+- Unter 600: Tab-Bar, eine Spalte, Rand 16. Ab 600: Rand 24, und die Ziele
+  wandern in die Seitenleiste (`HorizontRail`, `HzSize.sidebar` 240).
+  Ausnahme: Hat ein Bildschirm wenige gleichrangige Ansichten desselben
+  Inhalts, bleiben sie unten als Tab-Bar, und das Menü wird zur
+  einklappbaren Seitenleiste links (CLAUDE.md, „Ansichten unten, Menü
+  links“). Ab 840 quer: Inspektor rechts (`HzSize.inspector` 300). Ab 1200:
+  Raster aus Karten (mindestens `HzSize.gridCard` 240 breit). Formulare
+  höchstens `HzSize.form` 400, die Suche in der Titelzeile `HzSize.search`
+  320.
 - Mit Zeiger (macOS, Windows, Linux, Web am Rechner):
   `VisualDensity.compact`, Steuerelemente 28, Werkzeugleiste 52, Zeilen 28,
   Hover-Zustände, Tastenkürzel. Auf Touch bleibt jedes Ziel mindestens 44.
@@ -251,7 +283,8 @@ mit Goldens vorher und nachher.
 
 ### KNX Monitor (`~/Debug-KNX`, Repo `regetskcob/KNX-Monitor`)
 
-Umgestellt auf v0.6.0 (Branch `horizont`, regetskcob/KNX-Monitor#23). Was
+Umgestellt auf v0.6.0 (Branch `horizont`, regetskcob/KNX-Monitor#23); was
+v0.6.1 aus KNX ins Paket geholt hat, steht im [CHANGELOG](../CHANGELOG.md). Was
 dabei entstanden ist, steht unten unter „Referenz: KNX Monitor“. Die Punkte
 hier waren der Plan:
 
@@ -328,8 +361,12 @@ wandert es ins Paket (mit Token, Test und Tag). Pfade beziehen sich auf
 ### Aufbau des Theme-Ordners
 
 - `lib/theme/tokens.dart`: App-Namen für Paketwerte (`Gap`, `Radii`,
-  `Lines`, `Widths`, `Breakpoints`, `Motion`, `metaSeparator` = „ · “). Nur
-  Aliase und Ableitungen, keine eigenen Zahlen.
+  `Lines`, `Widths`, `Breakpoints`, `Motion`, `metaSeparator` = „ · “).
+  Gedacht als Aliase und Ableitungen. Auf v0.6.0 stehen in `Widths` noch
+  eigene Zahlen (Formular 400, Suche 320, Seitenleiste 240, Inspektor 300,
+  Kartenraster 240); seit v0.6.1 gibt es sie als `HzSize.form`, `search`,
+  `sidebar`, `inspector` und `gridCard`, `metaSeparator` als
+  `horizontMetaSeparator`. Eine neue App nimmt die Paketwerte.
 - `lib/theme/palette.dart`: `context.hz`, `context.hzTheme` und
   `context.mono(style)`. **`mono` setzt `fontFamily: HzFont.mono` und
   `package: HzFont.package` neu**; wer stattdessen die Familie eines Stils
@@ -376,7 +413,8 @@ wandert es ins Paket (mit Token, Test und Tag). Pfade beziehen sich auf
   (Anheften, „+“, Auf-/Zuklappen). Zugeklappt steht rechts der neueste Wert
   in Mono, höchstens die halbe Zeile. Angeheftet = Symbol in `accent-text`
   auf `accent-tint`. Ist der Kopf schmal, kürzt der Begriff mit „…“, der
-  Zähler bleibt (`SectionLabel(oneLine: true)`).
+  Zähler bleibt (im Paket: `Kennung(title, count: n, oneLine: true)` bzw.
+  `HorizontSectionHeader`).
 - **Karten im Raster:** Spalten = Breite / 240 (`columnsFor`), Zeilen gleich
   hoch über `IntrinsicHeight`. Name in Sans, Wert groß in Mono, darunter
   Adresse, DPT, Zeit und Absender klein in Mono, rechts ein Verlauf mit
@@ -406,11 +444,16 @@ Ansicht, die sie kennen: dieselben Sektionen und Karten, mit Werten.
 
 ### Kennzahlen und Werte
 
-- `Metric`: Kennung als Begriff, darunter der Wert in `titleMedium` Mono, eine
-  Größe für alle; Zustand als Parameter (Wort und Zeichen).
+- `HorizontMetric` (in KNX `Metric`): Kennung als Begriff, darunter der Wert
+  in Mono in der Größe von `titleMedium`, eine Größe für alle; Zustand als
+  Parameter (Zeichen und Farbe, das Wort steht im Begriff).
+  `HorizontMetricRow` bricht um, statt zu verkleinern.
 - `AddressTitle`: Adresse in Mono, Name dahinter in Sans.
 - Telegrammtyp als quadratisches Kennzeichen mit Buchstabe (W/R/A), Radius 2,
-  Fläche `*-tint`, wächst mit der Schrift.
+  Fläche `*-tint`, wächst mit der Schrift (im Paket:
+  `HorizontLetterBadge`).
+- Ein Zustand im Fließtext als Zeichen und Wort in der Statusfarbe
+  (`HorizontStatusLine`), eine leere Ansicht mit `HorizontEmptyHint`.
 - Aktivitätsleiste: Kennzahlen nebeneinander in einer Größe, die Balken der
   letzten 60 s rechts bündig auf derselben Grundlinie.
 
@@ -448,6 +491,8 @@ Variante nennen, `Semantics(onLongPressHint:)` setzen,
   zieht.
 - Gespeicherte Diagramme gehören zur Anlage (Projekt, sonst Gateway), nicht
   zum Gerät.
+- Heatmaps färben mit `colors.dataRamp` (fünf Stufen, ein Ton), nicht mit
+  dem Akzent in Transparenz; die Legende nennt die Werte der Stufen.
 - Heatmaps wählen die Auflösung nach der Zeitspanne: bis 1 h je Minute, bis
   12 h je 5 Minuten, bis 7 Tage Tag × Stunde, darüber Wochentag × Stunde. Die
   Auflösung steht in der Kennung („AKTIVITÄT · JE MINUTE“).
@@ -458,7 +503,8 @@ Variante nennen, `Semantics(onLongPressHint:)` setzen,
 
 - Goldens (`test/golden_test.dart`, Tag `golden`) für Telefon, iPad und Mac,
   hell und dunkel, Textgröße 1, das Telefon auch 2. Live-Daten über eine timerfreie
-  Simulation mit fester Uhr, sonst hängen die Tests.
+  Simulation mit fester Uhr, sonst hängen die Tests. Die Schriften lädt
+  `loadHorizontFonts()` aus `package:horizont/testing.dart`.
 - CI schließt die Goldens aus (`--exclude-tags golden`); sie werden lokal
   erzeugt und angesehen.
 
@@ -467,7 +513,9 @@ Variante nennen, `Semantics(onLongPressHint:)` setzen,
 - Goldens in hell und dunkel, bei Textgröße 1.0 und 2.0, LTR.
 - Kein roher Wert außerhalb von `lib/theme/` (grep oben).
 - Jeder Status mit Wort und Zeichen, Screenreader-Label inklusive.
-- Kontrast: Text mindestens 4,5:1, große Schrift und Linien 3:1. Die
-  Token-Paare sind geprüft, eigene Kombinationen nicht.
+- Kontrast: Text mindestens 4,5:1, große Schrift, Umrisse von
+  Bedienelementen und Linien, die einen Zustand zeigen, 3:1. Die
+  Token-Paare sind geprüft (`flutter/test/contrast_test.dart`), eigene
+  Kombinationen nicht.
 - Auf einem echten Gerät ansehen. Store-Screenshots kommen in den
   Geräterahmen der Doku.
