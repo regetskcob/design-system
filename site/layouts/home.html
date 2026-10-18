@@ -310,6 +310,18 @@
         </table>
       </div></div>
     </div>
+    <h3 class="t-title-3">Geräterahmen</h3>
+    <p>Jeder Screenshot steht in seinem Gerät, in dieser Dokumentation, auf den Landingpages und in Beiträgen. Minimal, aber realistisch: echte Proportionen, Kamera-Aussparung, Seitentasten, Standfuß. Keine Spiegelung, keine Perspektive, kein Schatten, keine Gerätefarbe außer Schwarz und Aluminium. Ein nackter Screenshot ohne Rahmen kommt nicht vor.</p>
+    <div class="doc-devices">
+      {{- $frames := slice (slice "iphone" 110 "jagdaufseher" "iPhone") (slice "android" 110 "knx" "Android") (slice "laptop" 250 "knx" "MacBook") (slice "tv" 250 "panzergefecht" "Fernseher") }}
+      {{- range $frames }}
+      <div><figure class="hz-device hz-device--{{ index . 0 }}" style="--w:{{ index . 1 }}px"><div class="hz-device-screen">{{ partial "horizont/app-icon.html" (dict "product" (index . 2) "size" 40) }}</div></figure><span class="t-kennung hz-kennung">{{ index . 3 }}</span></div>
+      {{- end }}
+    </div>
+    <dl class="doc-facts">
+      <dt>Web</dt><dd><span class="hz-mono">figure.hz-device.hz-device--iphone</span> mit <span class="hz-mono">--w</span> als Außenbreite, darin <span class="hz-mono">.hz-device-screen</span>. Varianten: iphone, android, laptop, tv, dazu <span class="hz-mono">--cropped</span> für ein Telefon, das am Abschnittsrand endet.</dd>
+      <dt>Stores</dt><dd>App-Store- und Play-Store-Bilder nutzen dieselben Rahmen auf Papier oder Gelände, mit einer Kennung und einem Satz in Literata darüber.</dd>
+    </dl>
   </div>
 </section>
 
@@ -329,7 +341,7 @@
         <tr><td>Home Assistant</td><td>Ingress im Rahmen von HA</td><td>Neutrale von HA übernehmen, Akzent und Schrift bleiben.</td><td>KNX Add-on</td></tr>
         <tr><td>tvOS, Android TV</td><td>Fokus statt Zeiger, Siri Remote</td><td>Fokusring 3 px im Akzent mit Abstand, Schrift × 1,5, Abstände für 3 m Sehabstand.</td><td>Panzergefecht</td></tr>
         <tr><td>watchOS, Wear OS</td><td>eine Aufgabe pro Screen</td><td>Schwarze Fläche, Mono-Werte, der Akzent nur für die eine Aktion.</td><td>Panzergefecht</td></tr>
-        <tr><td>Landingpage</td><td>Feldseite: Leiste mit Kennungen und Inhalt</td><td>Literata-Überschrift links, kein zentrierter Hero, kein Kachelraster. Die Horizontlinie unter dem Hero, im Fuß „ein Projekt von regetskcob“.</td><td>alle, Blog</td></tr>
+        <tr><td>Landingpage</td><td>Feldseite: Leiste mit Kennungen und Inhalt</td><td>Literata-Überschrift links, kein zentrierter Hero, kein Kachelraster. Screenshots nur im Geräterahmen. Die Horizontlinie unter dem Hero, im Fuß „ein Projekt von regetskcob“.</td><td>alle, Blog</td></tr>
       </tbody>
     </table>
     </div>
@@ -345,8 +357,8 @@
     <h3 class="t-title-2">Jagdaufseher · iPhone hell, Android dunkel</h3>
     <div class="mock-stage" data-product="jagdaufseher">
       <div>
-        <div class="mock-phone" data-theme="light">
-          <div class="mock-status"><span>9:41</span><span class="island"></span><span class="hz-mono" style="font-size:11px">5G 87</span></div>
+        <figure class="hz-device hz-device--iphone" style="--w:380px"><div class="hz-device-screen mock-phone" data-theme="light">
+          <div class="mock-status"><span>9:41</span><span class="hz-mono" style="font-size:11px">5G 87</span></div>
           <div class="mock-navbar">
             <div class="mock-navbar-row"><span class="t-kennung hz-kennung">Hegering Nord · 412 ha</span><span><button class="mock-icon-btn" type="button" aria-label="Suchen"><svg><use href="#i-search"/></svg></button><button class="mock-icon-btn" type="button" aria-label="Neu"><svg><use href="#i-plus"/></svg></button></span></div>
             <div class="t-title-1">Übersicht</div>
@@ -358,12 +370,12 @@
             <span class="mock-tab"><svg><use href="#i-antler"/></svg>Wild</span>
             <span class="mock-tab"><svg><use href="#i-map"/></svg>Karte</span>
           </nav>
-        </div>
+        </div></figure>
         <p class="mock-caption">iOS: Kennung über dem kleinen Titel, Aktionen rechts oben, Tab-Bar mit Linie über dem aktiven Tab. Kein Large Title, keine Karten pro Zeile.</p>
       </div>
       <div>
-        <div class="mock-phone" data-theme="dark" style="border-radius:32px">
-          <div class="mock-status android"><span>9:41</span><span class="island"></span><span class="hz-mono" style="font-size:11px">87 %</span></div>
+        <figure class="hz-device hz-device--android" style="--w:380px"><div class="hz-device-screen mock-phone" data-theme="dark">
+          <div class="mock-status android"><span>9:41</span><span class="hz-mono" style="font-size:11px">87 %</span></div>
           <div class="mock-navbar" style="padding-top:12px">
             <span class="t-kennung hz-kennung">Hegering Nord · 412 ha</span>
             <div class="mock-navbar-row"><div class="t-title-1">Übersicht</div><button class="mock-icon-btn" type="button" aria-label="Suchen"><svg><use href="#i-search"/></svg></button></div>
@@ -376,15 +388,15 @@
             <span class="mock-tab"><svg><use href="#i-antler"/></svg>Wild</span>
             <span class="mock-tab"><svg><use href="#i-map"/></svg>Karte</span>
           </nav>
-        </div>
-        <p class="mock-caption">Android: dieselbe Seite mit Android-Rahmen. Ein erweiterter FAB für die eine Hauptaktion, NavigationBar mit Linie statt Pille.</p>
+        </div></figure>
+        <p class="mock-caption">Android: dieselbe Seite im Pixel-Rahmen. Ein erweiterter FAB für die eine Hauptaktion, NavigationBar mit Linie statt Pille.</p>
       </div>
     </div>
 
     <h3 class="t-title-2">KNX Monitor · macOS, dunkel</h3>
     <div class="mock-stage" data-product="knx">
       <div style="width:100%">
-        <div class="doc-scroll"><div class="mock-window" data-theme="dark" style="min-width:760px">
+        <div class="doc-scroll"><figure class="hz-device hz-device--laptop" style="--w:860px;min-width:780px;margin-left:auto;margin-right:auto"><div class="hz-device-screen mock-window" data-theme="dark">
           <div class="mock-titlebar">
             <span class="mock-lights"><i></i><i></i><i></i></span>
             <b style="font-size:13px">Musterhaus.knxproj</b>
@@ -432,7 +444,7 @@
               <span class="hz-mono">1.1.30</span><span class="hz-mono">2/1/1</span><span class="hz-mono">5.001 %</span><span class="hz-mono">0xA3</span><span>Jalousieaktor Küche, Kanal B</span>
             </div>
           </div>
-        </div></div>
+        </div></figure></div>
         <p class="mock-caption" style="max-width:none">macOS: Seitenleiste mit Kennungen, Werte durchgehend in Mono und rechtsbündig. Der Telegrammtyp hat Buchstabe und Farbe (W, R, A), die gewählte Zeile trägt die Linie.</p>
       </div>
     </div>
@@ -440,37 +452,9 @@
     <h3 class="t-title-2">Panzergefecht · Apple TV, Gelände</h3>
     <div class="mock-stage" data-product="panzergefecht">
       <div style="width:100%">
-        <div class="mock-tv" data-theme="dark">
-          <div class="mock-tv-left">
-            <span class="k">Lobby · Raum 7F3K</span>
-            <h4 class="mock-tv-title">Gefecht</h4>
-            <p>Code mit dem Handy scannen, es wird zum Controller. Oder Panzergefecht auf dem Handy öffnen und den Code eingeben.</p>
-            <div style="display:flex;gap:3cqw;align-items:flex-end;margin-top:auto">
-              <div class="mock-qr"><svg viewBox="0 0 21 21" shape-rendering="crispEdges">
-                {{- range $i := seq 0 440 }}
-                {{- $x := mod $i 21 }}{{ $y := div $i 21 }}
-                {{- $finder := or (and (lt $x 7) (lt $y 7)) (and (gt $x 13) (lt $y 7)) (and (lt $x 7) (gt $y 13)) }}
-                {{- if $finder }}
-                  {{- $fx := cond (gt $x 13) (sub $x 14) $x }}{{ $fy := cond (gt $y 13) (sub $y 14) $y }}
-                  {{- if or (eq $fx 0) (eq $fx 6) (eq $fy 0) (eq $fy 6) (and (ge $fx 2) (le $fx 4) (ge $fy 2) (le $fy 4)) }}<rect x="{{ $x }}" y="{{ $y }}" width="1" height="1" fill="#141A0E"/>{{ end }}
-                {{- else if and (not (or (and (lt $x 8) (lt $y 8)) (and (gt $x 12) (lt $y 8)) (and (lt $x 8) (gt $y 12)))) (lt (mod (add (mul $x 7) (mul $y 13) (mul $x $y)) 5) 2) }}<rect x="{{ $x }}" y="{{ $y }}" width="1" height="1" fill="#141A0E"/>
-                {{- end }}
-                {{- end }}
-              </svg></div>
-              <div class="mock-tv-code" aria-label="Code 7F3K"><span>7</span><span>F</span><span>3</span><span>K</span></div>
-            </div>
-          </div>
-          <div class="mock-tv-right">
-            <span class="k">Spieler · 3/4</span>
-            <div class="mock-slot"><span class="team" style="background:#E5533D">R</span><span>Spieler 1</span><span class="dev">iPhone</span></div>
-            <div class="mock-slot"><span class="team" style="background:#4A90E2">B</span><span>Spieler 2</span><span class="dev">Siri Remote</span></div>
-            <div class="mock-slot"><span class="team" style="background:#E5533D">R</span><span>Spieler 3</span><span class="dev">Android</span></div>
-            <div class="mock-slot empty"><span class="team" style="outline:1px dashed var(--line-strong);color:var(--text-faint)">·</span><span>Wartet auf Controller …</span><span></span></div>
-            <span class="k" style="margin-top:2cqw">Modus</span>
-            <div style="font-size:1.8cqw">Letzter Panzer · Wald</div>
-            <span class="mock-tv-btn">Gefecht starten</span>
-          </div>
-        </div>
+        <figure class="hz-device hz-device--tv" style="--w:880px"><div class="hz-device-screen mock-tv" data-theme="dark">
+          {{ partial "site/mock-tv.html" . }}
+        </div></figure>
         <p class="mock-caption" style="max-width:none">tvOS: Gelände als Fläche, der Code groß in Mono, Teams mit Buchstabe und Farbe. Der fokussierte Knopf trägt den Fokusring mit Abstand. Die Überschrift nutzt den breiten Schnitt, das ist der Spielcharakter, ohne Fasen und Effekte.</p>
       </div>
     </div>
@@ -488,10 +472,11 @@
               <p>Hochsitze, Kirrungen, Aufgaben und Strecke an einem Ort, geteilt mit allen, die im Revier jagen. Was draußen erfasst wird, gleicht sich ab, sobald wieder Empfang da ist.</p>
               <div class="lp-actions"><span class="hz-button hz-button--primary">Beta anfragen<svg><use href="#i-arrow"/></svg></span><span class="hz-button hz-button--secondary">So funktioniert es</span></div>
             </div>
-            <div class="lp-shot"><div style="width:320px;transform:scale(.7);transform-origin:top left">
+            <figure class="hz-device hz-device--iphone hz-device--cropped lp-shot" style="--w:250px;--h:372px"><div class="hz-device-screen"><div style="width:340px;transform:scale(.694);transform-origin:top left">
+              <div class="mock-status"><span>9:41</span><span class="hz-mono" style="font-size:11px">5G 87</span></div>
               <div class="mock-navbar"><span class="t-kennung hz-kennung">Hegering Nord · 412 ha</span><div class="t-title-1">Übersicht</div></div>
               {{ partial "site/mock-jagd.html" . }}
-            </div></div>
+            </div></div></figure>
           </div>
           <div class="lp-horizon"></div>
           <div class="lp-sec">
@@ -523,7 +508,8 @@
               <p>Telegramme live mitlesen, mit den Namen aus dem ETS-Projekt. Über KNXnet/IP, auf dem Rechner, dem Telefon oder als Add-on in Home Assistant.</p>
               <div class="lp-actions"><span class="hz-button hz-button--primary">Herunterladen<svg><use href="#i-arrow"/></svg></span><span class="hz-button hz-button--secondary">Als Add-on installieren</span></div>
             </div>
-            <div class="lp-data">
+            <figure class="hz-device hz-device--laptop lp-device" style="--w:420px"><div class="hz-device-screen lp-data">
+              <div class="mock-titlebar" style="height:28px;gap:8px;padding:0 10px"><span class="mock-lights"><i style="width:8px;height:8px"></i><i style="width:8px;height:8px"></i><i style="width:8px;height:8px"></i></span><b style="font-size:10px">Live</b><span class="mock-conn"><span class="hz-badge hz-badge--positive" style="height:16px;font-size:9px"><svg style="width:10px;height:10px"><use href="#i-ok"/></svg>Verbunden</span></span></div>
               <table class="hz-table">
                 <thead><tr><th>Zeit</th><th>Ziel</th><th>Typ</th><th class="hz-num">Wert</th></tr></thead>
                 <tbody>
@@ -534,7 +520,7 @@
                   <tr><td class="hz-mono">14:32:11.250</td><td class="hz-mono">4/0/1</td><td><span class="mock-type w">W</span></td><td class="hz-mono hz-num">3 412 W</td></tr>
                 </tbody>
               </table>
-            </div>
+            </div></figure>
           </div>
           <div class="lp-horizon"></div>
           <div class="lp-foot">{{ partial "horizont/mark.html" (dict "product" "regetskcob" "size" 16) }}<span>ein Projekt von regetskcob</span><span>Impressum · Datenschutz</span></div>
@@ -553,7 +539,7 @@
               <p>Ein Spiel von oben auf wechselndem Gelände, allein gegen die CPU, gegeneinander oder gemeinsam gegen Wellen. Das Handy wird zum Controller, der Fernseher zum Gefechtsfeld. Ohne Werbung.</p>
               <div class="lp-actions"><span class="hz-button hz-button--primary">Jetzt spielen<svg><use href="#i-arrow"/></svg></span><span class="hz-button hz-button--secondary">App laden</span></div>
             </div>
-            <div class="lp-iconshot">{{ partial "horizont/app-icon.html" (dict "product" "panzergefecht" "size" 200) }}</div>
+            <figure class="hz-device hz-device--tv lp-device" style="--w:420px"><div class="hz-device-screen mock-tv">{{ partial "site/mock-tv.html" . }}</div></figure>
           </div>
           <div class="lp-horizon"></div>
           <div class="lp-sec">
@@ -564,7 +550,7 @@
           <div class="lp-foot">{{ partial "horizont/mark.html" (dict "product" "regetskcob" "size" 16) }}<span>ein Projekt von regetskcob</span><span>Impressum · Datenschutz</span></div>
         </div>
       </div>
-      <p class="mock-caption" style="max-width:none">KNX Monitor zeigt rechts statt eines Telefons die Daten selbst: die Telegrammliste ist das Produkt. Panzergefecht bleibt dunkel auf Gelände, das Signalgelb gehört dem einen Knopf „Jetzt spielen“. Aufbau, Kennungen, Horizontlinie und Fußzeile sind bei allen drei gleich.</p>
+      <p class="mock-caption" style="max-width:none">KNX Monitor zeigt rechts die Telegrammliste auf dem MacBook, Panzergefecht die Lobby auf dem Fernseher. Panzergefecht bleibt dunkel auf Gelände, das Signalgelb gehört dem einen Knopf „Jetzt spielen“. Aufbau, Kennungen, Horizontlinie und Fußzeile sind bei allen drei gleich.</p>
     </div>
   </div>
 </section>

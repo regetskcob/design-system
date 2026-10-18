@@ -38,6 +38,11 @@
 {{- range $k, $v := .size }}
   --size-{{ $k }}: {{ $v }}px;
 {{- end }}
+{{- range $k, $v := .device }}
+{{- if ne $k "_comment" }}
+  --device-{{ $k }}: {{ $v }};
+{{- end }}
+{{- end }}
 }
 
 [data-theme="light"] { color-scheme: light; }

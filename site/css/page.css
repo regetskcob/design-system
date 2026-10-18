@@ -50,7 +50,6 @@ a { color: var(--accent-text); text-underline-offset: 3px; text-decoration-thick
   .doc-main { padding: 0 var(--s-16) var(--s-64); }
   .doc-bar { padding: 0 var(--s-16); }
   .doc-bar > .t-kennung { display: none; }
-  .mock-phone { width: 100%; max-width: 380px; }
   .doc-facts { grid-template-columns: 1fr; gap: var(--s-4); }
   .doc-facts dd { margin-bottom: var(--s-12); }
 }
@@ -157,22 +156,12 @@ a { color: var(--accent-text); text-underline-offset: 3px; text-decoration-thick
 .doc-section .mock-caption { margin-top: var(--s-12); font-size: 0.8125rem; color: var(--text-muted); max-width: 380px; }
 
 .mock-phone {
-  width: 380px; height: 780px;
-  border-radius: 44px;
-  border: 10px solid #0B0B0A;
-  outline: 1px solid var(--line-strong);
-  overflow: hidden;
-  position: relative;
-  background: var(--bg);
-  color: var(--text);
   display: flex; flex-direction: column;
   font-size: 15px;
 }
 
 .mock-status { height: 44px; flex: none; display: flex; align-items: center; justify-content: space-between; padding: 0 22px 0 26px; font: 600 13px/1 var(--font-sans); }
-.mock-status .island { width: 90px; height: 26px; background: #0B0B0A; border-radius: 13px; }
 .mock-status.android { height: 28px; padding: 0 16px; font-weight: 500; font-size: 12px; }
-.mock-status.android .island { width: 10px; height: 10px; border-radius: 50%; }
 .mock-scroll { flex: 1; overflow: hidden; }
 .mock-navbar { padding: var(--s-8) var(--s-16) var(--s-12); border-bottom: var(--line-hairline) solid var(--line); }
 .mock-navbar .t-title-1 { margin-top: 2px; }
@@ -199,7 +188,10 @@ a { color: var(--accent-text); text-underline-offset: 3px; text-decoration-thick
 .mock-fab svg { width: 20px; height: 20px; }
 
 /* Desktop window (macOS) */
-.mock-window { width: 100%; max-width: 880px; border: 1px solid var(--line-strong); border-radius: 12px; overflow: hidden; background: var(--bg); color: var(--text); display: grid; grid-template-columns: 196px 1fr; grid-template-rows: 44px 1fr; height: 520px; font-size: 13px; }
+.mock-window { display: grid; grid-template-columns: 164px minmax(0, 1fr); grid-template-rows: 44px minmax(0, 1fr); font-size: 12px; }
+.mock-window .hz-table td { padding: 0 var(--s-8); }
+.mock-window .hz-table th { padding: var(--s-8); }
+.mock-window .mock-toolbar .hz-input { width: 150px; }
 .mock-titlebar { grid-column: 1 / -1; display: flex; align-items: center; gap: var(--s-16); padding: 0 var(--s-16); border-bottom: var(--line-hairline) solid var(--line); background: var(--surface); }
 .mock-lights { display: flex; gap: 8px; }
 .mock-lights i { width: 12px; height: 12px; border-radius: 50%; background: var(--line-strong); }
@@ -221,7 +213,7 @@ a { color: var(--accent-text); text-underline-offset: 3px; text-decoration-thick
 .mock-detail { border-top: var(--line-hairline) solid var(--line-strong); padding: var(--s-12) var(--s-16); display: grid; grid-template-columns: repeat(4, auto) 1fr; gap: var(--s-4) var(--s-24); align-items: baseline; margin-top: auto; background: var(--surface); }
 
 /* TV (tvOS) */
-.mock-tv { width: 100%; max-width: 880px; aspect-ratio: 16 / 9; border: 12px solid #0B0B0A; border-radius: 10px; outline: 1px solid var(--line-strong); background: var(--bg); color: var(--text); display: grid; grid-template-columns: 1.1fr 1fr; overflow: hidden; container-type: inline-size; }
+.mock-tv { display: grid; grid-template-columns: 1.1fr 1fr; container-type: inline-size; }
 .mock-tv-left { padding: 6cqw 5cqw; display: flex; flex-direction: column; gap: 2.2cqw; border-right: var(--line-hairline) solid var(--line); }
 .mock-tv-title { font: 800 5.4cqw/1 var(--font-sans); letter-spacing: 0.04em; text-transform: uppercase; font-stretch: 125%; margin: 0; }
 .mock-tv-code { display: flex; gap: 1.4cqw; }
@@ -250,7 +242,7 @@ a { color: var(--accent-text); text-underline-offset: 3px; text-decoration-thick
 .lp-hero h1 { margin: var(--s-16) 0 var(--s-24); font-size: clamp(2rem, 5.2cqw, 3.25rem); line-height: 1.08; }
 .lp-hero p { color: var(--text-muted); max-width: 46ch; margin: 0 0 var(--s-32); }
 .lp-actions { display: flex; gap: var(--s-12); flex-wrap: wrap; margin-bottom: var(--s-64); }
-.lp-shot { align-self: end; justify-self: center; width: 240px; height: 380px; border: 8px solid #0B0B0A; border-bottom: 0; border-radius: 32px 32px 0 0; overflow: hidden; background: var(--bg); }
+.lp-shot { align-self: end; justify-self: center; }
 .lp-horizon { border-top: var(--line-selection) solid var(--accent); }
 .lp-sec { display: grid; grid-template-columns: 180px 1fr 1fr; gap: var(--s-32); padding: var(--s-48) var(--s-32); border-bottom: var(--line-hairline) solid var(--line); }
 .lp-sec h3 { margin: 0 0 var(--s-12); }
@@ -275,17 +267,19 @@ a { color: var(--accent-text); text-underline-offset: 3px; text-decoration-thick
 .mock-toolbar .hz-input { width: 180px; }
 .mock-stage > div { min-width: 0; max-width: 100%; }
 .doc-switcher .hz-segmented { max-width: 100%; overflow-x: auto; }
-@media (max-width: 600px) {
-  .mock-phone { width: 100%; max-width: 380px; }
-}
 
 .doc-variants { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: var(--s-24); margin: var(--s-16) 0 var(--s-24); }
 .doc-variants .hz-app-icon { display: block; margin-bottom: var(--s-12); }
 .doc-mark-small { flex-wrap: wrap; }
 
-.lp-data { align-self: center; border: var(--line-hairline) solid var(--line); border-radius: var(--r-10); overflow: hidden; background: var(--surface); margin-bottom: var(--s-48); }
-.lp-iconshot { align-self: center; justify-self: center; margin-bottom: var(--s-48); }
-.lp-iconshot .hz-app-icon { display: block; }
+.lp-device { align-self: center; justify-self: center; margin-bottom: var(--s-64); }
+.lp-data { font-size: 11px; }
+.lp-data .hz-table td { height: 24px; }
 @container (max-width: 720px) {
-  .lp-data, .lp-iconshot { display: none; }
+  .lp-device { display: none; }
 }
+
+.doc-scroll:has(> .hz-device--laptop) { padding: 0 3% var(--s-8); }
+.doc-devices { display: flex; flex-wrap: wrap; gap: var(--s-32); align-items: flex-end; margin: var(--s-24) 0; }
+.doc-devices .hz-device-screen { display: grid; place-items: center; }
+.doc-devices > div { display: grid; gap: var(--s-12); justify-items: center; }

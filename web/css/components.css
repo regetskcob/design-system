@@ -265,3 +265,98 @@
 /* A row without a leading icon: the title starts at the edge. */
 .hz-row:has(> span:empty:first-child) { grid-template-columns: 1fr auto; }
 .hz-row > span:empty:first-child { display: none; }
+
+/* --- Device frames ---
+   Every screenshot stands in its device: minimal, but true to the real thing.
+   Real proportions, the camera cut-out, side buttons, the stand. No
+   reflection, no perspective, no shadow, no colour but black and aluminium.
+
+     <figure class="hz-device hz-device--iphone" style="--w: 300px">
+       <div class="hz-device-screen">…</div>
+     </figure>
+
+   --w is the outer width; everything else follows from it. */
+
+.hz-device { position: relative; display: block; margin: 0; flex: none; width: var(--w, 300px); max-width: 100%; }
+.hz-device-screen { position: relative; overflow: hidden; background: var(--bg); color: var(--text); }
+
+.hz-device--iphone, .hz-device--android {
+  padding: calc(var(--w, 300px) * 0.022);
+  background: var(--device-body);
+  box-shadow: 0 0 0 1px var(--device-edge);
+}
+.hz-device--iphone { border-radius: calc(var(--w, 300px) * 0.165); }
+.hz-device--iphone > .hz-device-screen { aspect-ratio: 393 / 852; border-radius: calc(var(--w, 300px) * 0.145); }
+.hz-device--iphone > .hz-device-screen::before {
+  content: ""; position: absolute; z-index: 5; left: 50%; top: 1.3%;
+  width: 31%; height: 3.6%; transform: translateX(-50%);
+  border-radius: 999px; background: #000;
+}
+.hz-device--android { border-radius: calc(var(--w, 300px) * 0.11); }
+.hz-device--android > .hz-device-screen { aspect-ratio: 412 / 915; border-radius: calc(var(--w, 300px) * 0.09); }
+.hz-device--android > .hz-device-screen::before {
+  content: ""; position: absolute; z-index: 5; left: 50%; top: 1.4%;
+  width: 3.2%; aspect-ratio: 1; transform: translateX(-50%);
+  border-radius: 50%; background: #000;
+}
+
+/* Side buttons: iPhone action button and volume left, side button right;
+   Android volume and power right. */
+.hz-device--iphone::before, .hz-device--iphone::after, .hz-device--android::after {
+  content: ""; position: absolute; width: 3px; background: var(--device-button);
+}
+.hz-device--iphone::before {
+  left: -3px; top: 17%; height: 21%; border-radius: 2px 0 0 2px;
+  background: linear-gradient(var(--device-button) 0 20%, transparent 20% 32%, var(--device-button) 32% 62%, transparent 62% 70%, var(--device-button) 70%);
+}
+.hz-device--iphone::after { right: -3px; top: 25%; height: 11%; border-radius: 0 2px 2px 0; }
+.hz-device--android::after {
+  right: -3px; top: 18%; height: 24%; border-radius: 0 2px 2px 0;
+  background: linear-gradient(var(--device-button) 0 25%, transparent 25% 40%, var(--device-button) 40%);
+}
+
+/* A phone cut off at the bottom edge of a section, as on landing pages. */
+.hz-device--cropped { padding-bottom: 0; border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+.hz-device--cropped > .hz-device-screen { aspect-ratio: auto; height: var(--h, 380px); border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+
+/* MacBook: thin black bezel, aluminium base with the opening notch. */
+.hz-device--laptop {
+  padding: calc(var(--w, 700px) * 0.014) calc(var(--w, 700px) * 0.014) calc(var(--w, 700px) * 0.02);
+  margin-bottom: calc(var(--w, 700px) * 0.022);
+  background: var(--device-body);
+  border-radius: calc(var(--w, 700px) * 0.022) calc(var(--w, 700px) * 0.022) 0 0;
+  box-shadow: 0 0 0 1px var(--device-edge);
+}
+.hz-device--laptop > .hz-device-screen { aspect-ratio: 16 / 10; border-radius: 3px; }
+.hz-device--laptop::after {
+  content: ""; position: absolute; left: -3.5%; right: -3.5%; top: 100%;
+  height: calc(var(--w, 700px) * 0.022);
+  background: linear-gradient(var(--device-aluminium), var(--device-aluminium-dark));
+  border-radius: 0 0 50% 50% / 0 0 100% 100%;
+}
+.hz-device--laptop::before {
+  content: ""; position: absolute; z-index: 1; left: 43%; right: 43%; top: 100%;
+  height: calc(var(--w, 700px) * 0.008);
+  background: var(--device-aluminium-dark);
+  border-radius: 0 0 6px 6px;
+}
+
+/* Television: hairline bezel, a slim neck and foot. */
+.hz-device--tv {
+  padding: calc(var(--w, 700px) * 0.008);
+  margin-bottom: calc(var(--w, 700px) * 0.045);
+  background: var(--device-glass);
+  border-radius: calc(var(--w, 700px) * 0.006);
+  box-shadow: 0 0 0 1px var(--device-edge);
+}
+.hz-device--tv > .hz-device-screen { aspect-ratio: 16 / 9; }
+.hz-device--tv::before {
+  content: ""; position: absolute; left: 48.5%; right: 48.5%; top: 100%;
+  height: calc(var(--w, 700px) * 0.035); background: var(--device-body);
+}
+.hz-device--tv::after {
+  content: ""; position: absolute; left: 38%; right: 38%;
+  top: calc(100% + var(--w, 700px) * 0.035);
+  height: calc(var(--w, 700px) * 0.008); background: var(--device-body);
+  border-radius: 2px;
+}

@@ -338,5 +338,14 @@
     "expanded": 840,
     "large": 1200
   },
-  "_icon": "App-Icons: Buehne aus Himmel (sky->sky2) und Boden (ground) mit der Horizontlinie auf dem unteren Drittel, ein illustrierter Gegenstand mit dunkler Kontur (outline) in drei Toenen (obj), weicher Schatten. field/glyph gelten fuer die reduzierte Marke in Kopf- und Fusszeilen."
+  "_icon": "App-Icons: Buehne aus Himmel (sky->sky2) und Boden (ground) mit der Horizontlinie auf dem unteren Drittel, ein illustrierter Gegenstand mit dunkler Kontur (outline) in drei Toenen (obj), weicher Schatten. field/glyph gelten fuer die reduzierte Marke in Kopf- und Fusszeilen.",
+  "device": {
+    "_comment": "Geraeterahmen fuer Screenshots: Hardwarefarben, unabhaengig von hell und dunkel, wie das echte Geraet.",
+    "body": "#1C1C1E",
+    "edge": "#48484A",
+    "button": "#2C2C2E",
+    "glass": "#0A0A0A",
+    "aluminium": "#D4D5D9",
+    "aluminium-dark": "#A9AAAF"
+  }
 }

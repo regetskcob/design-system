@@ -1,0 +1,30 @@
+{{- /* Screen of the Panzergefecht lobby on a TV, used in the mockups and on the landing page. */ -}}
+<div class="mock-tv-left">
+  <span class="k">Lobby · Raum 7F3K</span>
+  <h4 class="mock-tv-title">Gefecht</h4>
+  <p>Code mit dem Handy scannen, es wird zum Controller. Oder Panzergefecht auf dem Handy öffnen und den Code eingeben.</p>
+  <div style="display:flex;gap:3cqw;align-items:flex-end;margin-top:auto">
+    <div class="mock-qr"><svg viewBox="0 0 21 21" shape-rendering="crispEdges">
+      {{- range $i := seq 0 440 }}
+      {{- $x := mod $i 21 }}{{ $y := div $i 21 }}
+      {{- $finder := or (and (lt $x 7) (lt $y 7)) (and (gt $x 13) (lt $y 7)) (and (lt $x 7) (gt $y 13)) }}
+      {{- if $finder }}
+        {{- $fx := cond (gt $x 13) (sub $x 14) $x }}{{ $fy := cond (gt $y 13) (sub $y 14) $y }}
+        {{- if or (eq $fx 0) (eq $fx 6) (eq $fy 0) (eq $fy 6) (and (ge $fx 2) (le $fx 4) (ge $fy 2) (le $fy 4)) }}<rect x="{{ $x }}" y="{{ $y }}" width="1" height="1" fill="#141A0E"/>{{ end }}
+      {{- else if and (not (or (and (lt $x 8) (lt $y 8)) (and (gt $x 12) (lt $y 8)) (and (lt $x 8) (gt $y 12)))) (lt (mod (add (mul $x 7) (mul $y 13) (mul $x $y)) 5) 2) }}<rect x="{{ $x }}" y="{{ $y }}" width="1" height="1" fill="#141A0E"/>
+      {{- end }}
+      {{- end }}
+    </svg></div>
+    <div class="mock-tv-code" aria-label="Code 7F3K"><span>7</span><span>F</span><span>3</span><span>K</span></div>
+  </div>
+</div>
+<div class="mock-tv-right">
+  <span class="k">Spieler · 3/4</span>
+  <div class="mock-slot"><span class="team" style="background:#E5533D">R</span><span>Spieler 1</span><span class="dev">iPhone</span></div>
+  <div class="mock-slot"><span class="team" style="background:#4A90E2">B</span><span>Spieler 2</span><span class="dev">Siri Remote</span></div>
+  <div class="mock-slot"><span class="team" style="background:#E5533D">R</span><span>Spieler 3</span><span class="dev">Android</span></div>
+  <div class="mock-slot empty"><span class="team" style="outline:1px dashed var(--line-strong);color:var(--text-faint)">·</span><span>Wartet auf Controller …</span><span></span></div>
+  <span class="k" style="margin-top:2cqw">Modus</span>
+  <div style="font-size:1.8cqw">Letzter Panzer · Wald</div>
+  <span class="mock-tv-btn">Gefecht starten</span>
+</div>
