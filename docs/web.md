@@ -12,7 +12,7 @@ Monitor und Panzergefecht, Jagdaufseher liegt im Blog unter
 ```toml
 [module]
   [[module.imports]]
-    path = 'github.com/regetskcob/design-system'
+    path = 'github.com/regetskcob/horizont'
     [[module.imports.mounts]]
       source = 'tokens'
       target = 'data'
@@ -30,7 +30,7 @@ Monitor und Panzergefecht, Jagdaufseher liegt im Blog unter
 ```
 
 ```bash
-hugo mod get github.com/regetskcob/design-system@main
+hugo mod get github.com/regetskcob/horizont@main
 ```
 
 Das ändert `go.mod` und `go.sum`. Im CI braucht der Build Go, wie im

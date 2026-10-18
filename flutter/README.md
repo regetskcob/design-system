@@ -8,7 +8,7 @@ Leitfaden: [docs/flutter.md](../docs/flutter.md).
 dependencies:
   horizont:
     git:
-      url: https://github.com/regetskcob/design-system.git
+      url: https://github.com/regetskcob/horizont.git
       path: flutter
       ref: v0.3.0
 ```

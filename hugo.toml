@@ -1,8 +1,8 @@
 # Horizont, the design system of regetskcob and its projects. Built as a
 # GitHub Pages project site: the user site regetskcob.github.io has the custom
 # domain www.regetskcob.de, so this repository is served under
-# https://www.regetskcob.de/design-system/ (the deploy passes the base URL).
-baseURL = 'https://www.regetskcob.de/design-system/'
+# https://www.regetskcob.de/horizont/ (the deploy passes the base URL).
+baseURL = 'https://www.regetskcob.de/horizont/'
 languageCode = 'de-DE'
 title = 'Horizont'
 disableKinds = ['taxonomy', 'term', 'section', 'page', 'rss', 'sitemap', 'robotsTXT', '404']

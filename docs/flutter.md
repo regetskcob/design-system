@@ -19,7 +19,7 @@ Die Apps binden es per Git-Abhängigkeit mit festem Tag ein:
 dependencies:
   horizont:
     git:
-      url: https://github.com/regetskcob/design-system.git
+      url: https://github.com/regetskcob/horizont.git
       path: flutter
       ref: v0.3.0
 ```

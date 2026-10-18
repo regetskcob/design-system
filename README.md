@@ -3,7 +3,7 @@
 Das Designsystem von regetskcob und seinen Projekten Jagdaufseher, KNX Monitor
 und Panzergefecht. Leitbild: minimalistisch wie die niederrheinische Feldflur.
 
-Dokumentation und Entwürfe: https://www.regetskcob.de/design-system/
+Dokumentation und Entwürfe: https://www.regetskcob.de/horizont/
 
 Stand: v0.3, Entscheidungen getroffen (#1), Schriften gebündelt (#2), Flutter-Paket da (#3). Die Apps und ihre Landingpages nutzen das System noch nicht.
 
@@ -33,17 +33,17 @@ muss deshalb nicht wie eine Hugo-Seite aussehen.
 ## Lokal ansehen
 
 ```sh
-hugo server --baseURL http://localhost:1313/design-system/
+hugo server --baseURL http://localhost:1313/horizont/
 ```
 
-Dann http://localhost:1313/design-system/ öffnen.
+Dann http://localhost:1313/horizont/ öffnen.
 
 ## Deploy
 
 Jeder Push auf `main` baut die Seite und veröffentlicht sie über GitHub Pages
 (`.github/workflows/pages.yml`). Weil die Nutzerseite `regetskcob.github.io`
 die Domain `www.regetskcob.de` trägt, erscheint dieses Repository als
-Projektseite unter `/design-system/`.
+Projektseite unter `/horizont/`.
 
 ## Geplant
 

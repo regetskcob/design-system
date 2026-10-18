@@ -3,7 +3,7 @@
 Horizont ist das Designsystem von regetskcob (Blog) und den Projekten
 **Jagdaufseher**, **KNX Monitor** und **Panzergefecht**. Dieses Repository ist
 die einzige Quelle: Tokens, Web-Schicht, Marken, Icons und die Dokumentation
-unter https://www.regetskcob.de/design-system/.
+unter https://www.regetskcob.de/horizont/.
 
 Wer eine Oberfläche baut oder ändert, egal ob Flutter-App, Landingpage, Blog
 oder Store-Bild, liest zuerst diese Datei und dann den passenden Leitfaden:
@@ -171,7 +171,7 @@ hätten.
 
 ## Entscheidungen (v0.2)
 
-Vom Nutzer entschieden (regetskcob/design-system#1). Nicht wieder aufmachen,
+Vom Nutzer entschieden (regetskcob/horizont#1). Nicht wieder aufmachen,
 ohne zu fragen:
 
 - **Zwei Grün bleiben.** Tanne für Jagdaufseher, Bus (Lime) für KNX Monitor.
@@ -209,17 +209,17 @@ Nutzer entschieden, nicht von der Sitzung.
   `main`. Hugo hängt die
   Ordner per `module.mounts` ein (`hugo.toml`).
 - Lokal ansehen:
-  `hugo server --baseURL http://localhost:1313/design-system/`
+  `hugo server --baseURL http://localhost:1313/horizont/`
 - Prüfen vor jedem Commit: hell und dunkel, 375 px Breite ohne horizontalen
   Überlauf, keine Konsolenfehler. Bei Lockups und Faktenlisten die
   Grundlinien nachmessen, nicht nur ansehen.
 - **Jeder Push auf `main` geht sofort live** (GitHub Pages, Projektseite
-  unter `/design-system/`). Vor dem Push ausdrücklich nachfragen.
+  unter `/horizont/`). Vor dem Push ausdrücklich nachfragen.
 - Commit-Nachrichten auf Englisch, Betreff als Satz, im Text das Warum.
   Code-Kommentare englisch, Oberflächentexte deutsch. Keine Geburtsdaten,
   Wohnorte oder andere persönlichen Angaben in Texten.
 - **Wer Horizont nutzt:** der Blog (Hugo-Modul, `hugo mod get
-  github.com/regetskcob/design-system@main`) und die Vorschau unter
+  github.com/regetskcob/horizont@main`) und die Vorschau unter
   `/preview/` (Repository `regetskcob/preview`). Die Apps und Landingpages
   sind noch nicht umgestellt, siehe die Reihenfolge in
   [docs/flutter.md](docs/flutter.md).

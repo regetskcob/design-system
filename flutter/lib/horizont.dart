@@ -4,7 +4,7 @@
 /// Build the theme with [buildHorizontTheme] for light and dark, read it
 /// with [HorizontTheme.of], call [registerHorizontLicenses] in `main()`.
 /// Rules and the reasoning behind them: CLAUDE.md and docs/flutter.md in
-/// https://github.com/regetskcob/design-system.
+/// https://github.com/regetskcob/horizont.
 library;
 
 export 'src/colors.dart';

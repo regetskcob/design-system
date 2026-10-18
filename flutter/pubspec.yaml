@@ -5,7 +5,7 @@ description: >-
   needs.
 version: 0.3.0
 publish_to: none
-repository: https://github.com/regetskcob/design-system
+repository: https://github.com/regetskcob/horizont
 
 environment:
   sdk: ^3.9.0
