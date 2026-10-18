@@ -11,8 +11,9 @@ import '../tokens.g.dart';
 /// HorizontField(label: l10n.name, child: TextFormField(controller: c))
 /// ```
 ///
-/// The label and the field are merged for screen readers, so the field is
-/// announced with its label.
+/// Label and field form one group for screen readers: the label is read
+/// right before the field. (Merging them would break fields that bring their
+/// own semantics, such as dropdowns.)
 class HorizontField extends StatelessWidget {
   /// Creates a field with [label] above [child].
   const HorizontField({
@@ -34,7 +35,8 @@ class HorizontField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final c = HorizontTheme.of(context).colors;
-    return MergeSemantics(
+    return Semantics(
+      container: true,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisSize: MainAxisSize.min,
