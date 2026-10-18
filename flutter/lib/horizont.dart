@@ -13,6 +13,7 @@ export 'src/licenses.dart';
 export 'src/theme.dart';
 export 'src/tokens.g.dart'
     show
+        HorizontHost,
         HorizontProduct,
         HorizontSymbols,
         HzBreakpoint,

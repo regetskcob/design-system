@@ -1,6 +1,6 @@
 {
   "_comment": "Horizont, das Designsystem von regetskcob und seinen Projekten. Einzige Quelle der Tokens: die Dokumentation (site/layouts/home.html) und die CSS-Schicht (web/css/tokens.css) lesen sie hier, Generatoren fuer Flutter und Swift sollen es ebenso tun. Farben je light und dark, beide von Hand gesetzt, nie aus einem Seed abgeleitet.",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "color": {
     "neutral": {
       "light": {
@@ -195,6 +195,32 @@
             "tread": "#2A2A28",
             "wheel": "#5A5B55"
           }
+        }
+      }
+    },
+    "host": {
+      "home-assistant": {
+        "name": "Home Assistant",
+        "role": "Neutrale des Gastgebers, wenn eine App eingebettet läuft (Ingress); Akzent, Status und Schrift bleiben Horizont",
+        "light": {
+          "bg": "#FAFAFA",
+          "surface": "#FFFFFF",
+          "sunken": "#F2F2F2",
+          "line": "#DCDCDC",
+          "line-strong": "#BDBDBD",
+          "text": "#212121",
+          "text-muted": "#666666",
+          "text-faint": "#9E9E9E"
+        },
+        "dark": {
+          "bg": "#111111",
+          "surface": "#1C1C1C",
+          "sunken": "#0B0B0B",
+          "line": "#2F2F2F",
+          "line-strong": "#474747",
+          "text": "#E1E1E1",
+          "text-muted": "#9B9B9B",
+          "text-faint": "#6F6F6F"
         }
       }
     }

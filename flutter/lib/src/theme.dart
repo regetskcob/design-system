@@ -20,6 +20,10 @@ import 'tokens.g.dart';
 /// (`Switch.adaptive`, `showAdaptiveDialog`, Cupertino pickers) look native
 /// in the product's colours, with the system font.
 ///
+/// Embedded in a [host] (the Home Assistant add-on inside Ingress), the
+/// neutrals are the host's so the product sits calmly in its frame; accent,
+/// status, type and lines stay Horizont.
+///
 /// Build it once per brightness at the composition root:
 ///
 /// ```dart
@@ -34,10 +38,11 @@ ThemeData buildHorizontTheme(
   Brightness brightness, {
   HorizontDensity? density,
   TargetPlatform? platform,
+  HorizontHost? host,
 }) {
   final target = platform ?? defaultTargetPlatform;
   final resolvedDensity = density ?? HorizontDensity.forPlatform(target);
-  final c = HorizontColors.resolve(product, brightness);
+  final c = HorizontColors.resolve(product, brightness, host: host);
   final dark = brightness == Brightness.dark;
   final pointer = resolvedDensity == HorizontDensity.pointer;
   // Android shows its ripple; Apple platforms, Windows, Linux and the web

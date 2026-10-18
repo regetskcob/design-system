@@ -101,6 +101,41 @@ void main() {
 }
 ''');
 
+  final hosts = (color['host'] as Map<String, dynamic>?) ?? const {};
+  out
+    ..writeln('/// Hosts that embed a product and lend it their neutrals, e.g. Home')
+    ..writeln("/// Assistant's Ingress. Accent, status and type stay Horizont.")
+    ..writeln('enum HorizontHost {');
+  final hostIds = hosts.keys.toList();
+  for (var i = 0; i < hostIds.length; i++) {
+    final h = hosts[hostIds[i]] as Map<String, dynamic>;
+    out
+      ..writeln('  /// ${h['name']}: ${h['role']}.')
+      ..writeln('  ${_camel(hostIds[i])}(')
+      ..writeln("    displayName: '${h['name']}',")
+      ..write('    light: ')
+      ..write(_ctor('HzNeutrals', h['light'] as Map<String, dynamic>, 4))
+      ..writeln(',')
+      ..write('    dark: ')
+      ..write(_ctor('HzNeutrals', h['dark'] as Map<String, dynamic>, 4))
+      ..writeln(',')
+      ..writeln('  )${i == hostIds.length - 1 ? ';' : ','}');
+  }
+  out.writeln('''
+
+  const HorizontHost({required this.displayName, required this.light, required this.dark});
+
+  /// The host's name.
+  final String displayName;
+
+  /// The host's neutrals in light mode.
+  final HzNeutrals light;
+
+  /// The host's neutrals in dark mode.
+  final HzNeutrals dark;
+}
+''');
+
   _numbers(out, 'HzSpace', 'Spacing on the 4 grid.', 's', tokens['space'] as Map<String, dynamic>);
   _numbers(out, 'HzRadius', 'Corner radii.', 'r', tokens['radius'] as Map<String, dynamic>);
   _numbers(out, 'HzLine', 'Line widths.', '', tokens['line'] as Map<String, dynamic>);

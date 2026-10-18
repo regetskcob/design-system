@@ -102,6 +102,11 @@ oder Seite schreiben.
   | KNX Monitor | Bus | #437F18 | #9BD45E |
   | Panzergefecht | Signalgelb | #8F6400 | #FFB300 |
 
+- **Gastgeber** (`color.host.<id>`, bisher `home-assistant`): Läuft ein
+  Produkt eingebettet, etwa das KNX-Monitor-Add-on in Home Assistants
+  Ingress, nimmt es die Neutralen des Gastgebers
+  (`buildHorizontTheme(…, host: HorizontHost.homeAssistant)`). Akzent,
+  Status, Schrift und Linien bleiben Horizont.
 - **Gelände:** Panzergefecht hat im Dunkeln eigene, olivgetönte Neutrale
   (`neutralDark`). Das ist die einzige Ausnahme, und sie gilt nur für die
   Neutralen. Spielwelt-Farben (Teams, Tarnanstriche, Kartengelände) gehören
@@ -214,7 +219,7 @@ Nutzer entschieden, nicht von der Sitzung.
   bewussten Änderung mit `cd flutter/example && flutter test
   --update-goldens` neu erzeugen und ansehen.
 - Versionen: Tokens (`version` im JSON), Paket (`flutter/pubspec.yaml`) und
-  Git-Tag (`v0.5.1`) laufen gemeinsam. Die Apps hängen an einem Tag, nie an
+  Git-Tag (`v0.6.0`) laufen gemeinsam. Die Apps hängen an einem Tag, nie an
   `main`. Hugo hängt die
   Ordner per `module.mounts` ein (`hugo.toml`).
 - Lokal ansehen:

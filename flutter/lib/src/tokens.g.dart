@@ -8,7 +8,7 @@
 import 'package:flutter/widgets.dart';
 
 /// Version of the tokens this file was generated from.
-const String horizontTokensVersion = '0.5.1';
+const String horizontTokensVersion = '0.6.0';
 
 /// The neutral colours of one brightness.
 @immutable
@@ -265,6 +265,46 @@ enum HorizontProduct {
 
   /// Own neutrals in dark mode (only Panzergefecht's Gelände), else null.
   final HzNeutrals? neutralDark;
+}
+
+/// Hosts that embed a product and lend it their neutrals, e.g. Home
+/// Assistant's Ingress. Accent, status and type stay Horizont.
+enum HorizontHost {
+  /// Home Assistant: Neutrale des Gastgebers, wenn eine App eingebettet läuft (Ingress); Akzent, Status und Schrift bleiben Horizont.
+  homeAssistant(
+    displayName: 'Home Assistant',
+    light: HzNeutrals(
+      bg: Color(0xFFFAFAFA),
+      surface: Color(0xFFFFFFFF),
+      sunken: Color(0xFFF2F2F2),
+      line: Color(0xFFDCDCDC),
+      lineStrong: Color(0xFFBDBDBD),
+      text: Color(0xFF212121),
+      textMuted: Color(0xFF666666),
+      textFaint: Color(0xFF9E9E9E),
+    ),
+    dark: HzNeutrals(
+      bg: Color(0xFF111111),
+      surface: Color(0xFF1C1C1C),
+      sunken: Color(0xFF0B0B0B),
+      line: Color(0xFF2F2F2F),
+      lineStrong: Color(0xFF474747),
+      text: Color(0xFFE1E1E1),
+      textMuted: Color(0xFF9B9B9B),
+      textFaint: Color(0xFF6F6F6F),
+    ),
+  );
+
+  const HorizontHost({required this.displayName, required this.light, required this.dark});
+
+  /// The host's name.
+  final String displayName;
+
+  /// The host's neutrals in light mode.
+  final HzNeutrals light;
+
+  /// The host's neutrals in dark mode.
+  final HzNeutrals dark;
 }
 
 /// Spacing on the 4 grid.
@@ -674,6 +714,96 @@ abstract final class HorizontSymbols {
   static const IconData power = IconData(0xe63c, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
   /// `cloud_off`
   static const IconData cloudOff = IconData(0xe2c1, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
+  /// `space_dashboard`
+  static const IconData spaceDashboard = IconData(0xe66b, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
+  /// `video_library`
+  static const IconData videoLibrary = IconData(0xe04a, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
+  /// `show_chart`
+  static const IconData showChart = IconData(0xe6e1, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
+  /// `format_list_bulleted`
+  static const IconData formatListBulleted = IconData(0xe241, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
+  /// `arrow_upward`
+  static const IconData arrowUpward = IconData(0xe5d8, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
+  /// `track_changes`
+  static const IconData trackChanges = IconData(0xe8e1, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
+  /// `delete_sweep`
+  static const IconData deleteSweep = IconData(0xe16c, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
+  /// `light_mode`
+  static const IconData lightMode = IconData(0xe518, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
+  /// `hvac`
+  static const IconData hvac = IconData(0xf10e, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
+  /// `window`
+  static const IconData window = IconData(0xf088, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
+  /// `notification_important`
+  static const IconData notificationImportant = IconData(0xe004, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
+  /// `electric_meter`
+  static const IconData electricMeter = IconData(0xec1b, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
+  /// `touch_app`
+  static const IconData touchApp = IconData(0xe913, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
+  /// `troubleshoot`
+  static const IconData troubleshoot = IconData(0xe1d2, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
+  /// `assignment_turned_in`
+  static const IconData assignmentTurnedIn = IconData(0xe862, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
+  /// `notifications_active`
+  static const IconData notificationsActive = IconData(0xe7f7, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
+  /// `monitor_heart`
+  static const IconData monitorHeart = IconData(0xeaa2, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
+  /// `insights`
+  static const IconData insights = IconData(0xf092, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
+  /// `hub`
+  static const IconData hub = IconData(0xe9f4, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
+  /// `unfold_more`
+  static const IconData unfoldMore = IconData(0xe5d7, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
+  /// `fast_rewind`
+  static const IconData fastRewind = IconData(0xe020, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
+  /// `fast_forward`
+  static const IconData fastForward = IconData(0xe01f, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
+  /// `replay`
+  static const IconData replay = IconData(0xe042, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
+  /// `handyman`
+  static const IconData handyman = IconData(0xf10b, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
+  /// `push_pin`
+  static const IconData pushPin = IconData(0xf10d, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
+  /// `star`
+  static const IconData star = IconData(0xf09a, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
+  /// `picture_as_pdf`
+  static const IconData pictureAsPdf = IconData(0xe415, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
+  /// `table_chart`
+  static const IconData tableChart = IconData(0xe265, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
+  /// `data_object`
+  static const IconData dataObject = IconData(0xead3, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
+  /// `edit_note`
+  static const IconData editNote = IconData(0xe745, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
+  /// `upload_file`
+  static const IconData uploadFile = IconData(0xe9fc, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
+  /// `layers_clear`
+  static const IconData layersClear = IconData(0xe53c, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
+  /// `link_off`
+  static const IconData linkOff = IconData(0xe16f, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
+  /// `translate`
+  static const IconData translate = IconData(0xe8e2, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
+  /// `bookmarks`
+  static const IconData bookmarks = IconData(0xe98b, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
+  /// `bookmark_add`
+  static const IconData bookmarkAdd = IconData(0xe598, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
+  /// `label`
+  static const IconData label = IconData(0xe893, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
+  /// `label_off`
+  static const IconData labelOff = IconData(0xe9b6, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
+  /// `check_box`
+  static const IconData checkBox = IconData(0xe9de, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
+  /// `check_box_outline_blank`
+  static const IconData checkBoxOutlineBlank = IconData(0xe835, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
+  /// `radio_button_unchecked`
+  static const IconData radioButtonUnchecked = IconData(0xe836, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
+  /// `north_east`
+  static const IconData northEast = IconData(0xf1e1, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
+  /// `south_west`
+  static const IconData southWest = IconData(0xf1e5, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
+  /// `visibility_off`
+  static const IconData visibilityOff = IconData(0xe8f5, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
+  /// `ios_share`
+  static const IconData iosShare = IconData(0xe6b8, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
   /// `sports_esports`
   static const IconData sportsEsports = IconData(0xea28, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
   /// `tv`

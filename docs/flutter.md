@@ -21,7 +21,7 @@ dependencies:
     git:
       url: https://github.com/regetskcob/horizont.git
       path: flutter
-      ref: v0.5.1
+      ref: v0.6.0
 ```
 
 Es bringt mit:
@@ -265,7 +265,8 @@ mit Goldens vorher und nachher.
 - Icon: `LogoPainter` zeichnet heute das Telegramm. Neu ist die Busklemme
   auf dem Buskabel (siehe `web/partials/app-icon.html`, Produkt `knx`).
 - Das Home-Assistant-Add-on übernimmt die Neutralen von HA, Akzent und
-  Schrift bleiben.
+  Schrift bleiben: `buildHorizontTheme(HorizontProduct.knx, b, host:
+  HorizontHost.homeAssistant)`, nur wenn die App in Ingress läuft.
 
 ### Jagdaufseher (`~/jagdaufseher`, Repo `regetskcob/jagdaufseher`)
 

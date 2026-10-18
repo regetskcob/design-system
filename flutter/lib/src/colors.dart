@@ -33,10 +33,16 @@ class HorizontColors {
     required this.infoTint,
   });
 
-  /// The slots of [product] in [brightness], from the tokens.
-  factory HorizontColors.resolve(HorizontProduct product, Brightness brightness) {
+  /// The slots of [product] in [brightness], from the tokens. Embedded in a
+  /// [host] (Home Assistant's Ingress), the neutrals are the host's; accent
+  /// and status stay the product's.
+  factory HorizontColors.resolve(HorizontProduct product, Brightness brightness, {HorizontHost? host}) {
     final dark = brightness == Brightness.dark;
-    final n = dark ? (product.neutralDark ?? HzColors.neutralDark) : HzColors.neutralLight;
+    final n = host != null
+        ? (dark ? host.dark : host.light)
+        : dark
+            ? (product.neutralDark ?? HzColors.neutralDark)
+            : HzColors.neutralLight;
     final s = dark ? HzColors.statusDark : HzColors.statusLight;
     final a = dark ? product.dark : product.light;
     return HorizontColors(
