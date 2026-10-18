@@ -124,7 +124,8 @@ class _ShowcaseState extends State<Showcase> {
                   onSelectionChanged: (s) => setState(() => _view = s.first),
                 ),
                 const SizedBox(height: HzSpace.s8),
-                SwitchListTile(
+                // Adaptive: a Cupertino switch on Apple platforms, in the accent.
+                SwitchListTile.adaptive(
                   contentPadding: EdgeInsets.zero,
                   title: const Text('Offline speichern'),
                   value: _offline,

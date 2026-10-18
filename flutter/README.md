@@ -27,7 +27,7 @@ void main() {
 
 | Baustein | Zweck |
 | --- | --- |
-| `buildHorizontTheme(product, brightness, density:)` | `ThemeData` mit von Hand gesetztem `ColorScheme`, Typografie und Komponenten-Themes |
+| `buildHorizontTheme(product, brightness, density:, platform:)` | `ThemeData` mit von Hand gesetztem `ColorScheme`, Typografie und Komponenten-Themes; Rückmeldung, Übergänge, Dichte und adaptive Widgets bleiben nativ |
 | `HorizontTheme.of(context)` | Farb-Slots (`colors`), Textstile `data`, `kennung`, `reading`, `display`, Dichte |
 | `HorizontSymbols.*` | Material Symbols Sharp (Liste: `icons/material-symbols.txt`) |
 | `Kennung('…')` | Mono-Versalien, gelesen wie geschrieben |

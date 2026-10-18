@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:horizont/horizont.dart';
 
@@ -19,7 +20,7 @@ class ExampleApp extends StatefulWidget {
 class _ExampleAppState extends State<ExampleApp> {
   HorizontProduct _product = HorizontProduct.jagdaufseher;
   ThemeMode _mode = ThemeMode.light;
-  HorizontDensity _density = HorizontDensity.touch;
+  HorizontDensity _density = HorizontDensity.forPlatform(defaultTargetPlatform);
 
   @override
   Widget build(BuildContext context) {

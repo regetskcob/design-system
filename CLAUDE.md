@@ -53,7 +53,11 @@ wird daher für alle Formfaktoren mitgedacht, nicht nur für das Telefon.
    Haken (positive), Dreieck (warning), Achteck (critical), Kreis (info).
 6. **Plattform ja, Mode nein.** Navigation, Gesten, Systemdialoge,
    Tastenkürzel und Teilen folgen der Plattform. Farbe, Schrift, Linie,
-   Abstand und Ton folgen Horizont.
+   Abstand und Ton folgen Horizont. Jede App soll sich auf ihrer Plattform
+   nativ anfühlen: Das Paket hält Rückmeldung, Übergänge, Zurück-Gesten,
+   Dichte und adaptive Widgets nativ (`docs/flutter.md`, „Plattformgefühl“),
+   und die App baut keine Systemdialoge nach. Bewusst abweichend sind nur
+   Mona Sans, die Kennung mit linkem Titel und die Auswahl als Linie.
 
 ## Erkennungszeichen
 

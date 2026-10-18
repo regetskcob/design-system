@@ -1,6 +1,7 @@
 @Tags(['golden'])
 library;
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -48,5 +49,31 @@ void main() {
         });
       }
     }
+  }
+
+  // The same screen as an iOS app: Cupertino switch in the accent, no
+  // ripple, the system's page transitions. Horizont only sets the colours.
+  for (final (product, brightness) in [
+    (HorizontProduct.jagdaufseher, Brightness.light),
+    (HorizontProduct.panzergefecht, Brightness.dark),
+  ]) {
+    final name = '${product.name}_${brightness.name}_ios';
+    testWidgets(name, (tester) async {
+      debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
+      tester.view.physicalSize = const Size(393, 852) * 2;
+      tester.view.devicePixelRatio = 2;
+      addTearDown(tester.view.reset);
+      await tester.pumpWidget(
+        MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: buildHorizontTheme(product, brightness),
+          home: const Showcase(),
+        ),
+      );
+      await tester.drag(find.byType(ListView), const Offset(0, -300));
+      await tester.pumpAndSettle();
+      await expectLater(find.byType(Showcase), matchesGoldenFile('goldens/$name.png'));
+      debugDefaultTargetPlatformOverride = null;
+    });
   }
 }

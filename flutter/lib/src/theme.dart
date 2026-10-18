@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'colors.dart';
@@ -7,6 +9,16 @@ import 'tokens.g.dart';
 /// The `ThemeData` of [product] in [brightness]: a hand-authored
 /// `ColorScheme` (never `fromSeed`), the text theme of the three voices, the
 /// component themes of Horizont and the [HorizontTheme] extension.
+///
+/// Horizont sets colour, type, lines and spacing; the platform keeps its
+/// behaviour. Per [platform] (default: the one the app runs on) the theme
+/// keeps the native touch feedback (Android's ripple, the plain press
+/// highlight on Apple platforms, Windows, Linux and the web), the native page
+/// transitions with their back gestures (swipe back on iOS and macOS,
+/// predictive back on Android), the density (pointer on desktops unless
+/// [density] says otherwise) and a Cupertino theme, so adaptive widgets
+/// (`Switch.adaptive`, `showAdaptiveDialog`, Cupertino pickers) look native
+/// in the product's colours, with the system font.
 ///
 /// Build it once per brightness at the composition root:
 ///
@@ -20,11 +32,17 @@ import 'tokens.g.dart';
 ThemeData buildHorizontTheme(
   HorizontProduct product,
   Brightness brightness, {
-  HorizontDensity density = HorizontDensity.touch,
+  HorizontDensity? density,
+  TargetPlatform? platform,
 }) {
+  final target = platform ?? defaultTargetPlatform;
+  final resolvedDensity = density ?? HorizontDensity.forPlatform(target);
   final c = HorizontColors.resolve(product, brightness);
   final dark = brightness == Brightness.dark;
-  final pointer = density == HorizontDensity.pointer;
+  final pointer = resolvedDensity == HorizontDensity.pointer;
+  // Android shows its ripple; Apple platforms, Windows, Linux and the web
+  // show no splash, only the press highlight below.
+  final android = target == TargetPlatform.android || target == TargetPlatform.fuchsia;
   TextStyle t(HzTypeSpec spec, [Color? color]) => horizontTextStyle(spec, color ?? c.text);
 
   final scheme = ColorScheme(
@@ -95,15 +113,33 @@ ThemeData buildHorizontTheme(
     scaffoldBackgroundColor: c.bg,
     canvasColor: c.bg,
     dividerColor: c.line,
+    platform: platform,
     visualDensity: pointer ? VisualDensity.compact : VisualDensity.standard,
     materialTapTargetSize: pointer ? MaterialTapTargetSize.shrinkWrap : MaterialTapTargetSize.padded,
-    splashFactory: InkRipple.splashFactory,
+    splashFactory: android ? InkSparkle.splashFactory : NoSplash.splashFactory,
+    highlightColor: android ? null : c.text.withValues(alpha: dark ? 0.10 : 0.06),
+    hoverColor: c.text.withValues(alpha: dark ? 0.06 : 0.04),
+    pageTransitionsTheme: const PageTransitionsTheme(
+      builders: {
+        TargetPlatform.android: PredictiveBackPageTransitionsBuilder(),
+        TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+        TargetPlatform.macOS: CupertinoPageTransitionsBuilder(),
+      },
+    ),
+    adaptations: [_CupertinoSwitch(c.accent)],
+    cupertinoOverrideTheme: NoDefaultCupertinoThemeData(
+      brightness: brightness,
+      primaryColor: c.accent,
+      primaryContrastingColor: c.onAccent,
+      barBackgroundColor: c.surface,
+      scaffoldBackgroundColor: c.bg,
+    ),
     iconTheme: IconThemeData(color: c.text, size: 22, weight: 300),
     extensions: [
       HorizontTheme(
         product: product,
         brightness: brightness,
-        density: density,
+        density: resolvedDensity,
         colors: c,
         data: t(HzType.data),
         kennung: t(HzType.kennung, c.textMuted),
@@ -117,6 +153,8 @@ ThemeData buildHorizontTheme(
       elevation: 0,
       scrolledUnderElevation: 0,
       surfaceTintColor: Colors.transparent,
+      // Left, under a Kennung, on every platform: decided for Horizont
+      // (regetskcob/horizont#1), also where iOS would centre it.
       centerTitle: false,
       toolbarHeight: pointer ? HzSize.toolbarDesktop : 56,
       titleTextStyle: t(HzType.title1),
@@ -308,4 +346,21 @@ ThemeData buildHorizontTheme(
       radius: const Radius.circular(HzRadius.r2),
     ),
   );
+}
+
+/// `Switch.adaptive` on Apple platforms: the native switch with its white
+/// thumb, the track in the product's accent instead of system green.
+class _CupertinoSwitch extends Adaptation<SwitchThemeData> {
+  const _CupertinoSwitch(this.accent);
+
+  final Color accent;
+
+  @override
+  SwitchThemeData adapt(ThemeData theme, SwitchThemeData defaultValue) => switch (theme.platform) {
+        TargetPlatform.iOS || TargetPlatform.macOS => SwitchThemeData(
+            trackColor: WidgetStateProperty.resolveWith((s) => s.contains(WidgetState.selected) ? accent : null),
+            thumbColor: const WidgetStatePropertyAll(CupertinoColors.white),
+          ),
+        _ => defaultValue,
+      };
 }

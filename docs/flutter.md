@@ -44,6 +44,51 @@ Widgets inklusive Grundlinie des Lockups. Goldens der Showcase-App liegen in
 In einer App gilt: Nichts davon nachbauen. Fehlt etwas, kommt es ins Paket,
 mit Token, Test und neuem Tag.
 
+## Plattformgefühl
+
+Horizont legt Farbe, Schrift, Linie, Abstand und Ton fest. Wie sich eine App
+anfühlt, also Gesten, Rückmeldung, Übergänge, Systemdialoge und Dichte, bleibt
+bei der Plattform. Das Paket sorgt dafür, solange die App es nicht übersteuert:
+
+- **Rückmeldung beim Tippen:** auf Android die native Welle (Sparkle). Auf
+  iOS, macOS, Windows, Linux und im Web keine Welle, sondern nur das
+  Abdunkeln beim Drücken und ein Hover-Ton.
+- **Seitenübergänge und Zurück-Gesten:** auf iOS und macOS die
+  Cupertino-Übergänge mit Wischen zurück, auf Android Predictive Back.
+- **Dichte:** Die Plattform bestimmt sie (`HorizontDensity.forPlatform`). Mit
+  Zeiger auf Mac, Windows und Linux, Touch auf Telefon und Tablet. Übergeben
+  wird sie nur, wenn die App es besser weiß, etwa beim iPad mit Tastatur und
+  Trackpad.
+- **Cupertino-Theme:** `Switch.adaptive`, `showAdaptiveDialog`,
+  `CupertinoDatePicker` und Action Sheets erscheinen nativ, im Akzent und auf
+  der Fläche des Produkts, aber mit der Systemschrift.
+
+Für die App selbst gilt:
+
+- **Adaptive Bausteine nutzen:** `Switch.adaptive`, `Slider.adaptive`,
+  `Checkbox.adaptive`, `CircularProgressIndicator.adaptive`,
+  `AlertDialog.adaptive` bzw. `showAdaptiveDialog`, `Icons.adaptive.*` für
+  Zurück, Teilen und Mehr. Auf iOS Datum und Uhrzeit mit
+  `CupertinoDatePicker`, Auswahl aus wenigen Aktionen als
+  `CupertinoActionSheet`.
+- **System nie nachbauen:** Teilen über das System-Sheet, Berechtigungen,
+  Dateiauswahl, Textauswahl und Kontextmenüs bleiben nativ. Kein eigener
+  Dialog im Horizont-Look, wo das System einen hat.
+- **Scrollen nicht anfassen:** Gummiband auf Apple-Plattformen, Glow bzw.
+  Stretch auf Android. Keine eigene `ScrollPhysics` ohne Grund.
+- **Desktop:** Menüleiste auf macOS (`PlatformMenuBar`), Tastenkürzel,
+  Hover-Zustände, Rechtsklick-Menüs, Fenstertitel. Auf dem Mac sitzt die
+  Seitenleiste unter der transparenten Titelleiste.
+- **Haptik wie die Plattform:** `HapticFeedback.selectionClick` beim Wechsel
+  einer Auswahl auf iOS, sonst nur, wo das System es auch tut. Nie zur Zier.
+- **Fernseher und Uhr:** Fokus-Engine und Siri Remote auf tvOS, Krone und
+  Seitentaste auf watchOS bleiben beim System.
+
+Bewusst anders als die Plattform, so entschieden in regetskcob/horizont#1:
+Mona Sans statt Systemschrift in der App-Oberfläche, die Kennung mit linkem
+Titel statt des großen iOS-Titels, die Auswahl als Linie statt als Pille.
+Darüber hinaus weicht nichts ab, ohne dass es entschieden ist.
+
 ## Grundsätze
 
 - Nie `ColorScheme.fromSeed`, nie `dynamic_color`, nie `google_fonts`. Hell
@@ -172,7 +217,7 @@ Nicht das Paket `material_symbols_icons`, es bündelt alle Symbole.
 - **Dialog, BottomSheet:** `elevation: 0`, Radius 10 (große Sheets 16),
   Rand outlineVariant.
 - **Divider:** outlineVariant, Dicke 1, Abstand 1.
-- **Ripple:** `InkRipple.splashFactory`, kein Sparkle.
+- **Rückmeldung:** setzt das Paket je Plattform (Welle nur auf Android), siehe „Plattformgefühl“. Nicht in der App überschreiben.
 - **Tab-Bar:** `HorizontTabBar` aus dem Paket. Lange Wörter bekommen in der
   ARB einen weichen Trennstrich (`Einrich\u00ADtungen`). Bei großer Schrift
   höchstens vier Ziele, sonst ab 600 die Rail. Labels nie kürzen,

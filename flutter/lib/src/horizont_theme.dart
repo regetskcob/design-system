@@ -10,7 +10,14 @@ enum HorizontDensity {
   touch,
 
   /// Mouse or trackpad.
-  pointer,
+  pointer;
+
+  /// The density a platform expects: pointer on macOS, Windows and Linux
+  /// (also the web on those systems), touch everywhere else.
+  static HorizontDensity forPlatform(TargetPlatform platform) => switch (platform) {
+        TargetPlatform.macOS || TargetPlatform.windows || TargetPlatform.linux => HorizontDensity.pointer,
+        TargetPlatform.android || TargetPlatform.iOS || TargetPlatform.fuchsia => HorizontDensity.touch,
+      };
 }
 
 /// Everything of Horizont that Material's `ThemeData` has no slot for:

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:horizont/horizont.dart';
@@ -81,5 +82,38 @@ void main() {
     );
     expect(full, const Duration(milliseconds: 200));
     expect(reduced, Duration.zero);
+  });
+
+  group('native feel per platform', () {
+    ThemeData build(TargetPlatform p) => buildHorizontTheme(HorizontProduct.knx, Brightness.light, platform: p);
+
+    test('Android keeps its ripple, the others only the press highlight', () {
+      expect(build(TargetPlatform.android).splashFactory, InkSparkle.splashFactory);
+      for (final p in [TargetPlatform.iOS, TargetPlatform.macOS, TargetPlatform.windows, TargetPlatform.linux]) {
+        expect(build(p).splashFactory, NoSplash.splashFactory, reason: p.name);
+      }
+    });
+
+    test('native page transitions with their back gestures', () {
+      final android = build(TargetPlatform.android).pageTransitionsTheme.builders;
+      final ios = build(TargetPlatform.iOS).pageTransitionsTheme.builders;
+      expect(android[TargetPlatform.android], isA<PredictiveBackPageTransitionsBuilder>());
+      expect(ios[TargetPlatform.iOS], isA<CupertinoPageTransitionsBuilder>());
+      expect(ios[TargetPlatform.macOS], isA<CupertinoPageTransitionsBuilder>());
+    });
+
+    test('desktops get pointer density by default, phones touch', () {
+      expect(build(TargetPlatform.macOS).extension<HorizontTheme>()!.density, HorizontDensity.pointer);
+      expect(build(TargetPlatform.windows).extension<HorizontTheme>()!.density, HorizontDensity.pointer);
+      expect(build(TargetPlatform.iOS).extension<HorizontTheme>()!.density, HorizontDensity.touch);
+      expect(build(TargetPlatform.android).extension<HorizontTheme>()!.density, HorizontDensity.touch);
+    });
+
+    test('Cupertino widgets take the accent but keep the system font', () {
+      final theme = build(TargetPlatform.iOS);
+      final cupertino = MaterialBasedCupertinoThemeData(materialTheme: theme);
+      expect(cupertino.primaryColor, theme.extension<HorizontTheme>()!.colors.accent);
+      expect(cupertino.textTheme.textStyle.fontFamily, isNot(HzFont.sans));
+    });
   });
 }
