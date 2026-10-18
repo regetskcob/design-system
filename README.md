@@ -7,6 +7,11 @@ Dokumentation und Entwürfe: https://www.regetskcob.de/design-system/
 
 Stand: Entwurf v0.1. Die Apps und ihre Landingpages nutzen das System noch nicht.
 
+Wer Oberflächen umsetzt, ob Mensch oder Claude-Sitzung, beginnt mit
+[CLAUDE.md](CLAUDE.md) (Leitbild, Regeln, Tokens, offene Entscheidungen,
+Arbeitsweise) und liest dann [docs/flutter.md](docs/flutter.md) für die Apps
+bzw. [docs/web.md](docs/web.md) für Hugo-Seiten.
+
 ## Aufbau
 
 | Ordner | Inhalt |
@@ -16,6 +21,8 @@ Stand: Entwurf v0.1. Die Apps und ihre Landingpages nutzen das System noch nicht
 | `web/partials/` | Marken (`mark.html`), illustrierte App-Icons (`app-icon.html`), Platzhalter-Ikonen (`icons.html`) |
 | `web/fonts/` | Literata und Monaspace Argon, SIL Open Font License (`web/fonts/OFL.txt`) |
 | `site/` | Nur die Dokumentationsseite |
+| `docs/` | Umsetzungsleitfäden für Flutter und Web |
+| `CLAUDE.md` | Kurzfassung aller Regeln für Claude-Sitzungen |
 
 Hugo bindet die Ordner über `module.mounts` in `hugo.toml` ein, das Repository
 muss deshalb nicht wie eine Hugo-Seite aussehen.
