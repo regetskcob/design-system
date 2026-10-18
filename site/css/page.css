@@ -188,13 +188,13 @@ a { color: var(--accent-text); text-underline-offset: 3px; text-decoration-thick
 .mock-fab svg { width: 20px; height: 20px; }
 
 /* Desktop window (macOS) */
-.mock-window { display: grid; grid-template-columns: 164px minmax(0, 1fr); grid-template-rows: 44px minmax(0, 1fr); font-size: 12px; }
+.mock-window { display: grid; grid-template-columns: 164px minmax(0, 1fr); grid-template-rows: 32px minmax(0, 1fr); font-size: 12px; }
 .mock-window .hz-table td { padding: 0 var(--s-8); }
 .mock-window .hz-table th { padding: var(--s-8); }
 .mock-window .mock-toolbar .hz-input { width: 150px; }
 .mock-titlebar { grid-column: 1 / -1; display: flex; align-items: center; gap: var(--s-16); padding: 0 var(--s-16); border-bottom: var(--line-hairline) solid var(--line); background: var(--surface); }
-.mock-lights { display: flex; gap: 8px; }
-.mock-lights i { width: 12px; height: 12px; border-radius: 50%; background: var(--line-strong); }
+.mock-lights { display: flex; gap: 6px; }
+.mock-lights i { width: 9px; height: 9px; border-radius: 50%; background: var(--line-strong); }
 .mock-titlebar .mock-conn { margin-left: auto; display: flex; align-items: center; gap: var(--s-8); }
 .mock-sidebar { border-right: var(--line-hairline) solid var(--line); background: var(--sunken); padding: var(--s-12) 0; overflow: hidden; }
 .mock-sidebar .t-kennung { padding: var(--s-16) var(--s-16) var(--s-8); display: block; color: var(--text-muted); }
@@ -204,8 +204,8 @@ a { color: var(--accent-text); text-underline-offset: 3px; text-decoration-thick
 .mock-side-item[aria-current] { color: var(--text); background: var(--accent-tint); }
 .mock-side-item[aria-current]::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; border-left: var(--line-selection) solid var(--accent); }
 .mock-content { overflow: hidden; display: flex; flex-direction: column; }
-.mock-toolbar { display: flex; align-items: center; gap: var(--s-12); padding: var(--s-12) var(--s-16); border-bottom: var(--line-hairline) solid var(--line); }
-.mock-toolbar .hz-input { min-height: 28px; font-size: 12px; width: 220px; }
+.mock-toolbar { display: flex; align-items: center; gap: var(--s-8); padding: 6px var(--s-12); border-bottom: var(--line-hairline) solid var(--line); }
+.mock-toolbar .hz-input { min-height: 20px; font-size: 10.5px; width: 220px; padding: 0 var(--s-8); }
 .mock-type { display: inline-grid; place-items: center; width: 18px; height: 18px; border-radius: var(--r-2); font: 600 10px/1 var(--font-mono); }
 .mock-type.w { background: var(--accent-tint); color: var(--accent-text); }
 .mock-type.r { background: var(--warning-tint); color: var(--warning); }
@@ -361,9 +361,9 @@ a { color: var(--accent-text); text-underline-offset: 3px; text-decoration-thick
 .ff-layers { position: absolute; top: var(--s-12); left: var(--s-12); }
 .ff-layers .hz-segmented { background: var(--surface); }
 .ff-tools { position: absolute; right: var(--s-12); bottom: var(--s-12); display: grid; background: var(--surface); border: var(--line-hairline) solid var(--line-strong); border-radius: var(--r-6); }
-.ff-tools span { width: 30px; height: 30px; display: grid; place-items: center; color: var(--text); }
+.ff-tools span { width: 24px; height: 24px; display: grid; place-items: center; color: var(--text); }
 .ff-tools span + span { border-top: var(--line-hairline) solid var(--line); }
-.ff-tools svg { width: 16px; height: 16px; }
+.ff-tools svg { width: 13px; height: 13px; }
 .ff-scale { position: absolute; left: var(--s-12); bottom: var(--s-12); font: 400 9px/1 var(--font-mono); color: var(--text-muted); border-bottom: 1px solid var(--text-muted); border-left: 1px solid var(--text-muted); border-right: 1px solid var(--text-muted); width: 60px; padding: 0 0 3px 4px; }
 .ff-insp { border-left: var(--line-hairline) solid var(--line); background: var(--surface); padding: var(--s-16); display: flex; flex-direction: column; gap: var(--s-8); min-height: 0; }
 .ff-insp h4 { margin: 0; font: 600 16px/1.2 var(--font-sans); }
@@ -372,11 +372,11 @@ a { color: var(--accent-text); text-underline-offset: 3px; text-decoration-thick
 .ff-insp dd { margin: 0; }
 .ff-thumbs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
 .ff-thumbs i { aspect-ratio: 1; background: var(--sunken); border: var(--line-hairline) solid var(--line); }
-.ff-insp .hz-button { min-height: 30px; font-size: 12px; }
+.ff-insp .hz-button { min-height: 26px; font-size: 11px; }
 .ff-insp .push { margin-top: auto; display: grid; gap: var(--s-8); }
 
 /* Mac: toolbar, sidebar, object grid, inspector. */
-.ff-mac { display: grid; grid-template-columns: 17% 1fr 25%; grid-template-rows: 40px minmax(0, 1fr); height: 100%; font-size: 11px; }
+.ff-mac { display: grid; grid-template-columns: 17% 1fr 25%; grid-template-rows: 30px minmax(0, 1fr); height: 100%; font-size: 11px; }
 .ff-mac .mock-titlebar { grid-column: 1 / -1; gap: var(--s-12); }
 .ff-mac .mock-sidebar { padding-top: var(--s-8); }
 .ff-mac .mock-side-item { padding: 4px var(--s-12); }
@@ -401,7 +401,7 @@ a { color: var(--accent-text); text-underline-offset: 3px; text-decoration-thick
 .ff-macinsp svg { width: 100%; height: 70px; }
 .ff-macinsp svg path { fill: none; stroke: var(--accent); stroke-width: 1.5; }
 .ff-macinsp svg .grid { stroke: var(--line); stroke-width: 1; }
-.ff-macinsp .hz-button { min-height: 28px; font-size: 11px; }
+.ff-macinsp .hz-button { min-height: 20px; font-size: 10px; padding: 0 var(--s-8); }
 
 /* TV: safe area, focus shelf, details. */
 .ff-tv { height: 100%; padding: 5.5cqw 7cqw; display: grid; grid-template-rows: auto 1fr auto; gap: 1.6cqw; }
@@ -435,3 +435,17 @@ a { color: var(--accent-text); text-underline-offset: 3px; text-decoration-thick
 .ff-watch .bar::after { content: ""; position: absolute; inset: 0 30% 0 0; background: #FFB300; }
 .ff-watch.terrain { background: radial-gradient(circle at 18% 22%, #55603A 0 9%, transparent 9.5%), radial-gradient(circle at 82% 30%, #4A5530 0 11%, transparent 11.5%), radial-gradient(circle at 70% 72%, #3A4426 0 13%, transparent 13.5%), #2E3823; }
 .ff-watch.terrain .tank { position: absolute; left: 50%; top: 36%; width: 34px; transform: translateX(-50%) rotate(35deg); }
+
+/* Controls inside the device mockups at the scale of their screen: a Mac
+   toolbar control is 24 pt on a 1280 pt wide screen, an iPad control keeps
+   its 44 pt target on 1180 pt. */
+.hz-device--laptop .hz-device-screen .hz-segmented button { min-height: 18px; padding: 0 7px; font-size: 10px; box-shadow: inset 0 -1.5px 0 transparent; }
+.hz-device--laptop .hz-device-screen .hz-segmented button[aria-pressed="true"] { box-shadow: inset 0 -1.5px 0 var(--accent); }
+.hz-device--laptop .hz-device-screen .hz-button--dense { min-height: 18px; padding: 0 var(--s-8); font-size: 10px; gap: 4px; }
+.hz-device--laptop .hz-device-screen .hz-button--dense svg { width: 11px; height: 11px; }
+.hz-device--laptop .hz-device-screen .hz-badge { height: 16px; font-size: 9.5px; }
+.hz-device--laptop .hz-device-screen .hz-badge svg { width: 10px; height: 10px; }
+.hz-device--laptop .mock-titlebar { gap: var(--s-12); padding: 0 var(--s-12); }
+.hz-device--laptop .mock-titlebar b { font-size: 11px !important; }
+.hz-device--ipad .hz-device-screen .hz-segmented button { min-height: 24px; padding: 0 var(--s-8); font-size: 10.5px; }
+.doc-bar .hz-segmented button { min-height: 28px; font-size: 0.75rem; }

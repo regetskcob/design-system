@@ -330,7 +330,9 @@
     "row-dense": 28,
     "text-column": 720,
     "page": 1120,
-    "rail": 200
+    "rail": 200,
+    "control-desktop": 28,
+    "toolbar-desktop": 52
   },
   "breakpoint": {
     "compact": 0,

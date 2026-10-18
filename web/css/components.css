@@ -398,3 +398,12 @@
   content: ""; position: absolute; right: -3px; top: 50%; width: 3px; height: 20%;
   border-radius: 0 2px 2px 0; background: var(--device-button);
 }
+
+/* --- Density ---
+   Touch keeps 44 pt targets. With a pointer (macOS, a web app on the
+   desktop) controls are 24 to 28 pt high and the toolbar 52 pt: set
+   data-density="desktop" on the window or the page. */
+[data-density="desktop"] .hz-button { min-height: var(--size-control-desktop); padding: 0 var(--s-12); font-size: 0.8125rem; }
+[data-density="desktop"] .hz-input { min-height: var(--size-control-desktop); font-size: 0.8125rem; }
+[data-density="desktop"] .hz-segmented button { min-height: 24px; padding: 0 var(--s-12); font-size: 0.75rem; }
+[data-density="desktop"] .hz-row { min-height: var(--size-row-dense); padding-block: var(--s-4); }
