@@ -19,9 +19,9 @@ class HorizontDestination {
   final String? badge;
 }
 
-/// The bottom navigation of Horizont for compact widths (below 600): labels
-/// always visible, the selected destination marked by a 2 px line in the
-/// accent above it, no pill. On Android it replaces `NavigationBar`, on iOS
+/// The bottom navigation of Horizont on touch devices: labels always
+/// visible, the selected destination on a light accent tint (radius 6, no
+/// pill) with its icon larger and in the accent. On Android it replaces `NavigationBar`, on iOS
 /// it stands for the tab bar.
 class HorizontTabBar extends StatelessWidget {
   /// Creates a tab bar.
@@ -79,7 +79,7 @@ class _Tab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final c = HorizontTheme.of(context).colors;
-    final fg = selected ? c.text : c.textMuted;
+    final fg = selected ? c.accentText : c.textMuted;
     return Semantics(
       selected: selected,
       button: true,
@@ -87,32 +87,32 @@ class _Tab extends StatelessWidget {
         onTap: onTap,
         child: ConstrainedBox(
           constraints: const BoxConstraints(minHeight: HzSize.touch + HzSpace.s12),
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              if (selected)
-                PositionedDirectional(
-                  top: 0,
-                  start: HzSpace.s24,
-                  end: HzSpace.s24,
-                  child: Container(height: HzLine.selection, color: c.accent),
-                ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: HzSpace.s8),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: HzSpace.s8, vertical: HzSpace.s4),
+            // The selection is a light tint behind icon and word, radius 6
+            // (no pill); the icon is larger and in the accent.
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                color: selected ? c.accentTint : null,
+                borderRadius: const BorderRadius.all(Radius.circular(HzRadius.r6)),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: HzSpace.s4),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(destination.icon, size: 22, color: fg),
+                    Icon(destination.icon, size: 24, color: fg),
                     const SizedBox(height: HzSpace.s2),
                     Text(
                       destination.label,
-                      style: horizontTextStyle(HzType.caption, fg).copyWith(fontWeight: FontWeight.w500),
+                      style: horizontTextStyle(HzType.caption, selected ? c.text : c.textMuted)
+                          .copyWith(fontWeight: selected ? FontWeight.w600 : FontWeight.w500),
                       textAlign: TextAlign.center,
                     ),
                   ],
                 ),
               ),
-            ],
+            ),
           ),
         ),
       ),

@@ -204,8 +204,9 @@ Nicht das Paket `material_symbols_icons`, es bündelt alle Symbole.
   `*Tint`, Zeichen (Haken, Dreieck, Achteck, Kreis) und Wort, Radius 2.
 - **Auswahl als Linie:** `TabBar` mit `UnderlineTabIndicator(borderSide:
   BorderSide(width: 2, color: primary))` und `dividerColor: outlineVariant`.
-  Für Tab-Bar und `NavigationRail` ein eigenes schlankes Widget, das die
-  2-px-Linie über dem Ziel bzw. links davon zeichnet. Den Pillen-Indikator
+  Für `NavigationRail` ein eigenes schlankes Widget, das die 2-px-Linie
+  links vom Ziel zeichnet. Die Tab-Bar unten (`HorizontTabBar`) markiert
+  das Ziel mit `accent-tint` (Radius 6) und einem größeren Icon im Akzent. Den Pillen-Indikator
   von Material 3 nicht nachbauen
   (`indicatorColor: Colors.transparent` reicht nicht für die Linie).
 - **SegmentedButton:** Radius 6, Rand line-strong, Auswahl mit

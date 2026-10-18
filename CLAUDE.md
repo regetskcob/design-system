@@ -67,9 +67,11 @@ wird daher für alle Formfaktoren mitgedacht, nicht nur für das Telefon.
   412 HA` oder `01 — IN ENTWICKLUNG`. Sie ersetzt Eyebrow-Pillen und
   Abschnittstitel. Über dem Seitentitel steht eine Kennung statt eines Large
   Title (entschieden, siehe unten).
-- **Auswahl ist eine Linie:** 2 px im Akzent, unter dem aktiven Tab bzw.
-  über ihm in der Tab-Bar, links an der gewählten Zeile, unten im Segment.
-  Nie eine Pille als Indikator. Ein Tint (`accent-tint`) darf dazukommen.
+- **Auswahl ist eine Linie:** 2 px im Akzent, unter dem aktiven Tab, links
+  an der gewählten Zeile, unten im Segment. Nie eine Pille als Indikator.
+  Ein Tint (`accent-tint`) darf dazukommen. Ausnahme Tab-Bar unten: dort
+  liegt das gewählte Ziel auf `accent-tint` (Radius 6), das Icon größer und
+  im Akzent, ohne Linie (entschieden, siehe unten).
 - **Fokus:** 2 px Akzent mit 2 px Abstand, auf dem Fernseher 3 px.
 - **Lockup:** Steht eine Marke neben einem Namen, liegt ihre Horizontlinie
   auf der Grundlinie des Textes (web: `.hz-lockup`). Marke und Text nie
@@ -203,6 +205,10 @@ ohne zu fragen:
   Kennung, der große iOS-Titel wird nicht genutzt.
 - **Gelände** ist als einzige Ausnahme freigegeben: Panzergefecht hat im
   Dunkeln eigene Neutrale.
+- **Tab-Bar mit Tönung statt Linie** (entschieden bei KNX Monitor): Die
+  2-px-Linie über dem gewählten Tab wirkte am Gerät wie ein Fehler. Das
+  gewählte Ziel liegt auf `accent-tint` (Radius 6, keine Pille), Icon 24
+  im Akzent, Wort halbfett.
 - **Hauptaktion als FAB auf Touch** (entschieden bei der Umstellung von KNX
   Monitor, regetskcob/KNX-Monitor#23): Auf Telefon und Tablet steht die eine
   Hauptaktion als schwebender Knopf mit Wort, auf iOS wie auf Android. Oben
