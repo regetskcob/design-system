@@ -7,7 +7,11 @@ import '../tokens.g.dart';
 @immutable
 class HorizontDestination {
   /// Creates a destination with [icon] and [label].
-  const HorizontDestination({required this.icon, required this.label, this.badge});
+  const HorizontDestination({
+    required this.icon,
+    required this.label,
+    this.badge,
+  });
 
   /// The icon, usually one of `HorizontSymbols`.
   final IconData icon;
@@ -30,7 +34,10 @@ class HorizontTabBar extends StatelessWidget {
     required this.selectedIndex,
     required this.onSelected,
     super.key,
-  }) : assert(destinations.length >= 2 && destinations.length <= 5, 'A tab bar has 2 to 5 destinations.');
+  }) : assert(
+         destinations.length >= 2 && destinations.length <= 5,
+         'A tab bar has 2 to 5 destinations.',
+       );
 
   /// Three to five destinations.
   final List<HorizontDestination> destinations;
@@ -48,7 +55,9 @@ class HorizontTabBar extends StatelessWidget {
     return DecoratedBox(
       decoration: BoxDecoration(
         color: c.surface,
-        border: Border(top: BorderSide(color: c.line, width: HzLine.hairline)),
+        border: Border(
+          top: BorderSide(color: c.line, width: HzLine.hairline),
+        ),
       ),
       child: SafeArea(
         top: false,
@@ -70,7 +79,11 @@ class HorizontTabBar extends StatelessWidget {
 }
 
 class _Tab extends StatelessWidget {
-  const _Tab({required this.destination, required this.selected, required this.onTap});
+  const _Tab({
+    required this.destination,
+    required this.selected,
+    required this.onTap,
+  });
 
   final HorizontDestination destination;
   final bool selected;
@@ -86,30 +99,50 @@ class _Tab extends StatelessWidget {
       child: InkWell(
         onTap: onTap,
         child: ConstrainedBox(
-          constraints: const BoxConstraints(minHeight: HzSize.touch + HzSpace.s12),
+          constraints: const BoxConstraints(
+            minHeight: HzSize.touch + HzSpace.s12,
+          ),
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: HzSpace.s8, vertical: HzSpace.s4),
+            padding: const EdgeInsets.symmetric(
+              horizontal: HzSpace.s8,
+              vertical: HzSpace.s4,
+            ),
             // The selection is a light tint behind icon and word, radius 6
             // (no pill); the icon is larger and in the accent.
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                color: selected ? c.accentTint : null,
-                borderRadius: const BorderRadius.all(Radius.circular(HzRadius.r6)),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: HzSpace.s4),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(destination.icon, size: 24, color: fg),
-                    const SizedBox(height: HzSpace.s2),
-                    Text(
-                      destination.label,
-                      style: horizontTextStyle(HzType.caption, selected ? c.text : c.textMuted)
-                          .copyWith(fontWeight: selected ? FontWeight.w600 : FontWeight.w500),
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
+            child: Center(
+              // The tint hugs icon and word instead of filling the slot.
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  color: selected ? c.accentTint : null,
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(HzRadius.r6),
+                  ),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: HzSpace.s16,
+                    vertical: HzSpace.s4,
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(destination.icon, size: 24, color: fg),
+                      const SizedBox(height: HzSpace.s2),
+                      Text(
+                        destination.label,
+                        style:
+                            horizontTextStyle(
+                              HzType.caption,
+                              selected ? c.text : c.textMuted,
+                            ).copyWith(
+                              fontWeight: selected
+                                  ? FontWeight.w600
+                                  : FontWeight.w500,
+                            ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -162,7 +195,9 @@ class HorizontRail extends StatelessWidget {
       width: width,
       decoration: BoxDecoration(
         color: c.sunken,
-        border: BorderDirectional(end: BorderSide(color: c.line, width: HzLine.hairline)),
+        border: BorderDirectional(
+          end: BorderSide(color: c.line, width: HzLine.hairline),
+        ),
       ),
       child: SafeArea(
         right: false,
@@ -171,14 +206,21 @@ class HorizontRail extends StatelessWidget {
           children: [
             if (header != null)
               Padding(
-                padding: const EdgeInsets.fromLTRB(HzSpace.s16, HzSpace.s16, HzSpace.s16, HzSpace.s12),
+                padding: const EdgeInsets.fromLTRB(
+                  HzSpace.s16,
+                  HzSpace.s16,
+                  HzSpace.s16,
+                  HzSpace.s12,
+                ),
                 child: header,
               ),
             for (var i = 0; i < destinations.length; i++)
               _RailItem(
                 destination: destinations[i],
                 selected: i == selectedIndex,
-                height: theme.density == HorizontDensity.touch ? HzSize.touch : 32,
+                height: theme.density == HorizontDensity.touch
+                    ? HzSize.touch
+                    : 32,
                 onTap: () => onSelected(i),
               ),
             const Spacer(),
@@ -191,7 +233,12 @@ class HorizontRail extends StatelessWidget {
 }
 
 class _RailItem extends StatelessWidget {
-  const _RailItem({required this.destination, required this.selected, required this.height, required this.onTap});
+  const _RailItem({
+    required this.destination,
+    required this.selected,
+    required this.height,
+    required this.onTap,
+  });
 
   final HorizontDestination destination;
   final bool selected;
@@ -212,7 +259,10 @@ class _RailItem extends StatelessWidget {
           onTap: onTap,
           child: Container(
             height: height,
-            padding: const EdgeInsetsDirectional.only(start: HzSpace.s16, end: HzSpace.s12),
+            padding: const EdgeInsetsDirectional.only(
+              start: HzSpace.s16,
+              end: HzSpace.s12,
+            ),
             decoration: BoxDecoration(
               border: BorderDirectional(
                 start: BorderSide(
@@ -225,9 +275,20 @@ class _RailItem extends StatelessWidget {
               children: [
                 Icon(destination.icon, size: 18, color: fg),
                 const SizedBox(width: HzSpace.s8),
-                Expanded(child: Text(destination.label, style: horizontTextStyle(HzType.callout, fg))),
+                Expanded(
+                  child: Text(
+                    destination.label,
+                    style: horizontTextStyle(HzType.callout, fg),
+                  ),
+                ),
                 if (destination.badge != null)
-                  Text(destination.badge!, style: theme.data.copyWith(fontSize: 11, color: c.textMuted)),
+                  Text(
+                    destination.badge!,
+                    style: theme.data.copyWith(
+                      fontSize: 11,
+                      color: c.textMuted,
+                    ),
+                  ),
               ],
             ),
           ),
