@@ -716,6 +716,10 @@ abstract final class HorizontSymbols {
   static const IconData cloudOff = IconData(0xe2c1, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
   /// `cloud`
   static const IconData cloud = IconData(0xf15c, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
+  /// `left_panel_open`
+  static const IconData leftPanelOpen = IconData(0xf716, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
+  /// `left_panel_close`
+  static const IconData leftPanelClose = IconData(0xf717, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
   /// `space_dashboard`
   static const IconData spaceDashboard = IconData(0xe66b, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
   /// `video_library`

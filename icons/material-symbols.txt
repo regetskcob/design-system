@@ -89,6 +89,8 @@ lan
 power
 cloud_off
 cloud
+left_panel_open
+left_panel_close
 space_dashboard
 video_library
 show_chart

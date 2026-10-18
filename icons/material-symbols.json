@@ -79,6 +79,8 @@
   "power": "0xe63c",
   "cloud_off": "0xe2c1",
   "cloud": "0xf15c",
+  "left_panel_open": "0xf716",
+  "left_panel_close": "0xf717",
   "space_dashboard": "0xe66b",
   "video_library": "0xe04a",
   "show_chart": "0xe6e1",
