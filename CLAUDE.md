@@ -45,7 +45,8 @@ wird daher für alle Formfaktoren mitgedacht, nicht nur für das Telefon.
 3. **Eine Farbe pro Produkt.** Alles andere ist Papier und Tinte. Der Akzent
    markiert nur die Hauptaktion und die Auswahl, Status hat eigene Farben.
 4. **Drei Stimmen.** Literata für das, was man liest (Überschriften der
-   Landingpages, Fließtext, Onboarding). Mona Sans für das, was man bedient.
+   Landingpages, Fließtext, Onboarding). Mona Sans für das, was man bedient
+   (Überschriften von Panzergefecht: Mona Sans Display Expanded).
    Monaspace Argon für das, was gemessen wird (Werte, Zeiten, Adressen,
    IDs, Koordinaten), immer mit Tabellenziffern.
 5. **Zustand nie nur als Farbe.** Jeder Status hat Wort, Zeichen und Farbe:
@@ -150,9 +151,14 @@ Einrichtungen.
   `web/partials/mark.html`, Strich 7 von 100, eckige Enden.
 - **Absender:** Jedes Produkt trägt in Fußzeile, Über-Dialog und Store-Text
   „ein Projekt von regetskcob“ mit der Glyphe.
-- **UI-Ikonen:** Material Symbols **Sharp**, Strichstärke 300, als
-  gebündeltes Schrift-Subset. Die SVGs in `web/partials/icons.html` sind
-  Platzhalter im selben Stil.
+- **UI-Ikonen:** Material Symbols **Sharp**, Strichstärke 300, als Subset
+  (`flutter/fonts/MaterialSymbolsSharp-300.ttf`,
+  `web/fonts/MaterialSymbols/…woff2`). Es enthält genau die Namen aus
+  `icons/material-symbols.txt`, die Codepoints stehen in
+  `icons/material-symbols.json`. Fehlt ein Symbol: Namen in die Liste
+  eintragen, dann `tool/build_symbols.py` neu laufen lassen (Anleitung im
+  Kopf der Datei). Nie den ganzen Font bündeln. Die SVGs in
+  `web/partials/icons.html` sind Platzhalter der Doku.
 
 ## Screenshots
 
@@ -173,8 +179,8 @@ ohne zu fragen:
   #7ED399), kein blasses Mint.
 - **Mona Sans** ist die Bedienschrift (SIL OFL 1.1, kostenlos, auch
   gewerblich und gebündelt in Apps nutzbar, nur nicht allein verkäuflich).
-  Bis sie gebündelt ist (regetskcob/design-system#2), fällt alles auf die
-  Systemschrift zurück.
+  Sie liegt mit Literata und Monaspace in `web/fonts/` (WOFF2) und
+  `flutter/fonts/` (TTF/OTF).
 - **Kennung statt Large Title auf iOS:** über dem kleinen Titel steht eine
   Kennung, der große iOS-Titel wird nicht genutzt.
 - **Gelände** ist als einzige Ausnahme freigegeben: Panzergefecht hat im
@@ -188,7 +194,9 @@ Nutzer entschieden, nicht von der Sitzung.
 - Werte nur in `tokens/horizont.json` ändern. CSS (`web/css/tokens.css`)
   und Doku lesen sie von dort.
 - Aufbau: `tokens/` (Quelle), `web/` (wiederverwendbare Web-Schicht: CSS,
-  Partials, Schriften), `site/` (nur die Dokumentationsseite). Hugo hängt die
+  Partials, Schriften), `flutter/` (Schriften, später das Paket), `icons/`
+  (Liste und Codepoints der Symbole), `tool/` (Skripte), `site/` (nur die
+  Dokumentationsseite). Hugo hängt die
   Ordner per `module.mounts` ein (`hugo.toml`).
 - Lokal ansehen:
   `hugo server --baseURL http://localhost:1313/design-system/`

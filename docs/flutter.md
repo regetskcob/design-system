@@ -118,12 +118,17 @@ Extension fehlt):
 Beide sind Monaspace mit `FontFeature.tabularFigures()`. Zeilenhöhe als
 `height = line / size`.
 
-Schriften als Assets bündeln: Literata (Light, SemiBold), Monaspace Argon
-(Regular, SemiBold) und Mona Sans (Regular, Medium, SemiBold; für
-Panzergefecht dazu Expanded Bold und Black). Mona Sans ist entschieden
-(OFL 1.1). Die Dateien kommen mit regetskcob/design-system#2. Bis dahin
-bleibt die Bedienschrift die Plattformschrift, bei Panzergefecht die schon
-gebündelte Roboto.
+Die Schriften liegen in `flutter/fonts/`: Literata (Light, Light Italic,
+SemiBold), Monaspace Argon (Regular, SemiBold), Mona Sans (Regular, Medium,
+SemiBold) und für Panzergefecht Mona Sans Display Expanded (Bold, Black).
+Lizenzen: `OFL.txt`, `MaterialSymbols-LICENSE.txt`. Familien im
+`pubspec.yaml`: `Literata`, `MonaspaceArgon`, `MonaSans`,
+`MonaSansDisplayExpanded`, `MaterialSymbolsSharp`.
+
+UI-Ikonen kommen aus `MaterialSymbolsSharp-300.ttf` (Subset, Codepoints in
+`icons/material-symbols.json`), etwa
+`IconData(0xea99, fontFamily: 'MaterialSymbolsSharp', fontPackage: 'horizont')` für `forest`.
+Nicht das Paket `material_symbols_icons`, es bündelt alle Symbole.
 
 ## Komponenten im Theme
 
@@ -236,7 +241,7 @@ mit Goldens vorher und nachher.
   und #8F6400.
 - Die Fasen an Panels entfallen, es gelten Radius 6/10 und Haarlinien. Die
   Überschriften bleiben in Versalien, schwer und gesperrt, als Spielcharakter
-  (Mona Sans Expanded, sobald sie gebündelt ist).
+  (Mona Sans Display Expanded).
 - Die Spielwelt bleibt unberührt: Gelände der Karten
   (`lib/src/game/map_theme.dart`), Team- und Tarnfarben
   (`lib/src/game/game_config.dart`), Flame-Komponenten.

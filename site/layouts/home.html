@@ -201,11 +201,11 @@
     <h2 class="t-headline">Lesen, bedienen, messen.</h2>
     <div class="doc-voices">
       <div class="doc-voice"><span class="t-kennung hz-kennung">Lesen</span><div class="big" style="font-family:var(--font-serif);font-weight:300">Aa</div><b>Literata</b><p class="hz-muted t-callout">Überschriften der Landingpages, Blog, längere Texte, Onboarding. Leicht (300), nie fett. Schon im Blog.</p></div>
-      <div class="doc-voice"><span class="t-kennung hz-kennung">Bedienen</span><div class="big" style="font-family:var(--font-sans);font-weight:600">Aa</div><b>Mona Sans</b><p class="hz-muted t-callout">Alles, was man antippt: Titel, Listen, Knöpfe, Formulare. 400, 500, 600. Breite Schnitte (Expanded) nur für Panzergefecht.</p></div>
+      <div class="doc-voice"><span class="t-kennung hz-kennung">Bedienen</span><div class="big" style="font-family:var(--font-sans);font-weight:600">Aa</div><b>Mona Sans</b><p class="hz-muted t-callout">Alles, was man antippt: Titel, Listen, Knöpfe, Formulare. 400, 500, 600. Der breite Schnitt <span style="font-family:var(--font-sans-expanded);font-weight:800;text-transform:uppercase;letter-spacing:.02em">Display Expanded</span> nur für die Überschriften von Panzergefecht.</p></div>
       <div class="doc-voice"><span class="t-kennung hz-kennung">Messen</span><div class="big" style="font-family:var(--font-mono)">0/1/2</div><b>Monaspace Argon</b><p class="hz-muted t-callout">Werte, Zeiten, Adressen, Kennungen, Koordinaten. Immer mit Tabellenziffern. Schon im Blog.</p></div>
     </div>
     <p style="margin-top:24px">Mona Sans und Monaspace kommen von denselben Gestaltern (GitHub Next), sie teilen Proportionen und Strichstärke. Beide stehen unter der SIL Open Font License, ebenso Literata. Alle drei werden gebündelt, nie aus dem Netz geladen.</p>
-    <p class="hz-muted t-callout">Mona Sans ist die Bedienschrift (SIL OFL 1.1, auch gewerblich frei). Bis sie gebündelt ist, zeigt die Seite die Systemschrift (SF Pro auf dem Mac).</p>
+    <p class="hz-muted t-callout">Alle drei liegen gebündelt im Repository: als WOFF2 unter <span class="hz-mono">web/fonts/</span>, als TTF/OTF für Flutter unter <span class="hz-mono">flutter/fonts/</span>. Mona Sans steht wie Literata und Monaspace unter der SIL OFL 1.1 und ist auch gewerblich frei.</p>
     <table class="doc-scale">
       {{- range slice "display" "headline" "title-1" "title-2" "title-3" "reading" "body" "callout" "label" "caption" "data" "kennung" }}
       {{- $t := index $hz.type . }}
@@ -257,7 +257,7 @@
       <dt>Kurve</dt><dd class="hz-mono">{{ $hz.motion.standard }}</dd>
       <dt>Fenster</dt><dd>Kompakt unter 600, mittel bis 840, erweitert bis 1200, groß darüber, wie die Fenstergrößen von Material 3. Gebaut wird nach verfügbarer Breite, nie nach Gerät.</dd>
       <dt>Ziel</dt><dd>Auf Touch mindestens 44 × 44 pt pro Tippziel, auch bei dichten Zeilen. Mit Zeiger (Mac, Web-App am Rechner) sind Steuerelemente 24 bis 28 pt hoch und die Werkzeugleiste 52 pt: <span class="hz-mono">data-density="desktop"</span>.</dd>
-      <dt>Ikonen</dt><dd>Material Symbols Sharp, Strichstärke 300, eckig, passend zur Linie. Gebündelt als Schrift-Subset. Auf dieser Seite noch Platzhalter im selben Stil.</dd>
+      <dt>Ikonen</dt><dd>Material Symbols Sharp, Strichstärke 300, eckig, passend zur Linie. Gebündelt als Subset mit genau den Symbolen aus <span class="hz-mono">icons/material-symbols.txt</span> (12 KB), angesprochen über den Codepoint. Zum Beispiel: <span class="hz-symbol" title="forest">&#xea99;</span> <span class="hz-symbol" title="checklist">&#xe6b1;</span> <span class="hz-symbol" title="pets">&#xe91d;</span> <span class="hz-symbol" title="map">&#xe55b;</span> <span class="hz-symbol" title="bolt">&#xea0b;</span> <span class="hz-symbol" title="account_tree">&#xe97a;</span>. Die Mockups nutzen noch gezeichnete Platzhalter im selben Stil.</dd>
     </dl>
   </div>
 </section>
@@ -641,7 +641,7 @@
     <p>Diese Seite und die Tokens kommen aus dem Repository <a href="https://github.com/regetskcob/design-system">design-system</a>. Die Apps und ihre Landingpages sind noch unverändert.</p>
     <ol class="doc-todo">
       <li><span><b>Entscheidungen, erledigt.</b> Zwei Grün bleiben (Tanne dunkel leuchtender), Mona Sans, Kennung über dem Titel statt Large Title, Gelände als Ausnahme.</span></li>
-      <li><span><b>Schriften bündeln.</b> Mona Sans laden (OFL), Literata und Monaspace als TTF für Flutter, Material Symbols Sharp als Subset.</span></li>
+      <li><span><b>Schriften, erledigt.</b> Mona Sans, Literata und Monaspace für Web und Flutter, Material Symbols Sharp als Subset.</span></li>
       <li><span><b>Flutter-Paket <span class="hz-mono">horizont</span>.</b> Tokens aus <span class="hz-mono">tokens/horizont.json</span> generiert, ThemeExtension, ColorScheme von Hand je Produkt und Modus. Eingebunden per Git-Abhängigkeit in alle drei Apps.</span></li>
       <li><span><b>Pro App eine Umstellung.</b> Theme ersetzen, harte Farben (Zustand, Priorität, Ort) auf Status-Tokens, Radien auf die Skala. KNX Monitor zuerst, es hat schon Tokens.</span></li>
       <li><span><b>Landingpages als Feldseite.</b> <span class="hz-mono">web/</span> als Hugo-Modul einbinden, Aufbau wie oben.</span></li>

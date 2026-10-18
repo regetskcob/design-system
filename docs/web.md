@@ -22,7 +22,8 @@ Monitor und Panzergefecht, Jagdaufseher liegt im Blog unter
     [[module.imports.mounts]]
       source = 'web/partials'
       target = 'layouts/_partials/horizont'
-    # Only where the site does not ship Literata and Monaspace itself:
+    # Mona Sans, Material Symbols, Literata and Monaspace; the blog's theme
+    # brings its own Literata and Monaspace in the same folders.
     [[module.imports.mounts]]
       source = 'web/fonts'
       target = 'static/fonts'
@@ -93,6 +94,7 @@ Hardware `--device-<name>`. Typo-Klassen `.t-display` bis `.t-kennung`.
 | `.hz-table`, `.hz-num`, `.hz-mono` | Datentabellen, Werte in Mono rechtsbündig |
 | `.hz-kennung`, `.hz-muted`, `.hz-mono`, `.hz-rule` | Kennung, gedämpfter Text, Mono, Linie |
 | `.hz-lockup` (`--mark`) | Marke und Name auf einer Grundlinie |
+| `.hz-symbol` | Material-Symbols-Ikone per Codepoint (`&#xea99;` für `forest`, Liste in `icons/material-symbols.json`) |
 | `figure.hz-device.hz-device--<gerät>` + `.hz-device-screen` | Geräterahmen für Screenshots |
 
 Die Geräterahmen gibt es als `iphone`, `android`, `ipad`, `laptop`, `tv` und

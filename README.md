@@ -19,7 +19,10 @@ bzw. [docs/web.md](docs/web.md) für Hugo-Seiten.
 | `tokens/horizont.json` | Die einzige Quelle aller Werte: Farben hell und dunkel, Produkt-Akzente, Status, Schrift, Abstand, Radien, Linien, Bewegung, Icon-Paletten |
 | `web/css/` | Die Web-Schicht: `tokens.css` (Hugo-Template, erzeugt die CSS-Variablen aus den Tokens) und `components.css` (Knöpfe, Felder, Listen, Status, Tabellen) |
 | `web/partials/` | Marken (`mark.html`), illustrierte App-Icons (`app-icon.html`), Platzhalter-Ikonen (`icons.html`) |
-| `web/fonts/` | Literata und Monaspace Argon, SIL Open Font License (`web/fonts/OFL.txt`) |
+| `web/fonts/` | Literata, Mona Sans, Monaspace Argon (SIL OFL, `OFL.txt`) und Material Symbols Sharp als Subset (Apache 2.0), als WOFF2 |
+| `flutter/fonts/` | Dieselben Schriften als TTF/OTF für Flutter |
+| `icons/` | Liste der genutzten Material Symbols und ihre Codepoints |
+| `tool/` | `build_symbols.py`: schneidet Material Symbols Sharp auf die Liste zu |
 | `site/` | Nur die Dokumentationsseite |
 | `docs/` | Umsetzungsleitfäden für Flutter und Web |
 | `CLAUDE.md` | Kurzfassung aller Regeln für Claude-Sitzungen |
@@ -48,4 +51,3 @@ Projektseite unter `/design-system/`.
   Git-Abhängigkeit mit festem Tag in allen drei Apps
 - `web/` als Hugo-Modul für den Blog und die Landingpages
 - `icons/` mit SVG-Quellen und Export für iOS, Android und Favicons
-- Mona Sans bündeln, sobald entschieden

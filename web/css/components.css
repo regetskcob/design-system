@@ -12,8 +12,14 @@
 @font-face { font-family: "Literata"; src: url("../fonts/Literata/Literata-Light.woff2") format("woff2"); font-weight: 300; font-style: normal; font-display: swap; }
 @font-face { font-family: "Literata"; src: url("../fonts/Literata/Literata-LightItalic.woff2") format("woff2"); font-weight: 300; font-style: italic; font-display: swap; }
 @font-face { font-family: "Literata"; src: url("../fonts/Literata/Literata-SemiBold.woff2") format("woff2"); font-weight: 600; font-style: normal; font-display: swap; }
-@font-face { font-family: "Monaspace Argon"; src: url("../fonts/Monaspace/MonaspaceArgon-Regular.woff") format("woff"); font-weight: 400; font-display: swap; }
-@font-face { font-family: "Monaspace Argon"; src: url("../fonts/Monaspace/MonaspaceArgon-SemiBold.woff") format("woff"); font-weight: 600; font-display: swap; }
+@font-face { font-family: "Monaspace Argon"; src: url("../fonts/Monaspace/MonaspaceArgon-Regular.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Monaspace Argon"; src: url("../fonts/Monaspace/MonaspaceArgon-SemiBold.woff2") format("woff2"); font-weight: 600; font-display: swap; }
+@font-face { font-family: "Mona Sans"; src: url("../fonts/MonaSans/MonaSans-Regular.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Mona Sans"; src: url("../fonts/MonaSans/MonaSans-Medium.woff2") format("woff2"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "Mona Sans"; src: url("../fonts/MonaSans/MonaSans-SemiBold.woff2") format("woff2"); font-weight: 600; font-display: swap; }
+@font-face { font-family: "Mona Sans Display Expanded"; src: url("../fonts/MonaSans/MonaSansDisplayExpanded-Bold.woff2") format("woff2"); font-weight: 700; font-display: swap; }
+@font-face { font-family: "Mona Sans Display Expanded"; src: url("../fonts/MonaSans/MonaSansDisplayExpanded-Black.woff2") format("woff2"); font-weight: 800 900; font-display: swap; }
+@font-face { font-family: "Material Symbols Sharp"; src: url("../fonts/MaterialSymbols/MaterialSymbolsSharp-300.woff2") format("woff2"); font-weight: 300; font-display: block; }
 
 .hz {
   background: var(--bg);
@@ -30,6 +36,20 @@
 }
 
 .hz-muted { color: var(--text-muted); }
+
+/* A Material Symbols Sharp icon by codepoint (icons/material-symbols.json):
+   <span class="hz-symbol" aria-hidden="true">&#xe88a;</span>. The font is
+   cut to the names in icons/material-symbols.txt and has no ligatures. */
+.hz-symbol {
+  font-family: var(--font-symbols);
+  font-weight: 300;
+  font-style: normal;
+  font-size: 1.25em;
+  line-height: 1;
+  display: inline-block;
+  vertical-align: -0.2em;
+  -webkit-font-smoothing: antialiased;
+}
 .hz-kennung { color: var(--text-muted); }
 .hz-mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
 
