@@ -5,9 +5,10 @@ und Panzergefecht. Leitbild: minimalistisch wie die niederrheinische Feldflur.
 
 Dokumentation und Entwürfe: https://www.regetskcob.de/horizont/
 
-Stand: v0.6.2. KNX Monitor ist als erste App umgestellt (App und Landingpage
-auf v0.6.0), Jagdaufseher als zweite (auf v0.6.2, inklusive Web); Panzergefecht
-folgt, der Blog hängt an v0.5.0. Was sich je Version geändert hat, steht in
+Stand: v0.6.3. KNX Monitor ist als erste App umgestellt (App und Landingpage
+auf v0.6.0), Jagdaufseher als zweite (auf v0.6.2, inklusive Web), Panzergefecht
+als dritte (Spiel, Landingpage und Icons auf v0.6.2, regetskcob/wargame#31);
+der Blog hängt an v0.5.0. Was sich je Version geändert hat, steht in
 [CHANGELOG.md](CHANGELOG.md).
 
 Wer Oberflächen umsetzt, ob Mensch oder Claude-Sitzung, beginnt mit
@@ -26,7 +27,7 @@ bzw. [docs/web.md](docs/web.md) für Hugo-Seiten.
 | `web/fonts/` | Literata, Mona Sans, Monaspace Argon (SIL OFL, `OFL.txt`) und Material Symbols Sharp als Subset (Apache 2.0), als WOFF2 |
 | `flutter/` | Flutter-Paket `horizont`: Theme, Widgets, Schriften (`flutter/fonts/`), Showcase-App und Goldens (`flutter/example/`) |
 | `icons/` | Material-Symbols-Liste und Codepoints, die SVG-Quellen der App-Icons (`icons/svg/`) und die fertigen Sätze je Plattform (`icons/export/`) |
-| `tool/` | `generate_tokens.dart` (Tokens für Flutter), `build_symbols.py` (Material Symbols zuschneiden), `export_icons.py` (App-Icons für alle Plattformen) |
+| `tool/` | `generate_tokens.dart` (Tokens für Flutter), `build_symbols.py` (Material Symbols zuschneiden), `subset_fonts.py` (Schriften auf Latein kürzen), `export_icons.py` (App-Icons für alle Plattformen) |
 | `site/` | Nur die Dokumentationsseite |
 | `docs/` | Umsetzungsleitfäden für Flutter und Web |
 | `CLAUDE.md` | Kurzfassung aller Regeln für Claude-Sitzungen |

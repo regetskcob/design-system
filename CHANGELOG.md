@@ -4,6 +4,44 @@ Jede Version gilt zugleich für Tokens (`tokens/horizont.json`), das
 Flutter-Paket (`flutter/pubspec.yaml`) und den Git-Tag. Apps und Seiten hängen
 an einem Tag; unter „Heben“ steht, was beim Wechsel zu tun ist.
 
+## 0.6.3
+
+Kleinere Schriften und die Symbole von Panzergefecht. Keine Farbe, kein Maß,
+kein Widget ändert sich.
+
+### Geändert
+
+- **Schriften auf Latein gekürzt.** Literata, Mona Sans (auch Display
+  Expanded) und Monaspace enthalten nur noch Latein mit seinen Erweiterungen,
+  Satzzeichen, hoch- und tiefgestellte Ziffern, Pfeile, Rechenzeichen und die
+  Zeichen, die die Produkte als Text setzen (✓, ★, ●, ▲, ⋯, ⏯), ohne
+  Hinting; Layout-Features (Tabellenziffern, Texture Healing, Kerning)
+  bleiben. Im Flutter-Paket 0,85 statt 2,3 MB (gzip 0,48 statt 1,28 MB), im
+  Web 385 statt 930 KB WOFF2. Der Webbuild einer Flutter-App lädt jede Schrift
+  vor dem ersten Bild; bei Panzergefecht war das über ein Megabyte Wartezeit.
+  Geprüft gegen alle Texte von KNX Monitor, Jagdaufseher und Panzergefecht
+  und gegen die Doku; kein Zeichen, das eine Schrift vorher hatte, fehlt dort.
+  Gekürzt wird mit `tool/subset_fonts.py`, der Bereich steht im Kopf der
+  Datei.
+
+### Neu
+
+- 65 Symbole für Panzergefecht: Modi, Fahrzeuge, Nachschub
+  (`local_gas_station`, `inventory_2`, `local_fire_department`, `fort`,
+  `military_tech` …), Gelände und Wetter (`landscape`, `terrain`, `park`,
+  `waves`, `ac_unit`, `wb_sunny`, `nightlight_round`), Steuerung (`keyboard`,
+  `mouse`, `settings_remote`, `qr_code_scanner`) und Menüs (`school`,
+  `leaderboard`, `language`, `volume_up`, `volume_off`, `login`,
+  `swap_horiz` …). Das Subset ist damit 31 KB als TTF und 15 KB als WOFF2
+  (vorher 22 und 10).
+
+### Heben
+
+- Apps: `ref: v0.6.3`. Alle bisherigen Symbole behalten ihren Codepoint;
+  Text, der Zeichen außerhalb des Bereichs nutzt (Griechisch, Kyrillisch),
+  fällt auf die Systemschrift zurück.
+- Seiten: `hugo mod get github.com/regetskcob/horizont@v0.6.3`.
+
 ## 0.6.2
 
 Zehn Symbole mehr, damit Jagdaufseher aufhören kann, vier verschiedene Dinge

@@ -308,7 +308,7 @@ Nutzer entschieden, nicht von der Sitzung.
   Partials, Schriften), `flutter/` (das Paket `horizont` mit Schriften,
   Showcase-App unter `flutter/example/` und Tests), `icons/` (Liste und
   Codepoints der Symbole), `tool/` (`generate_tokens.dart`,
-  `build_symbols.py`), `site/` (nur die Dokumentationsseite).
+  `build_symbols.py`, `subset_fonts.py`), `site/` (nur die Dokumentationsseite).
 - Nach jeder Änderung an `tokens/` oder `icons/`:
   `dart run tool/generate_tokens.dart`, dann `cd flutter && flutter test`.
   Die Kontrasttests sind die AA-Prüfung des ganzen Systems. Schlägt einer
@@ -343,4 +343,5 @@ Nutzer entschieden, nicht von der Sitzung.
   `/preview/` (Repository `regetskcob/preview`). KNX Monitor (App und
   Landingpage) hängt an v0.6.0 und ist die Referenz für die anderen Apps;
   Jagdaufseher ist auf v0.6.2 umgestellt und läuft damit auch im Browser,
-  Panzergefecht folgt, siehe [docs/flutter.md](docs/flutter.md).
+  Panzergefecht ist auf v0.6.2 umgestellt (regetskcob/wargame#31), siehe
+  [docs/flutter.md](docs/flutter.md).
