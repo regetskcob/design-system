@@ -8,7 +8,7 @@
 import 'package:flutter/widgets.dart';
 
 /// Version of the tokens this file was generated from.
-const String horizontTokensVersion = '0.6.1';
+const String horizontTokensVersion = '0.6.2';
 
 /// The neutral colours of one brightness.
 @immutable
@@ -664,6 +664,8 @@ abstract final class HorizontSymbols {
   static const IconData history = IconData(0xe8b3, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
   /// `schedule`
   static const IconData schedule = IconData(0xefd6, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
+  /// `undo`
+  static const IconData undo = IconData(0xe166, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
   /// `calendar_today`
   static const IconData calendarToday = IconData(0xe935, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
   /// `notifications`
@@ -720,6 +722,24 @@ abstract final class HorizontSymbols {
   static const IconData waterDrop = IconData(0xe798, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
   /// `flag`
   static const IconData flag = IconData(0xf0c6, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
+  /// `deck`
+  static const IconData deck = IconData(0xea42, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
+  /// `cabin`
+  static const IconData cabin = IconData(0xe589, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
+  /// `tools_ladder`
+  static const IconData toolsLadder = IconData(0xe2cb, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
+  /// `event_seat`
+  static const IconData eventSeat = IconData(0xe903, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
+  /// `grain`
+  static const IconData grain = IconData(0xe3ea, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
+  /// `rice_bowl`
+  static const IconData riceBowl = IconData(0xf1f5, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
+  /// `diamond`
+  static const IconData diamond = IconData(0xead5, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
+  /// `yard`
+  static const IconData yard = IconData(0xf089, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
+  /// `gate`
+  static const IconData gate = IconData(0xe277, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
   /// `bolt`
   static const IconData bolt = IconData(0xea0b, fontFamily: HzFont.symbols, fontPackage: HzFont.package);
   /// `category`

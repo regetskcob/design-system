@@ -34,6 +34,7 @@ help
 logout
 history
 schedule
+undo
 calendar_today
 notifications
 person
@@ -66,6 +67,19 @@ nature
 grass
 water_drop
 flag
+# The four kinds of stand, told apart by shape: a roofed platform on posts,
+# a closed hut, a ladder against a tree, a seat on the ground.
+deck
+cabin
+tools_ladder
+event_seat
+# What a supply point holds: scattered grain, a full bowl, a block of salt.
+grain
+rice_bowl
+diamond
+# A planted plot, and the bar across a forest track.
+yard
+gate
 
 # KNX Monitor
 bolt

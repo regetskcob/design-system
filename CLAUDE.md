@@ -342,5 +342,5 @@ Nutzer entschieden, nicht von der Sitzung.
   github.com/regetskcob/horizont@v0.6.1`) und die Vorschau unter
   `/preview/` (Repository `regetskcob/preview`). KNX Monitor (App und
   Landingpage) hängt an v0.6.0 und ist die Referenz für die anderen Apps;
-  Jagdaufseher und Panzergefecht folgen, siehe
-  [docs/flutter.md](docs/flutter.md).
+  Jagdaufseher ist auf v0.6.2 umgestellt und läuft damit auch im Browser,
+  Panzergefecht folgt, siehe [docs/flutter.md](docs/flutter.md).

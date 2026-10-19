@@ -4,6 +4,30 @@ Jede Version gilt zugleich für Tokens (`tokens/horizont.json`), das
 Flutter-Paket (`flutter/pubspec.yaml`) und den Git-Tag. Apps und Seiten hängen
 an einem Tag; unter „Heben“ steht, was beim Wechsel zu tun ist.
 
+## 0.6.2
+
+Zehn Symbole mehr, damit Jagdaufseher aufhören kann, vier verschiedene Dinge
+mit demselben Zeichen zu benennen. Sonst ändert sich nichts: keine Farbe,
+kein Maß, kein Widget.
+
+### Neu
+
+- Symbole für Jagdaufseher: `deck`, `cabin`, `tools_ladder`, `event_seat`
+  (die vier Arten von Ansitzeinrichtung, an der Form unterscheidbar: Plattform
+  auf Pfosten, geschlossene Kanzel, Leiter, Sitz am Boden), `grain`,
+  `rice_bowl`, `diamond` (was eine Versorgungsstelle vorhält: gestreutes
+  Korn, volle Schale, Salzblock), `yard` (Wildacker) und `gate` (Schranke).
+- `undo` in den Aktionen. Es fehlte, und wer es brauchte, nahm `replay` -
+  ein Kreispfeil, der „noch einmal abspielen“ heißt, nicht „zurücknehmen“.
+
+Das Subset ist damit 22 KB als TTF und 10 KB als WOFF2 (vorher 20 und 10).
+
+### Heben
+
+- Apps: `ref: v0.6.2`. Nur nötig, wenn eines der neuen Symbole gebraucht
+  wird; alles bisherige behält seinen Codepoint.
+- Seiten: `hugo mod get github.com/regetskcob/horizont@v0.6.2`.
+
 ## 0.6.1
 
 Aufräumen nach der Umstellung von KNX Monitor: Code, Doku und gerenderte

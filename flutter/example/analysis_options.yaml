@@ -2,6 +2,10 @@ analyzer:
   exclude:
     - web/**
     - macos/**
+    - android/**
+    - ios/**
+    - windows/**
+    - linux/**
 include: ../analysis_options.yaml
 
 linter:

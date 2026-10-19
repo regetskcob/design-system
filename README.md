@@ -5,9 +5,10 @@ und Panzergefecht. Leitbild: minimalistisch wie die niederrheinische Feldflur.
 
 Dokumentation und Entwürfe: https://www.regetskcob.de/horizont/
 
-Stand: v0.6.1. KNX Monitor ist als erste App umgestellt (App und Landingpage
-auf v0.6.0), Jagdaufseher und Panzergefecht folgen; der Blog hängt an v0.5.0.
-Was sich je Version geändert hat, steht in [CHANGELOG.md](CHANGELOG.md).
+Stand: v0.6.2. KNX Monitor ist als erste App umgestellt (App und Landingpage
+auf v0.6.0), Jagdaufseher als zweite (auf v0.6.2, inklusive Web); Panzergefecht
+folgt, der Blog hängt an v0.5.0. Was sich je Version geändert hat, steht in
+[CHANGELOG.md](CHANGELOG.md).
 
 Wer Oberflächen umsetzt, ob Mensch oder Claude-Sitzung, beginnt mit
 [CLAUDE.md](CLAUDE.md) (Leitbild, Regeln, Tokens, offene Entscheidungen,
