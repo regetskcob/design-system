@@ -635,7 +635,12 @@
    The family seen from above: regetskcob as a field map, each field as large
    as its content, furrows at their own angle; the products behind a field
    path. The field you are on carries the accent and the mark. */
-.hz-karte { display: grid; grid-template-columns: minmax(0, 3fr) var(--s-16) minmax(0, 1fr); gap: var(--s-8); align-items: stretch; }
+/* The map follows its own width, not the window's: in a dialog or in a
+   page column it switches to one column below 760 px. Each field is a
+   container too, so a narrow field sets its name smaller; a long name
+   breaks with a hyphen rather than running over the field's edge. */
+.hz-karte { container: hz-karte / inline-size; }
+.hz-karte-grid { display: grid; grid-template-columns: minmax(0, 3fr) var(--s-16) minmax(0, 1.2fr); gap: var(--s-8); align-items: stretch; }
 .hz-gem { display: flex; flex-direction: column; gap: var(--s-8); min-width: 0; }
 .hz-gem > .hz-kennung { margin: 0; }
 .hz-gem > .hz-kennung a { color: inherit; text-decoration: none; }
@@ -646,8 +651,10 @@
 .hz-gem--prod .hz-felder { grid-auto-rows: 1fr; }
 .hz-felder > li { display: flex; min-width: 0; }
 .hz-feld {
+  container-type: inline-size;
   position: relative;
   flex: 1;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -660,10 +667,22 @@
   text-decoration: none;
 }
 .hz-feld:hover { border-color: var(--text); }
-.hz-feld-name, .hz-feld-count { background: var(--surface); padding: 0 var(--s-4); margin-left: calc(-1 * var(--s-4)); }
-.hz-feld-name { font: 300 1.125rem/1.2 var(--font-serif); display: inline-flex; align-items: center; gap: var(--s-8); }
-.hz-feld-name .hz-mark { width: 20px; height: 20px; color: var(--accent-text); }
+.hz-feld-name, .hz-feld-count {
+  max-width: calc(100% + var(--s-4));
+  background: var(--surface);
+  padding: 0 var(--s-4);
+  margin-left: calc(-1 * var(--s-4));
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+.hz-feld-name { font: 300 1.125rem/1.2 var(--font-serif); display: inline-flex; align-items: center; gap: var(--s-8); min-width: 0; }
+.hz-feld-name .hz-mark { flex: none; width: 20px; height: 20px; color: var(--accent-text); }
 .hz-feld-count { font: 600 0.5625rem/1.6 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); }
+@container (max-width: 150px) {
+  .hz-feld-name { font-size: 0.9375rem; gap: var(--s-4); }
+  .hz-feld-name .hz-mark { width: 16px; height: 16px; }
+  .hz-feld-count { letter-spacing: 0.04em; }
+}
 .hz-feld[aria-current] {
   border: var(--line-selection) solid var(--accent);
   padding: calc(var(--s-8) - 1px) calc(var(--s-12) - 1px);
@@ -672,13 +691,14 @@
 .hz-feld > .hz-mark { position: absolute; top: var(--s-8); right: var(--s-8); width: 24px; height: 24px; color: var(--accent-text); }
 .hz-weg { position: relative; }
 .hz-weg::before { content: ""; position: absolute; left: 50%; top: var(--s-24); bottom: 0; border-left: var(--line-hairline) dashed var(--line-strong); }
-@media (max-width: 640px) {
-  .hz-karte { grid-template-columns: minmax(0, 1fr); }
+@container hz-karte (max-width: 760px) {
+  .hz-karte-grid { grid-template-columns: minmax(0, 1fr); }
   .hz-weg { display: none; }
   .hz-gem:first-child .hz-felder { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .hz-gem:first-child .hz-felder > li { grid-column: span 1; grid-row: span 1; }
   .hz-gem:first-child .hz-felder > li:first-child { grid-column: span 2; }
   .hz-gem--prod { margin-top: var(--s-16); }
+  .hz-gem--prod .hz-felder { grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr)); grid-auto-rows: auto; }
 }
 
 .hz-karte-dialog {

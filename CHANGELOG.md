@@ -4,6 +4,26 @@ Jede Version gilt zugleich für Tokens (`tokens/horizont.json`), das
 Flutter-Paket (`flutter/pubspec.yaml`) und den Git-Tag. Apps und Seiten hängen
 an einem Tag; unter „Heben“ steht, was beim Wechsel zu tun ist.
 
+## 0.7.1
+
+Die Flurkarte passt in jede Breite.
+
+### Geändert
+
+- **Flurkarte folgt ihrer eigenen Breite.** Sie richtet sich nach dem Platz,
+  den sie hat (Container Query), nicht nach dem Fenster: im Dialog wie in
+  einer Textspalte unter 760 px einspaltig, die Projekte darunter. Vorher
+  liefen in schmalen Feldern Namen wie „Niederrhein.“ oder „Film-Rezepte“
+  über den Feldrand.
+- Schmale Felder (unter 150 px) setzen den Namen kleiner; lange Namen
+  trennen mit Bindestrich (`lang="de"`, `hyphens: auto`).
+- Die Horizontlinie richtet die Titel am Ende nach links aus und teilt sich
+  den Platz mit dem Strich davor; eng stehende Striche zeigen keine Worte.
+
+### Heben
+
+- `hugo mod get github.com/regetskcob/horizont@v0.7.1`; nichts sonst.
+
 ## 0.7.0
 
 Eine Navigation für alle Hugo-Seiten: der Horizont. Keine Farbe, kein Maß,

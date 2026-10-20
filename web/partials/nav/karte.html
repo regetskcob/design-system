@@ -21,7 +21,8 @@
 {{- $field := .field | default "" -}}
 {{- $counts := .counts | default dict -}}
 {{- $names := site.Data.horizont.color.product -}}
-<nav class="hz-karte" aria-label="Flurkarte">
+<nav class="hz-karte" aria-label="Flurkarte" lang="de">
+<div class="hz-karte-grid">
 {{- range $i, $g := $flur.gemarkungen }}
   {{- $base := cond (eq $g.id $home) "" $flur.site -}}
   {{- $href := cond (eq $g.id $home) (relURL (strings.TrimPrefix "/" $g.path)) (printf "%s%s" $base $g.path) -}}
@@ -60,5 +61,6 @@
 {{- end }}
     </ul>
   </div>
+</div>
 </nav>
 {{- /**/ -}}
