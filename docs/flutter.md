@@ -281,7 +281,7 @@ Reihenfolge: KNX Monitor (hat schon Tokens), dann Jagdaufseher, dann
 Panzergefecht. Jede App in einer eigenen Sitzung und einem eigenen Branch,
 mit Goldens vorher und nachher.
 
-### KNX Monitor (`~/Debug-KNX`, Repo `regetskcob/KNX-Monitor`)
+### KNX Monitor (`~/dev/knx-monitor/KNX-Monitor-Source`, Repo `regetskcob/KNX-Monitor-Source`, privat)
 
 Umgestellt auf v0.6.0 (Branch `horizont`, regetskcob/KNX-Monitor#23); was
 v0.6.1 aus KNX ins Paket geholt hat, steht im [CHANGELOG](../CHANGELOG.md). Was
@@ -307,7 +307,7 @@ hier waren der Plan:
   Schrift bleiben: `buildHorizontTheme(HorizontProduct.knx, b, host:
   HorizontHost.homeAssistant)`, nur wenn die App in Ingress läuft.
 
-### Jagdaufseher (`~/jagdaufseher`, Repo `regetskcob/jagdaufseher`)
+### Jagdaufseher (`~/dev/jagdaufseher`, Repo `regetskcob/jagdaufseher`)
 
 - Theme in `lib/app/theme.dart` (`appTheme(Brightness)` mit `fromSeed`
   #2F5D3A). Ersetzen durch ein `lib/theme/` nach diesem Leitfaden.
@@ -328,7 +328,7 @@ hier waren der Plan:
   jeder FAB mit eigenem `heroTag`.
 - Icon: die Kanzel am Waldrand ersetzt die Leiter auf dem Verlauf.
 
-### Panzergefecht (`~/wargame`, Repo `regetskcob/wargame`)
+### Panzergefecht (`~/dev/wargame`, Repo `regetskcob/wargame`)
 
 - Theme in `lib/src/ui/theme.dart` (`GameColors`, `buildGameTheme`), Formen
   in `lib/src/ui/widgets/panel.dart` (`GameShapes`, `Plate`). Heute gibt es
