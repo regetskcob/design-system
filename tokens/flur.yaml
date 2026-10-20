@@ -4,7 +4,8 @@
 #
 # Gemarkungen are the sites. The first one is regetskcob with its fields;
 # the products follow behind a field path, one parcel each. A project's
-# "note" is its line on the map, "text" one sentence for the landing page.
+# "note" is its line on the map, "text" one sentence for the landing page,
+# "status" a word for a project that is not out yet ("Vorschau").
 #
 # Per field:
 #   id      stable key; a site passes it as "field" to mark where it is
@@ -73,27 +74,6 @@ gemarkungen:
         span: [3, 1]
         angle: 0
 
-  - id: jagdaufseher
-    name: Jagdaufseher
-    product: jagdaufseher
-    path: /jagdaufseher/
-    note: Das Revier im Blick
-    text: "Hält Einrichtungen, Aufgaben und Meldungen im Revier zusammen, auch ohne Empfang."
-
-  - id: knx
-    name: KNX Monitor
-    product: knx
-    path: /knx/
-    note: Busmonitor & Diagnose
-    text: "Zeigt jedes Telegramm auf dem KNX-Bus, ordnet es dem ETS-Projekt zu und prüft die Anlage."
-
-  - id: panzergefecht
-    name: Panzergefecht
-    product: panzergefecht
-    path: /wargame/
-    note: Panzerduelle und Verteidigung
-    text: "Ein schnelles Panzerduell von oben: allein, gegeneinander oder im Trupp, im Browser und als App."
-
   - id: horizont
     name: Horizont
     product: regetskcob
@@ -101,3 +81,27 @@ gemarkungen:
     path: /horizont/
     note: Designsystem
     text: "Das gemeinsame Designsystem von Blog und Apps: Farben, Schrift, Zeichen und Bausteine für Web und Flutter."
+
+  - id: jagdaufseher
+    name: Jagdaufseher
+    product: jagdaufseher
+    path: /jagdaufseher/
+    status: Vorschau
+    note: Das Revier im Blick
+    text: "Hält Einrichtungen, Aufgaben und Meldungen im Revier zusammen, auch ohne Empfang."
+
+  - id: knx
+    name: KNX Monitor
+    product: knx
+    path: /knx/
+    status: Vorschau
+    note: Busmonitor & Diagnose
+    text: "Zeigt jedes Telegramm auf dem KNX-Bus, ordnet es dem ETS-Projekt zu und prüft die Anlage."
+
+  - id: panzergefecht
+    name: Panzergefecht
+    product: panzergefecht
+    path: /wargame/
+    status: Vorschau
+    note: Panzerduelle und Verteidigung
+    text: "Ein schnelles Panzerduell von oben: allein, gegeneinander oder im Trupp, im Browser und als App."

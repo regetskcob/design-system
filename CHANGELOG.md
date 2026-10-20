@@ -4,6 +4,18 @@ Jede Version gilt zugleich für Tokens (`tokens/horizont.json`), das
 Flutter-Paket (`flutter/pubspec.yaml`) und den Git-Tag. Apps und Seiten hängen
 an einem Tag; unter „Heben“ steht, was beim Wechsel zu tun ist.
 
+## 0.7.7
+
+### Geändert
+
+- In `tokens/flur.yaml` steht Horizont als erstes Projekt. Jagdaufseher, KNX
+  Monitor und Panzergefecht tragen `status: Vorschau`, solange sie nicht
+  erschienen sind; die Flurkarte setzt das Wort vor ihre Zeile.
+
+### Heben
+
+- `hugo mod get github.com/regetskcob/horizont@v0.7.7`; nichts sonst.
+
 ## 0.7.6
 
 ### Neu

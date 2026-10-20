@@ -53,7 +53,7 @@
       {{- $on := eq $g.id $here }}
       <li data-product="{{ $g.product }}">
         <a class="hz-parzelle hz-parzelle--prod" href="{{ $href }}"{{ if $on }} aria-current="page"{{ end }}>
-          <span class="hz-parzelle-count">{{ $g.note }}</span>
+          <span class="hz-parzelle-count">{{ with $g.status }}{{ . }} · {{ end }}{{ $g.note }}</span>
           <span class="hz-parzelle-name">{{ partial "horizont/mark.html" (dict "product" ($g.mark | default $g.product) "size" 20) }}{{ $g.name }}</span>
         </a>
       </li>
