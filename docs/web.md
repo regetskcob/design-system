@@ -228,8 +228,11 @@ Aufbau, wie in der Doku unter „Entwürfe“, zusammengesetzt aus den fünf
 Partials unter `horizont/feld/` in einem `<div class="hz-feld">`:
 
 1. Kopf: der Horizont (siehe „Navigation“) mit dem Zeichen des Produkts und
-   den nummerierten Abschnitten als Striche. Bis 0.7.0 war es das Lockup
-   mit Navigation rechts (`feld/head.html`).
+   den nummerierten Abschnitten als Striche, direkt in `<body>` vor
+   `<div class="hz-feld">` (dessen Container hielte die Linie auf Touch am
+   Seitenende fest). `"marks" "auto"` liest die Abschnitte samt Kennung aus
+   der Seite, so muss der Rahmen sie nicht kennen. Bis 0.7.0 war es das
+   Lockup mit Navigation rechts (`feld/head.html`).
 2. Hero, links ausgerichtet: Kennung (`01 — IN ENTWICKLUNG · IPHONE ·
    ANDROID`), Überschrift in `.t-display` (Literata 300), ein Absatz in
    `text-muted`, eine Hauptaktion (`--primary`) und eine zweite

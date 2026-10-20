@@ -19,6 +19,32 @@
   var done = nav.querySelector(".hz-horizon-done");
   var list = nav.querySelector(".hz-ticks");
   var dialog = document.querySelector("[data-hz-karte]");
+
+  // marks "auto": the chapters come from the page, by default the numbered
+  // sections of a Feldseite. "02 — Funktionen" becomes the title
+  // "02 Funktionen" and the number "02". Fewer than three: the line alone.
+  if (list && list.dataset.hzAuto) {
+    var found = [].slice.call(document.querySelectorAll(list.dataset.hzAuto)).filter(function (s) { return s.id; });
+    if (found.length >= 3) {
+      found.forEach(function (s, i) {
+        var k = s.querySelector(".hz-kennung, .t-kennung, h2");
+        var text = (k ? k.textContent : s.id).replace(/\s+/g, " ").trim();
+        var parts = text.match(/^(\d+)\s*[—–-]\s*(.+)$/);
+        var a = document.createElement("a");
+        a.className = "hz-tick";
+        a.href = "#" + s.id;
+        a.dataset.full = parts ? parts[1] + " " + parts[2] : text;
+        a.dataset.short = parts ? parts[1] : String(i + 1);
+        a.style.setProperty("--h", "10px");
+        var span = document.createElement("span");
+        span.textContent = a.dataset.full;
+        a.appendChild(span);
+        var li = document.createElement("li");
+        li.appendChild(a);
+        list.appendChild(li);
+      });
+    }
+  }
   var ticks = list ? [].slice.call(list.querySelectorAll(".hz-tick")) : [];
   // A mark whose chapter is not on this page (a year on another page of a
   // list) leaves the line.

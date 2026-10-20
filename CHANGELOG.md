@@ -4,6 +4,34 @@ Jede Version gilt zugleich für Tokens (`tokens/horizont.json`), das
 Flutter-Paket (`flutter/pubspec.yaml`) und den Git-Tag. Apps und Seiten hängen
 an einem Tag; unter „Heben“ steht, was beim Wechsel zu tun ist.
 
+## 0.7.2
+
+Der Horizont auf jeder Feldseite, und die Flurkarte stört sie nicht mehr.
+
+### Behoben
+
+- **Die Felder der Flurkarte heißen `.hz-parzelle`** (Liste
+  `.hz-parzellen`, `.hz-parzelle-name`, `.hz-parzelle-count`). Seit 0.7.0
+  hießen sie `.hz-feld` wie der Rahmen der Feldseite; dessen Seiten bekamen
+  dadurch Schraffur, Rahmen und ein Flex-Layout, das auf schmalen
+  Bildschirmen über den Rand lief.
+- `body.hz` hat keinen Außenabstand mehr; eine Seite auf Horizont läuft von
+  Rand zu Rand.
+
+### Neu
+
+- **`"marks" "auto"`** in `horizont/nav/horizon.html`: das Skript liest die
+  Kapitel aus der Seite, auf einer Feldseite die nummerierten Abschnitte
+  (`.hz-feld-section[id]`) mit ihrer Kennung als Titel. Ein anderer
+  Selektor geht über `"auto"`.
+- Auf einer Feldseite steht der Horizont direkt in `<body>` vor
+  `.hz-feld` und hält deren Rahmen (Breite und Einzug).
+
+### Heben
+
+- `hugo mod get github.com/regetskcob/horizont@v0.7.2`. Wer die Klassen
+  der Flurkarte im eigenen CSS anspricht, benennt sie um.
+
 ## 0.7.1
 
 Die Flurkarte passt in jede Breite.

@@ -16,6 +16,12 @@
                       "counts" (dict "blog" 151) "url" "/karte/")
       "lang"    (dict "name" "EN" "url" "/en/" "hreflang" "en"))
 
+  marks "auto" (with "auto" a CSS selector, by default the numbered
+  sections of a Feldseite, ".hz-feld-section[id]"): the script reads the
+  chapters from the page, their Kennung as the title. For pages whose
+  sections the frame cannot know in advance; without JavaScript there are
+  no marks then.
+
   marks: id is the anchor of the chapter, label its title below the line,
   short what the phone shows for the ones you are not at (a number or a
   year), n a count that sets the height of the mark (posts of a year),
@@ -30,14 +36,18 @@
   to the map page.
 */ -}}
 {{- $p := .product | default "regetskcob" -}}
+{{- $auto := "" -}}
 {{- $marks := .marks | default slice -}}
+{{- if eq (printf "%v" $marks) "auto" }}{{ $auto = .auto | default ".hz-feld-section[id]" }}{{ $marks = slice }}{{ end -}}
 {{- $k := .karte | default dict -}}
 {{- $maxN := 0 -}}
 {{- range $marks }}{{ with .n }}{{ if gt . $maxN }}{{ $maxN = . }}{{ end }}{{ end }}{{ end -}}
 <nav class="hz-horizon" data-hz-horizon data-product="{{ $p }}" aria-label="Horizont">
   <span class="hz-horizon-line" aria-hidden="true"></span>
   <span class="hz-horizon-done" aria-hidden="true"></span>
-  {{- if ge (len $marks) 3 }}
+  {{- if $auto }}
+  <ol class="hz-ticks" data-hz-auto="{{ $auto }}"></ol>
+  {{- else if ge (len $marks) 3 }}
   <ol class="hz-ticks">
     {{- range $m := $marks }}
     {{- $h := 10 -}}
