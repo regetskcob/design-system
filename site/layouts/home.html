@@ -63,7 +63,6 @@
       (dict "id" "plattformen" "label" "08 Plattformen" "short" "08")
       (dict "id" "entwuerfe" "label" "09 Entwürfe" "short" "09")
       (dict "id" "formfaktoren" "label" "10 Formfaktoren" "short" "10")
-      (dict "id" "umsetzung" "label" "11 Umsetzung" "short" "11")
     )
     "link" (dict "url" "https://www.regetskcob.de/" "hint" "regetskcob")) }}
 
@@ -671,24 +670,6 @@ Fotos | je Einrichtung
     </div>
   </div>
 </section>
-
-<section class="doc-section" id="umsetzung">
-  <div class="doc-rail"><span class="t-kennung">11 — Umsetzung</span></div>
-  <div>
-    <h2 class="t-headline">Was danach käme.</h2>
-    <p>Diese Seite und die Tokens kommen aus dem Repository <a href="https://github.com/regetskcob/horizont">horizont</a>. Horizont steht auf v{{ $hz.version }}, was sich je Version ändert, steht im <a href="https://github.com/regetskcob/horizont/blob/main/CHANGELOG.md">CHANGELOG</a>. KNX Monitor ist umgestellt, App und Landingpage auf v0.6.0. Es ist die Referenz für die übrigen Apps: Entscheidungen in <span class="hz-mono">CLAUDE.md</span>, Muster in <span class="hz-mono">docs/flutter.md</span> unter „Referenz: KNX Monitor“.</p>
-    <ol class="doc-todo">
-      <li><span><b>Entscheidungen, erledigt.</b> Zwei Grün bleiben (Tanne dunkel leuchtender), Mona Sans, Kennung über dem Titel statt Large Title, Gelände als Ausnahme. Aus KNX Monitor: Tab-Bar mit Tönung, FAB auf Touch (am Telefon nur Symbol), Ansichten unten und Menü links, Expertenmodus, Unumkehrbares in critical mit Bestätigung, Datenlisten in Seitenbreite. Für v0.6.1: ein Umriss mit 3:1 (line-strong dunkler).</span></li>
-      <li><span><b>Schriften, erledigt.</b> Mona Sans, Literata und Monaspace für Web und Flutter, Material Symbols Sharp als Subset.</span></li>
-      <li><span><b>Flutter-Paket <span class="hz-mono">horizont</span>, erledigt.</b> Tokens aus <span class="hz-mono">tokens/horizont.json</span> generiert, ThemeExtension, ColorScheme von Hand je Produkt und Modus, Grund-Widgets, Kontraste als Test. Einbinden per Git-Abhängigkeit mit Tag.</span></li>
-      <li><span><b>App-Icons, erledigt.</b> Für alle Plattformen unter <span class="hz-mono">icons/export/</span>, erzeugt aus den Partials.</span></li>
-      <li><span><b>Pro App eine Umstellung.</b> Theme ersetzen, harte Farben (Zustand, Priorität, Ort) auf Status-Tokens, Radien auf die Skala. KNX Monitor erledigt; Jagdaufseher und Panzergefecht folgen und übernehmen seine Muster.</span></li>
-      <li><span><b>Landingpages als Feldseite.</b> Modul einbinden, die Seite aus <span class="hz-mono">horizont/feld/*</span> zusammensetzen, Screenshots mit <span class="hz-mono">horizont/device.html</span>.</span></li>
-      <li><span><b>Blog angleichen.</b> Neutrale und Kennungen übernehmen, Literata bleibt, der Kopf bekommt die Linie.</span></li>
-    </ol>
-  </div>
-</section>
-
 </main>
 
 <script>
