@@ -4,6 +4,25 @@ Jede Version gilt zugleich für Tokens (`tokens/horizont.json`), das
 Flutter-Paket (`flutter/pubspec.yaml`) und den Git-Tag. Apps und Seiten hängen
 an einem Tag; unter „Heben“ steht, was beim Wechsel zu tun ist.
 
+## 0.7.3
+
+Zwei Zeichen mehr, und Horizont ist ein eigenes Projekt auf der Flurkarte.
+
+### Neu
+
+- **Glyphen „blog“ und „horizont“** in `mark.html`: das offene Buch auf der
+  Linie für den Blog und die Sonne auf der Linie für Horizont. Nur als
+  Glyphe, ohne App-Icon.
+- `horizont/nav/horizon.html` nimmt `mark`: das Zeichen, das über die Linie
+  wandert, wenn es nicht das des Produkts ist (im Blog das Buch).
+- **Horizont als Projekt** in `tokens/flur.yaml`, hinter dem Feldweg neben
+  den Apps; bei regetskcob übernimmt „Über“ seinen Platz. Felder und
+  Gemarkungen können ein eigenes `mark` tragen.
+
+### Heben
+
+- `hugo mod get github.com/regetskcob/horizont@v0.7.3`; nichts sonst.
+
 ## 0.7.2
 
 Der Horizont auf jeder Feldseite, und die Flurkarte stört sie nicht mehr.

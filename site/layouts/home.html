@@ -45,10 +45,11 @@
 
 {{- /* The horizon line is the page's only navigation (horizont/nav/
        horizon.html): one mark per chapter; the mark opens the Flurkarte.
-       The docs are a field of regetskcob, not a site of their own, so every
-       link of the map goes to the blog's domain. */}}
+       Horizont is a project of its own on the map, with the sun on the
+       line as its mark; every link of the map goes to the blog's domain. */}}
 {{ partial "horizont/nav/horizon.html" (dict
     "product" "regetskcob"
+    "mark" "horizont"
     "place" (printf "Horizont / v%s" $hz.version)
     "marks" (slice
       (dict "id" "ausgangslage" "label" "01 Ausgangslage" "short" "01")
@@ -63,7 +64,7 @@
       (dict "id" "formfaktoren" "label" "10 Formfaktoren" "short" "10")
       (dict "id" "umsetzung" "label" "11 Umsetzung" "short" "11")
     )
-    "karte" (dict "home" "" "here" "regetskcob" "field" "horizont" "url" "https://www.regetskcob.de/karte/")) }}
+    "karte" (dict "home" "" "here" "horizont" "url" "https://www.regetskcob.de/karte/")) }}
 
 <main class="doc-main" id="top">
 

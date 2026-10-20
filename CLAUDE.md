@@ -198,6 +198,9 @@ Einrichtungen.
 - **Marke:** eine Linie auf dem unteren Drittel, darauf ein Gegenstand:
   Buche (regetskcob), Kanzel (Jagdaufseher), Busklemme rot/grau auf dem
   grünen Buskabel (KNX Monitor), Panzer in Seitenansicht (Panzergefecht).
+  Dazu zwei Glyphen ohne App-Icon: das offene Buch für den Blog und die
+  Sonne auf der Linie für Horizont (`mark.html`, `product` "blog" bzw.
+  "horizont").
 - **App-Icon:** illustriert (`web/partials/app-icon.html`). Die Bühne ist
   Himmel oben und Boden unten mit einer hellen Horizontlinie bei zwei
   Dritteln. Davor steht ein Gegenstand in drei Tönen mit dunkler Kontur (1,6

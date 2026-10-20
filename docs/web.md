@@ -139,7 +139,7 @@ den Tokens. Eigene Werte in einem Layout sind ein Fehler.
 | Partial | Zweck |
 | --- | --- |
 | `horizont/lockup.html` | Marke und Name auf einer Grundlinie (`product`, `label`, `href`) |
-| `horizont/mark.html` | die Glyphe allein (`product`, `size`) |
+| `horizont/mark.html` | die Glyphe allein (`product`, `size`; auch `blog`, das offene Buch, und `horizont`, die Sonne auf der Linie) |
 | `horizont/app-icon.html` | das illustrierte App-Icon (`product`, `size`, `variant`) |
 | `horizont/kennung.html` | Kennung (Text oder `dict "text" "tag"`) |
 | `horizont/badge.html` | Status mit Zeichen und Wort (`status`, `label`) |

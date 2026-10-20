@@ -8,7 +8,7 @@
 import 'package:flutter/widgets.dart';
 
 /// Version of the tokens this file was generated from.
-const String horizontTokensVersion = '0.7.2';
+const String horizontTokensVersion = '0.7.3';
 
 /// The neutral colours of one brightness.
 @immutable

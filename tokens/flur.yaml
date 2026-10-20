@@ -15,6 +15,8 @@
 #   span    columns and rows on the six-column map; the area follows the
 #           content, roughly: Blog 151 posts is the largest field
 #   angle   direction of the furrows; neighbours differ, as on the land
+#   mark    the glyph when it is not the gemarkung's (mark.html): the blog's
+#           book; a project may set its own (Horizont's sun)
 #
 # The counts are as of 2026-10-20. A site that knows its own numbers (the
 # blog counts its posts) passes them in; the others keep these.
@@ -29,6 +31,7 @@ gemarkungen:
     fields:
       - id: blog
         name: Blog
+        mark: blog
         path: /blog/
         count: 151
         unit: [Beitrag, Beiträge]
@@ -66,14 +69,8 @@ gemarkungen:
       - id: ueber
         name: Über
         path: /about/
-        span: [1, 1]
+        span: [3, 1]
         angle: 0
-      - id: horizont
-        name: Horizont
-        path: /horizont/
-        note: Designsystem
-        span: [2, 1]
-        angle: 120
 
   - id: jagdaufseher
     name: Jagdaufseher
@@ -92,3 +89,10 @@ gemarkungen:
     product: panzergefecht
     path: /wargame/
     note: Panzerduelle und Verteidigung
+
+  - id: horizont
+    name: Horizont
+    product: regetskcob
+    mark: horizont
+    path: /horizont/
+    note: Designsystem

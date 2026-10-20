@@ -7,7 +7,9 @@
   at the bottom, in reach of the thumb, where a swipe along it jumps.
 
     partial "horizont/nav/horizon.html" (dict
-      "product" "regetskcob"          mark and accent
+      "product" "regetskcob"          accent, and the mark unless "mark" is set
+      "mark"    "blog"                the glyph that walks (mark.html), e.g.
+                                      the book on the blog
       "place"   "regetskcob / Blog"   where you are; said by the mark
       "marks"   (slice                 chapters of this page
                   (dict "id" "jahr-2025" "label" "2025" "short" "25" "n" 16
@@ -56,7 +58,7 @@
     {{- end }}
   </ol>
   {{- end }}
-  <a class="hz-walker" href="{{ $k.url | default (relURL "karte/") }}" data-hz-open-karte data-place="{{ .place }}" aria-label="Flurkarte{{ with .place }}, du bist in {{ . }}{{ end }}">{{ partial "horizont/mark.html" (dict "product" $p "size" 28) }}</a>
+  <a class="hz-walker" href="{{ $k.url | default (relURL "karte/") }}" data-hz-open-karte data-place="{{ .place }}" aria-label="Flurkarte{{ with .place }}, du bist in {{ . }}{{ end }}">{{ partial "horizont/mark.html" (dict "product" (.mark | default $p) "size" 28) }}</a>
   {{- with .lang }}
   <a class="hz-horizon-lang" href="{{ .url }}" hreflang="{{ .hreflang }}" lang="{{ .hreflang }}">{{ .name }}</a>
   {{- end }}

@@ -2,6 +2,8 @@
   The marks of Horizont: one horizon on the lower third of the square, the
   rule of thirds of a landscape photo, with the one object of the app icon on
   it: beech, raised hide, bus terminal, tank. Same stroke, square caps.
+  Two more are glyphs only (no app icon): "blog", an open book, and
+  "horizont", the sun on the line.
 
     partial "horizont/mark.html" (dict "product" "knx" "size" 64 "icon" true)
 
@@ -16,9 +18,14 @@
 {{- $p := .product | default "regetskcob" -}}
 {{- $size := .size | default 32 -}}
 {{- $icon := .icon | default false -}}
-{{- $colors := index site.Data.horizont.color.product $p "icon" -}}
-{{- $stroke := cond $icon $colors.glyph (.color | default "currentColor") -}}
-{{- $label := index site.Data.horizont.color.product $p "name" -}}
+{{- /* Two marks are glyphs only, no product with colours and app icon:
+       the blog (an open book) and Horizont itself (the sun on the line). */ -}}
+{{- $glyphs := dict "blog" "Blog" "horizont" "Horizont" -}}
+{{- $colors := dict -}}
+{{- $label := index $glyphs $p -}}
+{{- with index site.Data.horizont.color.product $p }}{{ $colors = .icon }}{{ $label = .name }}{{ end -}}
+{{- $stroke := .color | default "currentColor" -}}
+{{- if $icon }}{{ $stroke = $colors.glyph }}{{ end -}}
 <svg xmlns="http://www.w3.org/2000/svg" class="hz-mark" width="{{ $size }}" height="{{ $size }}" viewBox="0 0 100 100" role="img" aria-label="{{ $label }}" fill="none" stroke="{{ $stroke }}" stroke-width="{{ cond $icon 5 7 }}" stroke-linecap="square" stroke-linejoin="miter">
   {{- if $icon }}
   <rect width="100" height="100" rx="22.4" fill="{{ $colors.field }}" stroke="none"/>
@@ -33,6 +40,13 @@
   {{- else if eq $p "knx" }}
   <path d="M{{ cond $icon 0 4 }} 66.7H35M65 66.7H{{ cond $icon 100 96 }}"/>
   <path d="M35 40h30v34H35zM50 40v34"/>
+  {{- else if eq $p "blog" }}
+  <path d="M4 66.7H96"/>
+  <path d="M17 64.7c11-4.5 22-4.5 33 2 11-6.5 22-6.5 33-2V38c-11-4.5-22-4.5-33 2-11-6.5-22-6.5-33-2z"/>
+  <path d="M50 40v26.7"/>
+  {{- else if eq $p "horizont" }}
+  <path d="M4 66.7H96"/>
+  <path d="M27 66.7a23 23 0 0 1 46 0"/>
   {{- else if eq $p "panzergefecht" }}
   <path d="M{{ cond $icon 0 4 }} 66.7H{{ cond $icon 100 96 }}"/>
   <path d="M24 66.7l4-12h44l4 12M40 54.7V44h18v10.7M58 49h24"/>

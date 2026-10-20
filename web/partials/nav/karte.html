@@ -37,7 +37,7 @@
       {{- $on := and (eq $g.id $here) (eq $f.id $field) }}
       <li style="--cols:{{ index $span 0 }};--rows:{{ index $span 1 }};--ang:{{ $f.angle | default 0 }}deg">
         <a class="hz-parzelle" href="{{ $fh }}"{{ if $on }} aria-current="page"{{ end }}>
-          {{- if $on }}{{ partial "horizont/mark.html" (dict "product" $g.product "size" 24) }}{{ end }}
+          {{- if $on }}{{ partial "horizont/mark.html" (dict "product" ($f.mark | default $g.product) "size" 24) }}{{ end }}
           <span class="hz-parzelle-count">{{ with $n }}{{ . }} {{ cond (eq . 1) (index $f.unit 0) (index $f.unit 1) }}{{ else }}{{ $f.note }}{{ end }}{{ if and $n $f.note }} · {{ $f.note }}{{ end }}</span>
           <span class="hz-parzelle-name">{{ $f.name }}</span>
         </a>
@@ -54,7 +54,7 @@
       <li data-product="{{ $g.product }}">
         <a class="hz-parzelle hz-parzelle--prod" href="{{ $href }}"{{ if $on }} aria-current="page"{{ end }}>
           <span class="hz-parzelle-count">{{ $g.note }}</span>
-          <span class="hz-parzelle-name">{{ partial "horizont/mark.html" (dict "product" $g.product "size" 20) }}{{ $g.name }}</span>
+          <span class="hz-parzelle-name">{{ partial "horizont/mark.html" (dict "product" ($g.mark | default $g.product) "size" 20) }}{{ $g.name }}</span>
         </a>
       </li>
   {{- end }}
