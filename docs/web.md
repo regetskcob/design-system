@@ -93,7 +93,7 @@ Neutrale `--bg --surface --sunken --line --line-strong --text --text-muted
 --accent-text`, Datenrampe `--data-1` bis `--data-5` (Heatmaps, wenig nach
 viel), Schriften `--font-serif --font-sans --font-mono`, Abstände
 `--s-<n>`, Radien `--r-<n>`, Linien `--line-hairline --line-selection
---line-focus`, Bewegung `--motion-fast|base|slow --ease-standard`, Größen
+--line-focus`, Bewegung `--motion-fast|base|slow|calm --ease-standard|exit|settle`, Größen
 `--size-<name>` (auch `form`, `search`, `sidebar`, `inspector`,
 `grid-card`), Symbolgrößen `--icon-badge|inline|row|bar|tab`, Hardware
 `--device-<name>`. Typo-Klassen `.t-display` bis `.t-kennung`.

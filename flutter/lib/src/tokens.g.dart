@@ -445,10 +445,14 @@ abstract final class HzMotion {
   static const Duration base = Duration(milliseconds: 200);
   /// 320 ms.
   static const Duration slow = Duration(milliseconds: 320);
+  /// 560 ms.
+  static const Duration calm = Duration(milliseconds: 560);
   /// cubic-bezier(0.2, 0, 0, 1).
   static const Cubic standard = Cubic(0.2, 0, 0, 1);
   /// cubic-bezier(0.3, 0, 1, 1).
   static const Cubic exit = Cubic(0.3, 0, 1, 1);
+  /// cubic-bezier(0.16, 1, 0.3, 1).
+  static const Cubic settle = Cubic(0.16, 1, 0.3, 1);
 }
 
 /// Font families bundled with the package.

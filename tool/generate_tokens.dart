@@ -156,12 +156,12 @@ void main() {
   out
     ..writeln('/// Durations and curves. Collapse to zero under reduced motion.')
     ..writeln('abstract final class HzMotion {');
-  for (final k in ['fast', 'base', 'slow']) {
+  for (final k in ['fast', 'base', 'slow', 'calm']) {
     out
       ..writeln('  /// ${motion[k]} ms.')
       ..writeln('  static const Duration $k = Duration(milliseconds: ${motion[k]});');
   }
-  for (final k in ['standard', 'exit']) {
+  for (final k in ['standard', 'exit', 'settle']) {
     final v = RegExp(r'[\d.]+').allMatches(motion[k] as String).map((m) => m[0]).join(', ');
     out
       ..writeln('  /// ${motion[k]}.')

@@ -170,8 +170,15 @@ fehlt):
 
 Abstände (`HzSpace.s2 … s96`), Radien (`HzRadius.r0 … r16`), Linien
 (`HzLine.hairline` 1, `selection` 2), Größen (`HzSize`, `HzIconSize`) und
-Bewegung (`HzMotion.fast` 120, `base` 200, `slow` 320, Kurve
-`Cubic(0.2, 0, 0, 1)`) sind Konstanten.
+Bewegung (`HzMotion.fast` 120, `base` 200, `slow` 320, `calm` 560, Kurven
+`standard` `Cubic(0.2, 0, 0, 1)`, `exit`, `settle`) sind Konstanten.
+
+**`calm` mit `settle`** ist die ruhige Stufe für Bewegung, die niemand
+ausgelöst hat oder die etwas bestätigt: ein Wert, der sich ändert, ein
+Diagramm, das sich aufbaut, ein Haken nach dem Speichern, ein Zähler, der
+hochläuft. Nie für Navigation, Blätter oder Tippen – dort bleiben `fast` bis
+`slow`, damit die Oberfläche nicht träge wirkt. Wie alle Dauern unter
+reduzierter Bewegung null.
 
 ## Typografie
 

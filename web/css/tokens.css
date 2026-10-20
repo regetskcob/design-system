@@ -36,8 +36,10 @@
   --motion-fast: {{ .motion.fast }}ms;
   --motion-base: {{ .motion.base }}ms;
   --motion-slow: {{ .motion.slow }}ms;
+  --motion-calm: {{ .motion.calm }}ms;
   --ease-standard: {{ .motion.standard | safeCSS }};
   --ease-exit: {{ .motion.exit | safeCSS }};
+  --ease-settle: {{ .motion.settle | safeCSS }};
 {{- range $k, $v := .size }}
   --size-{{ $k }}: {{ $v }}px;
 {{- end }}
@@ -55,7 +57,7 @@
 [data-theme="dark"] { color-scheme: dark; }
 
 @media (prefers-reduced-motion: reduce) {
-  :root { --motion-fast: 0ms; --motion-base: 0ms; --motion-slow: 0ms; }
+  :root { --motion-fast: 0ms; --motion-base: 0ms; --motion-slow: 0ms; --motion-calm: 0ms; }
 }
 
 {{ range $p, $d := $c.product }}
