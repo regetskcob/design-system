@@ -4,6 +4,23 @@ Jede Version gilt zugleich für Tokens (`tokens/horizont.json`), das
 Flutter-Paket (`flutter/pubspec.yaml`) und den Git-Tag. Apps und Seiten hängen
 an einem Tag; unter „Heben“ steht, was beim Wechsel zu tun ist.
 
+## 0.7.4
+
+Der Sprachschalter ist zu sehen.
+
+### Geändert
+
+- **Sprachschalter am Ende der Linie:** beide Sprachen in einem kleinen
+  Rahmen („DE | EN“), die aktuelle mit der Akzentlinie, die andere als Link;
+  auf Touch 32 px hoch. Die Linie und ihre Striche enden davor. `lang` nimmt
+  dafür `current` (die Sprache der Seite).
+
+### Heben
+
+- `hugo mod get github.com/regetskcob/horizont@v0.7.4`, in `lang` das Feld
+  `current` ergänzen. Wer `.hz-horizon-lang` selbst anspricht: das ist jetzt
+  der Rahmen, der Link liegt darin (`.hz-horizon-lang a`).
+
 ## 0.7.3
 
 Zwei Zeichen mehr, und Horizont ist ein eigenes Projekt auf der Flurkarte.

@@ -526,7 +526,9 @@ body.hz { margin: 0; }
 }
 .hz-horizon-line,
 .hz-horizon-done { position: absolute; left: var(--inset); top: var(--at); height: var(--line-hairline); }
-.hz-horizon-line { right: var(--inset); background: var(--line-strong); }
+.hz-horizon-line { right: calc(var(--inset) + var(--end, 0px)); background: var(--line-strong); }
+/* With a language switch the line ends before it. */
+.hz-horizon:has(.hz-horizon-lang) { --end: calc(var(--lang-w, 72px) + var(--s-8)); }
 .hz-horizon-done { width: 0; height: var(--line-selection); margin-top: -1px; background: var(--accent); }
 .hz-walker {
   position: absolute;
@@ -561,8 +563,26 @@ body.hz { margin: 0; }
 .hz-ticks { list-style: none; margin: 0; padding: calc(var(--at) + var(--s-8)) var(--inset) var(--s-8) calc(var(--inset) + 28px); display: flex; flex-wrap: wrap; gap: var(--s-4) var(--s-16); }
 .hz-tick { font: 600 0.5625rem/1.2 var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-faint); text-decoration: none; }
 .hz-tick:hover, .hz-tick.is-current { color: var(--text); }
-.hz-horizon-lang { position: absolute; right: var(--inset); top: calc(var(--at) - 20px); font: 600 0.625rem/1.6 var(--font-mono); letter-spacing: 0.08em; color: var(--text-muted); text-decoration: none; background: var(--bg); padding-left: var(--s-4); }
-.hz-horizon-lang:hover { color: var(--text); }
+/* The language switch at the end of the line: both languages in a small
+   frame, the current one carrying the accent line, the other a link. */
+.hz-horizon-lang {
+  position: absolute;
+  right: var(--inset);
+  top: calc(var(--at) - 13px);
+  z-index: 3;
+  display: inline-flex;
+  align-items: stretch;
+  border: var(--line-hairline) solid var(--line-strong);
+  border-radius: var(--r-6);
+  background: var(--bg);
+  font: 600 0.6875rem/1 var(--font-mono);
+  letter-spacing: 0.08em;
+  overflow: hidden;
+}
+.hz-horizon-lang > * { display: inline-flex; align-items: center; min-height: 24px; padding: 0 var(--s-8); text-decoration: none; }
+.hz-horizon-lang-here { color: var(--text); box-shadow: inset 0 calc(-1 * var(--line-selection)) 0 var(--accent); }
+.hz-horizon-lang a { color: var(--text-muted); border-left: var(--line-hairline) solid var(--line); }
+.hz-horizon-lang a:hover { color: var(--text); background: var(--sunken); }
 
 /* On a Feldseite the line stands before .hz-feld (whose container would
    hold a fixed line on touch at the page's end) and keeps its frame. */
@@ -570,7 +590,7 @@ body:has(> .hz-feld) > .hz-horizon { --horizon-width: var(--size-page); --inset:
 @media (max-width: 720px) { body:has(> .hz-feld) > .hz-horizon { --inset: var(--s-16); } }
 
 /* With the script: marks at their place on the line. */
-.hz-horizon.is-live .hz-ticks { position: absolute; left: var(--inset); right: var(--inset); top: 0; height: 100%; padding: 0; display: block; }
+.hz-horizon.is-live .hz-ticks { position: absolute; left: var(--inset); right: calc(var(--inset) + var(--end, 0px)); top: 0; height: 100%; padding: 0; display: block; }
 .hz-horizon.is-live .hz-ticks li { position: absolute; top: 0; height: 100%; }
 .hz-horizon.is-live .hz-tick { position: absolute; top: 0; left: -10px; width: 20px; height: 100%; }
 .hz-horizon.is-live .hz-tick::before {
@@ -630,6 +650,9 @@ body:has(> .hz-feld) > .hz-horizon { --horizon-width: var(--size-page); --inset:
   .hz-horizon.is-live { touch-action: none; }
   body:has(.hz-horizon) { padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px)); }
   .hz-walker::after { display: none; }
+  .hz-horizon { --lang-w: 88px; }
+  .hz-horizon-lang { top: calc(var(--at) - 17px); }
+  .hz-horizon-lang > * { min-height: 32px; padding: 0 var(--s-12); }
   .hz-walker { width: 44px; height: 44px; margin-left: -22px; top: calc(var(--at) - 28px * 2 / 3 - 8px); padding: 8px; }
   .hz-horizon.is-live .hz-tick { left: -14px; width: 28px; }
   .hz-horizon.is-live .hz-tick::before { left: 13px; }

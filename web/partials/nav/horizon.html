@@ -16,7 +16,7 @@
                         "title" "2025 · 16 Beiträge"))
       "karte"   (dict "home" "regetskcob" "here" "regetskcob" "field" "blog"
                       "counts" (dict "blog" 151) "url" "/karte/")
-      "lang"    (dict "name" "EN" "url" "/en/" "hreflang" "en"))
+      "lang"    (dict "current" "DE" "name" "EN" "url" "/en/" "hreflang" "en"))
 
   marks "auto" (with "auto" a CSS selector, by default the numbered
   sections of a Feldseite, ".hz-feld-section[id]"): the script reads the
@@ -29,6 +29,9 @@
   year), n a count that sets the height of the mark (posts of a year),
   title the full words for a tooltip. With fewer than three marks the line
   stands alone.
+
+  lang: the switch at the end of the line, "current" the language of the
+  page (marked with the accent line), "name" and "url" the other one.
 
   karte: the arguments of horizont/nav/karte.html plus url, the page with
   the map for browsers without JavaScript. The script
@@ -60,7 +63,10 @@
   {{- end }}
   <a class="hz-walker" href="{{ $k.url | default (relURL "karte/") }}" data-hz-open-karte data-place="{{ .place }}" aria-label="Flurkarte{{ with .place }}, du bist in {{ . }}{{ end }}">{{ partial "horizont/mark.html" (dict "product" (.mark | default $p) "size" 28) }}</a>
   {{- with .lang }}
-  <a class="hz-horizon-lang" href="{{ .url }}" hreflang="{{ .hreflang }}" lang="{{ .hreflang }}">{{ .name }}</a>
+  <span class="hz-horizon-lang">
+    {{- with .current }}<span class="hz-horizon-lang-here" aria-current="true">{{ . }}</span>{{ end -}}
+    <a href="{{ .url }}" hreflang="{{ .hreflang }}" lang="{{ .hreflang }}">{{ .name }}</a>
+  </span>
   {{- end }}
 </nav>
 <dialog class="hz-karte-dialog" data-hz-karte aria-label="Flurkarte">
