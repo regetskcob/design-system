@@ -88,6 +88,18 @@ wird daher für alle Formfaktoren mitgedacht, nicht nur für das Telefon.
   Listen untereinander bündig stehen.
 - **Status-Badge:** Fläche `*-tint`, Text und Zeichen in der Statusfarbe,
   Radius 2.
+- **Navigation im Web ist der Horizont** (ab v0.7.0, `horizont/nav/
+  horizon.html`): keine Menüleiste, kein Hamburger, keine Dropdowns. Eine
+  Linie, das Zeichen der Seite steht darauf und wandert beim Lesen mit;
+  links davon ist die Linie im Akzent nachgezogen. Kapitel sind Striche an
+  ihrer echten Stelle, der Titel hängt klein unter dem Strich, der aktuelle
+  dunkel und ganz; wo Kapitel eng liegen, nur die Nummer. Im Blog-Index
+  sind die Striche Jahre, so hoch wie ihre Beiträge. Mit Zeiger steht die
+  Linie oben, auf Touch unten (Streichen springt). Das Zeichen öffnet die
+  Flurkarte (`horizont/nav/karte.html`): alle Seiten der Familie als Felder
+  von oben, Fläche nach Inhalt, die Produkte hinter einem Feldweg; Daten in
+  `tokens/flur.yaml`. Ohne JavaScript bleiben Ankerlinks und die Seite
+  `/karte/`. Die Apps behalten ihre eigene Navigation.
 
 ## Werte (Tokens)
 

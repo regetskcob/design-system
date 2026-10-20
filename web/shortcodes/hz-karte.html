@@ -1,0 +1,10 @@
+{{- /*
+  The Flurkarte on a page, e.g. /karte/, where the mark of the horizon line
+  leads without JavaScript (partials/nav/karte.html).
+
+    {{< hz-karte home="regetskcob" here="regetskcob" >}}
+*/ -}}
+{{ partial "horizont/nav/karte.html" (dict
+  "home" (.Get "home" | default "regetskcob")
+  "here" (.Get "here" | default (.Get "home" | default "regetskcob"))
+  "field" (.Get "field" | default "")) }}

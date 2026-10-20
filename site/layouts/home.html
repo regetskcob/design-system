@@ -39,25 +39,31 @@
   <title>Horizont · regetskcob</title>
   <meta name="description" content="{{ site.Params.description }}">
   <link rel="stylesheet" href="{{ $css.RelPermalink }}">
-  <script>
-    /* Theme before first paint, so a dark choice does not flash light. */
-    try { var t = localStorage.getItem("hz-theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
-  </script>
 </head>
 <body class="hz">
 {{ partial "horizont/icons.html" . }}
 
-<header class="doc-bar">
-  <a class="doc-brand hz-lockup" href="#top">{{ partial "horizont/mark.html" (dict "product" "regetskcob" "size" 22) }}<span>Horizont</span></a>
-  <span class="t-kennung hz-kennung">v{{ $hz.version }} · Entwurf</span>
-  <span class="doc-spacer"></span>
-  <nav aria-label="Abschnitte">
-    <a href="#prinzipien">Prinzipien</a><a href="#marken">Marken</a><a href="#farbe">Farbe</a><a href="#schrift">Schrift</a><a href="#komponenten">Komponenten</a><a href="#plattformen">Plattformen</a><a href="#entwuerfe">Entwürfe</a><a href="#formfaktoren">Formfaktoren</a>
-  </nav>
-  <div class="hz-segmented" role="group" aria-label="Darstellung">
-    <button type="button" data-set-theme="" aria-pressed="true">Auto</button><button type="button" data-set-theme="light" aria-pressed="false">Hell</button><button type="button" data-set-theme="dark" aria-pressed="false">Dunkel</button>
-  </div>
-</header>
+{{- /* The horizon line is the page's only navigation (horizont/nav/
+       horizon.html): one mark per chapter; the mark opens the Flurkarte.
+       The docs are a field of regetskcob, not a site of their own, so every
+       link of the map goes to the blog's domain. */}}
+{{ partial "horizont/nav/horizon.html" (dict
+    "product" "regetskcob"
+    "place" (printf "Horizont / v%s" $hz.version)
+    "marks" (slice
+      (dict "id" "ausgangslage" "label" "01 Ausgangslage" "short" "01")
+      (dict "id" "prinzipien" "label" "02 Prinzipien" "short" "02")
+      (dict "id" "marken" "label" "03 Marken" "short" "03")
+      (dict "id" "farbe" "label" "04 Farbe" "short" "04")
+      (dict "id" "schrift" "label" "05 Schrift" "short" "05")
+      (dict "id" "grundlagen" "label" "06 Grundlagen" "short" "06")
+      (dict "id" "komponenten" "label" "07 Komponenten" "short" "07")
+      (dict "id" "plattformen" "label" "08 Plattformen" "short" "08")
+      (dict "id" "entwuerfe" "label" "09 Entwürfe" "short" "09")
+      (dict "id" "formfaktoren" "label" "10 Formfaktoren" "short" "10")
+      (dict "id" "umsetzung" "label" "11 Umsetzung" "short" "11")
+    )
+    "karte" (dict "home" "" "here" "regetskcob" "field" "horizont" "url" "https://www.regetskcob.de/karte/")) }}
 
 <main class="doc-main" id="top">
 
@@ -687,17 +693,6 @@ Fotos | je Einrichtung
 (function () {
   var root = document.documentElement;
 
-  /* Page theme: Auto follows the system, Hell and Dunkel are remembered. */
-  var themeButtons = document.querySelectorAll("[data-set-theme]");
-  function setTheme(t) {
-    if (t) root.dataset.theme = t; else delete root.dataset.theme;
-    themeButtons.forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.setTheme === (t || ""))); });
-    try { if (t) localStorage.setItem("hz-theme", t); else localStorage.removeItem("hz-theme"); } catch (e) {}
-    measure();
-  }
-  themeButtons.forEach(function (b) { b.addEventListener("click", function () { setTheme(b.dataset.setTheme); }); });
-  setTheme(root.dataset.theme || "");
-
   /* Playground: product and mode of the component section. */
   var pg = document.getElementById("playground");
   document.querySelectorAll("[data-pg]").forEach(function (group) {
@@ -733,5 +728,6 @@ Fotos | je Einrichtung
   measure();
 })();
 </script>
+{{ partial "horizont/nav/script.html" . }}
 </body>
 </html>

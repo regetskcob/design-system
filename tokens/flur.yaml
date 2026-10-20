@@ -1,0 +1,94 @@
+# The Flurkarte: every page of the family as a field seen from above, like
+# the aerial photos of the Lower Rhine. One source for every site (web/
+# partials/nav/karte.html) and, later, the about page of the apps.
+#
+# Gemarkungen are the sites. The first one is regetskcob with its fields;
+# the products follow behind a field path, one parcel each.
+#
+# Per field:
+#   id      stable key; a site passes it as "field" to mark where it is
+#   name    as written on the field
+#   path    below the gemarkung's site; root-relative
+#   count   what lies on the field; a site may pass a live number
+#           ("counts" in the partial), otherwise this one is shown
+#   unit    singular and plural for the count
+#   span    columns and rows on the six-column map; the area follows the
+#           content, roughly: Blog 151 posts is the largest field
+#   angle   direction of the furrows; neighbours differ, as on the land
+#
+# The counts are as of 2026-10-20. A site that knows its own numbers (the
+# blog counts its posts) passes them in; the others keep these.
+
+site: https://www.regetskcob.de
+
+gemarkungen:
+  - id: regetskcob
+    name: regetskcob
+    product: regetskcob
+    path: /
+    fields:
+      - id: blog
+        name: Blog
+        path: /blog/
+        count: 151
+        unit: [Beitrag, Beiträge]
+        span: [3, 4]
+        angle: 45
+      - id: galerie
+        name: Galerie
+        path: /galerie/
+        count: 100
+        unit: [Foto, Fotos]
+        span: [2, 2]
+        angle: 0
+      - id: niederrhein
+        name: Niederrhein.
+        path: /niederrhein/
+        count: 52
+        unit: [Foto, Fotos]
+        note: Serie
+        span: [1, 2]
+        angle: 90
+      - id: ausruestung
+        name: Ausrüstung
+        path: /ausruestung/
+        count: 33
+        unit: [Teil, Teile]
+        span: [2, 1]
+        angle: 135
+      - id: rezepte
+        name: Film-Rezepte
+        path: /rezepte/
+        count: 3
+        unit: [Rezept, Rezepte]
+        span: [1, 1]
+        angle: 60
+      - id: ueber
+        name: Über
+        path: /about/
+        span: [1, 1]
+        angle: 0
+      - id: horizont
+        name: Horizont
+        path: /horizont/
+        note: Designsystem
+        span: [2, 1]
+        angle: 120
+
+  - id: jagdaufseher
+    name: Jagdaufseher
+    product: jagdaufseher
+    path: /jagdaufseher/
+    note: Das Revier im Blick
+
+  - id: knx
+    name: KNX Monitor
+    product: knx
+    path: /knx/
+    note: Busmonitor & Diagnose
+
+  - id: panzergefecht
+    name: Panzergefecht
+    product: panzergefecht
+    path: /wargame/
+    note: Panzerduelle und Verteidigung

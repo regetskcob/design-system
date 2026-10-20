@@ -29,6 +29,10 @@ Monitor und Panzergefecht, Jagdaufseher liegt im Blog unter
     [[module.imports.mounts]]
       source = 'web/shortcodes'
       target = 'layouts/_shortcodes'
+    # Ab 0.7.0: das Skript der Horizontlinie.
+    [[module.imports.mounts]]
+      source = 'web/js'
+      target = 'assets/js/horizont'
     # Mona Sans, Material Symbols, Literata and Monaspace; the blog's theme
     # brings its own Literata and Monaspace in the same folders.
     [[module.imports.mounts]]
@@ -37,7 +41,7 @@ Monitor und Panzergefecht, Jagdaufseher liegt im Blog unter
 ```
 
 ```bash
-hugo mod get github.com/regetskcob/horizont@v0.6.1
+hugo mod get github.com/regetskcob/horizont@v0.7.0
 ```
 
 Das ändert `go.mod` und `go.sum`. Wie die Apps hängt eine Seite an einem
@@ -142,7 +146,10 @@ den Tokens. Eigene Werte in einem Layout sind ein Fehler.
 | `horizont/symbol.html` | Material Symbol per Name (`name`, optional `label`) |
 | `horizont/facts.html` | Begriff und Wert auf einer Grundlinie (`items`, `term`) |
 | `horizont/device.html` | Screenshot im Geräterahmen (`device`, `width`, `image` oder `src`, `alt`, `cropped`) |
-| `horizont/feld/head.html`, `hero.html`, `section.html`, `foot.html` | die Feldseite (siehe unten) |
+| `horizont/nav/horizon.html` | die Navigation: Horizontlinie mit Zeichen, Kapitelstrichen und Flurkarte (siehe „Navigation“) |
+| `horizont/nav/karte.html` | die Flurkarte allein (`home`, `here`, `field`, `counts`) |
+| `horizont/nav/script.html` | das Skript dazu, einmal am Ende der Seite |
+| `horizont/feld/head.html`, `hero.html`, `section.html`, `foot.html` | die Feldseite (siehe unten); `feld/head.html` ist ab 0.7.0 durch den Horizont ersetzt und bleibt bis 0.8.0 |
 | `horizont/icons.html` | Platzhalter-Ikonen der Doku als SVG-Sprite |
 
 ```go-html-template
@@ -168,19 +175,61 @@ Für Beiträge im Blog und Texte der Landingpages:
 Zustand | gut, prüfen, defekt
 Fotos | je Einrichtung
 {{< /hz-facts >}}
+{{< hz-karte home="regetskcob" >}}
 ```
 
 `hz-device` nimmt ein Bild aus dem Page Bundle, verkleinert es auf WebP in
 doppelter Breite und setzt es in den Rahmen. Ein Screenshot ohne `alt` bricht
 den Build ab.
 
+## Navigation
+
+Jede Hugo-Seite hat dieselbe Navigation: den Horizont. Keine Menüleiste,
+kein Hamburger, keine Dropdowns.
+
+- **Linie und Zeichen.** Eine Linie über den Seitenrahmen, das Zeichen der
+  Seite steht darauf und wandert beim Lesen von links nach rechts; links
+  davon ist die Linie 2 px im Akzent nachgezogen. Bei reduzierter Bewegung
+  bleibt das Zeichen links, nur die Linie wächst. Das Zeichen ist der
+  einzige Knopf: es öffnet die Flurkarte und nennt beim Zeigen den Ort
+  (`place`, kurz: „regetskcob / Blog“, „KNX Monitor“).
+- **Kapitelstriche.** Jedes Kapitel ein Strich an seiner echten Stelle, der
+  Titel klein unter der Linie, der aktuelle dunkel und ganz; wo Kapitel eng
+  liegen, nur die Nummer. Unter drei Kapiteln steht die Linie allein. Im
+  Blog-Index sind die Striche Jahre, so hoch wie ihre Beiträge (`n`).
+- **Mit Zeiger oben, auf Touch unten** (`(hover: none) and (pointer:
+  coarse)`), wie die Ansichten in den Apps. Auf Touch tragen die Striche
+  Nummern; mit dem Daumen über die Linie streichen springt durch die
+  Kapitel.
+- **Flurkarte.** Alle Seiten der Familie als Felder von oben, die Fläche
+  nach dem Inhalt, die Furchen je Feld in eigenem Winkel; die Produkte
+  hinter einem Feldweg. Das Feld, auf dem man ist, trägt Akzent und
+  Zeichen. Daten in `tokens/flur.yaml`; eigene Zahlen gibt die Seite live
+  mit (`counts`).
+- **Ohne JavaScript** sind die Striche Ankerlinks in einer Reihe und das
+  Zeichen ein Link auf `/karte/` (Shortcode `hz-karte`).
+
+```go-html-template
+{{ partial "horizont/nav/horizon.html" (dict
+    "product" "regetskcob"
+    "place" "regetskcob / Blog"
+    "marks" (slice (dict "id" "jahr-2026" "label" "2026" "short" "26" "n" 13 "title" "2026 · 13 Beiträge"))
+    "karte" (dict "home" "regetskcob" "here" "regetskcob" "field" "blog" "counts" (dict "blog" 151))) }}
+…
+{{ partial "horizont/nav/script.html" . }}
+```
+
+Die Linie folgt dem Seitenrahmen über `--horizon-width` (etwa
+`.hz-horizon { --horizon-width: var(--size-page); }`).
+
 ## Landingpage („Feldseite“)
 
 Aufbau, wie in der Doku unter „Entwürfe“, zusammengesetzt aus den fünf
 Partials unter `horizont/feld/` in einem `<div class="hz-feld">`:
 
-1. Kopf: Lockup mit Glyphe im Akzent und Produktname (Mona Sans 600), rechts
-   die Navigation leise.
+1. Kopf: der Horizont (siehe „Navigation“) mit dem Zeichen des Produkts und
+   den nummerierten Abschnitten als Striche. Bis 0.7.0 war es das Lockup
+   mit Navigation rechts (`feld/head.html`).
 2. Hero, links ausgerichtet: Kennung (`01 — IN ENTWICKLUNG · IPHONE ·
    ANDROID`), Überschrift in `.t-display` (Literata 300), ein Absatz in
    `text-muted`, eine Hauptaktion (`--primary`) und eine zweite

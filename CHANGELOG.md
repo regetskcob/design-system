@@ -4,6 +4,33 @@ Jede Version gilt zugleich für Tokens (`tokens/horizont.json`), das
 Flutter-Paket (`flutter/pubspec.yaml`) und den Git-Tag. Apps und Seiten hängen
 an einem Tag; unter „Heben“ steht, was beim Wechsel zu tun ist.
 
+## 0.7.0
+
+Eine Navigation für alle Hugo-Seiten: der Horizont. Keine Farbe, kein Maß,
+kein Widget der Apps ändert sich.
+
+### Neu
+
+- **Horizontlinie** (`horizont/nav/horizon.html`, `.hz-horizon`): keine
+  Menüleiste, eine Linie mit dem Zeichen der Seite, das beim Lesen
+  mitwandert; Kapitel als Striche an ihrer echten Stelle mit dem Titel
+  darunter; mit Zeiger oben, auf Touch unten mit Streichen. Skript
+  `web/js/horizon.js` (rund 3 KB, ohne Abhängigkeiten) über
+  `horizont/nav/script.html`.
+- **Flurkarte** (`horizont/nav/karte.html`, Shortcode `hz-karte`,
+  `.hz-karte`): alle Seiten der Familie als Felder, Fläche nach Inhalt, die
+  Produkte hinter einem Feldweg. Daten in `tokens/flur.yaml`.
+- Die Doku nutzt beides; der Schalter Auto/Hell/Dunkel entfällt, die Seite
+  folgt dem System.
+
+### Heben
+
+- Hugo-Seiten: neuer Mount `web/js` → `assets/js/horizont` (docs/web.md,
+  „Einbinden“), dann den Kopf durch `horizont/nav/horizon.html` ersetzen und
+  `horizont/nav/script.html` ans Ende der Seite setzen.
+- `feld/head.html` bleibt bis 0.8.0, wird aber nicht mehr verwendet.
+- Apps: nichts zu tun, `ref: v0.7.0` ist gleich 0.6.3.
+
 ## 0.6.3
 
 Kleinere Schriften und die Symbole von Panzergefecht. Keine Farbe, kein Maß,

@@ -33,6 +33,9 @@ description = 'Horizont, das Designsystem von regetskcob und seinen Projekten Ja
     source = 'web/partials'
     target = 'layouts/_partials/horizont'
   [[module.mounts]]
+    source = 'web/js'
+    target = 'assets/js/horizont'
+  [[module.mounts]]
     source = 'web/fonts'
     target = 'static/fonts'
   [[module.mounts]]

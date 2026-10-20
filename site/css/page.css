@@ -8,20 +8,8 @@ a { color: var(--accent-text); text-underline-offset: 3px; text-decoration-thick
 
 /* --- Page frame: a rail of Kennungen left, content right --- */
 
-.doc-bar {
-  position: sticky; top: 0; z-index: 10;
-  display: flex; align-items: center; gap: var(--s-16);
-  height: 56px; padding: 0 var(--s-24);
-  background: color-mix(in srgb, var(--bg) 92%, transparent);
-  backdrop-filter: blur(8px);
-  border-bottom: var(--line-hairline) solid var(--line);
-}
-
-.doc-bar .doc-brand { color: var(--text); text-decoration: none; font-weight: 600; }
-.doc-bar .doc-spacer { flex: 1; }
-.doc-bar nav { display: flex; gap: var(--s-16); }
-.doc-bar nav a { color: var(--text-muted); text-decoration: none; font-size: 0.8125rem; }
-.doc-bar nav a:hover { color: var(--text); }
+/* The horizon line spans the page frame (components.css, .hz-horizon). */
+.hz-horizon { --horizon-width: var(--size-page); }
 
 .doc-main { max-width: var(--size-page); margin: 0 auto; padding: 0 var(--s-24) var(--s-96); }
 
@@ -43,13 +31,10 @@ a { color: var(--accent-text); text-underline-offset: 3px; text-decoration-thick
 
 @media (max-width: 840px) {
   .doc-section { grid-template-columns: minmax(0, 1fr); gap: var(--s-12); padding: var(--s-48) 0; }
-  .doc-bar nav { display: none; }
 }
 
 @media (max-width: 600px) {
   .doc-main { padding: 0 var(--s-16) var(--s-64); }
-  .doc-bar { padding: 0 var(--s-16); }
-  .doc-bar > .t-kennung { display: none; }
   .doc-facts { grid-template-columns: 1fr; gap: var(--s-4); }
   .doc-facts dd { margin-bottom: var(--s-12); }
 }
@@ -427,7 +412,6 @@ a { color: var(--accent-text); text-underline-offset: 3px; text-decoration-thick
 .hz-device--laptop .mock-titlebar { gap: var(--s-12); padding: 0 var(--s-12); }
 .hz-device--laptop .mock-titlebar b { font-size: 11px !important; }
 .hz-device--ipad .hz-device-screen .hz-segmented button { min-height: 24px; padding: 0 var(--s-8); font-size: 10.5px; }
-.doc-bar .hz-segmented button { min-height: 28px; font-size: 0.75rem; }
 
 .lp-data { height: 100%; }
 .doc-hugo { display: grid; gap: var(--s-24); margin: var(--s-16) 0; }

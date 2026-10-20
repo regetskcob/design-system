@@ -1,0 +1,13 @@
+{{- /*
+  The script of the horizon line (web/js/horizon.js), once at the end of a
+  page that uses horizont/nav/horizon.html. Needs the mount
+  web/js -> assets/js/horizont (docs/web.md, "Einbinden"); without it the
+  page keeps working with anchor links and the map page, and the build
+  warns.
+*/ -}}
+{{- with resources.Get "js/horizont/horizon.js" -}}
+{{- $js := . | minify | fingerprint -}}
+<script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
+{{- else -}}
+{{- warnf "horizont/nav/script.html: js/horizont/horizon.js not found; mount web/js to assets/js/horizont" -}}
+{{- end -}}

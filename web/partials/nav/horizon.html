@@ -1,0 +1,61 @@
+{{- /*
+  The horizon: the one navigation of a Horizont page. No menu bar; a line
+  with the mark standing on it. The mark walks along the line as you read
+  and opens the Flurkarte. The line is a measuring tape of the page: every
+  chapter a mark at its real position, its title small below the line, the
+  current one dark and whole. With a pointer it stands at the top, on touch
+  at the bottom, in reach of the thumb, where a swipe along it jumps.
+
+    partial "horizont/nav/horizon.html" (dict
+      "product" "regetskcob"          mark and accent
+      "place"   "regetskcob / Blog"   where you are; said by the mark
+      "marks"   (slice                 chapters of this page
+                  (dict "id" "jahr-2025" "label" "2025" "short" "25" "n" 16
+                        "title" "2025 · 16 Beiträge"))
+      "karte"   (dict "home" "regetskcob" "here" "regetskcob" "field" "blog"
+                      "counts" (dict "blog" 151) "url" "/karte/")
+      "lang"    (dict "name" "EN" "url" "/en/" "hreflang" "en"))
+
+  marks: id is the anchor of the chapter, label its title below the line,
+  short what the phone shows for the ones you are not at (a number or a
+  year), n a count that sets the height of the mark (posts of a year),
+  title the full words for a tooltip. With fewer than three marks the line
+  stands alone.
+
+  karte: the arguments of horizont/nav/karte.html plus url, the page with
+  the map for browsers without JavaScript. The script
+  (horizont/nav/script.html, once at the end of the page) opens the map as
+  a dialog instead, places the marks, lets the mark walk and the thumb
+  swipe. Without it the marks are a row of anchor links and the mark links
+  to the map page.
+*/ -}}
+{{- $p := .product | default "regetskcob" -}}
+{{- $marks := .marks | default slice -}}
+{{- $k := .karte | default dict -}}
+{{- $maxN := 0 -}}
+{{- range $marks }}{{ with .n }}{{ if gt . $maxN }}{{ $maxN = . }}{{ end }}{{ end }}{{ end -}}
+<nav class="hz-horizon" data-hz-horizon data-product="{{ $p }}" aria-label="Horizont">
+  <span class="hz-horizon-line" aria-hidden="true"></span>
+  <span class="hz-horizon-done" aria-hidden="true"></span>
+  {{- if ge (len $marks) 3 }}
+  <ol class="hz-ticks">
+    {{- range $m := $marks }}
+    {{- $h := 10 -}}
+    {{- if and $m.n (gt $maxN 0) }}{{ $h = int (math.Max 3 (math.Round (mul 22.0 (div (float $m.n) $maxN)))) }}{{ end }}
+    <li><a class="hz-tick" href="#{{ $m.id }}" data-full="{{ $m.label }}" data-short="{{ $m.short | default $m.label }}" style="--h:{{ $h }}px"{{ with $m.title }} title="{{ . }}"{{ end }}><span>{{ $m.label }}</span></a></li>
+    {{- end }}
+  </ol>
+  {{- end }}
+  <a class="hz-walker" href="{{ $k.url | default (relURL "karte/") }}" data-hz-open-karte data-place="{{ .place }}" aria-label="Flurkarte{{ with .place }}, du bist in {{ . }}{{ end }}">{{ partial "horizont/mark.html" (dict "product" $p "size" 28) }}</a>
+  {{- with .lang }}
+  <a class="hz-horizon-lang" href="{{ .url }}" hreflang="{{ .hreflang }}" lang="{{ .hreflang }}">{{ .name }}</a>
+  {{- end }}
+</nav>
+<dialog class="hz-karte-dialog" data-hz-karte aria-label="Flurkarte">
+  <form method="dialog" class="hz-karte-top">
+    <span class="t-kennung hz-kennung">Flurkarte{{ with .place }} · {{ . }}{{ end }}</span>
+    <button class="hz-button hz-button--secondary" type="submit">Schließen</button>
+  </form>
+  {{ partial "horizont/nav/karte.html" $k }}
+</dialog>
+{{- /**/ -}}
