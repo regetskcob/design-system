@@ -4,6 +4,21 @@ Jede Version gilt zugleich für Tokens (`tokens/horizont.json`), das
 Flutter-Paket (`flutter/pubspec.yaml`) und den Git-Tag. Apps und Seiten hängen
 an einem Tag; unter „Heben“ steht, was beim Wechsel zu tun ist.
 
+## 0.7.5
+
+Die Doku ist kein Feld der Familie.
+
+### Neu
+
+- `horizont/nav/horizon.html` nimmt `link` (`url`, `hint`) statt `karte`:
+  das Zeichen ist dann ein einfacher Link, eine Flurkarte gibt es nicht.
+  Der Hinweis beim Zeigen kommt aus `data-hint` („Karte“ oder der `hint`).
+- Die Doku nutzt das: die Sonne führt zurück auf regetskcob.de.
+
+### Heben
+
+- `hugo mod get github.com/regetskcob/horizont@v0.7.5`; nichts sonst.
+
 ## 0.7.4
 
 Der Sprachschalter ist zu sehen.

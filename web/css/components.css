@@ -543,7 +543,7 @@ body.hz { margin: 0; }
 }
 .hz-walker .hz-mark { display: block; width: 28px; height: 28px; }
 .hz-walker::after {
-  content: "Karte · " attr(data-place);
+  content: attr(data-hint) " · " attr(data-place);
   position: absolute;
   left: 36px;
   top: 2px;
