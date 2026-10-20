@@ -512,6 +512,7 @@
   z-index: 20;
   display: block;
   min-height: 62px;
+  width: 100%;
   max-width: var(--horizon-width, none);
   margin-inline: auto;
   background: var(--bg);

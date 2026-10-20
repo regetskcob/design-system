@@ -53,11 +53,17 @@
     });
     marks.forEach(function (m, i) {
       var next = i + 1 < marks.length ? marks[i + 1].x : 1;
+      var prev = i > 0 ? marks[i - 1].x : 0;
       var li = m.a.parentNode;
-      m.room = Math.max(14, (next - m.x) * width - 12);
+      // Near the end a title hangs to the left of its mark; it shares the gap
+      // to the mark before with that mark's title.
+      var end = m.x > 0.82;
+      var nextEnd = i + 1 < marks.length && marks[i + 1].x > 0.82;
+      var gap = end ? (m.x - prev) / 2 : (nextEnd ? (next - m.x) / 2 : next - m.x);
+      m.room = Math.max(14, gap * width - 12);
       li.style.left = (m.x * 100) + "%";
       li.style.setProperty("--room", m.room + "px");
-      m.a.classList.toggle("is-end", m.x > 0.82);
+      m.a.classList.toggle("is-end", end);
     });
     current = -2;
     update();
@@ -83,7 +89,8 @@
       if (on) m.a.setAttribute("aria-current", "location");
       else m.a.removeAttribute("aria-current");
       // A title where it has room; where chapters lie close, only its number.
-      m.label.textContent = on || (!touch.matches && m.room >= 72) ? m.a.dataset.full : m.a.dataset.short;
+      // Too close for even the number: the mark stays, its words are in the title.
+      m.label.textContent = on || (!touch.matches && m.room >= 72) ? m.a.dataset.full : (m.room >= 22 ? m.a.dataset.short : "");
     });
   }
 
