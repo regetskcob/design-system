@@ -4,6 +4,22 @@ Jede Version gilt zugleich für Tokens (`tokens/horizont.json`), das
 Flutter-Paket (`flutter/pubspec.yaml`) und den Git-Tag. Apps und Seiten hängen
 an einem Tag; unter „Heben“ steht, was beim Wechsel zu tun ist.
 
+## 0.7.6
+
+### Neu
+
+- Jedes Projekt in `tokens/flur.yaml` trägt einen Satz (`text`), etwa für
+  die Abzweige der Landingpage im Blog.
+
+### Geändert
+
+- Die Doku verliert den Abschnitt „Was danach käme“; was noch offen ist,
+  steht in den Umstellungs-Issues der Apps und in #5.
+
+### Heben
+
+- `hugo mod get github.com/regetskcob/horizont@v0.7.6`; nichts sonst.
+
 ## 0.7.5
 
 Die Doku ist kein Feld der Familie.
