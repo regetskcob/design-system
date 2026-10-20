@@ -21,8 +21,11 @@ dependencies:
     git:
       url: https://github.com/regetskcob/horizont.git
       path: flutter
-      ref: v0.6.1
+      ref: v0.7.7
 ```
+
+Für die Apps ist v0.6.3 der letzte Stand mit Änderungen; die 0.7er-Tags
+ändern nur das Web und lassen sich ohne Weiteres eintragen.
 
 Es bringt mit:
 

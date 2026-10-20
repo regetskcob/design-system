@@ -333,7 +333,7 @@ Nutzer entschieden, nicht von der Sitzung.
 - Jede Änderung, die Apps oder Seiten betrifft, kommt in
   [CHANGELOG.md](CHANGELOG.md) unter die nächste Version.
 - Versionen: Tokens (`version` im JSON), Paket (`flutter/pubspec.yaml`) und
-  Git-Tag (`v0.6.1`) laufen gemeinsam. Die Apps hängen an einem Tag, nie an
+  Git-Tag (`v0.7.7`) laufen gemeinsam. Die Apps hängen an einem Tag, nie an
   `main`. Hugo hängt die
   Ordner per `module.mounts` ein (`hugo.toml`).
 - Lokal ansehen:
@@ -353,10 +353,12 @@ Nutzer entschieden, nicht von der Sitzung.
   nachgebautem HTML. Die Mounts stehen in `docs/web.md`. Fehlt ein Baustein,
   kommt er hierher, nicht in die Seite.
 - **Wer Horizont nutzt:** der Blog (Hugo-Modul, in `go.mod` auf einen Tag
-  gepinnt, derzeit v0.5.0; heben mit `hugo mod get
-  github.com/regetskcob/horizont@v0.6.1`) und die Vorschau unter
-  `/preview/` (Repository `regetskcob/preview`). KNX Monitor (App und
-  Landingpage) hängt an v0.6.0 und ist die Referenz für die anderen Apps;
-  Jagdaufseher ist auf v0.6.2 umgestellt und läuft damit auch im Browser,
-  Panzergefecht ist auf v0.6.2 umgestellt (regetskcob/wargame#31), siehe
-  [docs/flutter.md](docs/flutter.md).
+  gepinnt, derzeit v0.7.7; heben mit `hugo mod get
+  github.com/regetskcob/horizont@v0.7.7`) und die Vorschau unter
+  `/preview/` (Repository `regetskcob/preview`). KNX Monitor ist die
+  Referenz für die anderen Apps (App auf v0.6.1, Landingpage auf v0.7.5);
+  Jagdaufseher läuft auch im Browser (App auf v0.6.2, Landingpage auf
+  v0.7.5); Panzergefecht hat das Spiel auf v0.6.3, die Landingpage auf
+  v0.7.5 liegt noch im Branch `horizont-0.7` (regetskcob/wargame#31), siehe
+  [docs/flutter.md](docs/flutter.md). Für Apps ist v0.6.3 der letzte Stand
+  mit Änderungen, die 0.7er-Tags ändern nur das Web.
