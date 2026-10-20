@@ -20,10 +20,15 @@
   var list = nav.querySelector(".hz-ticks");
   var dialog = document.querySelector("[data-hz-karte]");
   var ticks = list ? [].slice.call(list.querySelectorAll(".hz-tick")) : [];
+  // A mark whose chapter is not on this page (a year on another page of a
+  // list) leaves the line.
   var marks = ticks.map(function (a) {
     var id = decodeURIComponent(a.hash.slice(1));
     return { a: a, label: a.querySelector("span"), target: document.getElementById(id), x: 0 };
-  }).filter(function (m) { return m.target; });
+  }).filter(function (m) {
+    if (!m.target) m.a.parentNode.hidden = true;
+    return m.target;
+  });
   var current = -1;
   var frame = 0;
 
