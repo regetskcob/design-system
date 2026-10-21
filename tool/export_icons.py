@@ -18,6 +18,18 @@ same renderer as the web, so blur and shadow look as designed) and writes
                                    apple-touch-icon.png, icon-192/512.png,
                                    icon-512-maskable.png
 
+and for Panzergefecht, the only product on the television and in Messages,
+the wide pictures drawn from the same ground and tank (scene()):
+
+    tvos/topshelf-*.png            top shelf 1920x720 and wide 2320x720,
+                                   @1x and @2x, the name on the horizon
+    tvos/launch-tank-*.png         the tank alone for the launch image
+    android/tv-banner-*.png        320x180 and 640x360, without the name
+    imessage/icon-1024x768.png     the 4:3 icon of the Messages app
+    launch/ground-1200.png         the launch screens' ground, horizon in
+                                   the middle, and launch/tank-*.png that
+    launch/tank-*.png              stands on it when both are centred
+
 Needs Hugo, Google Chrome and Python with Pillow:
 
   python3 -m venv .venv && .venv/bin/pip install pillow
@@ -25,6 +37,8 @@ Needs Hugo, Google Chrome and Python with Pillow:
 
 CHROME overrides the path of the Chrome binary.
 """
+
+from __future__ import annotations
 
 import json
 import os
@@ -34,7 +48,7 @@ import sys
 import tempfile
 from pathlib import Path
 
-from PIL import Image
+from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parent.parent
 CHROME = os.environ.get(
@@ -52,14 +66,21 @@ def render(html: str, width: int, height: int, out: Path, workdir: Path) -> Imag
         f"width:{width}px;height:{height}px;overflow:hidden}}img{{display:block}}</style>"
         f"</head><body>{html}</body></html>"
     )
-    subprocess.run(
-        [
-            CHROME, "--headless=new", "--disable-gpu", "--hide-scrollbars",
-            "--force-device-scale-factor=1", "--default-background-color=00000000",
-            f"--window-size={width},{height}", f"--screenshot={out}", page.as_uri(),
-        ],
-        check=True, capture_output=True,
-    )
+    # Headless Chrome on macOS now and then quits with status 2 before it
+    # draws (display link errors); a second start goes through.
+    for attempt in range(3):
+        done = subprocess.run(
+            [
+                CHROME, "--headless=new", "--disable-gpu", "--hide-scrollbars",
+                "--force-device-scale-factor=1", "--default-background-color=00000000",
+                f"--window-size={width},{height}", f"--screenshot={out}", page.as_uri(),
+            ],
+            capture_output=True,
+        )
+        if done.returncode == 0:
+            break
+    else:
+        done.check_returncode()
     return Image.open(out).convert("RGBA")
 
 
@@ -76,6 +97,84 @@ def save(im: Image.Image, path: Path, size=None, alpha=True) -> None:
         flat.paste(im, mask=im.split()[3])
         im = flat
     im.save(path, optimize=True)
+
+
+# The ground's horizon in the TV art (y 66.7 of 100) and the ink of the
+# outlines, which the name on the top shelf takes.
+HORIZON = 0.667
+INK = (0x1C, 0x24, 0x16)
+
+
+def ground(svg: Path, w: int, h: int, horizon: float, shot: Path, work: Path) -> Image.Image:
+    """The TV back layer as vector, scaled to cover w x h with its horizon
+    at the share horizon of the height."""
+    ih = max(h, w * 3 / 5, h * (1 - horizon) / (1 - HORIZON), h * horizon / HORIZON)
+    iw = ih * 5 / 3
+    left, top = (w - iw) / 2, horizon * h - HORIZON * ih
+    return render(
+        img(svg / "tv-back.svg", round(iw), round(ih),
+            f"position:absolute;left:{left:.1f}px;top:{top:.1f}px"),
+        w, h, shot, work,
+    )
+
+
+def tank(svg: Path, shot: Path, work: Path) -> tuple[Image.Image, float]:
+    """The tank of the TV front layer, cut to its shadow, and where the
+    horizon runs through the cut-out (share of its height)."""
+    w, h = 3200, 1920
+    front = render(img(svg / "tv-front.svg", w, h), w, h, shot, work)
+    box = front.getchannel("A").point(lambda a: 255 if a > 8 else 0).getbbox()
+    return front.crop(box), (HORIZON * h - box[1]) / (box[3] - box[1])
+
+
+def scene(svg: Path, size: tuple[int, int], tank_h: float, tank_x: float, shot: Path,
+          work: Path, horizon: float = 0.62, name: str | None = None) -> Image.Image:
+    """Ground, the tank standing on the horizon at tank_x (share of the
+    width, its middle), tank_h of the height tall, and optionally the name
+    in the display face with its baseline on the horizon, as in the
+    lockup."""
+    w, h = size
+    pic = ground(svg, w, h, horizon, shot, work)
+    t, at = tank(svg, shot, work)
+    th = round(h * tank_h)
+    t = t.resize((round(t.width * th / t.height), th), Image.LANCZOS)
+    y = round(horizon * h - at * th)
+    pic.alpha_composite(t, (round(w * tank_x - t.width / 2), y))
+    if name:
+        font = ImageFont.truetype(str(ROOT / "flutter/fonts/MonaSansDisplayExpanded-Black.ttf"),
+                                  round(h * 0.13))
+        draw = ImageDraw.Draw(pic)
+        x = round(w * tank_x + t.width / 2 + h * 0.08)
+        draw.text((x, round(horizon * h - h * 0.012)), name.upper(), font=font, fill=INK,
+                  anchor="ls")
+    return pic
+
+
+def wide_sets(svg: Path, out: Path, shot: Path, work: Path) -> None:
+    """The television's and Messages' pictures and the launch screens."""
+    for name, base in (("topshelf", (1920, 720)), ("topshelf-wide", (2320, 720))):
+        for factor in (1, 2):
+            size = (base[0] * factor, base[1] * factor)
+            pic = scene(svg, size, 0.34, 0.2, shot, work, name="Panzergefecht")
+            save(pic, out / f"tvos/{name}-{size[0]}x{size[1]}.png", alpha=False)
+    for size in ((320, 180), (640, 360)):
+        save(scene(svg, size, 0.42, 0.5, shot, work), out / f"android/tv-banner-{size[0]}x{size[1]}.png",
+             alpha=False)
+    save(scene(svg, (1024, 768), 0.36, 0.5, shot, work, horizon=HORIZON),
+         out / "imessage/icon-1024x768.png", alpha=False)
+
+    t, at = tank(svg, shot, work)
+    for width in (360, 720):
+        h = round(t.height * width / t.width)
+        save(t, out / f"tvos/launch-tank-{width}.png", (width, h))
+    # The launch screens centre the tank and stretch the ground to cover,
+    # so the ground has its horizon in the middle and the tank picture is
+    # padded below until its horizon is its middle too.
+    save(ground(svg, 1200, 1200, 0.5, shot, work), out / "launch/ground-1200.png", alpha=False)
+    pad = Image.new("RGBA", (t.width, round(2 * at * t.height)), (0, 0, 0, 0))
+    pad.alpha_composite(t, (0, 0))
+    for width in (160, 480):
+        save(pad, out / f"launch/tank-{width}.png", (width, round(pad.height * width / pad.width)))
 
 
 def main() -> None:
@@ -146,6 +245,9 @@ def main() -> None:
         for label, size in (("400x240", (400, 240)), ("800x480", (800, 480)), ("1280x768", (1280, 768))):
             save(tv_back, out / f"tvos/back-{label}.png", size, alpha=False)
             save(tv_front, out / f"tvos/front-{label}.png", size)
+
+        if p == "panzergefecht":
+            wide_sets(svg, out, shot, work)
 
         # Web: the glyph favicon for small sizes, the illustration above.
         (out / "web").mkdir(parents=True, exist_ok=True)

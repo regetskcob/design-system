@@ -4,6 +4,35 @@ Jede Version gilt zugleich für Tokens (`tokens/horizont.json`), das
 Flutter-Paket (`flutter/pubspec.yaml`) und den Git-Tag. Apps und Seiten hängen
 an einem Tag; unter „Heben“ steht, was beim Wechsel zu tun ist.
 
+## 0.7.8
+
+Die breiten Bilder von Panzergefecht kommen aus Horizont. Keine Farbe, kein
+Maß, kein Widget ändert sich.
+
+### Neu
+
+- `tool/export_icons.py` zeichnet für Panzergefecht aus Boden und Panzer
+  der TV-Ebenen (`scene()`, als Vektor über Chrome, daher scharf in jeder
+  Größe):
+  - `tvos/topshelf-*.png`: Top Shelf 1920×720 und breit 2320×720, je
+    @1x und @2x, der Name in Mona Sans Display Expanded mit der Grundlinie
+    auf dem Horizont wie im Lockup
+  - `tvos/launch-tank-*.png`: der Panzer allein fürs Startbild des
+    Apple TV
+  - `android/tv-banner-*.png`: das Banner von Android TV, Google TV und
+    Fire TV, 320×180 und 640×360, ohne Namen
+  - `imessage/icon-1024x768.png`: das 4:3-Icon der Nachrichten-App
+  - `launch/ground-1200.png` und `launch/tank-*.png`: Boden mit dem
+    Horizont in der Mitte und der Panzer, der darauf steht, wenn beide
+    zentriert liegen (Startbildschirm von iOS, Android und Web)
+- Headless Chrome startet bis zu dreimal: auf macOS bricht er gelegentlich
+  vor dem Zeichnen ab.
+
+### Heben
+
+- Panzergefecht: `store/tool/horizont_icons.py` kopiert die neuen Bilder.
+  Andere Apps: nichts zu tun.
+
 ## 0.7.7
 
 ### Geändert

@@ -5,10 +5,10 @@ und Panzergefecht. Leitbild: minimalistisch wie die niederrheinische Feldflur.
 
 Dokumentation und Entwürfe: https://www.regetskcob.de/horizont/
 
-Stand: v0.7.7, die Navigation aller Hugo-Seiten (Horizontlinie und Flurkarte). KNX Monitor ist als erste App umgestellt (App auf v0.6.1,
+Stand: v0.7.8, die breiten Bilder für Fernseher, Nachrichten und Startbildschirm. KNX Monitor ist als erste App umgestellt (App auf v0.6.1,
 Landingpage auf v0.7.5), Jagdaufseher als zweite (App inklusive Web auf v0.6.2,
-Landingpage auf v0.7.5), Panzergefecht als dritte (Spiel auf v0.6.3, die
-Landingpage auf v0.7.5 im Branch `horizont-0.7`, regetskcob/wargame#31);
+Landingpage auf v0.7.5), Panzergefecht als dritte (Spiel und Landingpage auf
+v0.7.8, regetskcob/wargame#31);
 der Blog hängt an v0.7.7. Was sich je Version geändert hat, steht in
 [CHANGELOG.md](CHANGELOG.md).
 
