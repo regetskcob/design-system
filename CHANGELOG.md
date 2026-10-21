@@ -4,6 +4,31 @@ Jede Version gilt zugleich für Tokens (`tokens/horizont.json`), das
 Flutter-Paket (`flutter/pubspec.yaml`) und den Git-Tag. Apps und Seiten hängen
 an einem Tag; unter „Heben“ steht, was beim Wechsel zu tun ist.
 
+## 0.7.9 (noch ohne Tag)
+
+Eine ruhige Stufe der Bewegung, vorgeschlagen mit KNX Monitor.
+
+### Neu
+
+- **`calm` (560 ms) mit der Kurve `settle`** (`cubic-bezier(0.16, 1, 0.3,
+  1)`, läuft weich aus, ohne Überschwingen) für Bewegung, die niemand
+  ausgelöst hat oder die etwas bestätigt: ein Wert, der sich ändert, ein
+  Diagramm, das sich aufbaut, ein Haken nach dem Speichern, ein Zähler, der
+  hochläuft. Nie für Navigation, Blätter oder Tippen; dort bleiben `fast`
+  bis `slow`. Unter reduzierter Bewegung 0 wie alle Dauern.
+  - Flutter: `HzMotion.calm`, `HzMotion.settle`; mit `resolveMotion`
+    wie die anderen Dauern.
+  - Web: `--motion-calm`, `--ease-settle`.
+- Die Doku zeigt `calm` als vierte Bahn mit ihrer Kurve.
+
+### Heben
+
+- Apps: `ref` auf den neuen Tag, sobald es ihn gibt; nichts sonst. Wer
+  bisher eigene, längere Dauern für Werte oder Diagramme hatte, nimmt
+  `calm` mit `settle`.
+- Seiten: `hugo mod get github.com/regetskcob/horizont@v0.7.9`; nichts
+  sonst.
+
 ## 0.7.8
 
 Die breiten Bilder von Panzergefecht kommen aus Horizont. Keine Farbe, kein

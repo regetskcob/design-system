@@ -24,8 +24,10 @@ dependencies:
       ref: v0.7.8
 ```
 
-Für die Apps ist v0.6.3 der letzte Stand mit Änderungen; die 0.7er-Tags
-ändern nur das Web und lassen sich ohne Weiteres eintragen.
+Für die Apps ist v0.6.3 der letzte Tag mit Änderungen am Paket; die
+0.7er-Tags bis v0.7.8 ändern nur das Web und die Exporte und lassen sich
+ohne Weiteres eintragen. Der nächste Tag bringt `HzMotion.calm` und
+`settle`.
 
 Es bringt mit:
 

@@ -163,7 +163,12 @@ oder Seite schreiben.
   und Abschnitte (Listen, Kopf- und Fußlinien) und bleibt leise. So stehen
   Karte und Feld nebeneinander gleich.
 - **Bewegung:** 120 / 200 / 320 ms, Kurve `cubic-bezier(0.2, 0, 0, 1)`, ohne
-  Federn. Bei reduzierter Bewegung 0.
+  Federn. Dazu die ruhige Stufe `calm` 560 ms mit der Kurve `settle`
+  (`cubic-bezier(0.16, 1, 0.3, 1)`, läuft weich aus, schwingt nicht über),
+  nur für Bewegung, die niemand ausgelöst hat oder die etwas bestätigt:
+  ein Wert, der sich ändert, ein Diagramm, das sich aufbaut, ein Haken nach
+  dem Speichern. Nie für Navigation, Blätter oder Tippen. Bei reduzierter
+  Bewegung alles 0.
 - **Größen:** Tippziel 44, Zeile 44, dichte Zeile 28. Mit Zeiger (Mac,
   Web-App am Rechner) sind Steuerelemente 24 bis 28 hoch
   (`control-desktop`), die Werkzeugleiste 52 (`toolbar-desktop`). Breiten:
@@ -357,8 +362,9 @@ Nutzer entschieden, nicht von der Sitzung.
   github.com/regetskcob/horizont@v0.7.7`) und die Vorschau unter
   `/preview/` (Repository `regetskcob/preview`). KNX Monitor ist die
   Referenz für die anderen Apps (App auf v0.6.1, Landingpage auf v0.7.5);
-  Jagdaufseher läuft auch im Browser (App auf v0.6.2, Landingpage auf
-  v0.7.5); Panzergefecht hat das Spiel auf v0.6.3, die Landingpage auf
-  v0.7.5 liegt noch im Branch `horizont-0.7` (regetskcob/wargame#31), siehe
-  [docs/flutter.md](docs/flutter.md). Für Apps ist v0.6.3 der letzte Stand
-  mit Änderungen, die 0.7er-Tags ändern nur das Web.
+  Jagdaufseher läuft auch im Browser (App auf v0.7.7, Landingpage auf
+  v0.7.5); Panzergefecht hat Spiel und Landingpage auf v0.7.8
+  (regetskcob/wargame#31), siehe [docs/flutter.md](docs/flutter.md). Für
+  Apps ist v0.6.3 der letzte Tag mit Änderungen am Paket, die 0.7er-Tags
+  ändern das Web und die Exporte; `calm` und `settle` kommen mit dem
+  nächsten Tag.

@@ -291,14 +291,15 @@
       <dt>Schatten</dt><dd>Keine. Ein Sheet oder Menü hebt sich durch Fläche und Linie ab. Wo die Plattform einen Schatten zwingend zeichnet (macOS-Fenster, iOS-Menüs), bleibt er.</dd>
     </dl>
     <h3 class="t-title-3">Bewegung</h3>
-    <p>Kurz, ohne Federn, ohne Überschwingen. Bei reduzierter Bewegung fällt alles auf 0. Fahr mit der Maus über die Bahnen.</p>
+    <p>Kurz, ohne Federn, ohne Überschwingen; nur was etwas bestätigt, läuft ruhig aus. Bei reduzierter Bewegung fällt alles auf 0. Fahr mit der Maus über die Bahnen.</p>
     <div class="doc-motion">
-      {{- range slice "fast" "base" "slow" }}
+      {{- range slice "fast" "base" "slow" "calm" }}
       <div class="doc-motion-row"><span class="t-kennung hz-kennung">{{ . }} · {{ index $hz.motion . }} ms</span><div class="doc-motion-track {{ . }}"><i></i></div></div>
       {{- end }}
     </div>
     <dl class="doc-facts">
       <dt>Kurve</dt><dd class="hz-mono">{{ $hz.motion.standard }}</dd>
+      <dt>Ruhig</dt><dd><span class="hz-mono">calm</span> mit der Kurve <span class="hz-mono">{{ $hz.motion.settle }}</span>, die weich ausläuft: nur für Bewegung, die niemand ausgelöst hat oder die etwas bestätigt, etwa ein Wert, der sich ändert, ein Diagramm, das sich aufbaut, ein Haken nach dem Speichern. Nie für Navigation, Blätter oder Tippen.</dd>
       <dt>Fenster</dt><dd>Kompakt unter 600, mittel bis 840, erweitert bis 1200, groß darüber, wie die Fenstergrößen von Material 3. Gebaut wird nach verfügbarer Breite, nie nach Gerät.</dd>
       <dt>Ziel</dt><dd>Auf Touch mindestens 44 × 44 pt pro Tippziel, auch bei dichten Zeilen. Mit Zeiger (Mac, Web-App am Rechner) sind Steuerelemente 24 bis 28 pt hoch und die Werkzeugleiste 52 pt: <span class="hz-mono">data-density="desktop"</span>.</dd>
       <dt>Breiten</dt><dd>Lesespalte {{ index $hz.size "text-column" }}, Seite {{ $hz.size.page }}, Formular {{ $hz.size.form }}, Suche in der Titelzeile {{ $hz.size.search }}, Seitenleiste {{ $hz.size.sidebar }} (mit Zeiger ab {{ $hz.size.rail }}), Inspektor {{ $hz.size.inspector }}, Karte im Raster mindestens {{ index $hz.size "grid-card" }}.</dd>

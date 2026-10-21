@@ -120,6 +120,7 @@ a { color: var(--accent-text); text-underline-offset: 3px; text-decoration-thick
 .doc-motion-track.fast i { transition: left var(--motion-fast) var(--ease-standard); }
 .doc-motion-track.base i { transition: left var(--motion-base) var(--ease-standard); }
 .doc-motion-track.slow i { transition: left var(--motion-slow) var(--ease-standard); }
+.doc-motion-track.calm i { transition: left var(--motion-calm) var(--ease-settle); }
 
 /* --- Component playground --- */
 
