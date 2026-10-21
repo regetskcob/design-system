@@ -5,8 +5,8 @@ und Panzergefecht. Leitbild: minimalistisch wie die niederrheinische Feldflur.
 
 Dokumentation und Entwürfe: https://www.regetskcob.de/horizont/
 
-Stand: v0.7.8, die breiten Bilder für Fernseher, Nachrichten und Startbildschirm. KNX Monitor ist als erste App umgestellt (App auf v0.6.1,
-Landingpage auf v0.7.5), Jagdaufseher als zweite (App inklusive Web auf v0.7.7,
+Stand: v0.7.9, die ruhige Bewegung `calm` und die Busklemme auf der Horizontlinie. KNX Monitor ist als erste App umgestellt (App auf v0.6.1,
+Landingpage auf v0.7.9), Jagdaufseher als zweite (App inklusive Web auf v0.7.7,
 Landingpage auf v0.7.5), Panzergefecht als dritte (Spiel und Landingpage auf
 v0.7.8, regetskcob/wargame#31);
 der Blog hängt an v0.7.7. Was sich je Version geändert hat, steht in

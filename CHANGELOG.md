@@ -4,9 +4,10 @@ Jede Version gilt zugleich für Tokens (`tokens/horizont.json`), das
 Flutter-Paket (`flutter/pubspec.yaml`) und den Git-Tag. Apps und Seiten hängen
 an einem Tag; unter „Heben“ steht, was beim Wechsel zu tun ist.
 
-## 0.7.9 (noch ohne Tag)
+## 0.7.9
 
-Eine ruhige Stufe der Bewegung, vorgeschlagen mit KNX Monitor.
+Eine ruhige Stufe der Bewegung, vorgeschlagen mit KNX Monitor, und die
+Busklemme in Farbe auf der Horizontlinie.
 
 ### Neu
 
@@ -20,6 +21,13 @@ Eine ruhige Stufe der Bewegung, vorgeschlagen mit KNX Monitor.
     wie die anderen Dauern.
   - Web: `--motion-calm`, `--ease-settle`.
 - Die Doku zeigt `calm` als vierte Bahn mit ihrer Kurve.
+- **Wanderer von KNX Monitor:** Auf der Horizontlinie steht die Busklemme
+  in den Farben des App-Icons (rot für Plus, dunkelgrau für Minus) statt
+  der Strich-Glyphe, für mehr Wiedererkennung. `mark.html` bekommt dafür
+  `object true`; Produkte ohne farbiges Objekt zeichnen weiter ihre
+  Glyphe. Überall sonst (Lockup, Kopf, Fuß, Favicon) bleibt die Glyphe.
+- Der Wanderer steht auf ganzen Pixeln (`round()`), damit die Kanten einer
+  gefüllten Marke scharf bleiben.
 
 ### Heben
 

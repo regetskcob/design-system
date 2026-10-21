@@ -338,7 +338,7 @@ Nutzer entschieden, nicht von der Sitzung.
 - Jede Änderung, die Apps oder Seiten betrifft, kommt in
   [CHANGELOG.md](CHANGELOG.md) unter die nächste Version.
 - Versionen: Tokens (`version` im JSON), Paket (`flutter/pubspec.yaml`) und
-  Git-Tag (`v0.7.8`) laufen gemeinsam. Die Apps hängen an einem Tag, nie an
+  Git-Tag (`v0.7.9`) laufen gemeinsam. Die Apps hängen an einem Tag, nie an
   `main`. Hugo hängt die
   Ordner per `module.mounts` ein (`hugo.toml`).
 - Lokal ansehen:
@@ -361,7 +361,7 @@ Nutzer entschieden, nicht von der Sitzung.
   gepinnt, derzeit v0.7.7; heben mit `hugo mod get
   github.com/regetskcob/horizont@v0.7.7`) und die Vorschau unter
   `/preview/` (Repository `regetskcob/preview`). KNX Monitor ist die
-  Referenz für die anderen Apps (App auf v0.6.1, Landingpage auf v0.7.5);
+  Referenz für die anderen Apps (App auf v0.6.1, Landingpage auf v0.7.9);
   Jagdaufseher läuft auch im Browser (App auf v0.7.7, Landingpage auf
   v0.7.5); Panzergefecht hat Spiel und Landingpage auf v0.7.8
   (regetskcob/wargame#31), siehe [docs/flutter.md](docs/flutter.md). Für

@@ -21,13 +21,12 @@ dependencies:
     git:
       url: https://github.com/regetskcob/horizont.git
       path: flutter
-      ref: v0.7.8
+      ref: v0.7.9
 ```
 
 Für die Apps ist v0.6.3 der letzte Tag mit Änderungen am Paket; die
 0.7er-Tags bis v0.7.8 ändern nur das Web und die Exporte und lassen sich
-ohne Weiteres eintragen. Der nächste Tag bringt `HzMotion.calm` und
-`settle`.
+ohne Weiteres eintragen. v0.7.9 bringt `HzMotion.calm` und `settle`.
 
 Es bringt mit:
 
