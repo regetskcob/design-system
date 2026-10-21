@@ -11,6 +11,11 @@
   icon false: the glyph alone in currentColor (or "color"), for headers,
   footers and small favicons, where an illustration would not hold at 16
   to 24 px.
+
+  object true: where a product's object holds at glyph size, it stands in
+  its icon colours on the line in currentColor. So far KNX Monitor: the bus
+  terminal red for plus and dark grey for minus (the walker of the horizon).
+  Other products draw their glyph.
 */ -}}
 {{- if .icon -}}
 {{ partial "horizont/app-icon.html" . }}
@@ -37,6 +42,18 @@
   <path d="M{{ cond $icon 0 4 }} 66.7H{{ cond $icon 100 96 }}"/>
   <path d="M36 22l14-8 14 8M38 24h24v16H38z"/>
   <path d="M41 40l-8 26.7M59 40l8 26.7M37.6 49h24.8M35 58h30"/>
+  {{- else if and (eq $p "knx") .object (not $icon) }}
+  {{- $o := $colors.obj }}
+  <path d="M4 66.7H32.14M67.86 66.7H96"/>
+  {{- /* On whole pixels at 28 px (1 px = 25/7; the walker's top is rounded
+         in components.css): blurred edges let the grey half look a pixel
+         higher than the red one. */}}
+  <g stroke="none">
+    <rect x="32.14" y="35.71" width="17.86" height="39.29" rx="2.5" style="fill:{{ $o.red }}"/>
+    <rect x="50" y="35.71" width="17.86" height="39.29" rx="2.5" style="fill:light-dark({{ $o.grey }}, #5C6058)"/>
+    <path d="M35.71 39.29h10.72v10.71H35.71z" style="fill:{{ $o.redDark }}"/>
+    <path d="M53.57 39.29h10.72v10.71H53.57z" style="fill:light-dark({{ $o.greyDark }}, #44473F)"/>
+  </g>
   {{- else if eq $p "knx" }}
   <path d="M{{ cond $icon 0 4 }} 66.7H35M65 66.7H{{ cond $icon 100 96 }}"/>
   <path d="M35 40h30v34H35zM50 40v34"/>

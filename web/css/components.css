@@ -533,6 +533,8 @@ body.hz { margin: 0; }
 .hz-walker {
   position: absolute;
   top: calc(var(--at) - 28px * 2 / 3);
+  /* On whole pixels, so the edges of a filled mark stay sharp. */
+  top: round(calc(var(--at) - 28px * 2 / 3), 1px);
   left: calc(var(--inset) + var(--walk, 0px));
   width: 28px;
   height: 28px;
@@ -653,7 +655,7 @@ body:has(> .hz-feld) > .hz-horizon { --horizon-width: var(--size-page); --inset:
   .hz-horizon { --lang-w: 88px; }
   .hz-horizon-lang { top: calc(var(--at) - 17px); }
   .hz-horizon-lang > * { min-height: 32px; padding: 0 var(--s-12); }
-  .hz-walker { width: 44px; height: 44px; margin-left: -22px; top: calc(var(--at) - 28px * 2 / 3 - 8px); padding: 8px; }
+  .hz-walker { width: 44px; height: 44px; margin-left: -22px; top: calc(var(--at) - 28px * 2 / 3 - 8px); top: round(calc(var(--at) - 28px * 2 / 3 - 8px), 1px); padding: 8px; }
   .hz-horizon.is-live .hz-tick { left: -14px; width: 28px; }
   .hz-horizon.is-live .hz-tick::before { left: 13px; }
   .hz-horizon.is-live .hz-tick span { left: 13px; }

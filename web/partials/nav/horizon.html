@@ -66,9 +66,9 @@
   </ol>
   {{- end }}
   {{- with .link }}
-  <a class="hz-walker" href="{{ .url }}" data-hint="{{ .hint }}" data-place="{{ $.place }}" aria-label="{{ .hint }}{{ with $.place }}, du bist in {{ . }}{{ end }}">{{ partial "horizont/mark.html" (dict "product" ($.mark | default $p) "size" 28) }}</a>
+  <a class="hz-walker" href="{{ .url }}" data-hint="{{ .hint }}" data-place="{{ $.place }}" aria-label="{{ .hint }}{{ with $.place }}, du bist in {{ . }}{{ end }}">{{ partial "horizont/mark.html" (dict "product" ($.mark | default $p) "size" 28 "object" true) }}</a>
   {{- else }}
-  <a class="hz-walker" href="{{ $k.url | default (relURL "karte/") }}" data-hz-open-karte data-hint="Karte" data-place="{{ .place }}" aria-label="Flurkarte{{ with .place }}, du bist in {{ . }}{{ end }}">{{ partial "horizont/mark.html" (dict "product" (.mark | default $p) "size" 28) }}</a>
+  <a class="hz-walker" href="{{ $k.url | default (relURL "karte/") }}" data-hz-open-karte data-hint="Karte" data-place="{{ .place }}" aria-label="Flurkarte{{ with .place }}, du bist in {{ . }}{{ end }}">{{ partial "horizont/mark.html" (dict "product" (.mark | default $p) "size" 28 "object" true) }}</a>
   {{- end }}
   {{- with .lang }}
   <span class="hz-horizon-lang">
