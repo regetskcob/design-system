@@ -4,6 +4,43 @@ Jede Version gilt zugleich für Tokens (`tokens/horizont.json`), das
 Flutter-Paket (`flutter/pubspec.yaml`) und den Git-Tag. Apps und Seiten hängen
 an einem Tag; unter „Heben“ steht, was beim Wechsel zu tun ist.
 
+## 0.8.0
+
+Felder in genau der Höhe der Bedienelemente und zwei Bausteine fürs Feld,
+gefunden und am Gerät gemessen in KNX Monitor.
+
+### Neu
+
+- **Feldhöhe:** Jedes Eingabefeld ist so hoch wie ein Knopf, 28 mit Zeiger
+  und 44 auf Touch, leer wie gefüllt, mit Symbolen davor und dahinter und
+  als `DropdownMenu`. Bisher wurde ein Feld auf Touch 48 hoch (Material
+  erzwingt das ohne `isDense`) und mit Zeiger 32. Das Theme rechnet nun mit
+  der Zeile 20 (`data`), zieht die Dichte ab und begrenzt die Symbole auf
+  die Feldhöhe; der Platzhalter steht auf derselben Zeile.
+- **`HorizontTheme.field`:** Eingabe in Fließtext, Mona Sans 16 auf Zeile
+  20. Material hat für den Text eines `TextField` keinen Platz im Theme, die
+  App setzt ihn deshalb am Feld: `style: HorizontTheme.of(context).field`.
+  Felder in Mono (`data`) brauchen nichts.
+- **`HorizontFieldIconButton`** und **`HorizontTheme.fieldIconButton`:**
+  Symbolknopf im Feld (Suchen, Leeren, Anzeigen), quadratisch in
+  Feldhöhe, Symbol 18.
+- **`HorizontFieldDropdown<T>`:** wenige feste Werte im Formular als Feld
+  statt als Segment, ohne Tippen und Suche, der Pfeil als schlichtes
+  Symbol. `dropdownMenuTheme` gibt auch einem eigenen `DropdownMenu`
+  Feldhöhe und Feldschrift.
+- Ein Widget-Test misst alle Feldarten auf macOS, Windows (28), iOS und
+  Android (44).
+
+### Heben
+
+- Apps: `ref: v0.8.0`. Jedes `TextField` in Fließtext bekommt `style:
+  HorizontTheme.of(context).field`, sonst ist es 4 höher als die übrigen.
+  Eigene Helfer für Feldhöhe, Symbolknöpfe im Feld und Auswahlfelder
+  entfallen. Wer im Theme `constraints` für Felder gesetzt hat, nimmt sie
+  heraus.
+- Seiten: `hugo mod get github.com/regetskcob/horizont@v0.8.0`; nichts
+  sonst.
+
 ## 0.7.9
 
 Eine ruhige Stufe der Bewegung, vorgeschlagen mit KNX Monitor, und die

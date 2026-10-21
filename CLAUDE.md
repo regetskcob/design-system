@@ -79,7 +79,10 @@ wird daher für alle Formfaktoren mitgedacht, nicht nur für das Telefon.
 - **Fokus:** 2 px Akzent mit 2 px Abstand, auf dem Fernseher 3 px.
 - **Felder:** Die Beschriftung steht über dem Feld (`label`, 13/16, 500, in
   `text`), nie schwebend im Rahmen; darunter höchstens eine Hilfezeile
-  (Flutter `HorizontField`, Web `.hz-field`).
+  (Flutter `HorizontField`, Web `.hz-field`). Ein Feld ist genau so hoch wie
+  ein Knopf: 28 mit Zeiger, 44 auf Touch, auch mit Symbolen und leer. Wenige
+  feste Werte im Formular sind ein Auswahlfeld (`HorizontFieldDropdown`),
+  kein Segment; Knöpfe im Feld nimmt `HorizontFieldIconButton`.
 - **Lockup:** Steht eine Marke neben einem Namen, liegt ihre Horizontlinie
   auf der Grundlinie des Textes (web: `.hz-lockup`). Marke und Text nie
   mittig zueinander ausrichten.
@@ -338,7 +341,7 @@ Nutzer entschieden, nicht von der Sitzung.
 - Jede Änderung, die Apps oder Seiten betrifft, kommt in
   [CHANGELOG.md](CHANGELOG.md) unter die nächste Version.
 - Versionen: Tokens (`version` im JSON), Paket (`flutter/pubspec.yaml`) und
-  Git-Tag (`v0.7.9`) laufen gemeinsam. Die Apps hängen an einem Tag, nie an
+  Git-Tag (`v0.8.0`) laufen gemeinsam. Die Apps hängen an einem Tag, nie an
   `main`. Hugo hängt die
   Ordner per `module.mounts` ein (`hugo.toml`).
 - Lokal ansehen:
@@ -365,6 +368,6 @@ Nutzer entschieden, nicht von der Sitzung.
   Jagdaufseher läuft auch im Browser (App auf v0.7.7, Landingpage auf
   v0.7.5); Panzergefecht hat Spiel und Landingpage auf v0.7.8
   (regetskcob/wargame#31), siehe [docs/flutter.md](docs/flutter.md). Für
-  Apps ist v0.6.3 der letzte Tag mit Änderungen am Paket, die 0.7er-Tags
-  ändern das Web und die Exporte; `calm` und `settle` kommen mit dem
-  nächsten Tag.
+  Apps ändern v0.6.3, v0.7.9 (`calm` und `settle`) und v0.8.0 (Feldhöhen,
+  `HorizontFieldIconButton`, `HorizontFieldDropdown`) das Paket, die
+  übrigen 0.7er-Tags nur das Web und die Exporte.

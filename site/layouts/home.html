@@ -357,6 +357,14 @@
         </table>
       </div></div>
     </div>
+    <h3 class="t-title-3">Felder so hoch wie Knöpfe</h3>
+    <p>Ein Feld steht in einer Reihe mit Knöpfen und ist genau so hoch: 28 mit Zeiger, 44 auf Touch, leer wie gefüllt, mit Symbolen davor und dahinter. Der Rahmen richtet sich nach der Zeile und dem Innenabstand, nicht nach einer Mindesthöhe. Deshalb steht jede Eingabe auf der Zeile 20 der Werte, auch Fließtext. Große Schrift macht das Feld höher, nichts wird abgeschnitten.</p>
+    <dl class="doc-facts">
+      <dt>Eingabe</dt><dd>In Mono <span class="hz-mono">style: hz.data</span>, in Fließtext <span class="hz-mono">style: HorizontTheme.of(context).field</span> (Mona Sans 16 auf Zeile 20). Material hat für den Text eines Felds keinen Platz im Theme, deshalb steht er am Feld.</dd>
+      <dt>Knopf im Feld</dt><dd><span class="hz-mono">HorizontFieldIconButton</span> als <span class="hz-mono">suffixIcon</span> oder <span class="hz-mono">prefixIcon</span>: Suchen, Leeren, Anzeigen. Quadratisch in Feldhöhe, Symbol 18, ohne Innenabstand.</dd>
+      <dt>Auswahlfeld</dt><dd><span class="hz-mono">HorizontFieldDropdown</span> für wenige feste Werte im Formular, etwa Tunnelart oder Bedingung: ein Feld in voller Breite, ohne Tippen und Suche, der Pfeil als schlichtes Symbol. Ein Segment bleibt Ansichten vorbehalten (Liste, Karte).</dd>
+      <dt>Web</dt><dd><span class="hz-mono">.hz-input</span> hat dieselben Höhen: 44, mit <span class="hz-mono">[data-density="desktop"]</span> 28.</dd>
+    </dl>
     <h3 class="t-title-3">Geräterahmen</h3>
     <p>Jeder Screenshot steht in seinem Gerät, in dieser Dokumentation, auf den Landingpages und in Beiträgen. Minimal, aber realistisch: echte Proportionen, Kamera-Aussparung, Seitentasten, Standfuß. Keine Spiegelung, keine Perspektive, kein Schatten, keine Gerätefarbe außer Schwarz und Aluminium. Ein nackter Screenshot ohne Rahmen kommt nicht vor.</p>
     <div class="doc-devices">

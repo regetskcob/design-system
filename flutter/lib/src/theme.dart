@@ -115,6 +115,61 @@ ThemeData buildHorizontTheme(
     horizontal: pointer ? HzSpace.s12 : HzSpace.s16,
   );
   final buttonSize = WidgetStatePropertyAll(Size(0, control));
+  // Fields are exactly the control height (28 with a pointer, 44 on touch),
+  // whatever the font: the outline follows the text line plus the vertical
+  // padding, not a minimum height (`constraints.minHeight` only grows the box
+  // around the field). The line is the one of `data` (20), so Mono values and
+  // body text ([fieldText]) give the same height; Flutter still subtracts the
+  // visual density (compact: −8) from the content. Dense, or Material forces
+  // 48 on touch.
+  final visualDensity = pointer
+      ? VisualDensity.compact
+      : VisualDensity.standard;
+  final fieldText = t(
+    HzType.body,
+  ).copyWith(height: HzType.data.line / HzType.body.size);
+  final fieldIcons = BoxConstraints(minWidth: control, minHeight: control);
+  final fieldDecoration = InputDecorationTheme(
+    filled: true,
+    fillColor: c.surface,
+    isDense: true,
+    contentPadding: EdgeInsets.symmetric(
+      horizontal: HzSpace.s12,
+      vertical:
+          (control - HzType.data.line - visualDensity.baseSizeAdjustment.dy) /
+          2,
+    ),
+    // Icons before and after the text no taller than the field (Material:
+    // 40/48).
+    prefixIconConstraints: fieldIcons,
+    suffixIconConstraints: fieldIcons,
+    labelStyle: t(HzType.label),
+    floatingLabelStyle: t(HzType.label, c.accentText),
+    helperStyle: t(HzType.caption, c.textMuted),
+    errorStyle: t(HzType.caption, c.critical),
+    // The line of the input, or the empty field is taller than a filled one.
+    hintStyle: fieldText.copyWith(color: c.textFaint),
+    border: OutlineInputBorder(
+      borderRadius: r6,
+      borderSide: BorderSide(color: c.lineStrong),
+    ),
+    enabledBorder: OutlineInputBorder(
+      borderRadius: r6,
+      borderSide: BorderSide(color: c.lineStrong),
+    ),
+    focusedBorder: OutlineInputBorder(
+      borderRadius: r6,
+      borderSide: BorderSide(color: c.accent, width: HzLine.focus),
+    ),
+    errorBorder: OutlineInputBorder(
+      borderRadius: r6,
+      borderSide: BorderSide(color: c.critical),
+    ),
+    focusedErrorBorder: OutlineInputBorder(
+      borderRadius: r6,
+      borderSide: BorderSide(color: c.critical, width: HzLine.focus),
+    ),
+  );
 
   return ThemeData(
     useMaterial3: true,
@@ -127,7 +182,7 @@ ThemeData buildHorizontTheme(
     canvasColor: c.bg,
     dividerColor: c.line,
     platform: platform,
-    visualDensity: pointer ? VisualDensity.compact : VisualDensity.standard,
+    visualDensity: visualDensity,
     materialTapTargetSize: pointer
         ? MaterialTapTargetSize.shrinkWrap
         : MaterialTapTargetSize.padded,
@@ -162,6 +217,7 @@ ThemeData buildHorizontTheme(
         kennung: t(HzType.kennung, c.textMuted),
         reading: t(HzType.reading),
         display: t(HzType.display),
+        field: fieldText,
       ),
     ],
     appBarTheme: AppBarTheme(
@@ -278,39 +334,12 @@ ThemeData buildHorizontTheme(
       extendedTextStyle: buttonText,
       shape: const RoundedRectangleBorder(borderRadius: r10),
     ),
-    inputDecorationTheme: InputDecorationTheme(
-      filled: true,
-      fillColor: c.surface,
-      isDense: pointer,
-      contentPadding: EdgeInsets.symmetric(
-        horizontal: HzSpace.s12,
-        vertical: pointer ? HzSpace.s8 : HzSpace.s12,
-      ),
-      labelStyle: t(HzType.label),
-      floatingLabelStyle: t(HzType.label, c.accentText),
-      helperStyle: t(HzType.caption, c.textMuted),
-      errorStyle: t(HzType.caption, c.critical),
-      hintStyle: t(HzType.body, c.textFaint),
-      border: OutlineInputBorder(
-        borderRadius: r6,
-        borderSide: BorderSide(color: c.lineStrong),
-      ),
-      enabledBorder: OutlineInputBorder(
-        borderRadius: r6,
-        borderSide: BorderSide(color: c.lineStrong),
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderRadius: r6,
-        borderSide: BorderSide(color: c.accent, width: HzLine.focus),
-      ),
-      errorBorder: OutlineInputBorder(
-        borderRadius: r6,
-        borderSide: BorderSide(color: c.critical),
-      ),
-      focusedErrorBorder: OutlineInputBorder(
-        borderRadius: r6,
-        borderSide: BorderSide(color: c.critical, width: HzLine.focus),
-      ),
+    inputDecorationTheme: fieldDecoration,
+    // DropdownMenu brings its own field theme; without these it would be
+    // taller than the other fields and set in bodyLarge (16/24).
+    dropdownMenuTheme: DropdownMenuThemeData(
+      textStyle: fieldText,
+      inputDecorationTheme: fieldDecoration,
     ),
     chipTheme: ChipThemeData(
       backgroundColor: c.sunken,

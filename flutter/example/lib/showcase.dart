@@ -16,6 +16,7 @@ class _ShowcaseState extends State<Showcase> {
   int _tab = 0;
   bool _offline = true;
   String _view = 'list';
+  String _kind = 'kanzel';
 
   static const _destinations = [
     HorizontDestination(icon: HorizontSymbols.forest, label: 'Übersicht'),
@@ -124,10 +125,30 @@ class _ShowcaseState extends State<Showcase> {
                 ),
                 const SizedBox(height: HzSpace.s16),
                 // The label above the field, not inside the outline.
-                const HorizontField(
+                HorizontField(
                   label: 'Name',
                   help: 'So heißt sie im Revier.',
-                  child: TextField(decoration: InputDecoration(hintText: 'Kanzel am Bruch')),
+                  child: TextField(
+                    style: theme.field,
+                    decoration: InputDecoration(
+                      hintText: 'Kanzel am Bruch',
+                      suffixIcon: HorizontFieldIconButton(
+                        icon: const Icon(HorizontSymbols.close),
+                        tooltip: 'Leeren',
+                        onPressed: () {},
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: HzSpace.s16),
+                // A few fixed values inside a form: a field, not a segment.
+                HorizontField(
+                  label: 'Art',
+                  child: HorizontFieldDropdown(
+                    value: _kind,
+                    items: const [('kanzel', 'Kanzel'), ('leiter', 'Leiter'), ('kirrung', 'Kirrung')],
+                    onChanged: (v) => setState(() => _kind = v),
+                  ),
                 ),
                 const SizedBox(height: HzSpace.s16),
                 SegmentedButton<String>(

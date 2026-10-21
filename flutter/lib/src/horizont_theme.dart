@@ -35,6 +35,7 @@ class HorizontTheme extends ThemeExtension<HorizontTheme> {
     required this.kennung,
     required this.reading,
     required this.display,
+    required this.field,
   });
 
   /// The theme of [context]. Asserts when the app's ThemeData was not built
@@ -70,6 +71,13 @@ class HorizontTheme extends ThemeExtension<HorizontTheme> {
   /// Landing and onboarding headlines: Literata 44/48, light.
   final TextStyle display;
 
+  /// Input in body text: Mona Sans 16 on the line of [data] (20), so a field
+  /// is exactly [controlHeight] high like one in Mono. Material's TextField
+  /// has no theme slot for its text, so pass it to fields in body text:
+  /// `TextField(style: HorizontTheme.of(context).field)`. Fields in [data]
+  /// and `DropdownMenu` (themed) need nothing.
+  final TextStyle field;
+
   /// Minimum height of a control for [density]: 44 on touch, 28 with a pointer.
   double get controlHeight => density == HorizontDensity.touch ? HzSize.touch : HzSize.controlDesktop;
 
@@ -89,6 +97,17 @@ class HorizontTheme extends ThemeExtension<HorizontTheme> {
         foregroundColor: colors.onCritical,
       );
 
+  /// The style of an `IconButton` inside a field (search, clear, reveal): as
+  /// high and wide as the field, without padding, the icon 18. Otherwise the
+  /// button (40/48) makes the field taller. `HorizontFieldIconButton` uses it.
+  ButtonStyle get fieldIconButton => IconButton.styleFrom(
+        fixedSize: Size.square(controlHeight),
+        minimumSize: Size.zero,
+        padding: EdgeInsets.zero,
+        iconSize: HzIconSize.row,
+        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+      );
+
   @override
   HorizontTheme copyWith({
     HorizontProduct? product,
@@ -99,6 +118,7 @@ class HorizontTheme extends ThemeExtension<HorizontTheme> {
     TextStyle? kennung,
     TextStyle? reading,
     TextStyle? display,
+    TextStyle? field,
   }) =>
       HorizontTheme(
         product: product ?? this.product,
@@ -109,6 +129,7 @@ class HorizontTheme extends ThemeExtension<HorizontTheme> {
         kennung: kennung ?? this.kennung,
         reading: reading ?? this.reading,
         display: display ?? this.display,
+        field: field ?? this.field,
       );
 
   /// Colours and text styles interpolate; product, brightness and density
@@ -126,6 +147,7 @@ class HorizontTheme extends ThemeExtension<HorizontTheme> {
       kennung: TextStyle.lerp(kennung, other.kennung, t)!,
       reading: TextStyle.lerp(reading, other.reading, t)!,
       display: TextStyle.lerp(display, other.display, t)!,
+      field: TextStyle.lerp(field, other.field, t)!,
     );
   }
 }

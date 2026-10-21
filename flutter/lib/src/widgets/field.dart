@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 
 import '../horizont_theme.dart';
 import '../tokens.g.dart';
@@ -50,6 +50,124 @@ class HorizontField extends StatelessWidget {
           ],
         ],
       ),
+    );
+  }
+}
+
+/// A symbol button inside a field (search, clear, reveal), as high and wide
+/// as the field: put it in `InputDecoration.suffixIcon` or `prefixIcon`. See
+/// [HorizontTheme.fieldIconButton].
+///
+/// ```dart
+/// TextField(
+///   decoration: InputDecoration(
+///     suffixIcon: HorizontFieldIconButton(
+///       icon: const Icon(HorizontSymbols.close),
+///       tooltip: l10n.clear,
+///       onPressed: controller.clear,
+///     ),
+///   ),
+/// )
+/// ```
+class HorizontFieldIconButton extends StatelessWidget {
+  /// Creates a field button showing [icon].
+  const HorizontFieldIconButton({
+    required this.icon,
+    required this.onPressed,
+    this.tooltip,
+    this.isSelected,
+    super.key,
+  });
+
+  /// Usually an `Icon` from `HorizontSymbols`; its size comes from the style.
+  final Widget icon;
+
+  /// `null` disables the button.
+  final VoidCallback? onPressed;
+
+  /// What the button does, also read by screen readers.
+  final String? tooltip;
+
+  /// For a toggle (reveal a password): whether it is on.
+  final bool? isSelected;
+
+  @override
+  Widget build(BuildContext context) => IconButton(
+    tooltip: tooltip,
+    isSelected: isSelected,
+    style: HorizontTheme.of(context).fieldIconButton,
+    icon: icon,
+    onPressed: onPressed,
+  );
+}
+
+/// A choice from a few fixed values, shaped like the other fields: a
+/// `DropdownMenu` as high as a field, as wide as its parent, without typing
+/// or search. Use it instead of a `SegmentedButton` inside a form.
+///
+/// ```dart
+/// HorizontField(
+///   label: l10n.tunnel,
+///   child: HorizontFieldDropdown(
+///     value: mode,
+///     items: [(Mode.udp, 'UDP'), (Mode.tcp, 'TCP')],
+///     onChanged: (m) => setState(() => mode = m),
+///   ),
+/// )
+/// ```
+class HorizontFieldDropdown<T> extends StatelessWidget {
+  /// Creates a dropdown showing [value] out of [items].
+  const HorizontFieldDropdown({
+    required this.value,
+    required this.items,
+    required this.onChanged,
+    super.key,
+  });
+
+  /// The selected value.
+  final T value;
+
+  /// Value and label of each entry, in order.
+  final List<(T, String)> items;
+
+  /// Called with the chosen value; `null` disables the field.
+  final ValueChanged<T>? onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return DropdownMenu<T>(
+      // Rebuild when the value changes from outside.
+      key: ValueKey(value),
+      initialSelection: value,
+      expandedInsets: EdgeInsets.zero,
+      enabled: onChanged != null,
+      // Choose only: no keyboard, no search.
+      requestFocusOnTap: false,
+      enableSearch: false,
+      // Explicit, so a local DropdownMenuTheme cannot make it taller than the
+      // other fields.
+      textStyle: HorizontTheme.of(context).field,
+      inputDecorationTheme: theme.inputDecorationTheme,
+      // A plain symbol instead of DropdownMenu's IconButton (48), which would
+      // make the field taller.
+      decorationBuilder: (context, menu) => InputDecoration(
+        suffixIcon: Icon(
+          menu.isOpen ? HorizontSymbols.expandLess : HorizontSymbols.expandMore,
+          size: HzIconSize.row,
+        ),
+        suffixIconConstraints: const BoxConstraints(
+          minWidth: HzSpace.s32 + HzSpace.s8,
+          minHeight: 0,
+        ),
+      ),
+      onSelected: (v) {
+        if (v is T) onChanged?.call(v);
+      },
+      dropdownMenuEntries: [
+        for (final (v, label) in items)
+          DropdownMenuEntry(value: v, label: label),
+      ],
     );
   }
 }

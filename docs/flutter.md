@@ -21,12 +21,13 @@ dependencies:
     git:
       url: https://github.com/regetskcob/horizont.git
       path: flutter
-      ref: v0.7.9
+      ref: v0.8.0
 ```
 
-Für die Apps ist v0.6.3 der letzte Tag mit Änderungen am Paket; die
-0.7er-Tags bis v0.7.8 ändern nur das Web und die Exporte und lassen sich
-ohne Weiteres eintragen. v0.7.9 bringt `HzMotion.calm` und `settle`.
+Am Paket ändern v0.6.3, v0.7.9 (`HzMotion.calm` und `settle`) und v0.8.0
+(Feldhöhen, `HorizontFieldIconButton`, `HorizontFieldDropdown`); die
+übrigen 0.7er-Tags ändern nur das Web und die Exporte und lassen sich ohne
+Weiteres eintragen.
 
 Es bringt mit:
 
@@ -38,7 +39,8 @@ Es bringt mit:
 - `HorizontColors`, `HorizontSymbols`, die Werte `HzSpace`, `HzRadius`,
   `HzLine`, `HzSize`, `HzIconSize`, `HzBreakpoint`, `HzMotion`, `HzType`.
 - Die Widgets `Kennung` (mit `count` und `oneLine`),
-  `HorizontSectionHeader`, `HorizontField`, `HorizontBadge`,
+  `HorizontSectionHeader`, `HorizontField`, `HorizontFieldIconButton`,
+  `HorizontFieldDropdown`, `HorizontBadge`,
   `HorizontStatusLine`, `HorizontLetterBadge`, `HorizontMetric`,
   `HorizontMetricRow`, `HorizontEmptyHint`, `HorizontTabBar`,
   `HorizontRail`, `HorizontMark` und `HorizontLockup`, dazu
@@ -165,7 +167,8 @@ fehlt):
   Stufen für Heatmaps)
 - `product`, `brightness`, `density`, `controlHeight`, `rowHeight`
 - Textstile `data` und `kennung` (Monaspace), `reading` und `display`
-  (Literata)
+  (Literata), `field` (Eingabe in Fließtext: Mona Sans 16 auf Zeile 20)
+- `fieldIconButton`: der Stil für einen Symbolknopf im Feld
 - `criticalButton`: der Stil für den `FilledButton` einer unumkehrbaren
   Aktion
 
@@ -232,6 +235,26 @@ Nicht das Paket `material_symbols_icons`, es bündelt alle Symbole.
   `hintText`. Der Rahmen kommt aus dem Theme: `OutlineInputBorder`, Radius
   6, Rand line-strong (3:1), im Fokus Akzent 2 px, Fehler critical mit
   Zeichen in der Hilfezeile.
+- **Feldhöhe:** Jedes Feld ist genau `controlHeight` hoch, 28 mit Zeiger und
+  44 auf Touch, leer wie gefüllt, mit Symbolen davor und dahinter. Der
+  Rahmen richtet sich nach Zeile plus Innenabstand, nicht nach einer
+  Mindesthöhe; das Theme rechnet deshalb mit der Zeile 20 (`data`) und zieht
+  die Dichte ab (`isDense`, `contentPadding`, `hintStyle`, Symbolgrenzen in
+  Feldhöhe). Daraus folgt eine Pflicht in der App: Ein `TextField` in
+  Fließtext bekommt `style: HorizontTheme.of(context).field` (Material hat
+  dafür keinen Platz im Theme, mit `bodyLarge` 16/24 wäre es 4 höher). In
+  Mono reicht `style: hz.data`. Nie `constraints` oder eine feste Höhe
+  setzen, das schneidet große Schrift ab.
+- **Symbolknopf im Feld:** `HorizontFieldIconButton(icon:, tooltip:,
+  onPressed:)` als `suffixIcon` oder `prefixIcon` (Suchen, Leeren,
+  Anzeigen). So hoch und breit wie das Feld, Symbol 18. Ein normaler
+  `IconButton` (40/48) macht das Feld höher.
+- **Auswahlfeld:** `HorizontFieldDropdown(value:, items: [(wert, 'Wort')],
+  onChanged:)` für wenige feste Werte im Formular (Tunnelart, Bedingung),
+  statt eines `SegmentedButton`: ein `DropdownMenu` in Feldhöhe und voller
+  Breite, ohne Tippen und Suche, der Pfeil als schlichtes Symbol. Ein
+  eigenes `DropdownMenu` sitzt dank `dropdownMenuTheme` ebenfalls in
+  Feldhöhe. Segmente bleiben für Ansichten (Liste, Karte).
 - **Status:** ein eigenes Widget `HorizontBadge(kind, label)` mit Fläche
   `*Tint`, Zeichen (Haken, Dreieck, Achteck, Kreis) und Wort, Radius 2.
 - **Auswahl als Linie:** `TabBar` mit `UnderlineTabIndicator(borderSide:
