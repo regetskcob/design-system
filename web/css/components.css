@@ -565,6 +565,23 @@ body.hz { margin: 0; }
 .hz-ticks { list-style: none; margin: 0; padding: calc(var(--at) + var(--s-8)) var(--inset) var(--s-8) calc(var(--inset) + 28px); display: flex; flex-wrap: wrap; gap: var(--s-4) var(--s-16); }
 .hz-tick { font: 600 0.5625rem/1.2 var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-faint); text-decoration: none; }
 .hz-tick:hover, .hz-tick.is-current { color: var(--text); }
+/* Back hangs before the start of the line, outside the frame, its words on
+   the line like a lockup; the line keeps its length. Shown by the script
+   only where the window leaves room for it. */
+.hz-horizon-back {
+  position: absolute;
+  right: calc(100% - var(--inset) + 14px + var(--s-8));
+  top: calc(var(--at) - 11px);
+  font: 600 0.6875rem/1 var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--text-muted);
+  text-decoration: none;
+  padding-block: var(--s-2);
+}
+.hz-horizon-back:hover { color: var(--text); }
+.hz-horizon-back:not(.has-room) { visibility: hidden; }
 /* The language switch at the end of the line: both languages in a small
    frame, the current one carrying the accent line, the other a link. */
 .hz-horizon-lang {
@@ -616,6 +633,10 @@ body:has(> .hz-feld) > .hz-horizon { --horizon-width: var(--size-page); --inset:
 }
 .hz-horizon.is-live .hz-tick.is-end span { left: auto; right: 9px; text-align: right; }
 .hz-horizon.is-live .hz-tick.is-current span { max-width: max(var(--room, 80px), 180px); background: var(--bg); padding-right: var(--s-4); z-index: 1; }
+/* The chapter the line marks is the one heading in the text that stands
+   whole; the others recede. Only with the script, which sets the classes. */
+.hz-chapter { color: var(--text-muted); transition: color var(--motion-slow) var(--ease-standard); }
+.hz-chapter.is-current { color: var(--text); }
 .hz-horizon-bubble {
   position: absolute;
   left: 50%;
@@ -744,4 +765,5 @@ body:has(> .hz-feld) > .hz-horizon { --horizon-width: var(--size-page); --inset:
 }
 .hz-karte-dialog::backdrop { background: color-mix(in srgb, var(--text) 30%, transparent); }
 .hz-karte-top { display: flex; align-items: center; justify-content: space-between; gap: var(--s-16); margin: 0 0 var(--s-16); }
+.hz-karte-actions { display: flex; gap: var(--s-8); }
 @media (max-width: 640px) { .hz-karte-dialog { padding: var(--s-16); } }

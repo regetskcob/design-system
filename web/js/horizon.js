@@ -19,6 +19,7 @@
   var done = nav.querySelector(".hz-horizon-done");
   var list = nav.querySelector(".hz-ticks");
   var dialog = document.querySelector("[data-hz-karte]");
+  var back = nav.querySelector(".hz-horizon-back");
 
   // marks "auto": the chapters come from the page, by default the numbered
   // sections of a Feldseite. "02 — Funktionen" becomes the title
@@ -59,6 +60,12 @@
   var frame = 0;
 
   nav.classList.add("is-live");
+  // The heading of each chapter: the target itself, or the first heading in
+  // it where the target is a section.
+  marks.forEach(function (m) {
+    m.head = /^H[1-6]$/.test(m.target.tagName) ? m.target : m.target.querySelector("h1, h2, h3, h4");
+    if (m.head) m.head.classList.add("hz-chapter");
+  });
 
   function offsetTop(el) {
     return el.getBoundingClientRect().top + window.scrollY;
@@ -91,6 +98,11 @@
       li.style.setProperty("--room", m.room + "px");
       m.a.classList.toggle("is-end", end);
     });
+    // Back only where the window leaves room before the line.
+    if (back && !back.hidden) {
+      var room = nav.getBoundingClientRect().left + parseFloat(getComputedStyle(nav).getPropertyValue("--inset"));
+      back.classList.toggle("has-room", !touch.matches && room >= back.offsetWidth + 14 + 8 + 16);
+    }
     current = -2;
     update();
   }
@@ -112,6 +124,7 @@
     marks.forEach(function (m, i) {
       var on = i === at;
       m.a.classList.toggle("is-current", on);
+      if (m.head) m.head.classList.toggle("is-current", on);
       if (on) m.a.setAttribute("aria-current", "location");
       else m.a.removeAttribute("aria-current");
       // A title where it has room; where chapters lie close, only its number.
@@ -134,6 +147,20 @@
     });
     dialog.addEventListener("click", function (e) {
       if (e.target === dialog) dialog.close();
+    });
+  }
+
+  // Back: only when the page before is of this site; the history brings it
+  // back as it was left, which a link to it could not.
+  var from = null;
+  try { from = document.referrer ? new URL(document.referrer) : null; } catch (e) { from = null; }
+  if (from && from.origin === location.origin && from.href !== location.href && history.length > 1) {
+    [].forEach.call(document.querySelectorAll("[data-hz-back]"), function (b) {
+      b.hidden = false;
+      b.addEventListener("click", function (e) {
+        e.preventDefault();
+        history.back();
+      });
     });
   }
 

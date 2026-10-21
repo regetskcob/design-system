@@ -4,6 +4,40 @@ Jede Version gilt zugleich für Tokens (`tokens/horizont.json`), das
 Flutter-Paket (`flutter/pubspec.yaml`) und den Git-Tag. Apps und Seiten hängen
 an einem Tag; unter „Heben“ steht, was beim Wechsel zu tun ist.
 
+## 0.8.1 (in Arbeit)
+
+Die Horizontlinie im Web: Kapitel auch im Text, ein Zurück und zwei
+Wanderer in Farbe.
+
+### Neu
+
+- **Kapitel im Text:** Die Überschrift des Kapitels, das die Linie gerade
+  markiert, steht in `text`, die übrigen Kapitelüberschriften treten in
+  `text-muted` zurück (`.hz-chapter`, Übergang `slow`). Ist das Ziel einer
+  Marke ein Abschnitt, gilt das für seine erste Überschrift. Nur mit dem
+  Skript; ohne bleiben alle Überschriften wie gesetzt. Kein Wechsel der
+  Stärke: Literata hat nur Light und SemiBold, der Sprung würde Zeilen beim
+  Lesen neu umbrechen.
+- **Zurück:** Kam man von einer Seite derselben Domain, steht „Zurück“ vor
+  dem Anfang der Linie, nach links über den Rahmen hinaus, mit der
+  Grundlinie auf der Linie; die Linie bleibt so lang wie bisher. Nur wo
+  das Fenster links Platz lässt, also nicht auf Touch. Dazu ein Knopf
+  „Zurück“ in der Flurkarte neben „Schließen“. Beide gehen in der
+  Browser-Geschichte zurück, sodass die vorige Seite so wiederkommt, wie
+  man sie verlassen hat, samt Scrollstand.
+- **Wanderer von Horizont und Blog in Farbe** (`object true`, Farben unter
+  `color.mark`): die Sonne als Halbscheibe in Orange mit goldenem Kern,
+  das offene Buch mit weißen Seiten im braunen Einband. Das Buch schwebt
+  jetzt über der Linie, statt von ihr angeschnitten zu werden. Überall
+  sonst bleiben die Glyphen.
+
+### Heben
+
+- Seiten: `hugo mod get github.com/regetskcob/horizont@v0.8.1`; nichts
+  sonst. Wer Überschriften im Text eine eigene Farbe gibt, prüft, dass
+  `.hz-chapter` sie überschreiben darf.
+- Apps: nichts.
+
 ## 0.8.0
 
 Felder in genau der Höhe der Bedienelemente und zwei Bausteine fürs Feld,

@@ -230,6 +230,18 @@
           "text-faint": "#6F6F6F"
         }
       }
+    },
+    "mark": {
+      "_comment": "Farben der Glyphen ohne Produkt (mark.html mit object true): die Sonne von Horizont, die auf der Linie aufgeht, und das Buch des Blogs, weisse Seiten im braunen Einband, das ueber der Linie schwebt; flache Toene, ohne Verlauf. Die Linie bleibt currentColor.",
+      "horizont": {
+        "sun": "#D9692A",
+        "core": "#F2B33D"
+      },
+      "blog": {
+        "pages": "#FFFFFF",
+        "cover": "#7A4B2B",
+        "spine": "#5A3519"
+      }
     }
   },
   "font": {

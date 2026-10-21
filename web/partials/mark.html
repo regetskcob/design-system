@@ -14,8 +14,10 @@
 
   object true: where a product's object holds at glyph size, it stands in
   its icon colours on the line in currentColor. So far KNX Monitor: the bus
-  terminal red for plus and dark grey for minus (the walker of the horizon).
-  Other products draw their glyph.
+  terminal red for plus and dark grey for minus (the walker of the horizon),
+  Horizont: the sun rising on the line, orange with a golden core
+  (color.mark.horizont); the blog: the open book, white pages in a brown
+  cover, floating above the line (color.mark.blog). Other products draw their glyph.
 */ -}}
 {{- if .icon -}}
 {{ partial "horizont/app-icon.html" . }}
@@ -57,10 +59,27 @@
   {{- else if eq $p "knx" }}
   <path d="M{{ cond $icon 0 4 }} 66.7H35M65 66.7H{{ cond $icon 100 96 }}"/>
   <path d="M35 40h30v34H35zM50 40v34"/>
+  {{- else if and (eq $p "blog") .object }}
+  {{- $o := site.Data.horizont.color.mark.blog }}
+  {{- $book := "M17 56c11-4.5 22-4.5 33 2 11-6.5 22-6.5 33-2V29c-11-4.5-22-4.5-33 2-11-6.5-22-6.5-33-2z" }}
+  <path d="M4 66.7H96"/>
+  {{- /* Lifted off the line: the cover ends about 2 px above it at 28 px, wider than the pages. */}}
+  <g transform="translate(0 -8)">
+    <path d="{{ $book }}" transform="matrix(1.12 0 0 1 -6 6)" stroke="none" style="fill:{{ $o.cover }}"/>
+    <path d="{{ $book }}" stroke-width="4" stroke-linejoin="round" style="fill:{{ $o.pages }};stroke:{{ $o.cover }}"/>
+    <path d="M50 31v27" stroke-width="3" style="stroke:{{ $o.spine }}"/>
+  </g>
   {{- else if eq $p "blog" }}
   <path d="M4 66.7H96"/>
   <path d="M17 64.7c11-4.5 22-4.5 33 2 11-6.5 22-6.5 33-2V38c-11-4.5-22-4.5-33 2-11-6.5-22-6.5-33-2z"/>
   <path d="M50 40v26.7"/>
+  {{- else if and (eq $p "horizont") .object }}
+  {{- $o := site.Data.horizont.color.mark.horizont }}
+  <g stroke="none">
+    <path d="M27 66.7a23 23 0 0 1 46 0z" style="fill:{{ $o.sun }}"/>
+    <path d="M38 66.7a12 12 0 0 1 24 0z" style="fill:{{ $o.core }}"/>
+  </g>
+  <path d="M4 66.7H96"/>
   {{- else if eq $p "horizont" }}
   <path d="M4 66.7H96"/>
   <path d="M27 66.7a23 23 0 0 1 46 0"/>

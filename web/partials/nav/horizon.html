@@ -43,6 +43,12 @@
   a dialog instead, places the marks, lets the mark walk and the thumb
   swipe. Without it the marks are a row of anchor links and the mark links
   to the map page.
+
+  Back: where you came from a page of the same site, the script shows
+  "Zurück" before the start of the line (where the window leaves room) and
+  in the map. It goes back in the history, so the page before returns as
+  you left it, scrolled to where you were. Without the script the
+  browser's own back remains.
 */ -}}
 {{- $p := .product | default "regetskcob" -}}
 {{- $auto := "" -}}
@@ -54,6 +60,7 @@
 <nav class="hz-horizon" data-hz-horizon data-product="{{ $p }}" aria-label="Horizont">
   <span class="hz-horizon-line" aria-hidden="true"></span>
   <span class="hz-horizon-done" aria-hidden="true"></span>
+  <a class="hz-horizon-back" href="#" data-hz-back hidden aria-label="Zurück zur vorigen Seite"><span aria-hidden="true">←</span> Zurück</a>
   {{- if $auto }}
   <ol class="hz-ticks" data-hz-auto="{{ $auto }}"></ol>
   {{- else if ge (len $marks) 3 }}
@@ -81,7 +88,10 @@
 <dialog class="hz-karte-dialog" data-hz-karte aria-label="Flurkarte">
   <form method="dialog" class="hz-karte-top">
     <span class="t-kennung hz-kennung">Flurkarte{{ with .place }} · {{ . }}{{ end }}</span>
-    <button class="hz-button hz-button--secondary" type="submit">Schließen</button>
+    <span class="hz-karte-actions">
+      <button class="hz-button hz-button--secondary" type="button" data-hz-back hidden>Zurück</button>
+      <button class="hz-button hz-button--secondary" type="submit">Schließen</button>
+    </span>
   </form>
   {{ partial "horizont/nav/karte.html" $k }}
 </dialog>
