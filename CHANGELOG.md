@@ -4,7 +4,7 @@ Jede Version gilt zugleich für Tokens (`tokens/horizont.json`), das
 Flutter-Paket (`flutter/pubspec.yaml`) und den Git-Tag. Apps und Seiten hängen
 an einem Tag; unter „Heben“ steht, was beim Wechsel zu tun ist.
 
-## 0.8.1 (in Arbeit)
+## 0.8.1
 
 Die Horizontlinie im Web: Kapitel auch im Text, ein Zurück und zwei
 Wanderer in Farbe.
