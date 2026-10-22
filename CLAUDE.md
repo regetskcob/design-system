@@ -208,7 +208,8 @@ Einrichtungen.
   grünen Buskabel (KNX Monitor), Panzer in Seitenansicht (Panzergefecht).
   Dazu drei Glyphen ohne App-Icon: das offene Buch für den Blog, die
   Sonne auf der Linie für Horizont und der Prompt `>` leicht über der
-  Linie schwebend für Kalkar IT Solutions, die Linie ist sein Cursor (`mark.html`, `product` "blog",
+  Linie schwebend für Kalkar IT Solutions, die Linie ist sein Cursor; als
+  Wanderer steht der Prompt in Weidengrün (`color.mark.kalkar-it`) (`mark.html`, `product` "blog",
   "horizont" bzw. "kalkar-it"). Kalkar IT ist kein Produkt der Familie und
   hat keine eigenen Farben; die Seite nimmt den Akzent Tinte.
 - **App-Icon:** illustriert (`web/partials/app-icon.html`). Die Bühne ist

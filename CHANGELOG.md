@@ -13,7 +13,11 @@ Eine Glyphe für Kalkar IT Solutions.
 - **Glyphe `kalkar-it`** (`web/partials/mark.html`): ein Prompt `>` im
   linken Drittel, leicht über der Linie schwebend wie das Buch des Blogs;
   die Linie darunter ist sein Cursor, eine leere Eingabezeile. Aufliegend
-  schlösse sich der Pfeil bei 16 px zum Dreieck. Wie Blog
+  schlösse sich der Pfeil bei 16 px zum Dreieck. Mit `object true` (etwa
+  als Wanderer der Horizontlinie) steht der Prompt in Weidengrün, dem
+  Graugrün der Kopfweiden (`color.mark.kalkar-it.prompt`, hell #5A7A4E,
+  dunkel #9DB98C), die Linie bleibt in der Textfarbe. Bewusst kein drittes
+  Waldgrün neben Tanne und Bus. Wie Blog
   und Horizont nur Glyphe, ohne App-Icon und ohne eigene Farben; die
   Teaserseite von Kalkar IT nimmt weiter den Akzent Tinte.
 - **Lockup mit reiner Glyphe** (`web/partials/lockup.html`): Für eine

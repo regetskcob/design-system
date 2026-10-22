@@ -18,7 +18,9 @@
   terminal red for plus and dark grey for minus (the walker of the horizon),
   Horizont: the sun rising on the line, orange with a golden core
   (color.mark.horizont); the blog: the open book, white pages in a brown
-  cover, floating above the line (color.mark.blog). Other products draw their glyph.
+  cover, floating above the line (color.mark.blog); Kalkar IT: the prompt
+  in willow green, light and dark (color.mark.kalkar-it). Other products
+  draw their glyph.
 */ -}}
 {{- if .icon -}}
 {{ partial "horizont/app-icon.html" . }}
@@ -92,7 +94,12 @@
      line it would close into a triangle at 16 px. Left third, so the
      line runs on to the right like an input. */}}
   <path d="M4 66.7H96"/>
+  {{- if and .object (not $icon) }}
+  {{- $o := index site.Data.horizont.color.mark "kalkar-it" }}
+  <path d="M24 24l20 15-20 15" style="stroke:light-dark({{ $o.prompt.light }}, {{ $o.prompt.dark }})"/>
+  {{- else }}
   <path d="M24 24l20 15-20 15"/>
+  {{- end }}
   {{- else if eq $p "panzergefecht" }}
   <path d="M{{ cond $icon 0 4 }} 66.7H{{ cond $icon 100 96 }}"/>
   <path d="M24 66.7l4-12h44l4 12M40 54.7V44h18v10.7M58 49h24"/>
