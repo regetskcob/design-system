@@ -20,6 +20,13 @@ Eine Glyphe für Kalkar IT Solutions.
   Waldgrün neben Tanne und Bus. Wie Blog
   und Horizont nur Glyphe, ohne App-Icon und ohne eigene Farben; die
   Teaserseite von Kalkar IT nimmt weiter den Akzent Tinte.
+- **Bild für Avatare von Kalkar IT** (`web/partials/app-icon.html`,
+  `product "kalkar-it"`): die Bühne von regetskcob, Papier und Tinte, davor
+  der Prompt flach in Weidengrün über der Linie, darunter sein Schatten auf
+  dem Boden, rechts hinten klein die Buche als Absender. Für die
+  GitHub-Organisation; kein Produkt-Icon und keine Plattform-Exporte. Die
+  Farben liegen bei der Glyphe unter `color.mark.kalkar-it.icon`, das
+  App-Icon liest sie dort, wenn es keinen Produkteintrag gibt.
 - **Lockup mit reiner Glyphe** (`web/partials/lockup.html`): Für eine
   Marke ohne Eintrag unter `color.product` (blog, horizont, kalkar-it)
   nimmt das Lockup den übergebenen `label`; fehlt er, bricht der Build mit

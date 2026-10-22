@@ -209,7 +209,9 @@ Einrichtungen.
   Dazu drei Glyphen ohne App-Icon: das offene Buch für den Blog, die
   Sonne auf der Linie für Horizont und der Prompt `>` leicht über der
   Linie schwebend für Kalkar IT Solutions, die Linie ist sein Cursor; als
-  Wanderer steht der Prompt in Weidengrün (`color.mark.kalkar-it`) (`mark.html`, `product` "blog",
+  Wanderer steht der Prompt in Weidengrün (`color.mark.kalkar-it`), und
+  für Avatare gibt es ein flaches Bild mit der Buche klein im Hintergrund
+  (`app-icon.html`, `product` "kalkar-it") (`mark.html`, `product` "blog",
   "horizont" bzw. "kalkar-it"). Kalkar IT ist kein Produkt der Familie und
   hat keine eigenen Farben; die Seite nimmt den Akzent Tinte.
 - **App-Icon:** illustriert (`web/partials/app-icon.html`). Die Bühne ist

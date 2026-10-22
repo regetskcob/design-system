@@ -243,7 +243,24 @@
         "spine": "#5A3519"
       },
       "kalkar-it": {
-        "prompt": { "light": "#5A7A4E", "dark": "#9DB98C" }
+        "name": "Kalkar IT Solutions",
+        "prompt": { "light": "#5A7A4E", "dark": "#9DB98C" },
+        "icon": {
+          "_comment": "Das Bild fuer Avatare (GitHub-Organisation), kein Produkt-Icon: die Buehne von regetskcob, Tinte und Papier, davor der Prompt flach in Weidengruen ueber der Linie, rechts hinten klein die Buche als Absender.",
+          "field": "#1B1C19",
+          "glyph": "#9DB98C",
+          "sky": "#F1EFE6",
+          "sky2": "#D3D1C6",
+          "ground": "#3A3B35",
+          "ground2": "#26271F",
+          "horizon": "#FBFAF4",
+          "outline": "#151612",
+          "obj": {
+            "mid": "#7E9E6E",
+            "beech": "#BFBDB1",
+            "beechDark": "#AAA89C"
+          }
+        }
       }
     }
   },
