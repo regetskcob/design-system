@@ -5,7 +5,7 @@ und Panzergefecht. Leitbild: minimalistisch wie die niederrheinische Feldflur.
 
 Dokumentation und Entwürfe: https://www.regetskcob.de/horizont/
 
-Stand: v0.8.2, Jagdaufseher vorerst nicht mehr auf der Flurkarte. KNX Monitor ist als erste App umgestellt (App auf v0.6.1,
+Stand: v0.8.3, dazu die Glyphe von Kalkar IT Solutions. KNX Monitor ist als erste App umgestellt (App auf v0.6.1,
 Landingpage auf v0.7.9), Jagdaufseher als zweite (App inklusive Web auf v0.7.7,
 Landingpage offline seit 22.10.2026), Panzergefecht als dritte (Spiel und Landingpage auf
 v0.7.8, regetskcob/wargame#31);

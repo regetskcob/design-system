@@ -206,9 +206,11 @@ Einrichtungen.
 - **Marke:** eine Linie auf dem unteren Drittel, darauf ein Gegenstand:
   Buche (regetskcob), Kanzel (Jagdaufseher), Busklemme rot/grau auf dem
   grünen Buskabel (KNX Monitor), Panzer in Seitenansicht (Panzergefecht).
-  Dazu zwei Glyphen ohne App-Icon: das offene Buch für den Blog und die
-  Sonne auf der Linie für Horizont (`mark.html`, `product` "blog" bzw.
-  "horizont").
+  Dazu drei Glyphen ohne App-Icon: das offene Buch für den Blog, die
+  Sonne auf der Linie für Horizont und der Prompt `>` leicht über der
+  Linie schwebend für Kalkar IT Solutions, die Linie ist sein Cursor (`mark.html`, `product` "blog",
+  "horizont" bzw. "kalkar-it"). Kalkar IT ist kein Produkt der Familie und
+  hat keine eigenen Farben; die Seite nimmt den Akzent Tinte.
 - **App-Icon:** illustriert (`web/partials/app-icon.html`). Die Bühne ist
   Himmel oben und Boden unten mit einer hellen Horizontlinie bei zwei
   Dritteln. Davor steht ein Gegenstand in drei Tönen mit dunkler Kontur (1,6
@@ -341,7 +343,7 @@ Nutzer entschieden, nicht von der Sitzung.
 - Jede Änderung, die Apps oder Seiten betrifft, kommt in
   [CHANGELOG.md](CHANGELOG.md) unter die nächste Version.
 - Versionen: Tokens (`version` im JSON), Paket (`flutter/pubspec.yaml`) und
-  Git-Tag (`v0.8.2`) laufen gemeinsam. Die Apps hängen an einem Tag, nie an
+  Git-Tag (`v0.8.3`) laufen gemeinsam. Die Apps hängen an einem Tag, nie an
   `main`. Hugo hängt die
   Ordner per `module.mounts` ein (`hugo.toml`).
 - Lokal ansehen:

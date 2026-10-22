@@ -4,6 +4,29 @@ Jede Version gilt zugleich für Tokens (`tokens/horizont.json`), das
 Flutter-Paket (`flutter/pubspec.yaml`) und den Git-Tag. Apps und Seiten hängen
 an einem Tag; unter „Heben“ steht, was beim Wechsel zu tun ist.
 
+## 0.8.3
+
+Eine Glyphe für Kalkar IT Solutions.
+
+### Neu
+
+- **Glyphe `kalkar-it`** (`web/partials/mark.html`): ein Prompt `>` im
+  linken Drittel, leicht über der Linie schwebend wie das Buch des Blogs;
+  die Linie darunter ist sein Cursor, eine leere Eingabezeile. Aufliegend
+  schlösse sich der Pfeil bei 16 px zum Dreieck. Wie Blog
+  und Horizont nur Glyphe, ohne App-Icon und ohne eigene Farben; die
+  Teaserseite von Kalkar IT nimmt weiter den Akzent Tinte.
+- **Lockup mit reiner Glyphe** (`web/partials/lockup.html`): Für eine
+  Marke ohne Eintrag unter `color.product` (blog, horizont, kalkar-it)
+  nimmt das Lockup den übergebenen `label`; fehlt er, bricht der Build mit
+  einer Meldung ab statt mit einem Template-Fehler.
+
+### Heben
+
+- Seiten: `hugo mod get github.com/regetskcob/horizont@v0.8.3`; nichts
+  sonst.
+- Apps: nichts.
+
 ## 0.8.2
 
 Jagdaufseher geht vorerst von der Flurkarte.

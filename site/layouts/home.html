@@ -122,6 +122,7 @@
       <dt>Jagdaufseher</dt><dd>Eine Kanzel am Waldrand, Holz vor Tanne.</dd>
       <dt>KNX Monitor</dt><dd>Das grüne Buskabel ist der Horizont, darauf sitzt die rot-graue Busklemme mit ihren Leitereinführungen. Mehr braucht es nicht, jeder Elektriker erkennt sie.</dd>
       <dt>Panzergefecht</dt><dd>Der Panzer in Seitenansicht, auf dem Horizont wie Kanzel und Buche. Farben und Zeichenweise vom bisherigen Icon.</dd>
+      <dt>Nur Glyphe</dt><dd>Ohne App-Icon und eigene Farbe: {{ range slice (slice "blog" "das offene Buch für den Blog") (slice "horizont" "die Sonne auf der Linie für Horizont") (slice "kalkar-it" "der Prompt über der Linie für Kalkar IT Solutions, die Linie ist sein Cursor") }}<span class="hz-lockup">{{ partial "horizont/mark.html" (dict "product" (index . 0) "size" 20) }}<span>{{ index . 1 }}</span></span> {{ end }}</dd>
     </dl>
     <div class="doc-marks">
       {{- range $products }}
