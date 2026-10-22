@@ -4,13 +4,18 @@
 
     partial "horizont/lockup.html" (dict "product" "knx" "label" "KNX Monitor" "href" "/knx/")
 
-  product   regetskcob | jagdaufseher | knx | panzergefecht (default regetskcob)
+  product   regetskcob | jagdaufseher | knx | panzergefecht, or a glyph-only
+            mark (blog, horizont, kalkar-it) with a label (default regetskcob)
   label     the name; defaults to the product's name from the tokens
   href      makes the lockup a link
   mark      size of the mark as CSS length (default 1.15em, via --mark)
 */ -}}
 {{- $p := .product | default "regetskcob" -}}
-{{- $label := .label | default (index site.Data.horizont.color.product $p "name") -}}
+{{- /* A glyph-only mark (blog, horizont, kalkar-it) has no product entry
+       and needs its label passed in. */ -}}
+{{- $label := .label -}}
+{{- if not $label }}{{ with index site.Data.horizont.color.product $p }}{{ $label = .name }}{{ end }}{{ end -}}
+{{- if not $label }}{{ errorf "horizont/lockup: %q has no name in the tokens, pass a label" $p }}{{ end -}}
 {{- $style := "" -}}
 {{- with .mark }}{{ $style = printf "--mark:%s" . }}{{ end -}}
 {{- $inner := printf "%s<span>%s</span>" (partial "horizont/mark.html" (dict "product" $p "size" 24)) $label -}}

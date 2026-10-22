@@ -60,6 +60,7 @@ a { color: var(--accent-text); text-underline-offset: 3px; text-decoration-thick
 .doc-mark { padding: var(--s-24) var(--s-16) var(--s-24) 0; border-bottom: var(--line-hairline) solid var(--line); }
 .doc-mark > .hz-app-icon { display: block; margin-bottom: var(--s-16); }
 .doc-mark .doc-mark-name { font-weight: 600; }
+.doc-avatar { display: flex; align-items: flex-end; gap: var(--s-12); margin-top: var(--s-12); }
 .doc-mark .doc-mark-role { color: var(--text-muted); font-size: 0.8125rem; }
 .doc-mark .doc-mark-small { display: flex; gap: var(--s-12); align-items: center; margin-top: var(--s-12); }
 

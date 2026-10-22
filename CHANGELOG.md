@@ -4,6 +4,40 @@ Jede Version gilt zugleich für Tokens (`tokens/horizont.json`), das
 Flutter-Paket (`flutter/pubspec.yaml`) und den Git-Tag. Apps und Seiten hängen
 an einem Tag; unter „Heben“ steht, was beim Wechsel zu tun ist.
 
+## 0.8.3
+
+Eine Glyphe für Kalkar IT Solutions.
+
+### Neu
+
+- **Glyphe `kalkar-it`** (`web/partials/mark.html`): ein Prompt `>` im
+  linken Drittel, leicht über der Linie schwebend wie das Buch des Blogs;
+  die Linie darunter ist sein Cursor, eine leere Eingabezeile. Aufliegend
+  schlösse sich der Pfeil bei 16 px zum Dreieck. Mit `object true` (etwa
+  als Wanderer der Horizontlinie) steht der Prompt in Weidengrün, dem
+  Graugrün der Kopfweiden (`color.mark.kalkar-it.prompt`, hell #5A7A4E,
+  dunkel #9DB98C), die Linie bleibt in der Textfarbe. Bewusst kein drittes
+  Waldgrün neben Tanne und Bus. Wie Blog
+  und Horizont nur Glyphe, ohne App-Icon und ohne eigene Farben; die
+  Teaserseite von Kalkar IT nimmt weiter den Akzent Tinte.
+- **Bild für Avatare von Kalkar IT** (`web/partials/app-icon.html`,
+  `product "kalkar-it"`): die Bühne von regetskcob, Papier und Tinte, davor
+  der Prompt flach in Weidengrün über der Linie, darunter sein Schatten auf
+  dem Boden, rechts hinten klein die Buche als Absender. Für die
+  GitHub-Organisation; kein Produkt-Icon und keine Plattform-Exporte. Die
+  Farben liegen bei der Glyphe unter `color.mark.kalkar-it.icon`, das
+  App-Icon liest sie dort, wenn es keinen Produkteintrag gibt.
+- **Lockup mit reiner Glyphe** (`web/partials/lockup.html`): Für eine
+  Marke ohne Eintrag unter `color.product` (blog, horizont, kalkar-it)
+  nimmt das Lockup den übergebenen `label`; fehlt er, bricht der Build mit
+  einer Meldung ab statt mit einem Template-Fehler.
+
+### Heben
+
+- Seiten: `hugo mod get github.com/regetskcob/horizont@v0.8.3`; nichts
+  sonst.
+- Apps: nichts.
+
 ## 0.8.2
 
 Jagdaufseher geht vorerst von der Flurkarte.

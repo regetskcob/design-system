@@ -2,8 +2,9 @@
   The marks of Horizont: one horizon on the lower third of the square, the
   rule of thirds of a landscape photo, with the one object of the app icon on
   it: beech, raised hide, bus terminal, tank. Same stroke, square caps.
-  Two more are glyphs only (no app icon): "blog", an open book, and
-  "horizont", the sun on the line.
+  Three more are glyphs only (no app icon): "blog", an open book,
+  "horizont", the sun on the line, and "kalkar-it", a prompt > floating
+  above the line, which is its cursor, for Kalkar IT Solutions.
 
     partial "horizont/mark.html" (dict "product" "knx" "size" 64 "icon" true)
 
@@ -17,7 +18,9 @@
   terminal red for plus and dark grey for minus (the walker of the horizon),
   Horizont: the sun rising on the line, orange with a golden core
   (color.mark.horizont); the blog: the open book, white pages in a brown
-  cover, floating above the line (color.mark.blog). Other products draw their glyph.
+  cover, floating above the line (color.mark.blog); Kalkar IT: the prompt
+  in willow green, light and dark (color.mark.kalkar-it). Other products
+  draw their glyph.
 */ -}}
 {{- if .icon -}}
 {{ partial "horizont/app-icon.html" . }}
@@ -25,9 +28,10 @@
 {{- $p := .product | default "regetskcob" -}}
 {{- $size := .size | default 32 -}}
 {{- $icon := .icon | default false -}}
-{{- /* Two marks are glyphs only, no product with colours and app icon:
-       the blog (an open book) and Horizont itself (the sun on the line). */ -}}
-{{- $glyphs := dict "blog" "Blog" "horizont" "Horizont" -}}
+{{- /* Three marks are glyphs only, no product with colours and app icon:
+       the blog (an open book), Horizont itself (the sun on the line) and
+       Kalkar IT Solutions (a prompt above the line). */ -}}
+{{- $glyphs := dict "blog" "Blog" "horizont" "Horizont" "kalkar-it" "Kalkar IT Solutions" -}}
 {{- $colors := dict -}}
 {{- $label := index $glyphs $p -}}
 {{- with index site.Data.horizont.color.product $p }}{{ $colors = .icon }}{{ $label = .name }}{{ end -}}
@@ -83,6 +87,19 @@
   {{- else if eq $p "horizont" }}
   <path d="M4 66.7H96"/>
   <path d="M27 66.7a23 23 0 0 1 46 0"/>
+  {{- else if eq $p "kalkar-it" }}
+  {{- /* A terminal prompt: the > sits on the baseline, the horizon below
+     it is the cursor, the empty line waiting for what comes next. It
+     floats like the blog's book, about 2 px above the line at 28 px; on the
+     line it would close into a triangle at 16 px. Left third, so the
+     line runs on to the right like an input. */}}
+  <path d="M4 66.7H96"/>
+  {{- if and .object (not $icon) }}
+  {{- $o := index site.Data.horizont.color.mark "kalkar-it" }}
+  <path d="M24 24l20 15-20 15" style="stroke:light-dark({{ $o.prompt.light }}, {{ $o.prompt.dark }})"/>
+  {{- else }}
+  <path d="M24 24l20 15-20 15"/>
+  {{- end }}
   {{- else if eq $p "panzergefecht" }}
   <path d="M{{ cond $icon 0 4 }} 66.7H{{ cond $icon 100 96 }}"/>
   <path d="M24 66.7l4-12h44l4 12M40 54.7V44h18v10.7M58 49h24"/>

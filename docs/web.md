@@ -138,8 +138,8 @@ den Tokens. Eigene Werte in einem Layout sind ein Fehler.
 
 | Partial | Zweck |
 | --- | --- |
-| `horizont/lockup.html` | Marke und Name auf einer Grundlinie (`product`, `label`, `href`) |
-| `horizont/mark.html` | die Glyphe allein (`product`, `size`; auch `blog`, das offene Buch, und `horizont`, die Sonne auf der Linie) |
+| `horizont/lockup.html` | Marke und Name auf einer Grundlinie (`product`, `label`, `href`; für eine reine Glyphe wie `kalkar-it` ist `label` Pflicht) |
+| `horizont/mark.html` | die Glyphe allein (`product`, `size`; auch `blog`, das offene Buch, `horizont`, die Sonne auf der Linie, und `kalkar-it`, der Prompt über der Linie) |
 | `horizont/app-icon.html` | das illustrierte App-Icon (`product`, `size`, `variant`) |
 | `horizont/kennung.html` | Kennung (Text oder `dict "text" "tag"`) |
 | `horizont/badge.html` | Status mit Zeichen und Wort (`status`, `label`) |

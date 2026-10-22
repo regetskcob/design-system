@@ -8,7 +8,10 @@
 
   Panzergefecht has two variants: "side" (side view, standing on the horizon
   like the other objects, default) and "top" (the earlier tank from above).
-  Colours from tokens/horizont.json (color.product.<p>.icon).
+  Colours from tokens/horizont.json (color.product.<p>.icon). Kalkar IT
+  Solutions is no product of the family but has an image for avatars (the
+  GitHub organisation): its colours sit with its glyph under
+  color.mark.kalkar-it.icon.
 
   For the platform exports (tool/export_icons.sh):
     shape  rounded (default, the web and the doc) | bleed (square, the OS
@@ -19,10 +22,12 @@
 {{- $p := .product | default "regetskcob" -}}
 {{- $size := .size | default 96 -}}
 {{- $variant := .variant | default "side" -}}
-{{- $c := index site.Data.horizont.color.product $p "icon" -}}
+{{- $entry := index site.Data.horizont.color.product $p | default (index site.Data.horizont.color.mark $p) -}}
+{{- if not $entry.icon }}{{ errorf "horizont/app-icon: %q has no icon colours" $p }}{{ end -}}
+{{- $c := $entry.icon -}}
 {{- $o := $c.obj -}}
 {{- $u := printf "hzi%d" math.Counter -}}
-{{- $label := index site.Data.horizont.color.product $p "name" -}}
+{{- $label := $entry.name -}}
 {{- $shape := .shape | default "rounded" -}}
 {{- $layer := .layer | default "all" -}}
 {{- $box := dict "rounded" (slice 0 0 100 100) "bleed" (slice 0 0 100 100) "adaptive" (slice -25 -25 150 150) "tv" (slice -33.3333 0 166.6667 100) -}}
@@ -35,6 +40,7 @@
     <clipPath id="{{ $u }}c"><rect x="{{ $x0 }}" y="{{ $y0 }}" width="{{ $w }}" height="{{ $h }}"{{ if eq $shape "rounded" }} rx="22.4"{{ end }}/></clipPath>
     <linearGradient id="{{ $u }}s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="{{ $c.sky }}"/><stop offset="1" stop-color="{{ $c.sky2 }}"/></linearGradient>
     <filter id="{{ $u }}b" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>
+    <filter id="{{ $u }}f" x="-50%" y="-200%" width="200%" height="500%"><feGaussianBlur stdDeviation="1.2"/></filter>
     <filter id="{{ $u }}d" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="1.2" dy="2.4" stdDeviation="1.6" flood-color="{{ $c.outline }}" flood-opacity=".5"/></filter>
   </defs>
   <g clip-path="url(#{{ $u }}c)">
@@ -67,7 +73,22 @@
     </g>
     {{- end }}
 
+    {{- if eq $p "kalkar-it" }}
+    {{- /* The sender: a small beech far back on the right, without
+           outline, as on the regetskcob icon. */}}
+    <g stroke="none">
+      <path d="M80.4 66.7v-6.4h1.4v6.4z" fill="{{ $o.beechDark }}"/>
+      <g fill="{{ $o.beechDark }}"><circle cx="78" cy="58.2" r="4.2"/><circle cx="84.4" cy="57.8" r="3.9"/><circle cx="81.2" cy="54" r="4.6"/></g>
+      <g fill="{{ $o.beech }}"><circle cx="77.6" cy="57.4" r="3.2"/><circle cx="83.8" cy="57" r="2.9"/><circle cx="80.6" cy="53.2" r="3.6"/></g>
+    </g>
+    {{- end }}
+
     <rect x="{{ $x0 }}" y="65.9" width="{{ $w }}" height="1.6" fill="{{ $c.horizon }}"/>
+
+    {{- if eq $p "kalkar-it" }}
+    {{- /* The prompt floats: its shadow lies on the ground below it. */}}
+    <ellipse cx="44" cy="70.2" rx="14" ry="1.8" fill="{{ $c.outline }}" opacity=".45" filter="url(#{{ $u }}f)"/>
+    {{- end }}
     {{- end }}
 
     {{- if $front }}
@@ -107,6 +128,12 @@
         <path d="M52.6 39.6h13.8v9H52.6z" fill="{{ $o.greyDark }}"/>
         <circle cx="35.8" cy="44.1" r="1.25" fill="{{ $c.outline }}"/><circle cx="39.1" cy="44.1" r="1.25" fill="{{ $c.outline }}"/><circle cx="42.3" cy="44.1" r="1.25" fill="{{ $c.outline }}"/><circle cx="45.4" cy="44.1" r="1.25" fill="{{ $c.outline }}"/><circle cx="54.8" cy="44.1" r="1.25" fill="{{ $c.outline }}"/><circle cx="58.1" cy="44.1" r="1.25" fill="{{ $c.outline }}"/><circle cx="61.3" cy="44.1" r="1.25" fill="{{ $c.outline }}"/><circle cx="64.4" cy="44.1" r="1.25" fill="{{ $c.outline }}"/>
       </g>
+    {{- else if eq $p "kalkar-it" }}
+      {{- /* The prompt > of the glyph, flat in one willow tone with the
+             dark outline and the soft shadow of the stage, no depth. It
+             floats above the horizon, which is its cursor; its shadow lies
+             on the ground below. */}}
+      <path d="M27 26h10l20 16-20 16H27l20-16z" fill="{{ $o.mid }}"/>
     {{- else if eq $p "panzergefecht" }}
       {{- if eq $variant "side" }}
       <rect x="21" y="56" width="58" height="10.7" rx="5.3" fill="{{ $o.track }}"/>
