@@ -767,3 +767,350 @@ body:has(> .hz-feld) > .hz-horizon { --horizon-width: var(--size-page); --inset:
 .hz-karte-top { display: flex; align-items: center; justify-content: space-between; gap: var(--s-16); margin: 0 0 var(--s-16); }
 .hz-karte-actions { display: flex; gap: var(--s-8); }
 @media (max-width: 640px) { .hz-karte-dialog { padding: var(--s-16); } }
+
+/* Lightbox (partials/lightbox.html, js/lightbox.js): a picture large on a dark
+   backdrop, the bars on the window edges slightly see-through and fading
+   towards it. A viewer for pictures, so it keeps its own dark, whatever the
+   page's theme; taken over from the blog. */
+.hz-lightbox {
+  /* The bars sit on the top and bottom edge of the window, slightly see-
+     through, and fade out towards the photo. */
+  --hz-lightbox-alpha: 0.65;
+  --hz-lightbox-bar: rgb(0 0 0 / var(--hz-lightbox-alpha));
+  --hz-lightbox-bar-height: 4.4rem;
+  --hz-lightbox-fade: 5rem;
+  /* A fixed frame, not one that follows the photo: portrait and landscape
+     photos change in turn while paging, and the bars' content must stay put.
+     On a wide screen the frame is no wider than a 3:2 photo that fills its
+     height, so the buttons stay near the photo instead of in the far
+     corners of the window. */
+  --hz-lightbox-width: min(95vw, calc(1.5 * (100dvh - 2 * var(--hz-lightbox-bar-height) - 1rem)));
+  padding: 0;
+  border: none;
+  background: transparent;
+  width: var(--hz-lightbox-width);
+  height: 100vh;
+  height: 100dvh;
+  max-width: none;
+  max-height: none;
+  box-sizing: border-box;
+  padding-block: var(--hz-lightbox-bar-height);
+  overflow: visible;
+  cursor: default;
+}
+
+/* The way out of a bar: a smootherstep gradient over the full length of the
+   fade, so it shows no edge where it starts or ends. Positions count from
+   the window edge; --fade-solid is how far the bar is solid (its height for
+   the top and bottom bar, its width for the shooting data on the left). */
+.hz-lightbox-bar,
+.hz-lightbox-exif {
+  --hz-lightbox-fadeout:
+    var(--hz-lightbox-bar) var(--fade-solid),
+    rgb(0 0 0 / calc(var(--hz-lightbox-alpha) * 0.995)) calc(var(--fade-solid) + var(--hz-lightbox-fade) * 0.083),
+    rgb(0 0 0 / calc(var(--hz-lightbox-alpha) * 0.965)) calc(var(--fade-solid) + var(--hz-lightbox-fade) * 0.167),
+    rgb(0 0 0 / calc(var(--hz-lightbox-alpha) * 0.896)) calc(var(--fade-solid) + var(--hz-lightbox-fade) * 0.250),
+    rgb(0 0 0 / calc(var(--hz-lightbox-alpha) * 0.790)) calc(var(--fade-solid) + var(--hz-lightbox-fade) * 0.333),
+    rgb(0 0 0 / calc(var(--hz-lightbox-alpha) * 0.653)) calc(var(--fade-solid) + var(--hz-lightbox-fade) * 0.417),
+    rgb(0 0 0 / calc(var(--hz-lightbox-alpha) * 0.500)) calc(var(--fade-solid) + var(--hz-lightbox-fade) * 0.500),
+    rgb(0 0 0 / calc(var(--hz-lightbox-alpha) * 0.347)) calc(var(--fade-solid) + var(--hz-lightbox-fade) * 0.583),
+    rgb(0 0 0 / calc(var(--hz-lightbox-alpha) * 0.210)) calc(var(--fade-solid) + var(--hz-lightbox-fade) * 0.667),
+    rgb(0 0 0 / calc(var(--hz-lightbox-alpha) * 0.104)) calc(var(--fade-solid) + var(--hz-lightbox-fade) * 0.750),
+    rgb(0 0 0 / calc(var(--hz-lightbox-alpha) * 0.035)) calc(var(--fade-solid) + var(--hz-lightbox-fade) * 0.833),
+    rgb(0 0 0 / calc(var(--hz-lightbox-alpha) * 0.005)) calc(var(--fade-solid) + var(--hz-lightbox-fade) * 0.917),
+    transparent calc(var(--fade-solid) + var(--hz-lightbox-fade));
+}
+
+/* Nothing in the lightbox can be selected. Fast clicks on the paging buttons are
+   double and triple clicks, and the browser answered with a text selection
+   that tinted the photo and the caption (and reached into the page behind).
+   The photo cannot be dragged away either. */
+.hz-lightbox,
+.hz-lightbox * {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.hz-lightbox img {
+  -webkit-user-drag: none;
+}
+
+.hz-lightbox[open] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hz-lightbox::backdrop {
+  background: rgb(0 0 0 / 0.88);
+}
+
+/* The photo keeps its own aspect ratio, centred between the bars, and is
+   never scaled up beyond its own size. */
+.hz-lightbox img {
+  /* Above the bars: their fade runs out behind the photo, never over it. */
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: calc(100vh - 2 * var(--hz-lightbox-bar-height) - 1rem);
+  max-height: calc(100dvh - 2 * var(--hz-lightbox-bar-height) - 1rem);
+}
+
+/* The stage around the photo takes no part in the layout until the photo is
+   zoomed to its full size: then it is a scrolling window over the whole
+   screen, and the bars (and their buttons) stay above it. */
+.hz-lightbox-stage {
+  display: contents;
+}
+
+.hz-lightbox.zoomable img {
+  cursor: zoom-in;
+}
+
+.hz-lightbox.zoomed .hz-lightbox-stage {
+  display: flex;
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  box-sizing: border-box;
+  padding-block: var(--hz-lightbox-bar-height);
+  overflow: auto;
+  scrollbar-width: none;
+  overscroll-behavior: contain;
+}
+
+.hz-lightbox.zoomed .hz-lightbox-stage::-webkit-scrollbar {
+  display: none;
+}
+
+.hz-lightbox.zoomed img {
+  flex: none;
+  margin: auto;
+  max-width: none;
+  max-height: none;
+  z-index: auto;
+  cursor: zoom-out;
+}
+
+.hz-lightbox.zoomed .hz-lightbox-bar {
+  z-index: 3;
+  pointer-events: none;
+}
+
+.hz-lightbox.zoomed .hz-lightbox-bar > * {
+  pointer-events: auto;
+}
+
+/* Two bars across the whole window, flush with its top and bottom edge. Their
+   content is a grid of three columns that keeps the middle one centred,
+   however wide the outer ones are, and is inset so that it lines up with the
+   frame. Below the content the bar fades into the backdrop. */
+.hz-lightbox-bar {
+  --fade-solid: var(--hz-lightbox-bar-height);
+  position: fixed;
+  z-index: 0;
+  left: 0;
+  right: 0;
+  display: grid;
+  grid-template-columns: minmax(2.6rem, 1fr) minmax(0, auto) minmax(2.6rem, 1fr);
+  align-items: center;
+  gap: 0.8rem;
+  /* A percentage of the window width here. */
+  padding-inline: calc((100% - var(--hz-lightbox-width)) / 2 + 1rem);
+  box-sizing: border-box;
+  color: #fff;
+  cursor: default;
+}
+
+.hz-lightbox-bar-top {
+  top: 0;
+  height: calc(var(--hz-lightbox-bar-height) + var(--hz-lightbox-fade));
+  padding-bottom: var(--hz-lightbox-fade);
+  background: linear-gradient(to bottom, var(--hz-lightbox-fadeout));
+}
+
+.hz-lightbox-bar-bottom {
+  bottom: 0;
+  height: calc(var(--hz-lightbox-bar-height) + var(--hz-lightbox-fade));
+  padding-top: var(--hz-lightbox-fade);
+  background: linear-gradient(to top, var(--hz-lightbox-fadeout));
+}
+
+.hz-lightbox-bar p {
+  margin: 0;
+}
+
+.hz-lightbox-start {
+  justify-self: start;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.hz-lightbox-count,
+.hz-lightbox-exif-toggle {
+  padding: 0.15rem 0.7rem;
+  border: 1px solid rgb(255 255 255 / 0.55);
+  border-radius: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+.hz-lightbox-exif-toggle {
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+
+.hz-lightbox-exif-toggle:hover,
+.hz-lightbox-exif-toggle[aria-pressed="true"] {
+  background: rgb(255 255 255 / 0.15);
+  border-color: rgb(255 255 255 / 0.85);
+}
+
+/* The shooting data: a bar on the left edge between the top and the bottom
+   bar, like them slightly see-through, fading out towards the photo, and
+   above the photo. */
+.hz-lightbox-exif {
+  --fade-solid: 13rem;
+  position: fixed;
+  z-index: 2;
+  left: 0;
+  top: var(--hz-lightbox-bar-height);
+  bottom: var(--hz-lightbox-bar-height);
+  width: calc(var(--fade-solid) + var(--hz-lightbox-fade));
+  box-sizing: border-box;
+  padding: 1rem var(--hz-lightbox-fade) 1rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: linear-gradient(to right, var(--hz-lightbox-fadeout));
+  color: #fff;
+  cursor: default;
+}
+
+.hz-lightbox-exif[hidden] {
+  display: none;
+}
+
+.hz-lightbox-exif dl {
+  margin: 0;
+}
+
+.hz-lightbox-exif dt {
+  margin-top: 0.9rem;
+  font-size: 0.7rem;
+  line-height: 1.2;
+  opacity: 0.7;
+}
+
+.hz-lightbox-exif dt:first-child {
+  margin-top: 0;
+}
+
+.hz-lightbox-exif dd {
+  margin: 0.1rem 0 0;
+  font-size: 0.9rem;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+
+/* The album or post, one line. */
+.hz-lightbox-title {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: center;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.hz-lightbox-close,
+.hz-lightbox-nav {
+  width: 2.6rem;
+  height: 2.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 1px solid rgb(255 255 255 / 0.55);
+  border-radius: 50%;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* Each one sticks to the outer end of its column. */
+.hz-lightbox-close,
+.hz-lightbox-next {
+  justify-self: end;
+}
+
+.hz-lightbox-prev {
+  justify-self: start;
+}
+
+.hz-lightbox-close:hover,
+.hz-lightbox-nav:hover {
+  background: rgb(255 255 255 / 0.15);
+  border-color: rgb(255 255 255 / 0.85);
+}
+
+/* The alt text, between the buttons, at most two lines (three on a phone). */
+.hz-lightbox-caption {
+  min-width: 0;
+  text-align: center;
+  font-size: 0.85rem;
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+}
+
+@media (max-width: 640px) {
+  /* More room for the text on a phone, in the bars and in the fade. */
+  .hz-lightbox {
+    --hz-lightbox-bar-height: 4.6rem;
+    --hz-lightbox-fade: 5.4rem;
+  }
+
+  .hz-lightbox-exif {
+    --fade-solid: 11rem;
+  }
+
+  .hz-lightbox-bar {
+    gap: 0.5rem;
+    padding-inline: calc((100% - var(--hz-lightbox-width)) / 2 + 0.6rem);
+  }
+
+  .hz-lightbox-caption {
+    font-size: 0.75rem;
+    line-height: 1.3;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+  }
+}
+
+/* With a single photo there is nothing to page through: the buttons and the
+   count go, but keep their room, so the middle stays in the middle. */
+.hz-lightbox-nav[hidden],
+.hz-lightbox-count[hidden] {
+  display: flex;
+  visibility: hidden;
+}
+
+/* Pictures that open in the lightbox. */
+a[data-lightbox] {
+  display: block;
+  cursor: zoom-in;
+  text-decoration: none;
+  border-bottom: none;
+}

@@ -4,6 +4,33 @@ Jede Version gilt zugleich für Tokens (`tokens/horizont.json`), das
 Flutter-Paket (`flutter/pubspec.yaml`) und den Git-Tag. Apps und Seiten hängen
 an einem Tag; unter „Heben“ steht, was beim Wechsel zu tun ist.
 
+## 0.8.4
+
+Die Lightbox des Blogs kommt ins System.
+
+### Neu
+
+- **Lightbox** (`web/partials/lightbox.html`, `web/js/lightbox.js`, Styles
+  `.hz-lightbox` in `components.css`): Ein Link mit `data-lightbox` öffnet
+  sein Ziel, das große Bild, in einer dunklen Bildansicht. Darunter steht der
+  Untertitel (`data-caption`, sonst der Alt-Text), darüber Zähler und der
+  Titel der Gruppe (`data-lightbox-title`). Bilder derselben Gruppe (das
+  nächste Element mit `data-lightbox-group`, sonst die Seite) blättert man
+  mit Knöpfen, Pfeiltasten oder Wischen. Ein Klick zoomt auf volle Größe,
+  Escape, der Schließen-Knopf oder ein Klick daneben schließen. Mit
+  `data-exif` (JSON `[{label, value}]`) zeigt ein Knopf die Aufnahmedaten.
+  Beschriftungen deutsch oder englisch (`lang`). Ohne JavaScript öffnet der
+  Link einfach das Bild.
+
+### Heben
+
+- Seiten: `hugo mod get github.com/regetskcob/horizont@v0.8.4`; die
+  Lightbox ist neu und ändert nichts Bestehendes. Der Blog kann seine eigene
+  (`partials/lightbox.html`, `assets/js/lightbox.js`) später ersetzen: die
+  Klassen heißen hier `hz-lightbox…`, Gruppen markiert `data-lightbox-group`
+  statt fester Selektoren.
+- Apps: nichts.
+
 ## 0.8.3
 
 Eine Glyphe für Kalkar IT Solutions.

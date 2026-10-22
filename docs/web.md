@@ -150,6 +150,7 @@ den Tokens. Eigene Werte in einem Layout sind ein Fehler.
 | `horizont/nav/karte.html` | die Flurkarte allein (`home`, `here`, `field`, `counts`) |
 | `horizont/nav/script.html` | das Skript dazu, einmal am Ende der Seite |
 | `horizont/feld/head.html`, `hero.html`, `section.html`, `foot.html` | die Feldseite (siehe unten); `feld/head.html` ist ab 0.7.0 durch den Horizont ersetzt und bleibt bis 0.8.0 |
+| `horizont/lightbox.html` | Bildansicht: Links mit `data-lightbox` öffnen ihr Bild groß, mit Untertitel (`data-caption`), Blättern innerhalb von `data-lightbox-group` und Zoom per Klick (`lang`) |
 | `horizont/icons.html` | Platzhalter-Ikonen der Doku als SVG-Sprite |
 
 ```go-html-template

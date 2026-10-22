@@ -1,0 +1,61 @@
+{{- /*
+  The lightbox: one dialog and its script (web/js/lightbox.js), once per page
+  that has pictures to open. A link marked data-lightbox opens its href (the
+  large picture) in it:
+
+    <a href="{{ $large.RelPermalink }}" data-lightbox data-caption="…"><img src="…" alt="…"></a>
+
+  The pictures of the same group (the nearest element with
+  data-lightbox-group, else the page) can be paged through with the buttons,
+  the arrow keys or a swipe. The bar above holds the count, the group's
+  data-lightbox-title and the close button; the bar below the paging buttons
+  with the caption between them (data-caption, else the alt text). Links
+  with data-exif (JSON [{label, value}]) get the EXIF button next to the
+  count, a bar on the left with the shooting data. A click on the picture
+  zooms to its full size, where it can be dragged or scrolled; a second click
+  zooms out. A click beside it, the close button or Escape closes. Without
+  JavaScript the links simply open the large picture.
+
+    partial "horizont/lightbox.html" (dict "lang" "de")
+
+  lang   de (default) or en, for the labels of the buttons
+  Needs the mount web/js -> assets/js/horizont (docs/web.md, "Einbinden").
+*/ -}}
+{{- $en := eq .lang "en" -}}
+<dialog class="hz-lightbox" aria-label="{{ cond $en "Image view" "Bildansicht" }}">
+  <div class="hz-lightbox-bar hz-lightbox-bar-top">
+    <div class="hz-lightbox-start">
+      <p class="hz-lightbox-count" aria-live="polite"></p>
+      <button type="button" class="hz-lightbox-exif-toggle" aria-pressed="false" aria-controls="hz-lightbox-exif">EXIF</button>
+    </div>
+    <p class="hz-lightbox-title"></p>
+    <button type="button" class="hz-lightbox-close" aria-label="{{ cond $en "Close" "Schließen" }}">
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false">
+        <path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      </svg>
+    </button>
+  </div>
+  <div class="hz-lightbox-stage"><img alt=""></div>
+  <aside class="hz-lightbox-exif" id="hz-lightbox-exif" aria-label="{{ cond $en "Shooting data" "Aufnahmedaten" }}" hidden>
+    <dl></dl>
+  </aside>
+  <div class="hz-lightbox-bar hz-lightbox-bar-bottom">
+    <button type="button" class="hz-lightbox-nav hz-lightbox-prev" aria-label="{{ cond $en "Previous image" "Vorheriges Bild" }}">
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
+        <path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </button>
+    <p class="hz-lightbox-caption"></p>
+    <button type="button" class="hz-lightbox-nav hz-lightbox-next" aria-label="{{ cond $en "Next image" "Nächstes Bild" }}">
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
+        <path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </button>
+  </div>
+</dialog>
+{{- with resources.Get "js/horizont/lightbox.js" -}}
+{{- $js := . | minify | fingerprint }}
+<script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
+{{- else -}}
+{{- warnf "horizont/lightbox.html: js/horizont/lightbox.js not found; mount web/js to assets/js/horizont" -}}
+{{- end -}}
