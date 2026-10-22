@@ -20,6 +20,10 @@
 #   mark    the glyph when it is not the gemarkung's (mark.html): the blog's
 #           book; a project may set its own (Horizont's sun)
 #
+# Jagdaufseher is off the map since 2026-10-22: its landing page is offline
+# and its backend deleted while the work goes into KNX Monitor. Its entry
+# comes back here when the page does.
+#
 # The counts are as of 2026-10-20. A site that knows its own numbers (the
 # blog counts its posts) passes them in; the others keep these.
 
@@ -81,14 +85,6 @@ gemarkungen:
     path: /horizont/
     note: Designsystem
     text: "Das gemeinsame Designsystem von Blog und Apps: Farben, Schrift, Zeichen und Bausteine für Web und Flutter."
-
-  - id: jagdaufseher
-    name: Jagdaufseher
-    product: jagdaufseher
-    path: /jagdaufseher/
-    status: Vorschau
-    note: Das Revier im Blick
-    text: "Hält Einrichtungen, Aufgaben und Meldungen im Revier zusammen, auch ohne Empfang."
 
   - id: knx
     name: KNX Monitor

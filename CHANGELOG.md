@@ -4,6 +4,26 @@ Jede Version gilt zugleich für Tokens (`tokens/horizont.json`), das
 Flutter-Paket (`flutter/pubspec.yaml`) und den Git-Tag. Apps und Seiten hängen
 an einem Tag; unter „Heben“ steht, was beim Wechsel zu tun ist.
 
+## 0.8.2
+
+Jagdaufseher geht vorerst von der Flurkarte.
+
+### Geändert
+
+- **Flurkarte ohne Jagdaufseher** (`tokens/flur.yaml`): Die Landingpage unter
+  `/jagdaufseher/` ist offline und das Backend gelöscht, die Arbeit geht in
+  KNX Monitor. Damit verschwindet das Projekt auch aus der Projektliste der
+  Startseite, die dieselbe Datei liest. Marke, Farben und Bausteine von
+  Jagdaufseher bleiben im System; der Eintrag kommt zurück, wenn die Seite
+  wieder steht.
+
+### Heben
+
+- Seiten: `hugo mod get github.com/regetskcob/horizont@v0.8.2`; nichts
+  sonst. Eine Landingpage, die die Flurkarte zeigt und nicht hebt, verlinkt
+  weiter auf `/jagdaufseher/` und damit ins Leere.
+- Apps: nichts.
+
 ## 0.8.1
 
 Die Horizontlinie im Web: Kapitel auch im Text, ein Zurück und zwei
