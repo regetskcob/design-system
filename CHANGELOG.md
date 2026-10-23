@@ -4,6 +4,28 @@ Jede Version gilt zugleich für Tokens (`tokens/horizont.json`), das
 Flutter-Paket (`flutter/pubspec.yaml`) und den Git-Tag. Apps und Seiten hängen
 an einem Tag; unter „Heben“ steht, was beim Wechsel zu tun ist.
 
+## 0.8.5
+
+Zwei Fehler in der Horizontlinie.
+
+### Behoben
+
+- **Marke über der Linie** (`.hz-walker` in `components.css`): In Browsern
+  ohne CSS-`round()` (Chrome vor 125) schwebte die Marke rund 17 px über der
+  Linie. Mit `var()` darin verwirft der Browser nicht nur die
+  `round()`-Zeile, sondern das ganze `top`, die `calc()`-Zeile davor
+  eingeschlossen. Jetzt steht ein ganzzahliges `calc()` ohne `round()` da,
+  mit derselben Lage wie bisher (17 px am Desktop, 3 px auf Touch).
+- **„Zurück“ nach dem Sprachwechsel** (`web/js/horizon.js`): Kam man über
+  den Sprachumschalter, zeigte die Linie „Zurück“, das nur die Sprache
+  zurückgewechselt hätte. Ist die Seite davor ein Ziel des Umschalters, bleibt
+  „Zurück“ aus. Auf englischen Seiten (`<html lang="en">`) heißt es „Back“.
+
+### Heben
+
+- Seiten: `hugo mod get github.com/regetskcob/horizont@v0.8.5`, sonst nichts.
+- Apps: nichts.
+
 ## 0.8.4
 
 Die Lightbox des Blogs kommt ins System.

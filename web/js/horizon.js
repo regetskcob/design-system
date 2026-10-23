@@ -151,12 +151,21 @@
   }
 
   // Back: only when the page before is of this site; the history brings it
-  // back as it was left, which a link to it could not.
+  // back as it was left, which a link to it could not. Not after the
+  // language switch: the page before is this one in the other language.
   var from = null;
   try { from = document.referrer ? new URL(document.referrer) : null; } catch (e) { from = null; }
-  if (from && from.origin === location.origin && from.href !== location.href && history.length > 1) {
+  var switched = from && [].some.call(nav.querySelectorAll(".hz-horizon-lang a"), function (a) {
+    return a.pathname === from.pathname;
+  });
+  var en = /^en\b/i.test(document.documentElement.lang);
+  if (from && from.origin === location.origin && from.href !== location.href && !switched && history.length > 1) {
     [].forEach.call(document.querySelectorAll("[data-hz-back]"), function (b) {
       b.hidden = false;
+      if (en) {
+        b.lastChild.textContent = b.lastChild.textContent.replace("Zurück", "Back");
+        if (b.hasAttribute("aria-label")) b.setAttribute("aria-label", "Back to the previous page");
+      }
       b.addEventListener("click", function (e) {
         e.preventDefault();
         history.back();
