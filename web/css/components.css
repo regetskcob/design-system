@@ -323,17 +323,22 @@ body.hz { margin: 0; }
 }
 
 /* Side buttons: iPhone action button and volume left, side button right;
-   Android volume and power right. */
+   Android volume and power right. --btn is how far a button shows past the
+   1 px edge of the frame (whose outline would cover it otherwise): 1 % of
+   the frame width less that pixel, never under 1 px. 3 px in all at the
+   default 300, as before; a small phone in a scene keeps slim buttons
+   instead of 3 px blocks. */
+.hz-device--iphone, .hz-device--android { --btn: max(1px, calc(var(--w, 300px) * 0.01 - 1px)); }
 .hz-device--iphone::before, .hz-device--iphone::after, .hz-device--android::after {
-  content: ""; position: absolute; width: 3px; background: var(--device-button);
+  content: ""; position: absolute; width: calc(var(--btn) + 1px); background: var(--device-button);
 }
 .hz-device--iphone::before {
-  left: -3px; top: 17%; height: 21%; border-radius: 2px 0 0 2px;
+  left: calc(-1 * var(--btn) - 1px); top: 17%; height: 21%; border-radius: 2px 0 0 2px;
   background: linear-gradient(var(--device-button) 0 20%, transparent 20% 32%, var(--device-button) 32% 62%, transparent 62% 70%, var(--device-button) 70%);
 }
-.hz-device--iphone::after { right: -3px; top: 25%; height: 11%; border-radius: 0 2px 2px 0; }
+.hz-device--iphone::after { right: calc(-1 * var(--btn) - 1px); top: 25%; height: 11%; border-radius: 0 2px 2px 0; }
 .hz-device--android::after {
-  right: -3px; top: 18%; height: 24%; border-radius: 0 2px 2px 0;
+  right: calc(-1 * var(--btn) - 1px); top: 18%; height: 24%; border-radius: 0 2px 2px 0;
   background: linear-gradient(var(--device-button) 0 25%, transparent 25% 40%, var(--device-button) 40%);
 }
 
@@ -397,7 +402,10 @@ body.hz { margin: 0; }
   border-radius: 50%; background: var(--device-button);
 }
 .hz-device--ipad::after {
-  content: ""; position: absolute; top: -3px; right: 9%; width: 7%; height: 3px;
+  /* The top button: 0.5 % of the frame width, 3 px at the default 600,
+     past the 1 px edge like the phone buttons. */
+  --btn: max(1px, calc(var(--w, 600px) * 0.005 - 1px));
+  content: ""; position: absolute; top: calc(-1 * var(--btn) - 1px); right: 9%; width: 7%; height: calc(var(--btn) + 1px);
   border-radius: 2px 2px 0 0; background: var(--device-button);
 }
 
@@ -417,7 +425,10 @@ body.hz { margin: 0; }
   box-shadow: inset -1px 0 0 var(--device-edge);
 }
 .hz-device--watch::after {
-  content: ""; position: absolute; right: -3px; top: 50%; width: 3px; height: 20%;
+  /* The side button: 3 px at the default 160, scaled with the frame, past
+     the 1 px edge like the phone buttons. */
+  --btn: max(1px, calc(var(--w, 160px) * 0.019 - 1px));
+  content: ""; position: absolute; right: calc(-1 * var(--btn) - 1px); top: 50%; width: calc(var(--btn) + 1px); height: 20%;
   border-radius: 0 2px 2px 0; background: var(--device-button);
 }
 

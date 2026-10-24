@@ -4,6 +4,26 @@ Jede Version gilt zugleich für Tokens (`tokens/horizont.json`), das
 Flutter-Paket (`flutter/pubspec.yaml`) und den Git-Tag. Apps und Seiten hängen
 an einem Tag; unter „Heben“ steht, was beim Wechsel zu tun ist.
 
+## 0.8.6
+
+Seitentasten, die mit dem Geräterahmen mitwachsen.
+
+### Geändert
+
+- **Tasten der Geräterahmen relativ zur Breite** (`web/css/components.css`):
+  Seitentasten von iPhone und Android ragen 1 % der Rahmenbreite heraus,
+  die obere Taste des iPad 0,5 %, die Seitentaste der Uhr 1,9 %; über die
+  1-px-Kante des Rahmens hinaus immer mindestens 1 px sichtbar (`--btn`).
+  Bei den Standardbreiten (300, 600, 160) bleibt es bei 3 px. Vorher
+  waren es immer 3 px; ein kleines Telefon in einer Szene (gut 40 px breit,
+  etwa auf der Teaserseite von Kalkar IT) trug damit klobige Klötze.
+
+### Heben
+
+- Seiten: `hugo mod get github.com/regetskcob/horizont@v0.8.6`; nichts
+  sonst. Wer eigene Regeln für die Tasten hat, prüft sie gegen `--btn`.
+- Apps: nichts.
+
 ## 0.8.5
 
 Zwei Fehler in der Horizontlinie.
